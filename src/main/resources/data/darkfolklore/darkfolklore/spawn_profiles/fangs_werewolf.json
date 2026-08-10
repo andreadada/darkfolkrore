@@ -1,0 +1,8 @@
+{
+  "entity": "fangs_n_claws:werewolf",
+  "rarity": "LEGENDARY",
+  "natural_spawn_enabled": false,
+  "canonicalization_suppression": true,
+  "nocturnal": true,
+  "event_multiplier": 1.0
+}

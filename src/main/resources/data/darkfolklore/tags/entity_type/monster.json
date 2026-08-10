@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#darkfolklore:vampire",
+    "#darkfolklore:werewolf",
+    "#darkfolklore:undead",
+    "#darkfolklore:spirit",
+    "#darkfolklore:demon",
+    "#darkfolklore:cryptid",
+    "#darkfolklore:mythical_beast",
+    "#darkfolklore:sea_horror"
+  ]
+}

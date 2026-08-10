@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "betterarcheology:unidentified_artifact", "required": false},
+    {"id": "betterarcheology:artifact_shards", "required": false},
+    {"id": "betterarcheology:soul_totem", "required": false},
+    {"id": "betterarcheology:villager_fossil", "required": false}
+  ]
+}

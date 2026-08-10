@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "cnc:wendigo", "required": false},
+    {"id": "cnc:chupacabra", "required": false},
+    {"id": "mobs_of_mythology:chupacabra", "required": false},
+    {"id": "cnc:sasquatch", "required": false},
+    {"id": "cnc:skinwalker", "required": false},
+    {"id": "cnc:wechuge", "required": false}
+  ]
+}

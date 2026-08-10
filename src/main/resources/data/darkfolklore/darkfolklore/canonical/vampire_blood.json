@@ -1,0 +1,11 @@
+{
+  "concept": "darkfolklore:vampire_blood",
+  "kind": "ITEM",
+  "canonical": "vampirism:vampire_blood_bottle",
+  "implementations": [
+    "vampirism:blood_bottle",
+    "kaleidoscope_bloodwine:blood_bucket"
+  ],
+  "policy": "INTEROPERABILITY_ONLY",
+  "reason": "Bloodwine already selects Vampirism blood when loaded and retains its own deliberate fallback fluid."
+}

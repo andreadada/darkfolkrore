@@ -1,0 +1,8 @@
+{
+  "id": "darkfolklore:holy_vs_undead",
+  "target_traits": ["UNDEAD"],
+  "item_traits": ["HOLY"],
+  "multiplier": 1.4,
+  "native_provider_namespaces": [],
+  "priority": 60
+}

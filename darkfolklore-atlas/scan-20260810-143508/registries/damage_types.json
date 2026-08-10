@@ -1,0 +1,752 @@
+[
+  {
+    "id": "bloodlines:devour_soul",
+    "namespace": "bloodlines",
+    "path": "devour_soul",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "cnc:caribou_ran_over",
+    "namespace": "cnc",
+    "path": "caribou_ran_over",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "eidolon_repraised:frost",
+    "namespace": "eidolon_repraised",
+    "path": "frost",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "eidolon_repraised:ritual",
+    "namespace": "eidolon_repraised",
+    "path": "ritual",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "eidolon_repraised:sap",
+    "namespace": "eidolon_repraised",
+    "path": "sap",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "enchanted:internal_explosion",
+    "namespace": "enchanted",
+    "path": "internal_explosion",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "enchanted:sacrifice",
+    "namespace": "enchanted",
+    "path": "sacrifice",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "enchanted:sound",
+    "namespace": "enchanted",
+    "path": "sound",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "enchanted:voodoo",
+    "namespace": "enchanted",
+    "path": "voodoo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "fangs_n_claws:bear_trap",
+    "namespace": "fangs_n_claws",
+    "path": "bear_trap",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "fangs_n_claws:bleeding",
+    "namespace": "fangs_n_claws",
+    "path": "bleeding",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "farmersdelight:stove_burn",
+    "namespace": "farmersdelight",
+    "path": "stove_burn",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:acid",
+    "namespace": "immersiveengineering",
+    "path": "acid",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:crushed",
+    "namespace": "immersiveengineering",
+    "path": "crushed",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:railgun",
+    "namespace": "immersiveengineering",
+    "path": "railgun",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:railgun_turret",
+    "namespace": "immersiveengineering",
+    "path": "railgun_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:razor_shock",
+    "namespace": "immersiveengineering",
+    "path": "razor_shock",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:razor_wire",
+    "namespace": "immersiveengineering",
+    "path": "razor_wire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_armorpiercing",
+    "namespace": "immersiveengineering",
+    "path": "revolver_armorpiercing",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_armorpiercing_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_armorpiercing_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_buckshot",
+    "namespace": "immersiveengineering",
+    "path": "revolver_buckshot",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_buckshot_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_buckshot_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_casull",
+    "namespace": "immersiveengineering",
+    "path": "revolver_casull",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_casull_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_casull_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_dragonsbreath",
+    "namespace": "immersiveengineering",
+    "path": "revolver_dragonsbreath",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_dragonsbreath_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_dragonsbreath_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_homing",
+    "namespace": "immersiveengineering",
+    "path": "revolver_homing",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_homing_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_homing_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_potion",
+    "namespace": "immersiveengineering",
+    "path": "revolver_potion",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_potion_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_potion_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_silver",
+    "namespace": "immersiveengineering",
+    "path": "revolver_silver",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_silver_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_silver_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_wolfpack",
+    "namespace": "immersiveengineering",
+    "path": "revolver_wolfpack",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:revolver_wolfpack_turret",
+    "namespace": "immersiveengineering",
+    "path": "revolver_wolfpack_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:sawblade",
+    "namespace": "immersiveengineering",
+    "path": "sawblade",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:sawblade_turret",
+    "namespace": "immersiveengineering",
+    "path": "sawblade_turret",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:sawmill",
+    "namespace": "immersiveengineering",
+    "path": "sawmill",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:tesla",
+    "namespace": "immersiveengineering",
+    "path": "tesla",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:tesla_primary",
+    "namespace": "immersiveengineering",
+    "path": "tesla_primary",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "immersiveengineering:wire_shock",
+    "namespace": "immersiveengineering",
+    "path": "wire_shock",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:berserker_spirit_impact",
+    "namespace": "malum",
+    "path": "berserker_spirit_impact",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:desperate_need_cut",
+    "namespace": "malum",
+    "path": "desperate_need_cut",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:desperate_need_withdrawal",
+    "namespace": "malum",
+    "path": "desperate_need_withdrawal",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:hidden_blade_magic_counter",
+    "namespace": "malum",
+    "path": "hidden_blade_magic_counter",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:hidden_blade_physical_counter",
+    "namespace": "malum",
+    "path": "hidden_blade_physical_counter",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:inverted_heart_propagation",
+    "namespace": "malum",
+    "path": "inverted_heart_propagation",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:inverted_heart_retaliation",
+    "namespace": "malum",
+    "path": "inverted_heart_retaliation",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:karmic",
+    "namespace": "malum",
+    "path": "karmic",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:nitrate",
+    "namespace": "malum",
+    "path": "nitrate",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:nitrate_playerless",
+    "namespace": "malum",
+    "path": "nitrate_playerless",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:rot",
+    "namespace": "malum",
+    "path": "rot",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_ascension",
+    "namespace": "malum",
+    "path": "scythe_ascension",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_combo",
+    "namespace": "malum",
+    "path": "scythe_combo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_maelstrom",
+    "namespace": "malum",
+    "path": "scythe_maelstrom",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_melee",
+    "namespace": "malum",
+    "path": "scythe_melee",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_rebound",
+    "namespace": "malum",
+    "path": "scythe_rebound",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:scythe_sweep",
+    "namespace": "malum",
+    "path": "scythe_sweep",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:sundering_anchor_magic_combo",
+    "namespace": "malum",
+    "path": "sundering_anchor_magic_combo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:sundering_anchor_physical_combo",
+    "namespace": "malum",
+    "path": "sundering_anchor_physical_combo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:tyrving",
+    "namespace": "malum",
+    "path": "tyrving",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:unmakers_disdain_combo",
+    "namespace": "malum",
+    "path": "unmakers_disdain_combo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:void",
+    "namespace": "malum",
+    "path": "void",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:voodoo",
+    "namespace": "malum",
+    "path": "voodoo",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:voodoo_playerless",
+    "namespace": "malum",
+    "path": "voodoo_playerless",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malum:warlock_spirit_impact",
+    "namespace": "malum",
+    "path": "warlock_spirit_impact",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "malumarma:soul_gash_death",
+    "namespace": "malumarma",
+    "path": "soul_gash_death",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:arrow",
+    "namespace": "minecraft",
+    "path": "arrow",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:bad_respawn_point",
+    "namespace": "minecraft",
+    "path": "bad_respawn_point",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:cactus",
+    "namespace": "minecraft",
+    "path": "cactus",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:campfire",
+    "namespace": "minecraft",
+    "path": "campfire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:cramming",
+    "namespace": "minecraft",
+    "path": "cramming",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:dragon_breath",
+    "namespace": "minecraft",
+    "path": "dragon_breath",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:drown",
+    "namespace": "minecraft",
+    "path": "drown",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:dry_out",
+    "namespace": "minecraft",
+    "path": "dry_out",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:explosion",
+    "namespace": "minecraft",
+    "path": "explosion",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:fall",
+    "namespace": "minecraft",
+    "path": "fall",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:falling_anvil",
+    "namespace": "minecraft",
+    "path": "falling_anvil",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:falling_block",
+    "namespace": "minecraft",
+    "path": "falling_block",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:falling_stalactite",
+    "namespace": "minecraft",
+    "path": "falling_stalactite",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:fireball",
+    "namespace": "minecraft",
+    "path": "fireball",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:fireworks",
+    "namespace": "minecraft",
+    "path": "fireworks",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:fly_into_wall",
+    "namespace": "minecraft",
+    "path": "fly_into_wall",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:freeze",
+    "namespace": "minecraft",
+    "path": "freeze",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:generic",
+    "namespace": "minecraft",
+    "path": "generic",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:generic_kill",
+    "namespace": "minecraft",
+    "path": "generic_kill",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:hot_floor",
+    "namespace": "minecraft",
+    "path": "hot_floor",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:in_fire",
+    "namespace": "minecraft",
+    "path": "in_fire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:in_wall",
+    "namespace": "minecraft",
+    "path": "in_wall",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:indirect_magic",
+    "namespace": "minecraft",
+    "path": "indirect_magic",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:lava",
+    "namespace": "minecraft",
+    "path": "lava",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:lightning_bolt",
+    "namespace": "minecraft",
+    "path": "lightning_bolt",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:magic",
+    "namespace": "minecraft",
+    "path": "magic",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:mob_attack",
+    "namespace": "minecraft",
+    "path": "mob_attack",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:mob_attack_no_aggro",
+    "namespace": "minecraft",
+    "path": "mob_attack_no_aggro",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:mob_projectile",
+    "namespace": "minecraft",
+    "path": "mob_projectile",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:on_fire",
+    "namespace": "minecraft",
+    "path": "on_fire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:out_of_world",
+    "namespace": "minecraft",
+    "path": "out_of_world",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:outside_border",
+    "namespace": "minecraft",
+    "path": "outside_border",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:player_attack",
+    "namespace": "minecraft",
+    "path": "player_attack",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:player_explosion",
+    "namespace": "minecraft",
+    "path": "player_explosion",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:sonic_boom",
+    "namespace": "minecraft",
+    "path": "sonic_boom",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:spit",
+    "namespace": "minecraft",
+    "path": "spit",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:stalagmite",
+    "namespace": "minecraft",
+    "path": "stalagmite",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:starve",
+    "namespace": "minecraft",
+    "path": "starve",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:sting",
+    "namespace": "minecraft",
+    "path": "sting",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:sweet_berry_bush",
+    "namespace": "minecraft",
+    "path": "sweet_berry_bush",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:thorns",
+    "namespace": "minecraft",
+    "path": "thorns",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:thrown",
+    "namespace": "minecraft",
+    "path": "thrown",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:trident",
+    "namespace": "minecraft",
+    "path": "trident",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:unattributed_fireball",
+    "namespace": "minecraft",
+    "path": "unattributed_fireball",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:wind_charge",
+    "namespace": "minecraft",
+    "path": "wind_charge",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:wither",
+    "namespace": "minecraft",
+    "path": "wither",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "minecraft:wither_skull",
+    "namespace": "minecraft",
+    "path": "wither_skull",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "neoforge:poison",
+    "namespace": "neoforge",
+    "path": "poison",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:blood_loss",
+    "namespace": "vampirism",
+    "path": "blood_loss",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:dbno",
+    "namespace": "vampirism",
+    "path": "dbno",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:holy_water",
+    "namespace": "vampirism",
+    "path": "holy_water",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:minion",
+    "namespace": "vampirism",
+    "path": "minion",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:mother",
+    "namespace": "vampirism",
+    "path": "mother",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:stake",
+    "namespace": "vampirism",
+    "path": "stake",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:sun_damage",
+    "namespace": "vampirism",
+    "path": "sun_damage",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:vampire_in_fire",
+    "namespace": "vampirism",
+    "path": "vampire_in_fire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "vampirism:vampire_on_fire",
+    "namespace": "vampirism",
+    "path": "vampire_on_fire",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "werewolves:bite",
+    "namespace": "werewolves",
+    "path": "bite",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  },
+  {
+    "id": "werewolves:blood_loss",
+    "namespace": "werewolves",
+    "path": "blood_loss",
+    "class": "net.minecraft.world.damagesource.DamageType"
+  }
+]

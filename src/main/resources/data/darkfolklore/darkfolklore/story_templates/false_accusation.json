@@ -1,0 +1,9 @@
+{
+  "id": "darkfolklore:false_accusation",
+  "trigger": "CONTROLLED_FALSE_ACCUSATION",
+  "concept": "darkfolklore:vampire",
+  "weight": 1,
+  "cooldown_ticks": 72000,
+  "lifetime_ticks": 120000,
+  "enabled": true
+}

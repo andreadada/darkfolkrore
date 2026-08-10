@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "vampirism:hunter", "required": false},
+    {"id": "vampirism:advanced_hunter", "required": false},
+    {"id": "vampirism:hunter_minion", "required": false},
+    {"id": "vampirism:hunter_trainer", "required": false},
+    {"id": "vampirism:task_master_hunter", "required": false}
+  ]
+}

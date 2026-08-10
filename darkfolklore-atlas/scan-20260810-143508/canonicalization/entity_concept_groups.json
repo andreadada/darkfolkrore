@@ -1,0 +1,238 @@
+[
+  {
+    "kind": "entity",
+    "concept": "bellsnickel",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "feywild:bellsnickel",
+      "lore_master:bellsnickel"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "cnc:chupacabra",
+      "mobs_of_mythology:chupacabra"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": true,
+    "members": [
+      "fangs_n_claws:ghost",
+      "vampirism:ghost"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "imp",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:imp",
+      "mythsandlegends:imp"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "wraith",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:wraith",
+      "graveyard:wraith"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "bellsnickel",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "feywild:bellsnickel",
+      "lore_master:bellsnickel"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "cnc:chupacabra",
+      "mobs_of_mythology:chupacabra"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "classification": "GENERIC_NAME_COLLISION_GROUP",
+    "generic_name": true,
+    "members": [
+      "fangs_n_claws:ghost",
+      "vampirism:ghost"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "imp",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:imp",
+      "mythsandlegends:imp"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "wraith",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:wraith",
+      "graveyard:wraith"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "beaver",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "cnc:beaver",
+      "occultism:beaver_familiar"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "bellsnickel",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "feywild:bellsnickel",
+      "lore_master:bellsnickel"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "cnc:chupacabra",
+      "cnc:chupacabra_spit",
+      "mobs_of_mythology:chupacabra"
+    ],
+    "member_count": 3,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": true,
+    "members": [
+      "fangs_n_claws:fire_ghost",
+      "fangs_n_claws:ghost",
+      "vampirism:ghost"
+    ],
+    "member_count": 3,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "golem",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:golem",
+      "fangs_n_claws:ice_golem",
+      "occultism:iesnium_golem"
+    ],
+    "member_count": 3,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "nightmare",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:nightmare_horse",
+      "graveyard:nightmare"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "reaper",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "graveyard:reaper",
+      "mca:grim_reaper"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:werewolf",
+      "werewolves:alpha_werewolf",
+      "werewolves:human_werewolf",
+      "werewolves:task_master_werewolf",
+      "werewolves:werewolf_beast",
+      "werewolves:werewolf_minion",
+      "werewolves:werewolf_survivalist"
+    ],
+    "member_count": 7,
+    "namespace_count": 2
+  },
+  {
+    "kind": "entity",
+    "concept": "wraith",
+    "classification": "RELATED_ENTITY_FAMILY",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:wraith",
+      "graveyard:wraith"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  }
+]

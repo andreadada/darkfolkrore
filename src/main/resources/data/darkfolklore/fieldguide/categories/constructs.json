@@ -1,0 +1,12 @@
+{
+  "sort_index": 29,
+  "icon": "fieldguide:textures/gui/icons/ore.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:occultism/iesnium_golem",
+      "canonical_concept": "darkfolklore:golem",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

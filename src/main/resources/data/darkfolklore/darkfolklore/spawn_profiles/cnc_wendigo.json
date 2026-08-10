@@ -1,0 +1,7 @@
+{
+  "entity": "cnc:wendigo",
+  "rarity": "VERY_RARE",
+  "natural_spawn_enabled": true,
+  "nocturnal": true,
+  "event_multiplier": 1.5
+}

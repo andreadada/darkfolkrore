@@ -1,0 +1,33 @@
+{
+  "type": "darkfolklore:canonicalize_items",
+  "conditions": [],
+  "replacements": {
+    "enchanted:garlic": "vampirism:garlic",
+    "werewolves:wolfsbane": "enchanted:wolfsbane_flower",
+
+    "eidolon_repraised:raw_silver": "immersiveengineering:raw_silver",
+    "eidolon_repraised:raw_silver_block": "immersiveengineering:raw_block_silver",
+    "eidolon_repraised:silver_block": "immersiveengineering:storage_silver",
+    "eidolon_repraised:silver_ingot": "immersiveengineering:ingot_silver",
+    "eidolon_repraised:silver_nugget": "immersiveengineering:nugget_silver",
+    "eidolon_repraised:silver_ore": "immersiveengineering:ore_silver",
+    "eidolon_repraised:deep_silver_ore": "immersiveengineering:deepslate_ore_silver",
+
+    "occultism:raw_silver": "immersiveengineering:raw_silver",
+    "occultism:raw_silver_block": "immersiveengineering:raw_block_silver",
+    "occultism:silver_block": "immersiveengineering:storage_silver",
+    "occultism:silver_dust": "immersiveengineering:dust_silver",
+    "occultism:silver_ingot": "immersiveengineering:ingot_silver",
+    "occultism:silver_nugget": "immersiveengineering:nugget_silver",
+    "occultism:silver_ore": "immersiveengineering:ore_silver",
+    "occultism:silver_ore_deepslate": "immersiveengineering:deepslate_ore_silver",
+
+    "werewolves:raw_silver": "immersiveengineering:raw_silver",
+    "werewolves:raw_silver_block": "immersiveengineering:raw_block_silver",
+    "werewolves:silver_block": "immersiveengineering:storage_silver",
+    "werewolves:silver_ingot": "immersiveengineering:ingot_silver",
+    "werewolves:silver_nugget": "immersiveengineering:nugget_silver",
+    "werewolves:silver_ore": "immersiveengineering:ore_silver",
+    "werewolves:deepslate_silver_ore": "immersiveengineering:deepslate_ore_silver"
+  }
+}

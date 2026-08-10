@@ -1,0 +1,7 @@
+{
+  "entity": "eidolon_repraised:wraith",
+  "rarity": "RARE",
+  "natural_spawn_enabled": true,
+  "nocturnal": true,
+  "event_multiplier": 1.4
+}

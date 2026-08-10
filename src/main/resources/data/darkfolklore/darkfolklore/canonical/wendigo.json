@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:wendigo",
+  "kind": "ENTITY",
+  "canonical": "cnc:wendigo",
+  "implementations": [],
+  "policy": "CANONICAL",
+  "reason": "The installed compatibility target exposes one verified implementation."
+}

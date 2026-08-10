@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:blood_soul_rite",
+  "traditions": ["SPIRIT", "SOUL", "FORBIDDEN_THEURGY"],
+  "required_traits": ["VAMPIRE_BLOOD", "SOUL", "RITUAL_COMPONENT"],
+  "knowledge_reward": "darkfolklore:forbidden_lore",
+  "knowledge_points": 10
+}

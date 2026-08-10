@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:imp",
+  "kind": "ENTITY",
+  "canonical": "mythsandlegends:imp",
+  "implementations": ["fangs_n_claws:imp"],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "Myths & Legends owns the enabled Nether ecology; Fangs already disables its duplicate."
+}

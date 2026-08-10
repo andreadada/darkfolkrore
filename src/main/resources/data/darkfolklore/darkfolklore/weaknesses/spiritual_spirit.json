@@ -1,0 +1,8 @@
+{
+  "id": "darkfolklore:spiritual_vs_spirit",
+  "target_traits": ["SPIRIT"],
+  "item_traits": ["SPIRITUAL"],
+  "multiplier": 1.5,
+  "native_provider_namespaces": [],
+  "priority": 70
+}

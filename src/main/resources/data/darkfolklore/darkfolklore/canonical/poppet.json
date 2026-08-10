@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:poppet",
+  "kind": "CONCEPT",
+  "canonical": "",
+  "implementations": ["enchanted:poppet", "malum:poppet"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Enchanted poppets are functional; Malum's current poppet is reserved for its future system."
+}

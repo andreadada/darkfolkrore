@@ -1,0 +1,11 @@
+{
+  "concept": "darkfolklore:vampire",
+  "kind": "ENTITY",
+  "canonical": "vampirism:vampire",
+  "implementations": [
+    "vampirism:vampire_mob",
+    "vampirism:vampire_imob"
+  ],
+  "policy": "CANONICAL",
+  "reason": "The basic Vampirism vampire is the static canonical creature. Advanced vampires, barons, task masters, minions, converted villagers, players, and MCA people retain distinct entity or dynamic-identity semantics."
+}

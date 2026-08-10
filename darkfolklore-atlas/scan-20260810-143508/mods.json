@@ -1,0 +1,884 @@
+[
+  {
+    "mod_id": "aa4_atlas",
+    "display_name": "AA4 Atlas",
+    "version": "1.1.2",
+    "namespace_guess": "aa4_atlas"
+  },
+  {
+    "mod_id": "almostunified",
+    "display_name": "AlmostUnified",
+    "version": "1.21.1-1.4.2",
+    "namespace_guess": "almostunified"
+  },
+  {
+    "mod_id": "almostunified_ie",
+    "display_name": "Almost Unified Immersive Engineering",
+    "version": "1.21.1-1.0.1",
+    "namespace_guess": "almostunified_ie"
+  },
+  {
+    "mod_id": "ancient_tools",
+    "display_name": "Vanity: Ancient Tool Variants",
+    "version": "3.0.0",
+    "namespace_guess": "ancient_tools"
+  },
+  {
+    "mod_id": "antique_atlas",
+    "display_name": "Antique Atlas",
+    "version": "3.1.2_1.21",
+    "namespace_guess": "antique_atlas"
+  },
+  {
+    "mod_id": "antiqueatlas",
+    "display_name": "Antique Atlas",
+    "version": "8.0.1",
+    "namespace_guess": "antiqueatlas"
+  },
+  {
+    "mod_id": "architectury",
+    "display_name": "Architectury",
+    "version": "13.0.11",
+    "namespace_guess": "architectury"
+  },
+  {
+    "mod_id": "audrops",
+    "display_name": "AlmostUnifiedDrops",
+    "version": "1.0.1",
+    "namespace_guess": "audrops"
+  },
+  {
+    "mod_id": "azurelib",
+    "display_name": "AzureLib",
+    "version": "3.1.11",
+    "namespace_guess": "azurelib"
+  },
+  {
+    "mod_id": "betteradvancedtooltips",
+    "display_name": "Better Advanced Tooltips",
+    "version": "2101.1.0-build.1",
+    "namespace_guess": "betteradvancedtooltips"
+  },
+  {
+    "mod_id": "betterarcheology",
+    "display_name": "Better Archeology",
+    "version": "1.21.1-1.3.8",
+    "namespace_guess": "betterarcheology"
+  },
+  {
+    "mod_id": "bloodlines",
+    "display_name": "Bloodlines",
+    "version": "1.21-3.0.8",
+    "namespace_guess": "bloodlines"
+  },
+  {
+    "mod_id": "boss_checklist",
+    "display_name": "Boss Checklist",
+    "version": "5.2.0",
+    "namespace_guess": "boss_checklist"
+  },
+  {
+    "mod_id": "cerbons_api",
+    "display_name": "Cerbons API",
+    "version": "1.3.0",
+    "namespace_guess": "cerbons_api"
+  },
+  {
+    "mod_id": "cnc",
+    "display_name": "Critters n' Crawlers",
+    "version": "2.2.5",
+    "namespace_guess": "cnc"
+  },
+  {
+    "mod_id": "connector",
+    "display_name": "Sinytra Connector",
+    "version": "2.0.0-beta.16+1.21.1",
+    "namespace_guess": "connector"
+  },
+  {
+    "mod_id": "cupboard",
+    "display_name": "Cupboard mod",
+    "version": "3.9",
+    "namespace_guess": "cupboard"
+  },
+  {
+    "mod_id": "curios",
+    "display_name": "Curios API",
+    "version": "9.5.1+1.21.1",
+    "namespace_guess": "curios"
+  },
+  {
+    "mod_id": "darkfolklore_atlas",
+    "display_name": "Dark Folklore Atlas",
+    "version": "0.2.0",
+    "namespace_guess": "darkfolklore_atlas"
+  },
+  {
+    "mod_id": "eidolon_repraised",
+    "display_name": "Eidolon:Repraised",
+    "version": "0.5.0.2",
+    "namespace_guess": "eidolon_repraised"
+  },
+  {
+    "mod_id": "emi",
+    "display_name": "EMI",
+    "version": "1.1.24+1.21.1+neoforge",
+    "namespace_guess": "emi"
+  },
+  {
+    "mod_id": "enchanted",
+    "display_name": "Enchanted",
+    "version": "4.2.7",
+    "namespace_guess": "enchanted"
+  },
+  {
+    "mod_id": "fabric_api",
+    "display_name": "Forgified Fabric API",
+    "version": "0.116.15+2.3.1+1.21.1",
+    "namespace_guess": "fabric_api"
+  },
+  {
+    "mod_id": "fabric_api_base",
+    "display_name": "Forgified Fabric API Base",
+    "version": "0.4.42+d1308ded19",
+    "namespace_guess": "fabric_api_base"
+  },
+  {
+    "mod_id": "fabric_api_lookup_api_v1",
+    "display_name": "Forgified Fabric API Lookup API (v1)",
+    "version": "1.6.72+6244b11119",
+    "namespace_guess": "fabric_api_lookup_api_v1"
+  },
+  {
+    "mod_id": "fabric_biome_api_v1",
+    "display_name": "Forgified Fabric Biome API (v1)",
+    "version": "13.0.31+1e62d33c19",
+    "namespace_guess": "fabric_biome_api_v1"
+  },
+  {
+    "mod_id": "fabric_block_api_v1",
+    "display_name": "Forgified Fabric Block API (v1)",
+    "version": "1.1.0+b0c22bb819",
+    "namespace_guess": "fabric_block_api_v1"
+  },
+  {
+    "mod_id": "fabric_block_view_api_v2",
+    "display_name": "Forgified Fabric BlockView API (v2)",
+    "version": "1.0.11+e9036fd419",
+    "namespace_guess": "fabric_block_view_api_v2"
+  },
+  {
+    "mod_id": "fabric_blockrenderlayer_v1",
+    "display_name": "Forgified Fabric BlockRenderLayer Registration (v1)",
+    "version": "1.1.52+c290471319",
+    "namespace_guess": "fabric_blockrenderlayer_v1"
+  },
+  {
+    "mod_id": "fabric_client_tags_api_v1",
+    "display_name": "Forgified Fabric Client Tags",
+    "version": "1.2.0+5adff2d719",
+    "namespace_guess": "fabric_client_tags_api_v1"
+  },
+  {
+    "mod_id": "fabric_command_api_v2",
+    "display_name": "Forgified Fabric Command API (v2)",
+    "version": "2.2.28+36d727be19",
+    "namespace_guess": "fabric_command_api_v2"
+  },
+  {
+    "mod_id": "fabric_content_registries_v0",
+    "display_name": "Forgified Fabric Content Registries (v0)",
+    "version": "8.0.19+5e0d320019",
+    "namespace_guess": "fabric_content_registries_v0"
+  },
+  {
+    "mod_id": "fabric_convention_tags_v1",
+    "display_name": "Forgified Fabric Convention Tags",
+    "version": "2.1.7+7f945d5b19",
+    "namespace_guess": "fabric_convention_tags_v1"
+  },
+  {
+    "mod_id": "fabric_convention_tags_v2",
+    "display_name": "Forgified Fabric Convention Tags (v2)",
+    "version": "2.12.0+75d3639619",
+    "namespace_guess": "fabric_convention_tags_v2"
+  },
+  {
+    "mod_id": "fabric_data_attachment_api_v1",
+    "display_name": "Forgified Fabric Data Attachment API (v1)",
+    "version": "1.4.7+26d408aa19",
+    "namespace_guess": "fabric_data_attachment_api_v1"
+  },
+  {
+    "mod_id": "fabric_data_generation_api_v1",
+    "display_name": "Forgified Fabric Data Generation API (v1)",
+    "version": "20.3.0+3e2bcb4b19",
+    "namespace_guess": "fabric_data_generation_api_v1"
+  },
+  {
+    "mod_id": "fabric_entity_events_v1",
+    "display_name": "Forgified Fabric Entity Events (v1)",
+    "version": "1.8.0+e46a02ca19",
+    "namespace_guess": "fabric_entity_events_v1"
+  },
+  {
+    "mod_id": "fabric_events_interaction_v0",
+    "display_name": "Forgified Fabric Events Interaction (v0)",
+    "version": "0.7.14+7e3d421f19",
+    "namespace_guess": "fabric_events_interaction_v0"
+  },
+  {
+    "mod_id": "fabric_game_rule_api_v1",
+    "display_name": "Forgified Fabric Game Rule API (v1)",
+    "version": "1.0.53+36d727be19",
+    "namespace_guess": "fabric_game_rule_api_v1"
+  },
+  {
+    "mod_id": "fabric_gametest_api_v1",
+    "display_name": "Forgified Fabric Game Test API (v1)",
+    "version": "2.0.5+29f188ce19",
+    "namespace_guess": "fabric_gametest_api_v1"
+  },
+  {
+    "mod_id": "fabric_item_api_v1",
+    "display_name": "Forgified Fabric Item API (v1)",
+    "version": "11.3.0+766f218719",
+    "namespace_guess": "fabric_item_api_v1"
+  },
+  {
+    "mod_id": "fabric_item_group_api_v1",
+    "display_name": "Forgified Fabric Item Group API (v1)",
+    "version": "4.1.7+e324903319",
+    "namespace_guess": "fabric_item_group_api_v1"
+  },
+  {
+    "mod_id": "fabric_key_binding_api_v1",
+    "display_name": "Forgified Fabric Key Binding API (v1)",
+    "version": "1.0.47+62cc7ce119",
+    "namespace_guess": "fabric_key_binding_api_v1"
+  },
+  {
+    "mod_id": "fabric_lifecycle_events_v1",
+    "display_name": "Forgified Fabric Lifecycle Events (v1)",
+    "version": "2.6.0+e40d8add19",
+    "namespace_guess": "fabric_lifecycle_events_v1"
+  },
+  {
+    "mod_id": "fabric_loot_api_v2",
+    "display_name": "Forgified Fabric Loot API (v2)",
+    "version": "3.0.15+a3ee712d19",
+    "namespace_guess": "fabric_loot_api_v2"
+  },
+  {
+    "mod_id": "fabric_loot_api_v3",
+    "display_name": "Forgified Fabric Loot API (v3)",
+    "version": "1.0.3+333dfad919",
+    "namespace_guess": "fabric_loot_api_v3"
+  },
+  {
+    "mod_id": "fabric_message_api_v1",
+    "display_name": "Forgified Fabric Message API (v1)",
+    "version": "6.0.14+6a754fce19",
+    "namespace_guess": "fabric_message_api_v1"
+  },
+  {
+    "mod_id": "fabric_model_loading_api_v1",
+    "display_name": "Forgified Fabric Model Loading API (v1)",
+    "version": "2.1.0+6e8f52c719",
+    "namespace_guess": "fabric_model_loading_api_v1"
+  },
+  {
+    "mod_id": "fabric_networking_api_v1",
+    "display_name": "Forgified Fabric Networking API (v1)",
+    "version": "4.3.1+7e3d421f19",
+    "namespace_guess": "fabric_networking_api_v1"
+  },
+  {
+    "mod_id": "fabric_object_builder_api_v1",
+    "display_name": "Forgified Fabric Object Builder API (v1)",
+    "version": "15.2.1+cc242efd19",
+    "namespace_guess": "fabric_object_builder_api_v1"
+  },
+  {
+    "mod_id": "fabric_particles_v1",
+    "display_name": "Forgified Fabric Particles (v1)",
+    "version": "4.0.2+824f924c19",
+    "namespace_guess": "fabric_particles_v1"
+  },
+  {
+    "mod_id": "fabric_recipe_api_v1",
+    "display_name": "Forgified Fabric Recipe API (v1)",
+    "version": "5.0.16+59440bcc19",
+    "namespace_guess": "fabric_recipe_api_v1"
+  },
+  {
+    "mod_id": "fabric_registry_sync_v0",
+    "display_name": "Forgified Fabric Registry Sync (v0)",
+    "version": "5.3.2+f9aace1619",
+    "namespace_guess": "fabric_registry_sync_v0"
+  },
+  {
+    "mod_id": "fabric_renderer_api_v1",
+    "display_name": "Forgified Fabric Renderer API (v1)",
+    "version": "3.4.1+9125b6dc19",
+    "namespace_guess": "fabric_renderer_api_v1"
+  },
+  {
+    "mod_id": "fabric_renderer_indigo",
+    "display_name": "Forgified Fabric Renderer - Indigo",
+    "version": "1.7.1+9125b6dc19",
+    "namespace_guess": "fabric_renderer_indigo"
+  },
+  {
+    "mod_id": "fabric_rendering_data_attachment_v1",
+    "display_name": "Forgified Fabric Rendering Data Attachment (v1)",
+    "version": "0.3.49+73761d2e19",
+    "namespace_guess": "fabric_rendering_data_attachment_v1"
+  },
+  {
+    "mod_id": "fabric_rendering_fluids_v1",
+    "display_name": "Forgified Fabric Rendering Fluids (v1)",
+    "version": "3.1.6+a51883b219",
+    "namespace_guess": "fabric_rendering_fluids_v1"
+  },
+  {
+    "mod_id": "fabric_rendering_v1",
+    "display_name": "Forgified Fabric Rendering (v1)",
+    "version": "5.1.0+1a09bd5a19",
+    "namespace_guess": "fabric_rendering_v1"
+  },
+  {
+    "mod_id": "fabric_resource_conditions_api_v1",
+    "display_name": "Forgified Fabric Resource Conditions API (v1)",
+    "version": "4.3.0+5bdd099819",
+    "namespace_guess": "fabric_resource_conditions_api_v1"
+  },
+  {
+    "mod_id": "fabric_resource_loader_v0",
+    "display_name": "Forgified Fabric Resource Loader (v0)",
+    "version": "1.3.1+4ea8954419",
+    "namespace_guess": "fabric_resource_loader_v0"
+  },
+  {
+    "mod_id": "fabric_screen_api_v1",
+    "display_name": "Forgified Fabric Screen API (v1)",
+    "version": "2.0.26+b4953c7419",
+    "namespace_guess": "fabric_screen_api_v1"
+  },
+  {
+    "mod_id": "fabric_screen_handler_api_v1",
+    "display_name": "Forgified Fabric Screen Handler API (v1)",
+    "version": "1.3.91+8dbc56dd19",
+    "namespace_guess": "fabric_screen_handler_api_v1"
+  },
+  {
+    "mod_id": "fabric_sound_api_v1",
+    "display_name": "Forgified Fabric Sound API (v1)",
+    "version": "1.0.23+10b84f8419",
+    "namespace_guess": "fabric_sound_api_v1"
+  },
+  {
+    "mod_id": "fabric_tag_api_v1",
+    "display_name": "Forgified Fabric Tag API (v1)",
+    "version": "1.3.0+3e2bcb4b19",
+    "namespace_guess": "fabric_tag_api_v1"
+  },
+  {
+    "mod_id": "fabric_transfer_api_v1",
+    "display_name": "Forgified Fabric Transfer API (v1)",
+    "version": "5.4.4+6244b11119",
+    "namespace_guess": "fabric_transfer_api_v1"
+  },
+  {
+    "mod_id": "fabric_transitive_access_wideners_v1",
+    "display_name": "Forgified Fabric Transitive Access Wideners (v1)",
+    "version": "6.2.0+6c854b6f19",
+    "namespace_guess": "fabric_transitive_access_wideners_v1"
+  },
+  {
+    "mod_id": "fangs_n_claws",
+    "display_name": "Fangs 'n Claws",
+    "version": "1.2.2",
+    "namespace_guess": "fangs_n_claws"
+  },
+  {
+    "mod_id": "farmersdelight",
+    "display_name": "Farmer's Delight",
+    "version": "1.3.2",
+    "namespace_guess": "farmersdelight"
+  },
+  {
+    "mod_id": "feywild",
+    "display_name": "Feywild",
+    "version": "5.5.5",
+    "namespace_guess": "feywild"
+  },
+  {
+    "mod_id": "fieldguide",
+    "display_name": "Field Guide",
+    "version": "1.14.0",
+    "namespace_guess": "fieldguide"
+  },
+  {
+    "mod_id": "forgified_fabric_api",
+    "display_name": "Forgified Fabric API (dummy)",
+    "version": "0.116.15+2.3.1+1.21.1",
+    "namespace_guess": "forgified_fabric_api"
+  },
+  {
+    "mod_id": "fusion",
+    "display_name": "Fusion",
+    "version": "1.3.12",
+    "namespace_guess": "fusion"
+  },
+  {
+    "mod_id": "gaze",
+    "display_name": "Gaze",
+    "version": "1.1.7.1",
+    "namespace_guess": "gaze"
+  },
+  {
+    "mod_id": "geckolib",
+    "display_name": "GeckoLib 4",
+    "version": "4.9.2",
+    "namespace_guess": "geckolib"
+  },
+  {
+    "mod_id": "glowingeyes",
+    "display_name": "Glowing Eyes",
+    "version": "2.1.3",
+    "namespace_guess": "glowingeyes"
+  },
+  {
+    "mod_id": "graveyard",
+    "display_name": "The Graveyard",
+    "version": "2.6.2",
+    "namespace_guess": "graveyard"
+  },
+  {
+    "mod_id": "harshersun",
+    "display_name": "Harsher Sun",
+    "version": "1.0.0",
+    "namespace_guess": "harshersun"
+  },
+  {
+    "mod_id": "herebedoodles",
+    "display_name": "Here Be Doodles",
+    "version": "1.0.0",
+    "namespace_guess": "herebedoodles"
+  },
+  {
+    "mod_id": "immersive_vampirism",
+    "display_name": "ImmersiveVampirism",
+    "version": "1.0.0",
+    "namespace_guess": "immersive_vampirism"
+  },
+  {
+    "mod_id": "immersiveengineering",
+    "display_name": "Immersive Engineering",
+    "version": "12.4.2-194",
+    "namespace_guess": "immersiveengineering"
+  },
+  {
+    "mod_id": "immersiveoverlays",
+    "display_name": "Immersive Overlays",
+    "version": "1.7.3+1.21.1",
+    "namespace_guess": "immersiveoverlays"
+  },
+  {
+    "mod_id": "item_descriptions",
+    "display_name": "Item Descriptions",
+    "version": "2.8.0+1.21.1",
+    "namespace_guess": "item_descriptions"
+  },
+  {
+    "mod_id": "jade",
+    "display_name": "Jade",
+    "version": "15.10.6+neoforge",
+    "namespace_guess": "jade"
+  },
+  {
+    "mod_id": "jei",
+    "display_name": "Just Enough Items",
+    "version": "19.27.0.340",
+    "namespace_guess": "jei"
+  },
+  {
+    "mod_id": "jei_malum",
+    "display_name": "JEI Malum",
+    "version": "1.0",
+    "namespace_guess": "jei_malum"
+  },
+  {
+    "mod_id": "kaleidoscope_bloodwine",
+    "display_name": "Kaleidoscope Bloodwine",
+    "version": "1.1.0",
+    "namespace_guess": "kaleidoscope_bloodwine"
+  },
+  {
+    "mod_id": "kaleidoscope_tavern",
+    "display_name": "Kaleidoscope Tavern",
+    "version": "1.2.0-neoforge+mc1.21.1",
+    "namespace_guess": "kaleidoscope_tavern"
+  },
+  {
+    "mod_id": "kjseidolon",
+    "display_name": "KubeJS Eidolon",
+    "version": "1.3.1",
+    "namespace_guess": "kjseidolon"
+  },
+  {
+    "mod_id": "kubejs",
+    "display_name": "KubeJS",
+    "version": "2101.7.2-build.368",
+    "namespace_guess": "kubejs"
+  },
+  {
+    "mod_id": "lodestone",
+    "display_name": "Lodestone",
+    "version": "1.8.2",
+    "namespace_guess": "lodestone"
+  },
+  {
+    "mod_id": "lootintegrations",
+    "display_name": "Lootintegrations mod",
+    "version": "4.7",
+    "namespace_guess": "lootintegrations"
+  },
+  {
+    "mod_id": "lootintegrations_betterarcheology",
+    "display_name": "lootintegrations_betterarcheology mod",
+    "version": "1",
+    "namespace_guess": "lootintegrations_betterarcheology"
+  },
+  {
+    "mod_id": "lootintegrations_graveyard",
+    "display_name": "lootintegrations_graveyard mod",
+    "version": "1",
+    "namespace_guess": "lootintegrations_graveyard"
+  },
+  {
+    "mod_id": "lore_master",
+    "display_name": "LoreMaster",
+    "version": "1.1.6",
+    "namespace_guess": "lore_master"
+  },
+  {
+    "mod_id": "malstone",
+    "display_name": "Malstone Mod",
+    "version": "1.0.5.0-neoforge",
+    "namespace_guess": "malstone"
+  },
+  {
+    "mod_id": "malum",
+    "display_name": "Malum",
+    "version": "1.8.2",
+    "namespace_guess": "malum"
+  },
+  {
+    "mod_id": "malumarma",
+    "display_name": "Malum - Arma",
+    "version": "1.0.5",
+    "namespace_guess": "malumarma"
+  },
+  {
+    "mod_id": "mca",
+    "display_name": "Minecraft Comes Alive",
+    "version": "7.7.32+1.21.1",
+    "namespace_guess": "mca"
+  },
+  {
+    "mod_id": "mca_vamp_compat",
+    "display_name": "MCA Reborn x Vampirism Compat",
+    "version": "2.0.12",
+    "namespace_guess": "mca_vamp_compat"
+  },
+  {
+    "mod_id": "mcacapitals",
+    "display_name": "MCA Capitals",
+    "version": "1.1.0",
+    "namespace_guess": "mcacapitals"
+  },
+  {
+    "mod_id": "mcasocial",
+    "display_name": "MCA Social",
+    "version": "0.7",
+    "namespace_guess": "mcasocial"
+  },
+  {
+    "mod_id": "mcqoy",
+    "display_name": "Barebones McQoy",
+    "version": "0.4.1+neo-1.21",
+    "namespace_guess": "mcqoy"
+  },
+  {
+    "mod_id": "minecraft",
+    "display_name": "Minecraft",
+    "version": "1.21.1",
+    "namespace_guess": "minecraft"
+  },
+  {
+    "mod_id": "mobs_of_mythology",
+    "display_name": "Mobs of Mythology",
+    "version": "3.0.0",
+    "namespace_guess": "mobs_of_mythology"
+  },
+  {
+    "mod_id": "modonomicon",
+    "display_name": "Modonomicon",
+    "version": "1.120.4",
+    "namespace_guess": "modonomicon"
+  },
+  {
+    "mod_id": "modopedia",
+    "display_name": "Modopedia",
+    "version": "1.1.11",
+    "namespace_guess": "modopedia"
+  },
+  {
+    "mod_id": "monster_checklist_mod_1784790200",
+    "display_name": "怪物清单",
+    "version": "1.2.2",
+    "namespace_guess": "monster_checklist_mod_1784790200"
+  },
+  {
+    "mod_id": "mru",
+    "display_name": "MRU",
+    "version": "1.0.31+1.21.1",
+    "namespace_guess": "mru"
+  },
+  {
+    "mod_id": "myths_of_the_sea",
+    "display_name": "MythsOfTheSea",
+    "version": "1.3.0",
+    "namespace_guess": "myths_of_the_sea"
+  },
+  {
+    "mod_id": "mythsandlegends",
+    "display_name": "Myths & Legends",
+    "version": "0.0.8.6",
+    "namespace_guess": "mythsandlegends"
+  },
+  {
+    "mod_id": "neoforge",
+    "display_name": "NeoForge",
+    "version": "21.1.248",
+    "namespace_guess": "neoforge"
+  },
+  {
+    "mod_id": "occultdelight",
+    "display_name": "Occult Delight",
+    "version": "1.0.0",
+    "namespace_guess": "occultdelight"
+  },
+  {
+    "mod_id": "occultism",
+    "display_name": "Occultism",
+    "version": "1.224.2",
+    "namespace_guess": "occultism"
+  },
+  {
+    "mod_id": "ornate_weaponry",
+    "display_name": "Vanity: Ornate Weaponry",
+    "version": "3.0.0",
+    "namespace_guess": "ornate_weaponry"
+  },
+  {
+    "mod_id": "patchouli",
+    "display_name": "Patchouli",
+    "version": "1.21.1-93-NEOFORGE",
+    "namespace_guess": "patchouli"
+  },
+  {
+    "mod_id": "polymorph",
+    "display_name": "Polymorph (alias)",
+    "version": "1.2.456",
+    "namespace_guess": "polymorph"
+  },
+  {
+    "mod_id": "polymorph_plus",
+    "display_name": "Polymorph+",
+    "version": "1.2.1+1.21.1",
+    "namespace_guess": "polymorph_plus"
+  },
+  {
+    "mod_id": "polymorphic_occultism",
+    "display_name": "Polymorphic Occultism",
+    "version": "1.0.1",
+    "namespace_guess": "polymorphic_occultism"
+  },
+  {
+    "mod_id": "quest_giver",
+    "display_name": "Quest Giver",
+    "version": "1.5.1",
+    "namespace_guess": "quest_giver"
+  },
+  {
+    "mod_id": "resourcefulconfig",
+    "display_name": "Resourcefulconfig",
+    "version": "3.0.11",
+    "namespace_guess": "resourcefulconfig"
+  },
+  {
+    "mod_id": "resourcefullib",
+    "display_name": "Resourceful Lib",
+    "version": "3.0.0",
+    "namespace_guess": "resourcefullib"
+  },
+  {
+    "mod_id": "rhino",
+    "display_name": "Rhino",
+    "version": "2101.2.7-build.85",
+    "namespace_guess": "rhino"
+  },
+  {
+    "mod_id": "shine",
+    "display_name": "Shine",
+    "version": "2.0.1+1.21.1-neoforge",
+    "namespace_guess": "shine"
+  },
+  {
+    "mod_id": "smartbrainlib",
+    "display_name": "SmartBrainLib",
+    "version": "1.16.11",
+    "namespace_guess": "smartbrainlib"
+  },
+  {
+    "mod_id": "sodium",
+    "display_name": "Sodium",
+    "version": "0.6.13+mc1.21.1",
+    "namespace_guess": "sodium"
+  },
+  {
+    "mod_id": "stateobserver",
+    "display_name": "StateObserver",
+    "version": "1.6.4",
+    "namespace_guess": "stateobserver"
+  },
+  {
+    "mod_id": "stohuns_vanity_collection",
+    "display_name": "Stohun's Vanity Collection",
+    "version": "1.0.0",
+    "namespace_guess": "stohuns_vanity_collection"
+  },
+  {
+    "mod_id": "surveyor",
+    "display_name": "Surveyor Map Framework",
+    "version": "1.2.4_1.21",
+    "namespace_guess": "surveyor"
+  },
+  {
+    "mod_id": "teamlapenlib",
+    "display_name": "Teamlapen Library",
+    "version": "1.10.12",
+    "namespace_guess": "teamlapenlib"
+  },
+  {
+    "mod_id": "townstead",
+    "display_name": "Townstead",
+    "version": "0.7.5+1.21.1",
+    "namespace_guess": "townstead"
+  },
+  {
+    "mod_id": "unionlib",
+    "display_name": "UnionLib",
+    "version": "12.0.18",
+    "namespace_guess": "unionlib"
+  },
+  {
+    "mod_id": "unionlib_potionfluid",
+    "display_name": "UnionLib (Potions & Fluids)",
+    "version": "1.0.0",
+    "namespace_guess": "unionlib_potionfluid"
+  },
+  {
+    "mod_id": "vampiresdelight",
+    "display_name": "Vampire's Delight",
+    "version": "0.1.12b",
+    "namespace_guess": "vampiresdelight"
+  },
+  {
+    "mod_id": "vampiresneedumbrellas",
+    "display_name": "Vampires Need Umbrellas",
+    "version": "1.0.3",
+    "namespace_guess": "vampiresneedumbrellas"
+  },
+  {
+    "mod_id": "vampiricageing",
+    "display_name": "Vampiric Ageing",
+    "version": "1.21-1.4.21",
+    "namespace_guess": "vampiricageing"
+  },
+  {
+    "mod_id": "vampirism",
+    "display_name": "Vampirism",
+    "version": "1.10.12",
+    "namespace_guess": "vampirism"
+  },
+  {
+    "mod_id": "vampirism__boss_checklist_compat",
+    "display_name": "§6Boss Checklist §e- §cVampirism §r§4Compatibility",
+    "version": "1.0.0",
+    "namespace_guess": "vampirism__boss_checklist_compat"
+  },
+  {
+    "mod_id": "vampirism_integrations",
+    "display_name": "Vampirism Integrations",
+    "version": "1.10.2",
+    "namespace_guess": "vampirism_integrations"
+  },
+  {
+    "mod_id": "vampirismrings",
+    "display_name": "Vampirism Rings",
+    "version": "1.0.0",
+    "namespace_guess": "vampirismrings"
+  },
+  {
+    "mod_id": "vanity",
+    "display_name": "Vanity",
+    "version": "5.0.2",
+    "namespace_guess": "vanity"
+  },
+  {
+    "mod_id": "vanity_aesthetic_armory",
+    "display_name": "Vanity: Aesthetic Armory",
+    "version": "1.1.1",
+    "namespace_guess": "vanity_aesthetic_armory"
+  },
+  {
+    "mod_id": "vanity_colossal_weapons",
+    "display_name": "Vanity: Colossal Weapons",
+    "version": "1.0.2",
+    "namespace_guess": "vanity_colossal_weapons"
+  },
+  {
+    "mod_id": "vestis",
+    "display_name": "Malum: Vestis",
+    "version": "1.1.0",
+    "namespace_guess": "vestis"
+  },
+  {
+    "mod_id": "wayward_attributes",
+    "display_name": "Wayward Attributes",
+    "version": "1.1.1",
+    "namespace_guess": "wayward_attributes"
+  },
+  {
+    "mod_id": "werewolves",
+    "display_name": "Werewolves",
+    "version": "2.0.3.3",
+    "namespace_guess": "werewolves"
+  },
+  {
+    "mod_id": "yeetusexperimentus",
+    "display_name": "Yeetus Experimentus",
+    "version": "87.0.0",
+    "namespace_guess": "yeetusexperimentus"
+  },
+  {
+    "mod_id": "yet_another_config_lib_v3",
+    "display_name": "YetAnotherConfigLib",
+    "version": "3.8.2+1.21.1-neoforge",
+    "namespace_guess": "yet_another_config_lib_v3"
+  }
+]

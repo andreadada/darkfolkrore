@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "eidolon_repraised:silver_sword", "required": false},
+    {"id": "eidolon_repraised:silver_axe", "required": false},
+    {"id": "fangs_n_claws:silver_sword", "required": false},
+    {"id": "vampiresdelight:silver_knife", "required": false}
+  ]
+}

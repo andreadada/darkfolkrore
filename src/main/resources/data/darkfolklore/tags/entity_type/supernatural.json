@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#darkfolklore:monster",
+    "#darkfolklore:fae",
+    "#darkfolklore:construct",
+    "#darkfolklore:witch"
+  ]
+}

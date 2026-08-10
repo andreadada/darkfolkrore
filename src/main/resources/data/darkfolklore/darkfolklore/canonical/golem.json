@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:golem",
+  "kind": "ENTITY",
+  "canonical": "",
+  "implementations": ["fangs_n_claws:golem", "fangs_n_claws:ice_golem", "occultism:iesnium_golem"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Hostile regenerating monsters and a ritual-created familiar are not substitutes."
+}

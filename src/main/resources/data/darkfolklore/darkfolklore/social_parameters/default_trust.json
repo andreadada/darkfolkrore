@@ -1,0 +1,8 @@
+{
+  "self": 0.30,
+  "spouse": 0.25,
+  "parent_or_child": 0.22,
+  "sibling": 0.18,
+  "player_friend": 0.12,
+  "player_bounty_target": -0.20
+}

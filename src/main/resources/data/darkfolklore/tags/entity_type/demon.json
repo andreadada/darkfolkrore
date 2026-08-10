@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mythsandlegends:imp", "required": false},
+    {"id": "mythsandlegends:imp_clone", "required": false},
+    {"id": "fangs_n_claws:imp", "required": false},
+    {"id": "occultism:afrit_wild", "required": false}
+  ]
+}

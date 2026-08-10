@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "occultism:iesnium_golem", "required": false},
+    {"id": "fangs_n_claws:golem", "required": false},
+    {"id": "fangs_n_claws:ice_golem", "required": false},
+    {"id": "mythsandlegends:possessed_armor", "required": false}
+  ]
+}

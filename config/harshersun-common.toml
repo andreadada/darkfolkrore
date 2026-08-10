@@ -1,0 +1,6 @@
+#Also set NPC vampires (mobs) on fire while they take sun damage, not just players
+igniteVampireMobs = true
+#Play a sizzling sound while a vampire burns in the sun
+sizzleSound = true
+#Emit smoke particles while a vampire burns in the sun
+smokeParticles = true

@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mobs_of_mythology:chupacabra", "required": false}
+  ]
+}

@@ -1,0 +1,1185 @@
+[
+  {
+    "id": "bloodlines:blood_frenzy",
+    "namespace": "bloodlines",
+    "path": "blood_frenzy",
+    "description_id": "action.bloodlines.blood_frenzy",
+    "class": "com.thedrofdoctoring.bloodlines.effects.BloodFrenzyEffect"
+  },
+  {
+    "id": "bloodlines:cold_blooded",
+    "namespace": "bloodlines",
+    "path": "cold_blooded",
+    "description_id": "effect.bloodlines.cold_blooded",
+    "class": "com.thedrofdoctoring.bloodlines.effects.ColdbloodedEffect"
+  },
+  {
+    "id": "bloodlines:heinous_curse",
+    "namespace": "bloodlines",
+    "path": "heinous_curse",
+    "description_id": "effect.bloodlines.heinous_curse",
+    "class": "com.thedrofdoctoring.bloodlines.effects.HeinousCurseEffect"
+  },
+  {
+    "id": "bloodlines:soul_rending",
+    "namespace": "bloodlines",
+    "path": "soul_rending",
+    "description_id": "effect.bloodlines.soul_rending",
+    "class": "com.thedrofdoctoring.bloodlines.effects.SoulRendingEffect"
+  },
+  {
+    "id": "cnc:sobbing",
+    "namespace": "cnc",
+    "path": "sobbing",
+    "description_id": "effect.cnc.sobbing",
+    "class": "net.imasillylittleguy.cnc.potion.SobbingMobEffect"
+  },
+  {
+    "id": "eidolon_repraised:anchored",
+    "namespace": "eidolon_repraised",
+    "path": "anchored",
+    "description_id": "effect.eidolon_repraised.anchored",
+    "class": "alexthw.eidolon_repraised.common.potion.AnchoredEffect"
+  },
+  {
+    "id": "eidolon_repraised:chilled",
+    "namespace": "eidolon_repraised",
+    "path": "chilled",
+    "description_id": "effect.eidolon_repraised.chilled",
+    "class": "alexthw.eidolon_repraised.common.potion.ChilledEffect"
+  },
+  {
+    "id": "eidolon_repraised:light_blessing",
+    "namespace": "eidolon_repraised",
+    "path": "light_blessing",
+    "description_id": "effect.eidolon_repraised.light_blessing",
+    "class": "alexthw.eidolon_repraised.common.potion.BlessedEffect"
+  },
+  {
+    "id": "eidolon_repraised:reinforced",
+    "namespace": "eidolon_repraised",
+    "path": "reinforced",
+    "description_id": "effect.eidolon_repraised.reinforced",
+    "class": "alexthw.eidolon_repraised.common.potion.ReinforcedEffect"
+  },
+  {
+    "id": "eidolon_repraised:soul_harvest",
+    "namespace": "eidolon_repraised",
+    "path": "soul_harvest",
+    "description_id": "effect.eidolon_repraised.soul_harvest",
+    "class": "alexthw.eidolon_repraised.common.potion.SHarvestEffect"
+  },
+  {
+    "id": "eidolon_repraised:undeath",
+    "namespace": "eidolon_repraised",
+    "path": "undeath",
+    "description_id": "effect.eidolon_repraised.undeath",
+    "class": "alexthw.eidolon_repraised.common.potion.UndeathEffect"
+  },
+  {
+    "id": "eidolon_repraised:vulnerable",
+    "namespace": "eidolon_repraised",
+    "path": "vulnerable",
+    "description_id": "effect.eidolon_repraised.vulnerable",
+    "class": "alexthw.eidolon_repraised.common.potion.VulnerableEffect"
+  },
+  {
+    "id": "enchanted:drown_resistance",
+    "namespace": "enchanted",
+    "path": "drown_resistance",
+    "description_id": "effect.enchanted.drown_resistance",
+    "class": "net.favouriteless.enchanted.common.effects.EMobEffect"
+  },
+  {
+    "id": "enchanted:fall_resistance",
+    "namespace": "enchanted",
+    "path": "fall_resistance",
+    "description_id": "effect.enchanted.fall_resistance",
+    "class": "net.favouriteless.enchanted.common.effects.EMobEffect"
+  },
+  {
+    "id": "enchanted:grotesque",
+    "namespace": "enchanted",
+    "path": "grotesque",
+    "description_id": "effect.enchanted.grotesque",
+    "class": "net.favouriteless.enchanted.common.effects.EMobEffect"
+  },
+  {
+    "id": "enchanted:magic_resistance",
+    "namespace": "enchanted",
+    "path": "magic_resistance",
+    "description_id": "effect.enchanted.magic_resistance",
+    "class": "net.favouriteless.enchanted.common.effects.EMobEffect"
+  },
+  {
+    "id": "fangs_n_claws:bleeding",
+    "namespace": "fangs_n_claws",
+    "path": "bleeding",
+    "description_id": "effect.fangs_n_claws.bleeding",
+    "class": "net.raptorzizi.fangs_n_claws.effect.BleedingEffect"
+  },
+  {
+    "id": "fangs_n_claws:flamebrand",
+    "namespace": "fangs_n_claws",
+    "path": "flamebrand",
+    "description_id": "effect.fangs_n_claws.flamebrand",
+    "class": "net.raptorzizi.fangs_n_claws.effect.FlamebrandEffect"
+  },
+  {
+    "id": "fangs_n_claws:frozen",
+    "namespace": "fangs_n_claws",
+    "path": "frozen",
+    "description_id": "effect.fangs_n_claws.frozen",
+    "class": "net.raptorzizi.fangs_n_claws.effect.FrozenEffect"
+  },
+  {
+    "id": "fangs_n_claws:hellfire_flamebrand",
+    "namespace": "fangs_n_claws",
+    "path": "hellfire_flamebrand",
+    "description_id": "effect.fangs_n_claws.hellfire_flamebrand",
+    "class": "net.raptorzizi.fangs_n_claws.effect.HellFlamebrandEffect"
+  },
+  {
+    "id": "fangs_n_claws:mithridatic",
+    "namespace": "fangs_n_claws",
+    "path": "mithridatic",
+    "description_id": "effect.fangs_n_claws.mithridatic",
+    "class": "net.raptorzizi.fangs_n_claws.effect.MithridaticEffect"
+  },
+  {
+    "id": "fangs_n_claws:stunned",
+    "namespace": "fangs_n_claws",
+    "path": "stunned",
+    "description_id": "effect.fangs_n_claws.stunned",
+    "class": "net.raptorzizi.fangs_n_claws.effect.StunnedEffect"
+  },
+  {
+    "id": "fangs_n_claws:venom",
+    "namespace": "fangs_n_claws",
+    "path": "venom",
+    "description_id": "effect.fangs_n_claws.venom",
+    "class": "net.raptorzizi.fangs_n_claws.effect.VenomEffect"
+  },
+  {
+    "id": "farmersdelight:comfort",
+    "namespace": "farmersdelight",
+    "path": "comfort",
+    "description_id": "effect.farmersdelight.comfort",
+    "class": "vectorwing.farmersdelight.common.effect.ComfortEffect"
+  },
+  {
+    "id": "farmersdelight:nourishment",
+    "namespace": "farmersdelight",
+    "path": "nourishment",
+    "description_id": "effect.farmersdelight.nourishment",
+    "class": "vectorwing.farmersdelight.common.effect.NourishmentEffect"
+  },
+  {
+    "id": "feywild:autumn_tree_ent_protection",
+    "namespace": "feywild",
+    "path": "autumn_tree_ent_protection",
+    "description_id": "effect.feywild.autumn_tree_ent_protection",
+    "class": "com.saphienyako.feywild.effect.AutumnTreeEntProtectionEffect"
+  },
+  {
+    "id": "feywild:fey_flying",
+    "namespace": "feywild",
+    "path": "fey_flying",
+    "description_id": "effect.feywild.fey_flying",
+    "class": "com.saphienyako.feywild.effect.FeyFlyingEffect"
+  },
+  {
+    "id": "feywild:fey_trickery",
+    "namespace": "feywild",
+    "path": "fey_trickery",
+    "description_id": "effect.feywild.fey_trickery",
+    "class": "com.saphienyako.feywild.effect.FeyTrickeryEffect"
+  },
+  {
+    "id": "feywild:spring_tree_ent_protection",
+    "namespace": "feywild",
+    "path": "spring_tree_ent_protection",
+    "description_id": "effect.feywild.spring_tree_ent_protection",
+    "class": "com.saphienyako.feywild.effect.SpringTreeEntProtectionEffect"
+  },
+  {
+    "id": "feywild:summer_tree_ent_protection",
+    "namespace": "feywild",
+    "path": "summer_tree_ent_protection",
+    "description_id": "effect.feywild.summer_tree_ent_protection",
+    "class": "com.saphienyako.feywild.effect.SummerTreeEntProtectionEffect"
+  },
+  {
+    "id": "feywild:winter_tree_ent_protection",
+    "namespace": "feywild",
+    "path": "winter_tree_ent_protection",
+    "description_id": "effect.feywild.winter_tree_ent_protection",
+    "class": "com.saphienyako.feywild.effect.WinterTreeEntProtectionEffect"
+  },
+  {
+    "id": "gaze:blighted",
+    "namespace": "gaze",
+    "path": "blighted",
+    "description_id": "effect.gaze.blighted",
+    "class": "com.strawberry.gaze.effect.BlightedEffect"
+  },
+  {
+    "id": "gaze:compromised",
+    "namespace": "gaze",
+    "path": "compromised",
+    "description_id": "effect.gaze.compromised",
+    "class": "com.strawberry.gaze.effect.CompromisedEffect"
+  },
+  {
+    "id": "gaze:drenched",
+    "namespace": "gaze",
+    "path": "drenched",
+    "description_id": "effect.gaze.drenched",
+    "class": "com.strawberry.gaze.effect.DrenchedEffect"
+  },
+  {
+    "id": "gaze:joyful",
+    "namespace": "gaze",
+    "path": "joyful",
+    "description_id": "effect.gaze.joyful",
+    "class": "com.strawberry.gaze.effect.JoyfulEffect"
+  },
+  {
+    "id": "gaze:sword_domain",
+    "namespace": "gaze",
+    "path": "sword_domain",
+    "description_id": "effect.gaze.sword_domain",
+    "class": "com.strawberry.gaze.effect.SwordDomainEffect"
+  },
+  {
+    "id": "gaze:world_anchor",
+    "namespace": "gaze",
+    "path": "world_anchor",
+    "description_id": "effect.gaze.world_anchor",
+    "class": "com.strawberry.gaze.effect.WorldAnchorEffect"
+  },
+  {
+    "id": "immersiveengineering:concrete_feet",
+    "namespace": "immersiveengineering",
+    "path": "concrete_feet",
+    "description_id": "effect.immersiveengineering.concrete_feet",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:conductive",
+    "namespace": "immersiveengineering",
+    "path": "conductive",
+    "description_id": "effect.immersiveengineering.conductive",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:flammable",
+    "namespace": "immersiveengineering",
+    "path": "flammable",
+    "description_id": "effect.immersiveengineering.flammable",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:flashed",
+    "namespace": "immersiveengineering",
+    "path": "flashed",
+    "description_id": "effect.immersiveengineering.flashed",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:incognito",
+    "namespace": "immersiveengineering",
+    "path": "incognito",
+    "description_id": "effect.immersiveengineering.incognito",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:slippery",
+    "namespace": "immersiveengineering",
+    "path": "slippery",
+    "description_id": "effect.immersiveengineering.slippery",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:sticky",
+    "namespace": "immersiveengineering",
+    "path": "sticky",
+    "description_id": "effect.immersiveengineering.sticky",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "immersiveengineering:stunned",
+    "namespace": "immersiveengineering",
+    "path": "stunned",
+    "description_id": "effect.immersiveengineering.stunned",
+    "class": "blusunrize.immersiveengineering.common.register.IEPotions$IEPotion"
+  },
+  {
+    "id": "kaleidoscope_tavern:ardent_heat",
+    "namespace": "kaleidoscope_tavern",
+    "path": "ardent_heat",
+    "description_id": "effect.kaleidoscope_tavern.ardent_heat",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.ArdentHeatEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:bloody_mary",
+    "namespace": "kaleidoscope_tavern",
+    "path": "bloody_mary",
+    "description_id": "effect.kaleidoscope_tavern.bloody_mary",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:grass_stealth",
+    "namespace": "kaleidoscope_tavern",
+    "path": "grass_stealth",
+    "description_id": "effect.kaleidoscope_tavern.grass_stealth",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.GrassStealthEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:high_heels",
+    "namespace": "kaleidoscope_tavern",
+    "path": "high_heels",
+    "description_id": "effect.kaleidoscope_tavern.high_heels",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.HighHeelsEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:long_reach",
+    "namespace": "kaleidoscope_tavern",
+    "path": "long_reach",
+    "description_id": "effect.kaleidoscope_tavern.long_reach",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.LongReachEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:shriek_attack",
+    "namespace": "kaleidoscope_tavern",
+    "path": "shriek_attack",
+    "description_id": "effect.kaleidoscope_tavern.shriek_attack",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.ShriekAttackEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:slightly_tipsy",
+    "namespace": "kaleidoscope_tavern",
+    "path": "slightly_tipsy",
+    "description_id": "effect.kaleidoscope_tavern.slightly_tipsy",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:tomb_raider",
+    "namespace": "kaleidoscope_tavern",
+    "path": "tomb_raider",
+    "description_id": "effect.kaleidoscope_tavern.tomb_raider",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:upside_down",
+    "namespace": "kaleidoscope_tavern",
+    "path": "upside_down",
+    "description_id": "effect.kaleidoscope_tavern.upside_down",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.UpsideDownEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:vision",
+    "namespace": "kaleidoscope_tavern",
+    "path": "vision",
+    "description_id": "effect.kaleidoscope_tavern.vision",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.VisionEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:xp_drain",
+    "namespace": "kaleidoscope_tavern",
+    "path": "xp_drain",
+    "description_id": "effect.kaleidoscope_tavern.xp_drain",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.XpDrainEffect"
+  },
+  {
+    "id": "kaleidoscope_tavern:zenith",
+    "namespace": "kaleidoscope_tavern",
+    "path": "zenith",
+    "description_id": "effect.kaleidoscope_tavern.zenith",
+    "class": "com.github.ysbbbbbb.kaleidoscopetavern.effect.ZenithEffect"
+  },
+  {
+    "id": "malstone:fall_curse",
+    "namespace": "malstone",
+    "path": "fall_curse",
+    "description_id": "effect.malstone.fall_curse",
+    "class": "com.ytgld.malstone.effects.FallCurse"
+  },
+  {
+    "id": "malum:arcanaphage",
+    "namespace": "malum",
+    "path": "arcanaphage",
+    "description_id": "effect.malum.arcanaphage",
+    "class": "com.sammy.malum.common.effect.geas.ArcanaphageEffect"
+  },
+  {
+    "id": "malum:ascension",
+    "namespace": "malum",
+    "path": "ascension",
+    "description_id": "effect.malum.ascension",
+    "class": "com.sammy.malum.common.effect.ascension.AscensionEffect"
+  },
+  {
+    "id": "malum:avarice",
+    "namespace": "malum",
+    "path": "avarice",
+    "description_id": "effect.malum.avarice",
+    "class": "com.sammy.malum.common.effect.geas.AvariceEffect"
+  },
+  {
+    "id": "malum:burning_fervor",
+    "namespace": "malum",
+    "path": "burning_fervor",
+    "description_id": "effect.malum.burning_fervor",
+    "class": "com.sammy.malum.common.effect.rite.aura.BurningFervorEffect"
+  },
+  {
+    "id": "malum:cancerous_growth",
+    "namespace": "malum",
+    "path": "cancerous_growth",
+    "description_id": "effect.malum.cancerous_growth",
+    "class": "com.sammy.malum.common.effect.GrowingFleshEffect"
+  },
+  {
+    "id": "malum:desperate_need",
+    "namespace": "malum",
+    "path": "desperate_need",
+    "description_id": "effect.malum.desperate_need",
+    "class": "com.sammy.malum.common.effect.gluttony.DesperateNeedEffect"
+  },
+  {
+    "id": "malum:echoing_arcana",
+    "namespace": "malum",
+    "path": "echoing_arcana",
+    "description_id": "effect.malum.echoing_arcana",
+    "class": "com.sammy.malum.common.effect.EchoingArcanaEffect"
+  },
+  {
+    "id": "malum:fiery_embrace",
+    "namespace": "malum",
+    "path": "fiery_embrace",
+    "description_id": "effect.malum.fiery_embrace",
+    "class": "com.sammy.malum.common.effect.rite.aura.soulwood.FieryEmbraceEffect"
+  },
+  {
+    "id": "malum:flawed_aim",
+    "namespace": "malum",
+    "path": "flawed_aim",
+    "description_id": "effect.malum.flawed_aim",
+    "class": "com.sammy.malum.common.effect.geas.FlawedAimEffect"
+  },
+  {
+    "id": "malum:flowing_grasp",
+    "namespace": "malum",
+    "path": "flowing_grasp",
+    "description_id": "effect.malum.flowing_grasp",
+    "class": "com.sammy.malum.common.effect.rite.aura.FlowingGraspEffect"
+  },
+  {
+    "id": "malum:gleeful_target",
+    "namespace": "malum",
+    "path": "gleeful_target",
+    "description_id": "effect.malum.gleeful_target",
+    "class": "com.sammy.malum.common.effect.geas.GleefulTargetEffect"
+  },
+  {
+    "id": "malum:gluttony",
+    "namespace": "malum",
+    "path": "gluttony",
+    "description_id": "effect.malum.gluttony",
+    "class": "com.sammy.malum.common.effect.gluttony.GluttonyEffect"
+  },
+  {
+    "id": "malum:good_tides",
+    "namespace": "malum",
+    "path": "good_tides",
+    "description_id": "effect.malum.good_tides",
+    "class": "com.sammy.malum.common.effect.rite.aura.soulwood.GoodTidesEffect"
+  },
+  {
+    "id": "malum:grim_certainty",
+    "namespace": "malum",
+    "path": "grim_certainty",
+    "description_id": "effect.malum.grim_certainty",
+    "class": "com.sammy.malum.common.effect.GrimCertaintyEffect"
+  },
+  {
+    "id": "malum:hatred",
+    "namespace": "malum",
+    "path": "hatred",
+    "description_id": "effect.malum.hatred",
+    "class": "com.sammy.malum.common.effect.HatredEffect"
+  },
+  {
+    "id": "malum:howling_gale",
+    "namespace": "malum",
+    "path": "howling_gale",
+    "description_id": "effect.malum.howling_gale",
+    "class": "com.sammy.malum.common.effect.rite.aura.HowlingGaleEffect"
+  },
+  {
+    "id": "malum:imminent_deliverance",
+    "namespace": "malum",
+    "path": "imminent_deliverance",
+    "description_id": "effect.malum.imminent_deliverance",
+    "class": "com.sammy.malum.common.effect.ImminentDeliveranceEffect"
+  },
+  {
+    "id": "malum:lifted",
+    "namespace": "malum",
+    "path": "lifted",
+    "description_id": "effect.malum.lifted",
+    "class": "com.sammy.malum.common.effect.ascension.LiftedEffect"
+  },
+  {
+    "id": "malum:oaken_might",
+    "namespace": "malum",
+    "path": "oaken_might",
+    "description_id": "effect.malum.oaken_might",
+    "class": "com.sammy.malum.common.effect.rite.aura.soulwood.OakenMightEffect"
+  },
+  {
+    "id": "malum:rejected",
+    "namespace": "malum",
+    "path": "rejected",
+    "description_id": "effect.malum.rejected",
+    "class": "com.sammy.malum.common.effect.RejectedEffect"
+  },
+  {
+    "id": "malum:sacred_nourishment",
+    "namespace": "malum",
+    "path": "sacred_nourishment",
+    "description_id": "effect.malum.sacred_nourishment",
+    "class": "com.sammy.malum.common.effect.rite.SacredNourishment"
+  },
+  {
+    "id": "malum:shaken_faith",
+    "namespace": "malum",
+    "path": "shaken_faith",
+    "description_id": "effect.malum.shaken_faith",
+    "class": "com.sammy.malum.common.effect.geas.ShakenFaithEffect"
+  },
+  {
+    "id": "malum:silenced",
+    "namespace": "malum",
+    "path": "silenced",
+    "description_id": "effect.malum.silenced",
+    "class": "com.sammy.malum.common.effect.SilencedEffect"
+  },
+  {
+    "id": "malum:sky_tether",
+    "namespace": "malum",
+    "path": "sky_tether",
+    "description_id": "effect.malum.sky_tether",
+    "class": "com.sammy.malum.common.effect.rite.aura.soulwood.SkyTetherEffect"
+  },
+  {
+    "id": "malum:stone_ward",
+    "namespace": "malum",
+    "path": "stone_ward",
+    "description_id": "effect.malum.stone_ward",
+    "class": "com.sammy.malum.common.effect.rite.aura.StoneWardEffect"
+  },
+  {
+    "id": "malum:trial_of_faith",
+    "namespace": "malum",
+    "path": "trial_of_faith",
+    "description_id": "effect.malum.trial_of_faith",
+    "class": "com.sammy.malum.common.effect.gluttony.TrialOfFaithEffect"
+  },
+  {
+    "id": "malum:true_shot",
+    "namespace": "malum",
+    "path": "true_shot",
+    "description_id": "effect.malum.true_shot",
+    "class": "com.sammy.malum.common.effect.geas.TrueShotEffect"
+  },
+  {
+    "id": "malum:wicked_empowerment",
+    "namespace": "malum",
+    "path": "wicked_empowerment",
+    "description_id": "effect.malum.wicked_empowerment",
+    "class": "com.sammy.malum.common.effect.rite.WickedEmpowerment"
+  },
+  {
+    "id": "malum:wicked_intent",
+    "namespace": "malum",
+    "path": "wicked_intent",
+    "description_id": "effect.malum.wicked_intent",
+    "class": "com.sammy.malum.common.effect.WickedIntentEffect"
+  },
+  {
+    "id": "malum:wyrd_exhaustion",
+    "namespace": "malum",
+    "path": "wyrd_exhaustion",
+    "description_id": "effect.malum.wyrd_exhaustion",
+    "class": "com.sammy.malum.common.effect.geas.WyrdExhaustionEffect"
+  },
+  {
+    "id": "malumarma:malice",
+    "namespace": "malumarma",
+    "path": "malice",
+    "description_id": "effect.malumarma.malice",
+    "class": "com.apachehc.malumarma.common.effect.MaliceEffect"
+  },
+  {
+    "id": "malumarma:soul_gash",
+    "namespace": "malumarma",
+    "path": "soul_gash",
+    "description_id": "effect.malumarma.soul_gash",
+    "class": "com.apachehc.malumarma.common.effect.SoulGashEffect"
+  },
+  {
+    "id": "minecraft:absorption",
+    "namespace": "minecraft",
+    "path": "absorption",
+    "description_id": "effect.minecraft.absorption",
+    "class": "net.minecraft.world.effect.AbsorptionMobEffect"
+  },
+  {
+    "id": "minecraft:bad_omen",
+    "namespace": "minecraft",
+    "path": "bad_omen",
+    "description_id": "effect.minecraft.bad_omen",
+    "class": "net.minecraft.world.effect.BadOmenMobEffect"
+  },
+  {
+    "id": "minecraft:blindness",
+    "namespace": "minecraft",
+    "path": "blindness",
+    "description_id": "effect.minecraft.blindness",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:conduit_power",
+    "namespace": "minecraft",
+    "path": "conduit_power",
+    "description_id": "effect.minecraft.conduit_power",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:darkness",
+    "namespace": "minecraft",
+    "path": "darkness",
+    "description_id": "effect.minecraft.darkness",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:dolphins_grace",
+    "namespace": "minecraft",
+    "path": "dolphins_grace",
+    "description_id": "effect.minecraft.dolphins_grace",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:fire_resistance",
+    "namespace": "minecraft",
+    "path": "fire_resistance",
+    "description_id": "effect.minecraft.fire_resistance",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:glowing",
+    "namespace": "minecraft",
+    "path": "glowing",
+    "description_id": "effect.minecraft.glowing",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:haste",
+    "namespace": "minecraft",
+    "path": "haste",
+    "description_id": "effect.minecraft.haste",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:health_boost",
+    "namespace": "minecraft",
+    "path": "health_boost",
+    "description_id": "effect.minecraft.health_boost",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:hero_of_the_village",
+    "namespace": "minecraft",
+    "path": "hero_of_the_village",
+    "description_id": "effect.minecraft.hero_of_the_village",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:hunger",
+    "namespace": "minecraft",
+    "path": "hunger",
+    "description_id": "effect.minecraft.hunger",
+    "class": "net.minecraft.world.effect.HungerMobEffect"
+  },
+  {
+    "id": "minecraft:infested",
+    "namespace": "minecraft",
+    "path": "infested",
+    "description_id": "effect.minecraft.infested",
+    "class": "net.minecraft.world.effect.InfestedMobEffect"
+  },
+  {
+    "id": "minecraft:instant_damage",
+    "namespace": "minecraft",
+    "path": "instant_damage",
+    "description_id": "effect.minecraft.instant_damage",
+    "class": "net.minecraft.world.effect.HealOrHarmMobEffect"
+  },
+  {
+    "id": "minecraft:instant_health",
+    "namespace": "minecraft",
+    "path": "instant_health",
+    "description_id": "effect.minecraft.instant_health",
+    "class": "net.minecraft.world.effect.HealOrHarmMobEffect"
+  },
+  {
+    "id": "minecraft:invisibility",
+    "namespace": "minecraft",
+    "path": "invisibility",
+    "description_id": "effect.minecraft.invisibility",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:jump_boost",
+    "namespace": "minecraft",
+    "path": "jump_boost",
+    "description_id": "effect.minecraft.jump_boost",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:levitation",
+    "namespace": "minecraft",
+    "path": "levitation",
+    "description_id": "effect.minecraft.levitation",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:luck",
+    "namespace": "minecraft",
+    "path": "luck",
+    "description_id": "effect.minecraft.luck",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:mining_fatigue",
+    "namespace": "minecraft",
+    "path": "mining_fatigue",
+    "description_id": "effect.minecraft.mining_fatigue",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:nausea",
+    "namespace": "minecraft",
+    "path": "nausea",
+    "description_id": "effect.minecraft.nausea",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:night_vision",
+    "namespace": "minecraft",
+    "path": "night_vision",
+    "description_id": "effect.minecraft.night_vision",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:oozing",
+    "namespace": "minecraft",
+    "path": "oozing",
+    "description_id": "effect.minecraft.oozing",
+    "class": "net.minecraft.world.effect.OozingMobEffect"
+  },
+  {
+    "id": "minecraft:poison",
+    "namespace": "minecraft",
+    "path": "poison",
+    "description_id": "effect.minecraft.poison",
+    "class": "net.minecraft.world.effect.PoisonMobEffect"
+  },
+  {
+    "id": "minecraft:raid_omen",
+    "namespace": "minecraft",
+    "path": "raid_omen",
+    "description_id": "effect.minecraft.raid_omen",
+    "class": "net.minecraft.world.effect.RaidOmenMobEffect"
+  },
+  {
+    "id": "minecraft:regeneration",
+    "namespace": "minecraft",
+    "path": "regeneration",
+    "description_id": "effect.minecraft.regeneration",
+    "class": "net.minecraft.world.effect.RegenerationMobEffect"
+  },
+  {
+    "id": "minecraft:resistance",
+    "namespace": "minecraft",
+    "path": "resistance",
+    "description_id": "effect.minecraft.resistance",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:saturation",
+    "namespace": "minecraft",
+    "path": "saturation",
+    "description_id": "effect.minecraft.saturation",
+    "class": "net.minecraft.world.effect.SaturationMobEffect"
+  },
+  {
+    "id": "minecraft:slow_falling",
+    "namespace": "minecraft",
+    "path": "slow_falling",
+    "description_id": "effect.minecraft.slow_falling",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:slowness",
+    "namespace": "minecraft",
+    "path": "slowness",
+    "description_id": "effect.minecraft.slowness",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:speed",
+    "namespace": "minecraft",
+    "path": "speed",
+    "description_id": "effect.minecraft.speed",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:strength",
+    "namespace": "minecraft",
+    "path": "strength",
+    "description_id": "effect.minecraft.strength",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:trial_omen",
+    "namespace": "minecraft",
+    "path": "trial_omen",
+    "description_id": "effect.minecraft.trial_omen",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:unluck",
+    "namespace": "minecraft",
+    "path": "unluck",
+    "description_id": "effect.minecraft.unluck",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:water_breathing",
+    "namespace": "minecraft",
+    "path": "water_breathing",
+    "description_id": "effect.minecraft.water_breathing",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:weakness",
+    "namespace": "minecraft",
+    "path": "weakness",
+    "description_id": "effect.minecraft.weakness",
+    "class": "net.minecraft.world.effect.MobEffect"
+  },
+  {
+    "id": "minecraft:weaving",
+    "namespace": "minecraft",
+    "path": "weaving",
+    "description_id": "effect.minecraft.weaving",
+    "class": "net.minecraft.world.effect.WeavingMobEffect"
+  },
+  {
+    "id": "minecraft:wind_charged",
+    "namespace": "minecraft",
+    "path": "wind_charged",
+    "description_id": "effect.minecraft.wind_charged",
+    "class": "net.minecraft.world.effect.WindChargedMobEffect"
+  },
+  {
+    "id": "minecraft:wither",
+    "namespace": "minecraft",
+    "path": "wither",
+    "description_id": "effect.minecraft.wither",
+    "class": "net.minecraft.world.effect.WitherMobEffect"
+  },
+  {
+    "id": "mythsandlegends:petrified",
+    "namespace": "mythsandlegends",
+    "path": "petrified",
+    "description_id": "effect.mythsandlegends.petrified",
+    "class": "com.ovinter.mythsandlegends.effect.PetrifiedEffect"
+  },
+  {
+    "id": "occultism:bat_lifesteal",
+    "namespace": "occultism",
+    "path": "bat_lifesteal",
+    "description_id": "effect.occultism.bat_lifesteal",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:beaver_harvest",
+    "namespace": "occultism",
+    "path": "beaver_harvest",
+    "description_id": "effect.occultism.beaver_harvest",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:double_jump",
+    "namespace": "occultism",
+    "path": "double_jump",
+    "description_id": "effect.occultism.double_jump",
+    "class": "com.klikli_dev.occultism.common.effect.DoubleJumpEffect"
+  },
+  {
+    "id": "occultism:dragon_greed",
+    "namespace": "occultism",
+    "path": "dragon_greed",
+    "description_id": "effect.occultism.dragon_greed",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:mummy_dodge",
+    "namespace": "occultism",
+    "path": "mummy_dodge",
+    "description_id": "effect.occultism.mummy_dodge",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:pumpkin_head",
+    "namespace": "occultism",
+    "path": "pumpkin_head",
+    "description_id": "effect.occultism.pumpkin_head",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:step_blocked",
+    "namespace": "occultism",
+    "path": "step_blocked",
+    "description_id": "effect.occultism.step_blocked",
+    "class": "com.klikli_dev.occultism.registry.OccultismEffects$ModEffect"
+  },
+  {
+    "id": "occultism:step_height",
+    "namespace": "occultism",
+    "path": "step_height",
+    "description_id": "effect.occultism.step_height",
+    "class": "com.klikli_dev.occultism.common.effect.StepHeightEffect"
+  },
+  {
+    "id": "occultism:third_eye",
+    "namespace": "occultism",
+    "path": "third_eye",
+    "description_id": "effect.occultism.third_eye",
+    "class": "com.klikli_dev.occultism.common.effect.ThirdEyeEffect"
+  },
+  {
+    "id": "townstead:agelessness",
+    "namespace": "townstead",
+    "path": "agelessness",
+    "description_id": "effect.townstead.agelessness",
+    "class": "com.aetherianartificer.townstead.item.LifePotionEffect"
+  },
+  {
+    "id": "townstead:aging",
+    "namespace": "townstead",
+    "path": "aging",
+    "description_id": "effect.townstead.aging",
+    "class": "com.aetherianartificer.townstead.item.LifePotionEffect"
+  },
+  {
+    "id": "vampiresdelight:blessing",
+    "namespace": "vampiresdelight",
+    "path": "blessing",
+    "description_id": "effect.vampiresdelight.blessing",
+    "class": "net.grid.vampiresdelight.common.effect.BlessingEffect"
+  },
+  {
+    "id": "vampiresdelight:clothes_dissolving",
+    "namespace": "vampiresdelight",
+    "path": "clothes_dissolving",
+    "description_id": "effect.vampiresdelight.clothes_dissolving",
+    "class": "net.grid.vampiresdelight.common.effect.ClothesDissolvingEffect"
+  },
+  {
+    "id": "vampiresdelight:fog_vision",
+    "namespace": "vampiresdelight",
+    "path": "fog_vision",
+    "description_id": "effect.vampiresdelight.fog_vision",
+    "class": "net.grid.vampiresdelight.common.effect.DefaultEffect"
+  },
+  {
+    "id": "vampiricageing:tainted_blood_effect",
+    "namespace": "vampiricageing",
+    "path": "tainted_blood_effect",
+    "description_id": "effect.vampiricageing.tainted_blood_effect",
+    "class": "com.thedrofdoctoring.vampiricageing.effects.TaintedBloodEffect"
+  },
+  {
+    "id": "vampirism:armor_regeneration",
+    "namespace": "vampirism",
+    "path": "armor_regeneration",
+    "description_id": "effect.vampirism.armor_regeneration",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:bad_omen_hunter",
+    "namespace": "vampirism",
+    "path": "bad_omen_hunter",
+    "description_id": "effect.vampirism.bad_omen_hunter",
+    "class": "de.teamlapen.vampirism.core.ModEffects$1"
+  },
+  {
+    "id": "vampirism:bad_omen_vampire",
+    "namespace": "vampirism",
+    "path": "bad_omen_vampire",
+    "description_id": "effect.vampirism.bad_omen_vampire",
+    "class": "de.teamlapen.vampirism.core.ModEffects$2"
+  },
+  {
+    "id": "vampirism:disguise_as_vampire",
+    "namespace": "vampirism",
+    "path": "disguise_as_vampire",
+    "description_id": "effect.vampirism.disguise_as_vampire",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:fire_protection",
+    "namespace": "vampirism",
+    "path": "fire_protection",
+    "description_id": "effect.vampirism.fire_protection",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:freeze",
+    "namespace": "vampirism",
+    "path": "freeze",
+    "description_id": "action.vampirism.freeze",
+    "class": "de.teamlapen.vampirism.effects.FreezeEffect"
+  },
+  {
+    "id": "vampirism:garlic",
+    "namespace": "vampirism",
+    "path": "garlic",
+    "description_id": "effect.vampirism.garlic",
+    "class": "de.teamlapen.vampirism.effects.GarlicEffect"
+  },
+  {
+    "id": "vampirism:lord_attack_speed",
+    "namespace": "vampirism",
+    "path": "lord_attack_speed",
+    "description_id": "effect.vampirism.lord_attack_speed",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:lord_speed",
+    "namespace": "vampirism",
+    "path": "lord_speed",
+    "description_id": "effect.vampirism.lord_speed",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:neonatal",
+    "namespace": "vampirism",
+    "path": "neonatal",
+    "description_id": "effect.vampirism.neonatal",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:no_blood",
+    "namespace": "vampirism",
+    "path": "no_blood",
+    "description_id": "effect.vampirism.no_blood",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:oblivion",
+    "namespace": "vampirism",
+    "path": "oblivion",
+    "description_id": "effect.vampirism.oblivion",
+    "class": "de.teamlapen.vampirism.effects.OblivionEffect"
+  },
+  {
+    "id": "vampirism:poison",
+    "namespace": "vampirism",
+    "path": "poison",
+    "description_id": "effect.vampirism.poison",
+    "class": "de.teamlapen.vampirism.effects.VampirismPoisonEffect"
+  },
+  {
+    "id": "vampirism:sanguinare",
+    "namespace": "vampirism",
+    "path": "sanguinare",
+    "description_id": "effect.vampirism.sanguinare",
+    "class": "de.teamlapen.vampirism.effects.SanguinareEffect"
+  },
+  {
+    "id": "vampirism:saturation",
+    "namespace": "vampirism",
+    "path": "saturation",
+    "description_id": "effect.vampirism.saturation",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "vampirism:sunscreen",
+    "namespace": "vampirism",
+    "path": "sunscreen",
+    "description_id": "effect.vampirism.sunscreen",
+    "class": "de.teamlapen.vampirism.effects.VampirismEffect"
+  },
+  {
+    "id": "werewolves:bad_omen_werewolf",
+    "namespace": "werewolves",
+    "path": "bad_omen_werewolf",
+    "description_id": "effect.werewolves.bad_omen_werewolf",
+    "class": "de.teamlapen.werewolves.core.ModEffects$1"
+  },
+  {
+    "id": "werewolves:bleeding",
+    "namespace": "werewolves",
+    "path": "bleeding",
+    "description_id": "effect.werewolves.bleeding",
+    "class": "de.teamlapen.werewolves.effects.BleedingEffect"
+  },
+  {
+    "id": "werewolves:howling",
+    "namespace": "werewolves",
+    "path": "howling",
+    "description_id": "effect.werewolves.howling",
+    "class": "de.teamlapen.werewolves.effects.HowlingEffect"
+  },
+  {
+    "id": "werewolves:lupus_sanguinem",
+    "namespace": "werewolves",
+    "path": "lupus_sanguinem",
+    "description_id": "effect.werewolves.lupus_sanguinem",
+    "class": "de.teamlapen.werewolves.effects.LupusSanguinemEffect"
+  },
+  {
+    "id": "werewolves:silver",
+    "namespace": "werewolves",
+    "path": "silver",
+    "description_id": "effect.werewolves.silver",
+    "class": "de.teamlapen.werewolves.effects.SilverEffect"
+  },
+  {
+    "id": "werewolves:stun",
+    "namespace": "werewolves",
+    "path": "stun",
+    "description_id": "effect.werewolves.stun",
+    "class": "de.teamlapen.werewolves.effects.StunEffect"
+  },
+  {
+    "id": "werewolves:un_werewolf",
+    "namespace": "werewolves",
+    "path": "un_werewolf",
+    "description_id": "effect.werewolves.un_werewolf",
+    "class": "de.teamlapen.werewolves.effects.UnWerewolfEffect"
+  },
+  {
+    "id": "werewolves:wolfsbane",
+    "namespace": "werewolves",
+    "path": "wolfsbane",
+    "description_id": "effect.werewolves.wolfsbane",
+    "class": "de.teamlapen.werewolves.effects.WolfsbaneEffect"
+  }
+]

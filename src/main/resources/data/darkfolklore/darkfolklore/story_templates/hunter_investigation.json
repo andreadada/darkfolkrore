@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:hunter_investigation",
+  "trigger": "HUNTER_INVESTIGATION",
+  "concept": "*",
+  "weight": 4,
+  "cooldown_ticks": 18000,
+  "lifetime_ticks": 168000,
+  "contract_eligible": true,
+  "enabled": true
+}

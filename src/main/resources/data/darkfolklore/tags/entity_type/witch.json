@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:witch",
+    {"id": "occultism:possessed_witch", "required": false},
+    {"id": "eidolon_repraised:necromancer", "required": false},
+    {"id": "graveyard:acolyte", "required": false}
+  ]
+}

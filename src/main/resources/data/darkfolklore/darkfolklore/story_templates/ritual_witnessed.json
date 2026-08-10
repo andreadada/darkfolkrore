@@ -1,0 +1,11 @@
+{
+  "id": "darkfolklore:ritual_witnessed",
+  "trigger": "WITCHING_HOUR",
+  "concept": "darkfolklore:witch",
+  "weight": 1,
+  "cooldown_ticks": 36000,
+  "lifetime_ticks": 144000,
+  "required_secret": "WITCH",
+  "contract_eligible": true,
+  "enabled": true
+}

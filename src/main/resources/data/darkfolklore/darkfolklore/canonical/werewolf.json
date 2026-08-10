@@ -1,0 +1,15 @@
+{
+  "concept": "darkfolklore:werewolf",
+  "kind": "ENTITY",
+  "canonical": "werewolves:human_werewolf",
+  "implementations": [
+    "werewolves:alpha_werewolf",
+    "werewolves:task_master_werewolf",
+    "werewolves:werewolf_beast",
+    "werewolves:werewolf_minion",
+    "werewolves:werewolf_survivalist",
+    "fangs_n_claws:werewolf"
+  ],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "Werewolves owns progression and natural ecology; Fangs remains a registered legacy implementation with natural spawning suppressed."
+}

@@ -1,0 +1,28 @@
+{
+  "type": "darkfolklore:remove_features_when_canonicalization_enabled",
+  "biomes": "#minecraft:is_overworld",
+  "features": "#darkfolklore:noncanonical_wolfsbane",
+  "step": "vegetal_decoration",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "werewolves"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "enchanted"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "enchanted:wolfsbane_flower"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "enchanted:wolfsbane_seeds"
+    }
+  ]
+}

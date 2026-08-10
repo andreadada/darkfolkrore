@@ -1,0 +1,8 @@
+[occultCookingPot]
+	#If true, the recipe list shows every Farmer's Delight cooking recipe. If false, only
+	#recipes the player has unlocked are shown.
+	showAllRecipes = true
+	#What to do with the empty container a cooked ingredient leaves behind (a milk bucket's
+	#empty bucket, for example). If true they go back into the network; if false they drop on
+	#the floor, which is what the vanilla Farmer's Delight pot does.
+	returnRemaindersToNetwork = true

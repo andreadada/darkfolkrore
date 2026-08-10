@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "vampirism:vampire_blood_bottle", "required": false},
+    {"id": "vampirism:blood_bottle", "required": false},
+    {"id": "#vampirism:pure_blood", "required": false},
+    {"id": "kaleidoscope_bloodwine:blood_bucket", "required": false}
+  ]
+}

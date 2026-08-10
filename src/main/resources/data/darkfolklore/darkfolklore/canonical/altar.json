@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:altar",
+  "kind": "CONCEPT",
+  "canonical": "",
+  "implementations": ["enchanted:altar", "graveyard:altar", "werewolves:stone_altar", "eidolon_repraised:stone_altar"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Each altar belongs to a different ritual system."
+}

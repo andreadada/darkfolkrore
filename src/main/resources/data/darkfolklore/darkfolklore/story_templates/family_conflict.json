@@ -1,0 +1,9 @@
+{
+  "id": "darkfolklore:family_conflict",
+  "trigger": "FAMILY_DISCOVERY",
+  "concept": "*",
+  "weight": 2,
+  "cooldown_ticks": 24000,
+  "lifetime_ticks": 144000,
+  "enabled": true
+}

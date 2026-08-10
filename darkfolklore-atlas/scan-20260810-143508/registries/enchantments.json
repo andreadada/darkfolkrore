@@ -1,0 +1,398 @@
+[
+  {
+    "id": "betterarcheology:penetrating_strike",
+    "namespace": "betterarcheology",
+    "path": "penetrating_strike",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "betterarcheology:soaring_winds",
+    "namespace": "betterarcheology",
+    "path": "soaring_winds",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "betterarcheology:tunneling",
+    "namespace": "betterarcheology",
+    "path": "tunneling",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "cnc:headhunter",
+    "namespace": "cnc",
+    "path": "headhunter",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "fangs_n_claws:blazing",
+    "namespace": "fangs_n_claws",
+    "path": "blazing",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "fangs_n_claws:critical_backstab",
+    "namespace": "fangs_n_claws",
+    "path": "critical_backstab",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "fangs_n_claws:item_catcher",
+    "namespace": "fangs_n_claws",
+    "path": "item_catcher",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "fangs_n_claws:quick_killer",
+    "namespace": "fangs_n_claws",
+    "path": "quick_killer",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "fangs_n_claws:scratch",
+    "namespace": "fangs_n_claws",
+    "path": "scratch",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "farmersdelight:backstabbing",
+    "namespace": "farmersdelight",
+    "path": "backstabbing",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "gaze:enmity",
+    "namespace": "gaze",
+    "path": "enmity",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:animated",
+    "namespace": "malum",
+    "path": "animated",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:ascension",
+    "namespace": "malum",
+    "path": "ascension",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:capacitor",
+    "namespace": "malum",
+    "path": "capacitor",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:haunted",
+    "namespace": "malum",
+    "path": "haunted",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:rebound",
+    "namespace": "malum",
+    "path": "rebound",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:replenishing",
+    "namespace": "malum",
+    "path": "replenishing",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:spirit_plunder",
+    "namespace": "malum",
+    "path": "spirit_plunder",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:weavers_haste",
+    "namespace": "malum",
+    "path": "weavers_haste",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "malum:weavers_propagation",
+    "namespace": "malum",
+    "path": "weavers_propagation",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:aqua_affinity",
+    "namespace": "minecraft",
+    "path": "aqua_affinity",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:bane_of_arthropods",
+    "namespace": "minecraft",
+    "path": "bane_of_arthropods",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:binding_curse",
+    "namespace": "minecraft",
+    "path": "binding_curse",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:blast_protection",
+    "namespace": "minecraft",
+    "path": "blast_protection",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:breach",
+    "namespace": "minecraft",
+    "path": "breach",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:channeling",
+    "namespace": "minecraft",
+    "path": "channeling",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:density",
+    "namespace": "minecraft",
+    "path": "density",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:depth_strider",
+    "namespace": "minecraft",
+    "path": "depth_strider",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:efficiency",
+    "namespace": "minecraft",
+    "path": "efficiency",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:feather_falling",
+    "namespace": "minecraft",
+    "path": "feather_falling",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:fire_aspect",
+    "namespace": "minecraft",
+    "path": "fire_aspect",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:fire_protection",
+    "namespace": "minecraft",
+    "path": "fire_protection",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:flame",
+    "namespace": "minecraft",
+    "path": "flame",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:fortune",
+    "namespace": "minecraft",
+    "path": "fortune",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:frost_walker",
+    "namespace": "minecraft",
+    "path": "frost_walker",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:impaling",
+    "namespace": "minecraft",
+    "path": "impaling",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:infinity",
+    "namespace": "minecraft",
+    "path": "infinity",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:knockback",
+    "namespace": "minecraft",
+    "path": "knockback",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:looting",
+    "namespace": "minecraft",
+    "path": "looting",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:loyalty",
+    "namespace": "minecraft",
+    "path": "loyalty",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:luck_of_the_sea",
+    "namespace": "minecraft",
+    "path": "luck_of_the_sea",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:lure",
+    "namespace": "minecraft",
+    "path": "lure",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:mending",
+    "namespace": "minecraft",
+    "path": "mending",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:multishot",
+    "namespace": "minecraft",
+    "path": "multishot",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:piercing",
+    "namespace": "minecraft",
+    "path": "piercing",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:power",
+    "namespace": "minecraft",
+    "path": "power",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:projectile_protection",
+    "namespace": "minecraft",
+    "path": "projectile_protection",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:protection",
+    "namespace": "minecraft",
+    "path": "protection",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:punch",
+    "namespace": "minecraft",
+    "path": "punch",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:quick_charge",
+    "namespace": "minecraft",
+    "path": "quick_charge",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:respiration",
+    "namespace": "minecraft",
+    "path": "respiration",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:riptide",
+    "namespace": "minecraft",
+    "path": "riptide",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:sharpness",
+    "namespace": "minecraft",
+    "path": "sharpness",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:silk_touch",
+    "namespace": "minecraft",
+    "path": "silk_touch",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:smite",
+    "namespace": "minecraft",
+    "path": "smite",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:soul_speed",
+    "namespace": "minecraft",
+    "path": "soul_speed",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:sweeping_edge",
+    "namespace": "minecraft",
+    "path": "sweeping_edge",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:swift_sneak",
+    "namespace": "minecraft",
+    "path": "swift_sneak",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:thorns",
+    "namespace": "minecraft",
+    "path": "thorns",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:unbreaking",
+    "namespace": "minecraft",
+    "path": "unbreaking",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:vanishing_curse",
+    "namespace": "minecraft",
+    "path": "vanishing_curse",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "minecraft:wind_burst",
+    "namespace": "minecraft",
+    "path": "wind_burst",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "occultism:fracture_soul",
+    "namespace": "occultism",
+    "path": "fracture_soul",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "vampiresdelight:vampire_bite",
+    "namespace": "vampiresdelight",
+    "path": "vampire_bite",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "vampirism:arrow_frugality",
+    "namespace": "vampirism",
+    "path": "arrow_frugality",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  },
+  {
+    "id": "vampirism:vampire_slayer",
+    "namespace": "vampirism",
+    "path": "vampire_slayer",
+    "class": "net.minecraft.world.item.enchantment.Enchantment"
+  }
+]

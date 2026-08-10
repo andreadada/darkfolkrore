@@ -1,0 +1,63 @@
+# Dark Folklore Core 0.2.0 production release
+
+## Release target
+
+| Property | Release value |
+| --- | --- |
+| Mod ID | `darkfolklore` |
+| Display name | Dark Folklore Core |
+| Version | 0.2.0 |
+| Minecraft | exactly 1.21.1 |
+| NeoForge | 21.1.248 through the 21.1 line |
+| Java | 21 or newer; emitted class version 65 |
+| License | All Rights Reserved; the complete notice is packaged as `META-INF/LICENSE_darkfolklore` |
+| Authors | Dark Folklore |
+
+The 0.2.0 minor version adds backwards-compatible society systems and persistent schema fields. It does not intentionally remove 0.1 registry IDs or foreign-mod content.
+
+## Reproducible build
+
+Install a 64-bit Java 21 JDK, then run from a fresh checkout:
+
+```powershell
+.\gradlew.bat clean build --no-daemon --no-configuration-cache --stacktrace
+```
+
+On Linux or macOS, use `./gradlew` with the same arguments. The production artifact is `build/libs/darkfolklore-core-0.2.0.jar`; the `-sources.jar` is a development artifact and must not be installed in a modpack.
+
+Archive timestamps are stripped and entries use a stable order. The manifest deliberately omits a build timestamp. Running the same clean build twice from identical source and resolved inputs should therefore produce the same SHA-256.
+The Gradle 9.2.1 wrapper distribution is also pinned by SHA-256 in `gradle/wrapper/gradle-wrapper.properties`.
+
+## Audited compile-only dependencies
+
+The project does not compile against files under `mods/`, a local Maven repository, an IDE cache, or an absolute path. The three Java integrations that require external types resolve from Modrinth's public Maven endpoint using immutable version IDs. Their content is verified before compilation.
+
+| Purpose | Immutable Maven coordinate | SHA-256 |
+| --- | --- | --- |
+| Vampirism 1.21-1.10.12 API | `maven.modrinth:jVZ0F1wn:rAtxPNwi` | `C6DCCA1AF24DECA473A24470CCAB66053D3AA3324E453B4E1697090ED6D16BE2` |
+| Werewolves 1.21-2.0.3.3 bridge | `maven.modrinth:3ElBohKg:zkd687ts` | `ECBCA2CD344E24AD48157834A8F321D1A7D2221C727FE8E61E4436D1219C6CFB` |
+| Field Guide 1.14.0 NeoForge bridge | `maven.modrinth:field-guide:8jdVbcd0` | `00B26B1351CB85B90ED86675C49BFC054A3141BEDAE22358D5A6AD4FE7CB0740` |
+
+These dependencies are `compileOnly` and non-transitive. They are not shaded, copied, or published by Dark Folklore Core. Dark Folklore Atlas, JUnit, local modpack JARs, and test classes never enter the production runtime configuration.
+
+## Runtime dependency policy
+
+Minecraft and NeoForge are required. Every third-party gameplay integration is declared optional. Metadata ranges are bounded to the audited compatibility line so NeoForge can order compatible mods, while adapters that use external Java contracts activate only on the exact version recorded by the compatibility manager. A missing or untested optional mod disables that adapter without inventing facts.
+
+Dark Folklore Core 0.2.0 does not expose a stable public Java API. Classes under `compat` are internal, exact-version implementation details. Datapack formats and documented identifiers are the supported customization surface; patch releases should preserve them or supply migration behavior.
+
+## Automated release gate
+
+`build` runs unit tests, resource validators, the audited-dependency checksum task, and `auditReleaseJar`. The JAR audit fails on:
+
+- unresolved metadata placeholders or an incorrect artifact version;
+- missing manifest, license, English/Italian language files, Field Guide data, or canonical vampire data;
+- Atlas, JUnit, test, temporary, cache, or shaded external-mod classes;
+- embedded Windows user-directory paths;
+- any class file not emitted as Java class version 65.
+
+GitHub Actions repeats the Java 21 clean build without configuration-cache reuse and uploads only `darkfolklore-core-0.2.0.jar`. Local third-party JARs are ignored by Git and are not needed by CI.
+
+## Manual promotion gate
+
+Automated success is necessary but not sufficient. Before publication, record the final filename, byte size, SHA-256, migration result, and smoke-matrix A–G results. Promotion to `PRODUCTION_READY` additionally requires successful dedicated-server and client validation, a fresh 0.2 world, and an upgraded 0.1 world with no known corruption or critical crash. If client validation remains outstanding, the maximum classification is `RELEASE_CANDIDATE`.

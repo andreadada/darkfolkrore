@@ -1,0 +1,663 @@
+[
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "relation": "SIMILAR_NAME",
+    "left": "cnc:chupacabra",
+    "right": "mobs_of_mythology:chupacabra",
+    "score": 100,
+    "normalized_left": "chupacabra",
+    "normalized_right": "chupacabra",
+    "semantic_left": "chupacabra",
+    "semantic_right": "chupacabra",
+    "evidence": [
+      "entity ids share the meaningful concept token 'chupacabra'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "wraith",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:wraith",
+    "right": "graveyard:wraith",
+    "score": 100,
+    "normalized_left": "wraith",
+    "normalized_right": "wraith",
+    "semantic_left": "wraith",
+    "semantic_right": "wraith",
+    "evidence": [
+      "entity ids share the meaningful concept token 'wraith'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:ghost",
+    "right": "vampirism:ghost",
+    "score": 100,
+    "normalized_left": "ghost",
+    "normalized_right": "ghost",
+    "semantic_left": "ghost",
+    "semantic_right": "ghost",
+    "evidence": [
+      "entity ids share the meaningful concept token 'ghost'",
+      "high registry-path string similarity",
+      "same generic semantic base; equivalence is not implied",
+      "same normalized registry path",
+      "same path tokens in different order/separators"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "imp",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:imp",
+    "right": "mythsandlegends:imp",
+    "score": 100,
+    "normalized_left": "imp",
+    "normalized_right": "imp",
+    "semantic_left": "imp",
+    "semantic_right": "imp",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "bellsnickel",
+    "relation": "SIMILAR_NAME",
+    "left": "feywild:bellsnickel",
+    "right": "lore_master:bellsnickel",
+    "score": 100,
+    "normalized_left": "bellsnickel",
+    "normalized_right": "bellsnickel",
+    "semantic_left": "bellsnickel",
+    "semantic_right": "bellsnickel",
+    "evidence": [
+      "entity ids share the meaningful concept token 'bellsnickel'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "beaver",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "cnc:beaver",
+    "right": "occultism:beaver_familiar",
+    "score": 82,
+    "normalized_left": "beaver",
+    "normalized_right": "beaverfamiliar",
+    "semantic_left": "beaver",
+    "semantic_right": "beaver_familiar",
+    "evidence": [
+      "entity ids share the meaningful concept token 'beaver'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "cnc:chupacabra_spit",
+    "right": "mobs_of_mythology:chupacabra",
+    "score": 82,
+    "normalized_left": "chupacabraspit",
+    "normalized_right": "chupacabra",
+    "semantic_left": "chupacabra_spit",
+    "semantic_right": "chupacabra",
+    "evidence": [
+      "entity ids share the meaningful concept token 'chupacabra'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:fire_ghost",
+    "right": "vampirism:ghost",
+    "score": 82,
+    "normalized_left": "fireghost",
+    "normalized_right": "ghost",
+    "semantic_left": "fire_ghost",
+    "semantic_right": "ghost",
+    "evidence": [
+      "entity ids share the meaningful concept token 'ghost'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "golem",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:golem",
+    "right": "occultism:iesnium_golem",
+    "score": 82,
+    "normalized_left": "golem",
+    "normalized_right": "iesniumgolem",
+    "semantic_left": "golem",
+    "semantic_right": "iesnium_golem",
+    "evidence": [
+      "entity ids share the meaningful concept token 'golem'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "golem",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:ice_golem",
+    "right": "occultism:iesnium_golem",
+    "score": 82,
+    "normalized_left": "icegolem",
+    "normalized_right": "iesniumgolem",
+    "semantic_left": "ice_golem",
+    "semantic_right": "iesnium_golem",
+    "evidence": [
+      "entity ids share the meaningful concept token 'golem'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "nightmare",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:nightmare_horse",
+    "right": "graveyard:nightmare",
+    "score": 82,
+    "normalized_left": "nightmarehorse",
+    "normalized_right": "nightmare",
+    "semantic_left": "nightmare_horse",
+    "semantic_right": "nightmare",
+    "evidence": [
+      "entity ids share the meaningful concept token 'nightmare'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:alpha_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "alphawerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "alpha_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 4,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:human_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "humanwerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "human_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:task_master_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "taskmasterwerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "task_master_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_beast",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfbeast",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_beast",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "tags": 2,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_minion",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfminion",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_minion",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_survivalist",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfsurvivalist",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_survivalist",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "reaper",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "graveyard:reaper",
+    "right": "mca:grim_reaper",
+    "score": 82,
+    "normalized_left": "reaper",
+    "normalized_right": "grimreaper",
+    "semantic_left": "reaper",
+    "semantic_right": "grim_reaper",
+    "evidence": [
+      "entity ids share the meaningful concept token 'reaper'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  }
+]

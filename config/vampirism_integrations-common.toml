@@ -1,0 +1,5 @@
+	[Compatibility.vampirism]
+		enable_compat_vampirism = true
+
+	[Compatibility.mca]
+		enable_compat_mca = true

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "feywild:mandrake", "required": false},
+    {"id": "feywild:mandrake_root", "required": false},
+    {"id": "feywild:autumn_pixie_wing_tiara", "required": false},
+    {"id": "feywild:elven_quartz", "required": false}
+  ]
+}

@@ -1,0 +1,584 @@
+[
+  {
+    "id": "betterarcheology:archeologist_camp_grassy",
+    "namespace": "betterarcheology",
+    "path": "archeologist_camp_grassy",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:archeologist_camp_redsand",
+    "namespace": "betterarcheology",
+    "path": "archeologist_camp_redsand",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:archeologist_camp_sand",
+    "namespace": "betterarcheology",
+    "path": "archeologist_camp_sand",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:buried_ruins_sand",
+    "namespace": "betterarcheology",
+    "path": "buried_ruins_sand",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:catacombs",
+    "namespace": "betterarcheology",
+    "path": "catacombs",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:desert_obelisk",
+    "namespace": "betterarcheology",
+    "path": "desert_obelisk",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_chicken",
+    "namespace": "betterarcheology",
+    "path": "fossil_chicken",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_chicken_birch",
+    "namespace": "betterarcheology",
+    "path": "fossil_chicken_birch",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_creeper",
+    "namespace": "betterarcheology",
+    "path": "fossil_creeper",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_jungle_0",
+    "namespace": "betterarcheology",
+    "path": "fossil_jungle_0",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_jungle_1",
+    "namespace": "betterarcheology",
+    "path": "fossil_jungle_1",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_sheep_0",
+    "namespace": "betterarcheology",
+    "path": "fossil_sheep_0",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:fossil_wolf",
+    "namespace": "betterarcheology",
+    "path": "fossil_wolf",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:light_temple",
+    "namespace": "betterarcheology",
+    "path": "light_temple",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:mesa_ruins",
+    "namespace": "betterarcheology",
+    "path": "mesa_ruins",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:mott",
+    "namespace": "betterarcheology",
+    "path": "mott",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:ruins_sand",
+    "namespace": "betterarcheology",
+    "path": "ruins_sand",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:stonehenge_grassy",
+    "namespace": "betterarcheology",
+    "path": "stonehenge_grassy",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:temple_jungle",
+    "namespace": "betterarcheology",
+    "path": "temple_jungle",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:tumulus_grassy",
+    "namespace": "betterarcheology",
+    "path": "tumulus_grassy",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:underwater_0",
+    "namespace": "betterarcheology",
+    "path": "underwater_0",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:underwater_1",
+    "namespace": "betterarcheology",
+    "path": "underwater_1",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:underwater_2",
+    "namespace": "betterarcheology",
+    "path": "underwater_2",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:underwater_3",
+    "namespace": "betterarcheology",
+    "path": "underwater_3",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "betterarcheology:villager_grave",
+    "namespace": "betterarcheology",
+    "path": "villager_grave",
+    "class": "net.Pandarix.world.structure.ArcheologyStructures"
+  },
+  {
+    "id": "bloodlines:zealot_shrine",
+    "namespace": "bloodlines",
+    "path": "zealot_shrine",
+    "class": "com.thedrofdoctoring.bloodlines.world.structures.ZealotShrineStructure"
+  },
+  {
+    "id": "eidolon_repraised:catacomb",
+    "namespace": "eidolon_repraised",
+    "path": "catacomb",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "eidolon_repraised:lab",
+    "namespace": "eidolon_repraised",
+    "path": "lab",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "eidolon_repraised:stray_tower",
+    "namespace": "eidolon_repraised",
+    "path": "stray_tower",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "graveyard:altar",
+    "namespace": "graveyard",
+    "path": "altar",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:crypt",
+    "namespace": "graveyard",
+    "path": "crypt",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:dead_tree",
+    "namespace": "graveyard",
+    "path": "dead_tree",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:giant_mushroom",
+    "namespace": "graveyard",
+    "path": "giant_mushroom",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:haunted_house",
+    "namespace": "graveyard",
+    "path": "haunted_house",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:large_graveyard",
+    "namespace": "graveyard",
+    "path": "large_graveyard",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:lich_prison",
+    "namespace": "graveyard",
+    "path": "lich_prison",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:medium_graveyard",
+    "namespace": "graveyard",
+    "path": "medium_graveyard",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:memorial_tree",
+    "namespace": "graveyard",
+    "path": "memorial_tree",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:mushroom_grave",
+    "namespace": "graveyard",
+    "path": "mushroom_grave",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:ruins",
+    "namespace": "graveyard",
+    "path": "ruins",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_desert_grave",
+    "namespace": "graveyard",
+    "path": "small_desert_grave",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_desert_graveyard",
+    "namespace": "graveyard",
+    "path": "small_desert_graveyard",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_grave",
+    "namespace": "graveyard",
+    "path": "small_grave",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_graveyard",
+    "namespace": "graveyard",
+    "path": "small_graveyard",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_mountain_grave",
+    "namespace": "graveyard",
+    "path": "small_mountain_grave",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "graveyard:small_savanna_grave",
+    "namespace": "graveyard",
+    "path": "small_savanna_grave",
+    "class": "com.finallion.graveyard.world.structures.TGJigsawStructure"
+  },
+  {
+    "id": "lore_master:library",
+    "namespace": "lore_master",
+    "path": "library",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "malum:weeping_well",
+    "namespace": "malum",
+    "path": "weeping_well",
+    "class": "com.sammy.malum.common.worldgen.well.WeepingWellStructure"
+  },
+  {
+    "id": "minecraft:ancient_city",
+    "namespace": "minecraft",
+    "path": "ancient_city",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:bastion_remnant",
+    "namespace": "minecraft",
+    "path": "bastion_remnant",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:buried_treasure",
+    "namespace": "minecraft",
+    "path": "buried_treasure",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.BuriedTreasureStructure"
+  },
+  {
+    "id": "minecraft:desert_pyramid",
+    "namespace": "minecraft",
+    "path": "desert_pyramid",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.DesertPyramidStructure"
+  },
+  {
+    "id": "minecraft:end_city",
+    "namespace": "minecraft",
+    "path": "end_city",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.EndCityStructure"
+  },
+  {
+    "id": "minecraft:fortress",
+    "namespace": "minecraft",
+    "path": "fortress",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.NetherFortressStructure"
+  },
+  {
+    "id": "minecraft:igloo",
+    "namespace": "minecraft",
+    "path": "igloo",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.IglooStructure"
+  },
+  {
+    "id": "minecraft:jungle_pyramid",
+    "namespace": "minecraft",
+    "path": "jungle_pyramid",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JungleTempleStructure"
+  },
+  {
+    "id": "minecraft:mansion",
+    "namespace": "minecraft",
+    "path": "mansion",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.WoodlandMansionStructure"
+  },
+  {
+    "id": "minecraft:mineshaft",
+    "namespace": "minecraft",
+    "path": "mineshaft",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.MineshaftStructure"
+  },
+  {
+    "id": "minecraft:mineshaft_mesa",
+    "namespace": "minecraft",
+    "path": "mineshaft_mesa",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.MineshaftStructure"
+  },
+  {
+    "id": "minecraft:monument",
+    "namespace": "minecraft",
+    "path": "monument",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.OceanMonumentStructure"
+  },
+  {
+    "id": "minecraft:nether_fossil",
+    "namespace": "minecraft",
+    "path": "nether_fossil",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.NetherFossilStructure"
+  },
+  {
+    "id": "minecraft:ocean_ruin_cold",
+    "namespace": "minecraft",
+    "path": "ocean_ruin_cold",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.OceanRuinStructure"
+  },
+  {
+    "id": "minecraft:ocean_ruin_warm",
+    "namespace": "minecraft",
+    "path": "ocean_ruin_warm",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.OceanRuinStructure"
+  },
+  {
+    "id": "minecraft:pillager_outpost",
+    "namespace": "minecraft",
+    "path": "pillager_outpost",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal",
+    "namespace": "minecraft",
+    "path": "ruined_portal",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_desert",
+    "namespace": "minecraft",
+    "path": "ruined_portal_desert",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_jungle",
+    "namespace": "minecraft",
+    "path": "ruined_portal_jungle",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_mountain",
+    "namespace": "minecraft",
+    "path": "ruined_portal_mountain",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_nether",
+    "namespace": "minecraft",
+    "path": "ruined_portal_nether",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_ocean",
+    "namespace": "minecraft",
+    "path": "ruined_portal_ocean",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:ruined_portal_swamp",
+    "namespace": "minecraft",
+    "path": "ruined_portal_swamp",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.RuinedPortalStructure"
+  },
+  {
+    "id": "minecraft:shipwreck",
+    "namespace": "minecraft",
+    "path": "shipwreck",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.ShipwreckStructure"
+  },
+  {
+    "id": "minecraft:shipwreck_beached",
+    "namespace": "minecraft",
+    "path": "shipwreck_beached",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.ShipwreckStructure"
+  },
+  {
+    "id": "minecraft:stronghold",
+    "namespace": "minecraft",
+    "path": "stronghold",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.StrongholdStructure"
+  },
+  {
+    "id": "minecraft:swamp_hut",
+    "namespace": "minecraft",
+    "path": "swamp_hut",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.SwampHutStructure"
+  },
+  {
+    "id": "minecraft:trail_ruins",
+    "namespace": "minecraft",
+    "path": "trail_ruins",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:trial_chambers",
+    "namespace": "minecraft",
+    "path": "trial_chambers",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:village_desert",
+    "namespace": "minecraft",
+    "path": "village_desert",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:village_plains",
+    "namespace": "minecraft",
+    "path": "village_plains",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:village_savanna",
+    "namespace": "minecraft",
+    "path": "village_savanna",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:village_snowy",
+    "namespace": "minecraft",
+    "path": "village_snowy",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "minecraft:village_taiga",
+    "namespace": "minecraft",
+    "path": "village_taiga",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mobs_of_mythology:automaton_structure",
+    "namespace": "mobs_of_mythology",
+    "path": "automaton_structure",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mythsandlegends:ancient_vestiges",
+    "namespace": "mythsandlegends",
+    "path": "ancient_vestiges",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mythsandlegends:graveyard",
+    "namespace": "mythsandlegends",
+    "path": "graveyard",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mythsandlegends:old_camp",
+    "namespace": "mythsandlegends",
+    "path": "old_camp",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mythsandlegends:scorched_nest",
+    "namespace": "mythsandlegends",
+    "path": "scorched_nest",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "mythsandlegends:sepulcrum_ignitum",
+    "namespace": "mythsandlegends",
+    "path": "sepulcrum_ignitum",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:crypt",
+    "namespace": "vampirism",
+    "path": "crypt",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:hunter_camp",
+    "namespace": "vampirism",
+    "path": "hunter_camp",
+    "class": "de.teamlapen.vampirism.world.gen.structure.huntercamp.HunterCampStructure"
+  },
+  {
+    "id": "vampirism:hunter_outpost_badlands",
+    "namespace": "vampirism",
+    "path": "hunter_outpost_badlands",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:hunter_outpost_desert",
+    "namespace": "vampirism",
+    "path": "hunter_outpost_desert",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:hunter_outpost_plains",
+    "namespace": "vampirism",
+    "path": "hunter_outpost_plains",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:hunter_outpost_vampire_forest",
+    "namespace": "vampirism",
+    "path": "hunter_outpost_vampire_forest",
+    "class": "net.minecraft.world.level.levelgen.structure.structures.JigsawStructure"
+  },
+  {
+    "id": "vampirism:mother",
+    "namespace": "vampirism",
+    "path": "mother",
+    "class": "de.teamlapen.vampirism.world.gen.structure.mother.MotherStructure"
+  },
+  {
+    "id": "vampirism:vampire_altar",
+    "namespace": "vampirism",
+    "path": "vampire_altar",
+    "class": "de.teamlapen.vampirism.world.gen.structure.vampirealtar.VampireAltarStructure"
+  },
+  {
+    "id": "vampirism:vampire_hut",
+    "namespace": "vampirism",
+    "path": "vampire_hut",
+    "class": "de.teamlapen.vampirism.world.gen.structure.vampirehut.VampireHutStructure"
+  }
+]

@@ -1,0 +1,4 @@
+#Milestone rewards settings
+[milestones]
+	#Milestone unlock thresholds (sorted ascending). Add new milestones as you progress.
+	milestoneThresholds = [5, 10, 20, 35, 50]

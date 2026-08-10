@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:vampire_coven_recruitment",
+  "trigger": "ORGANIZATION_RECRUITMENT",
+  "concept": "darkfolklore:vampire",
+  "weight": 1,
+  "cooldown_ticks": 24000,
+  "lifetime_ticks": 120000,
+  "required_secret": "VAMPIRE",
+  "enabled": true
+}

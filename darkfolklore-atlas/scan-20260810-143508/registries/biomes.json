@@ -1,0 +1,398 @@
+[
+  {
+    "id": "minecraft:badlands",
+    "namespace": "minecraft",
+    "path": "badlands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:bamboo_jungle",
+    "namespace": "minecraft",
+    "path": "bamboo_jungle",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:basalt_deltas",
+    "namespace": "minecraft",
+    "path": "basalt_deltas",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:beach",
+    "namespace": "minecraft",
+    "path": "beach",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:birch_forest",
+    "namespace": "minecraft",
+    "path": "birch_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:cherry_grove",
+    "namespace": "minecraft",
+    "path": "cherry_grove",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:cold_ocean",
+    "namespace": "minecraft",
+    "path": "cold_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:crimson_forest",
+    "namespace": "minecraft",
+    "path": "crimson_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:dark_forest",
+    "namespace": "minecraft",
+    "path": "dark_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:deep_cold_ocean",
+    "namespace": "minecraft",
+    "path": "deep_cold_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:deep_dark",
+    "namespace": "minecraft",
+    "path": "deep_dark",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:deep_frozen_ocean",
+    "namespace": "minecraft",
+    "path": "deep_frozen_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:deep_lukewarm_ocean",
+    "namespace": "minecraft",
+    "path": "deep_lukewarm_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:deep_ocean",
+    "namespace": "minecraft",
+    "path": "deep_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:desert",
+    "namespace": "minecraft",
+    "path": "desert",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:dripstone_caves",
+    "namespace": "minecraft",
+    "path": "dripstone_caves",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:end_barrens",
+    "namespace": "minecraft",
+    "path": "end_barrens",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:end_highlands",
+    "namespace": "minecraft",
+    "path": "end_highlands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:end_midlands",
+    "namespace": "minecraft",
+    "path": "end_midlands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:eroded_badlands",
+    "namespace": "minecraft",
+    "path": "eroded_badlands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:flower_forest",
+    "namespace": "minecraft",
+    "path": "flower_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:forest",
+    "namespace": "minecraft",
+    "path": "forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:frozen_ocean",
+    "namespace": "minecraft",
+    "path": "frozen_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:frozen_peaks",
+    "namespace": "minecraft",
+    "path": "frozen_peaks",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:frozen_river",
+    "namespace": "minecraft",
+    "path": "frozen_river",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:grove",
+    "namespace": "minecraft",
+    "path": "grove",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:ice_spikes",
+    "namespace": "minecraft",
+    "path": "ice_spikes",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:jagged_peaks",
+    "namespace": "minecraft",
+    "path": "jagged_peaks",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:jungle",
+    "namespace": "minecraft",
+    "path": "jungle",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:lukewarm_ocean",
+    "namespace": "minecraft",
+    "path": "lukewarm_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:lush_caves",
+    "namespace": "minecraft",
+    "path": "lush_caves",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:mangrove_swamp",
+    "namespace": "minecraft",
+    "path": "mangrove_swamp",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:meadow",
+    "namespace": "minecraft",
+    "path": "meadow",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:mushroom_fields",
+    "namespace": "minecraft",
+    "path": "mushroom_fields",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:nether_wastes",
+    "namespace": "minecraft",
+    "path": "nether_wastes",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:ocean",
+    "namespace": "minecraft",
+    "path": "ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:old_growth_birch_forest",
+    "namespace": "minecraft",
+    "path": "old_growth_birch_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:old_growth_pine_taiga",
+    "namespace": "minecraft",
+    "path": "old_growth_pine_taiga",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:old_growth_spruce_taiga",
+    "namespace": "minecraft",
+    "path": "old_growth_spruce_taiga",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:plains",
+    "namespace": "minecraft",
+    "path": "plains",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:river",
+    "namespace": "minecraft",
+    "path": "river",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:savanna",
+    "namespace": "minecraft",
+    "path": "savanna",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:savanna_plateau",
+    "namespace": "minecraft",
+    "path": "savanna_plateau",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:small_end_islands",
+    "namespace": "minecraft",
+    "path": "small_end_islands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:snowy_beach",
+    "namespace": "minecraft",
+    "path": "snowy_beach",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:snowy_plains",
+    "namespace": "minecraft",
+    "path": "snowy_plains",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:snowy_slopes",
+    "namespace": "minecraft",
+    "path": "snowy_slopes",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:snowy_taiga",
+    "namespace": "minecraft",
+    "path": "snowy_taiga",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:soul_sand_valley",
+    "namespace": "minecraft",
+    "path": "soul_sand_valley",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:sparse_jungle",
+    "namespace": "minecraft",
+    "path": "sparse_jungle",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:stony_peaks",
+    "namespace": "minecraft",
+    "path": "stony_peaks",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:stony_shore",
+    "namespace": "minecraft",
+    "path": "stony_shore",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:sunflower_plains",
+    "namespace": "minecraft",
+    "path": "sunflower_plains",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:swamp",
+    "namespace": "minecraft",
+    "path": "swamp",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:taiga",
+    "namespace": "minecraft",
+    "path": "taiga",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:the_end",
+    "namespace": "minecraft",
+    "path": "the_end",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:the_void",
+    "namespace": "minecraft",
+    "path": "the_void",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:warm_ocean",
+    "namespace": "minecraft",
+    "path": "warm_ocean",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:warped_forest",
+    "namespace": "minecraft",
+    "path": "warped_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:windswept_forest",
+    "namespace": "minecraft",
+    "path": "windswept_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:windswept_gravelly_hills",
+    "namespace": "minecraft",
+    "path": "windswept_gravelly_hills",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:windswept_hills",
+    "namespace": "minecraft",
+    "path": "windswept_hills",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:windswept_savanna",
+    "namespace": "minecraft",
+    "path": "windswept_savanna",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "minecraft:wooded_badlands",
+    "namespace": "minecraft",
+    "path": "wooded_badlands",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "vampirism:vampire_forest",
+    "namespace": "vampirism",
+    "path": "vampire_forest",
+    "class": "net.minecraft.world.level.biome.Biome"
+  },
+  {
+    "id": "werewolves:werewolf_heaven",
+    "namespace": "werewolves",
+    "path": "werewolf_heaven",
+    "class": "net.minecraft.world.level.biome.Biome"
+  }
+]

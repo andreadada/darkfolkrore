@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#darkfolklore:ghost",
+    {"id": "eidolon_repraised:wraith", "required": false},
+    {"id": "graveyard:wraith", "required": false},
+    {"id": "malum:natural_spirit", "required": false},
+    {"id": "occultism:foliot", "required": false},
+    {"id": "occultism:djinni", "required": false},
+    {"id": "occultism:afrit", "required": false},
+    {"id": "occultism:marid", "required": false}
+  ]
+}

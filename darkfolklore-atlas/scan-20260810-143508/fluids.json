@@ -1,0 +1,355 @@
+[
+  {
+    "id": "immersiveengineering:acetaldehyde",
+    "namespace": "immersiveengineering",
+    "path": "acetaldehyde",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:acetaldehyde",
+      "c:gaseous"
+    ]
+  },
+  {
+    "id": "immersiveengineering:acetaldehyde_flowing",
+    "namespace": "immersiveengineering",
+    "path": "acetaldehyde_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:biodiesel",
+    "namespace": "immersiveengineering",
+    "path": "biodiesel",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:biodiesel",
+      "immersiveengineering:drill_fuel"
+    ]
+  },
+  {
+    "id": "immersiveengineering:biodiesel_flowing",
+    "namespace": "immersiveengineering",
+    "path": "biodiesel_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:concrete",
+    "namespace": "immersiveengineering",
+    "path": "concrete",
+    "class": "blusunrize.immersiveengineering.common.fluids.ConcreteFluid",
+    "tags": [
+      "c:concrete"
+    ]
+  },
+  {
+    "id": "immersiveengineering:concrete_flowing",
+    "namespace": "immersiveengineering",
+    "path": "concrete_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.ConcreteFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:creosote",
+    "namespace": "immersiveengineering",
+    "path": "creosote",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:creosote"
+    ]
+  },
+  {
+    "id": "immersiveengineering:creosote_flowing",
+    "namespace": "immersiveengineering",
+    "path": "creosote_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:ethanol",
+    "namespace": "immersiveengineering",
+    "path": "ethanol",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:ethanol"
+    ]
+  },
+  {
+    "id": "immersiveengineering:ethanol_flowing",
+    "namespace": "immersiveengineering",
+    "path": "ethanol_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:herbicide",
+    "namespace": "immersiveengineering",
+    "path": "herbicide",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:herbicide"
+    ]
+  },
+  {
+    "id": "immersiveengineering:herbicide_flowing",
+    "namespace": "immersiveengineering",
+    "path": "herbicide_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:high_power_biodiesel",
+    "namespace": "immersiveengineering",
+    "path": "high_power_biodiesel",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:high_power_biodiesel",
+      "immersiveengineering:drill_fuel"
+    ]
+  },
+  {
+    "id": "immersiveengineering:high_power_biodiesel_flowing",
+    "namespace": "immersiveengineering",
+    "path": "high_power_biodiesel_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:phenolic_resin",
+    "namespace": "immersiveengineering",
+    "path": "phenolic_resin",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:phenolic_resin"
+    ]
+  },
+  {
+    "id": "immersiveengineering:phenolic_resin_flowing",
+    "namespace": "immersiveengineering",
+    "path": "phenolic_resin_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:plantoil",
+    "namespace": "immersiveengineering",
+    "path": "plantoil",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:plantoil"
+    ]
+  },
+  {
+    "id": "immersiveengineering:plantoil_flowing",
+    "namespace": "immersiveengineering",
+    "path": "plantoil_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "immersiveengineering:potion",
+    "namespace": "immersiveengineering",
+    "path": "potion",
+    "class": "blusunrize.immersiveengineering.common.fluids.PotionFluid",
+    "tags": [
+      "c:potion"
+    ]
+  },
+  {
+    "id": "immersiveengineering:redstone_acid",
+    "namespace": "immersiveengineering",
+    "path": "redstone_acid",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid",
+    "tags": [
+      "c:redstone_acid"
+    ]
+  },
+  {
+    "id": "immersiveengineering:redstone_acid_flowing",
+    "namespace": "immersiveengineering",
+    "path": "redstone_acid_flowing",
+    "class": "blusunrize.immersiveengineering.common.fluids.IEFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_bloodwine:blood",
+    "namespace": "kaleidoscope_bloodwine",
+    "path": "blood",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_bloodwine:flowing_blood",
+    "namespace": "kaleidoscope_bloodwine",
+    "path": "flowing_blood",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_glow_berries_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_glow_berries_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_gold_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_gold_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_green_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_green_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_ice_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_ice_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:flowing_sweet_berries_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "flowing_sweet_berries_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:glow_berries_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "glow_berries_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:gold_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "gold_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:green_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "green_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:ice_grape_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "ice_grape_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "kaleidoscope_tavern:sweet_berries_juice",
+    "namespace": "kaleidoscope_tavern",
+    "path": "sweet_berries_juice",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": []
+  },
+  {
+    "id": "minecraft:empty",
+    "namespace": "minecraft",
+    "path": "empty",
+    "class": "net.minecraft.world.level.material.EmptyFluid",
+    "tags": []
+  },
+  {
+    "id": "minecraft:flowing_lava",
+    "namespace": "minecraft",
+    "path": "flowing_lava",
+    "class": "net.minecraft.world.level.material.LavaFluid$Flowing",
+    "tags": [
+      "c:lava",
+      "minecraft:lava"
+    ]
+  },
+  {
+    "id": "minecraft:flowing_milk",
+    "namespace": "minecraft",
+    "path": "flowing_milk",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+    "tags": [
+      "c:milk"
+    ]
+  },
+  {
+    "id": "minecraft:flowing_water",
+    "namespace": "minecraft",
+    "path": "flowing_water",
+    "class": "net.minecraft.world.level.material.WaterFluid$Flowing",
+    "tags": [
+      "c:water",
+      "minecraft:water"
+    ]
+  },
+  {
+    "id": "minecraft:lava",
+    "namespace": "minecraft",
+    "path": "lava",
+    "class": "net.minecraft.world.level.material.LavaFluid$Source",
+    "tags": [
+      "c:lava",
+      "minecraft:lava"
+    ]
+  },
+  {
+    "id": "minecraft:milk",
+    "namespace": "minecraft",
+    "path": "milk",
+    "class": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source",
+    "tags": [
+      "c:milk"
+    ]
+  },
+  {
+    "id": "minecraft:water",
+    "namespace": "minecraft",
+    "path": "water",
+    "class": "net.minecraft.world.level.material.WaterFluid$Source",
+    "tags": [
+      "c:water",
+      "minecraft:water"
+    ]
+  },
+  {
+    "id": "vampirism:blood",
+    "namespace": "vampirism",
+    "path": "blood",
+    "class": "de.teamlapen.vampirism.fluids.BloodFluid",
+    "tags": [
+      "vampirism:vampirism_blood"
+    ]
+  },
+  {
+    "id": "vampirism:impure_blood",
+    "namespace": "vampirism",
+    "path": "impure_blood",
+    "class": "de.teamlapen.vampirism.fluids.ImpureBloodFluid",
+    "tags": [
+      "vampirism:vampirism_impure_blood"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "werewolves:alpha_werewolf", "required": false},
+    {"id": "werewolves:human_werewolf", "required": false},
+    {"id": "werewolves:task_master_werewolf", "required": false},
+    {"id": "werewolves:werewolf_beast", "required": false},
+    {"id": "werewolves:werewolf_minion", "required": false},
+    {"id": "werewolves:werewolf_survivalist", "required": false},
+    {"id": "fangs_n_claws:werewolf", "required": false}
+  ]
+}

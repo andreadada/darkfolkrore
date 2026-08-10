@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "mythsandlegends:amarok", "required": false},
+    {"id": "mythsandlegends:gargoyle", "required": false},
+    {"id": "mobs_of_mythology:chupacabra", "required": false},
+    {"id": "feywild:bee_knight", "required": false}
+  ]
+}

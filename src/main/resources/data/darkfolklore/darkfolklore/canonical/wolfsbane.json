@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:wolfsbane",
+  "kind": "ITEM",
+  "canonical": "enchanted:wolfsbane_flower",
+  "implementations": ["werewolves:wolfsbane"],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "Enchanted 4.2.7 owns the farmable crop and flower; exact-version compatibility preserves Werewolves 2.0.3.3 recipes, diffuser fuel, finder utility, contact effects, and existing legacy stacks."
+}

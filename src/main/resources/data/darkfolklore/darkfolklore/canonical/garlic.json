@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:garlic",
+  "kind": "ITEM",
+  "canonical": "vampirism:garlic",
+  "implementations": ["enchanted:garlic"],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "Vampirism owns specialized inventory, crop, diffuser and AI behavior; legacy Enchanted stacks stay registered."
+}

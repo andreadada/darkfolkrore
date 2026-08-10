@@ -1,0 +1,24 @@
+{
+  "sort_index": 23,
+  "icon": "fieldguide:textures/gui/icons/ghast.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:vampirism/ghost",
+      "canonical_concept": "darkfolklore:ghost",
+      "unlock": {"triggers": ["scan", "kill"]}
+    },
+    {
+      "type": "entry",
+      "id": "entity:eidolon_repraised/wraith",
+      "canonical_concept": "darkfolklore:wraith",
+      "unlock": {"triggers": ["scan", "kill"]}
+    },
+    {
+      "type": "entry",
+      "id": "entity:graveyard/wraith",
+      "canonical_concept": "darkfolklore:wraith",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

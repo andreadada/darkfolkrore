@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:fae_binding",
+  "traditions": ["WITCHCRAFT", "FAE"],
+  "required_traits": ["WOLFSBANE", "FAE", "RITUAL_COMPONENT"],
+  "knowledge_reward": "darkfolklore:fae_lore",
+  "knowledge_points": 8
+}

@@ -1,0 +1,12 @@
+{
+  "sort_index": 27,
+  "icon": "fieldguide:textures/gui/icons/spider.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:mythsandlegends/imp",
+      "canonical_concept": "darkfolklore:imp",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

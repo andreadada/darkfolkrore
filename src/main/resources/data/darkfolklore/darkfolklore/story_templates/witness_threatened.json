@@ -1,0 +1,9 @@
+{
+  "id": "darkfolklore:witness_threatened",
+  "trigger": "HUNTER_INVESTIGATION",
+  "concept": "*",
+  "weight": 1,
+  "cooldown_ticks": 36000,
+  "lifetime_ticks": 120000,
+  "enabled": true
+}

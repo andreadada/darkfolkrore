@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:undead",
+    {"id": "eidolon_repraised:wraith", "required": false},
+    {"id": "graveyard:wraith", "required": false},
+    {"id": "graveyard:revenant", "required": false},
+    {"id": "graveyard:ghoul", "required": false},
+    {"id": "graveyard:lich", "required": false}
+  ]
+}

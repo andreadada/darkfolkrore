@@ -1,0 +1,35 @@
+{
+  "type": "vampirism:alchemical_cauldron",
+  "experience": 2.0,
+  "fluid": {
+    "tag": "darkfolklore:wolfsbane"
+  },
+  "ingredient": {
+    "item": "werewolves:wolfsbane_diffuser_core"
+  },
+  "result": {
+    "count": 1,
+    "id": "werewolves:wolfsbane_diffuser_core_improved"
+  },
+  "skill": [
+    "vampirism:garlic_diffuser_improved"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "werewolves"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane_diffuser_core"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane_diffuser_core_improved"
+    }
+  ]
+}

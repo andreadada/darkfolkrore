@@ -1,0 +1,8 @@
+{
+  "type": "HUNTER_SOCIETY",
+  "base_influence": 10,
+  "max_members": 48,
+  "auto_found": false,
+  "public_reveal_authority": true,
+  "objectives": ["PROTECT_COMMUNITY", "INVESTIGATE_SUPERNATURAL"]
+}

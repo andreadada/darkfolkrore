@@ -1,0 +1,12 @@
+{
+  "sort_index": 20,
+  "icon": "fieldguide:textures/gui/icons/wither.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:vampirism/vampire",
+      "canonical_concept": "darkfolklore:vampire",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:hunter_recruitment",
+  "trigger": "ORGANIZATION_RECRUITMENT",
+  "concept": "darkfolklore:hunter",
+  "weight": 1,
+  "cooldown_ticks": 24000,
+  "lifetime_ticks": 120000,
+  "required_secret": "HUNTER",
+  "enabled": true
+}

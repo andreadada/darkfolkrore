@@ -1,0 +1,5 @@
+{
+  "type": "darkfolklore:remove_spawns_when_canonicalization_enabled",
+  "biomes": "#minecraft:is_overworld",
+  "entity_types": "#darkfolklore:noncanonical_natural_spawn"
+}

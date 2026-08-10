@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:chupacabra",
+  "kind": "ENTITY",
+  "canonical": "cnc:chupacabra",
+  "implementations": ["mobs_of_mythology:chupacabra"],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "CNC has the curated behavior/model; Mobs of Mythology remains registered but loses natural spawning."
+}

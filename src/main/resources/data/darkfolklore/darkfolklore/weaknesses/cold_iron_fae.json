@@ -1,0 +1,8 @@
+{
+  "id": "darkfolklore:cold_iron_vs_fae",
+  "target_traits": ["FAE"],
+  "item_traits": ["COLD_IRON"],
+  "multiplier": 1.5,
+  "native_provider_namespaces": [],
+  "priority": 80
+}

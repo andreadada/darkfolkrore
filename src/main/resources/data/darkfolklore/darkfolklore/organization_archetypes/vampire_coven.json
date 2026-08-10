@@ -1,0 +1,8 @@
+{
+  "type": "VAMPIRE_COVEN",
+  "base_influence": 5,
+  "max_members": 32,
+  "auto_found": true,
+  "public_reveal_authority": false,
+  "objectives": ["PROTECT_MEMBERS", "PRESERVE_SECRETS", "GROW_INFLUENCE"]
+}

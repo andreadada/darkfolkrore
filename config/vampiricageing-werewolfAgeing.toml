@@ -1,0 +1,102 @@
+#Whilst the Werewolf specific Ageing options are here, the general configuration options are in the main vampiricAgeing config. For example, resetting age on death or the level to begin ageing is managed in the main config, not this one
+#Whenever there is a list with 6 values you can change, the first value refers to a player with Age 0 Rank. The final value therefore refers to an Age 5 Player
+#Whether Werewolves can Age. Requires Werewolves Addon for Vampirism.
+werewolfAgeing = true
+#The level at which the age mechanic begins
+# Default: 14
+# Range: 0 ~ 14
+levelToBeginAgeMechanic = 14
+#DEVOUR hunting gains points exclusively from killing mobs with the bite ability, W_HUNTING is when killed through any means, W_MIXED uses the devour worth for devour kills, and the hunt worth when not devouring
+#Change to select Ageing type. Valid Options include: DEVOUR, W_HUNTING, W_MIXED
+ageingMethod = "DEVOUR"
+#This defines the minimum lord level, for werewolves, required to age, 0 to not require a lord level
+# Default: 0
+# Range: 0 ~ 5
+werewolfLordLevelRankRequirement = 0
+#Only the DEVOUR ageing method uses devoured for next age, the others use hunted for next age
+#How many points worth of devoured entities are needed to increase Age Rank. Count is reset on Rank Up
+devouredforNextAge = [30, 60, 100, 250, 500]
+#How much a petty devour is worth. These are things like basic animals
+# Default: 1
+# Range: 0 ~ 999999999
+pettyDevourWorth = 1
+#How much a common devour is worth. These are things like certain hostile mobs
+# Default: 2
+# Range: 0 ~ 999999999
+commonDevourWorth = 2
+#How much a greater devour is worth. These are things like advanced faction mobs
+# Default: 5
+# Range: 0 ~ 999999999
+greaterDevourWorth = 5
+#How much a exquisite devour is worth. These are things like vampire barons
+# Default: 10
+# Range: 0 ~ 999999999
+exquisiteDevourWorth = 10
+#How much a petty hunt is worth. These are things like basic versions of vampires or hunters
+# Default: 1
+# Range: 0 ~ 999999999
+pettyHuntWorth = 1
+#How much a common hunt is worth. These are things like advanced vampires or hunters
+# Default: 3
+# Range: 0 ~ 999999999
+commonHuntWorth = 3
+#How much a greater hunt is worth. These are things like vampire barons
+# Default: 5
+# Range: 0 ~ 999999999
+greaterHuntWorth = 5
+#How many points worth of hunted entities are needed to increase Age Rank. Count is reset on Rank Up
+huntedforNextAge = [20, 40, 80, 160, 250]
+#Max Health Increase for each rank. This is addition, not multiplier based
+maxHealthIncrease = [0.0, 2.0, 2.0, 4.0, 4.0, 6.0]
+#How much each rank multiplies bite damage. Bite damage multiplier is strange and values of 0 should be treated as 1, values like 0.2 should be treated as a 1.2 multiplier
+biteDamageMultiplier = [0.0, 0.0, 0.0, 0.125, 0.25, 0.5]
+#How much each rank multiplies damages from Silver Oil. Values are set to 1 by default as to disable it by default.
+silverOilMultiplier = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+#How much each rank multiplies the strength of the Leap ability
+leapStrengthMultiplier = [1.0, 1.0, 1.25, 1.5, 1.75, 2.0]
+#How much the player is healed for biting an entity based on rank
+healonBiteAmount = [0.0, 0.0, 0.0, 1.0, 2.0, 2.0]
+#How much the duration of time a player can stay in werewolf form is multiplied by
+formTimeMultiplier = [1.0, 1.5, 2.0, 3.0, 4.0, 5.0]
+#Whether higher age ranks buffs the mobs summoned by howling
+ageBuffsHowl = true
+#When enabled, biting an entity provides sustenance
+bitingGivesFood = true
+#Requires bitingGivesFood to be enabled. At what rank should biting begin to give food
+# Default: 2
+# Range: 0 ~ 5
+rankForBitefood = 2
+#How much nutrition (hungar bar value) a bite gives
+# Default: 1
+# Range: 0 ~ 20
+biteNutrition = 1
+#How much saturation a bite gives
+# Default: 0.1
+# Range: 0.0 ~ 1.2
+biteSaturation = 0.1
+#How much more nourishing raw meat is for a werewolf based on age rank
+nutritionMultipliers = [1.0, 1.0, 2.0, 2.0, 3.0, 3.0]
+#How much more saturating raw meat is for a werewolf based on age rank
+saturationMultipliers = [1.0, 1.0, 1.5, 1.5, 2.0, 2.0]
+#At what age should a werewolf gain the Improved Senses action, allowing you to see invisible players.
+# Default: 5
+# Range: 0 ~ 6
+improvedSensesAssistAge = 5
+#Cooldown for improved senses action
+# Default: 10
+# Range: > 0
+improvedSensesCooldown = 10
+#Duration for improved senses action
+# Default: 120
+# Range: > 0
+improvedSensesDuration = 120
+#Whether you will be slowed down whilst using improved senses
+improvedSensesSlowdown = true
+#Whether improved senses also requires the senses skill
+improvedSensesSensesRequirement = true
+#How much each age rank increases damage by adding on to base damage. Set all to 0 to disable completely.
+ageDamageIncrease = [0.0, 0.0, 1.0, 2.0, 3.0, 4.0]
+#How much each age rank multiples damage taken, when the silver effect is active.
+silverDamageMultiplier = [1.0, 1.0, 1.1, 1.15, 1.2, 1.25]
+#If changed from default, changes the rank number for a given age rank to the provided text.
+werewolfAgeRankTitles = ["1", "2", "3", "4", "5"]

@@ -1,0 +1,11 @@
+{
+  "id": "darkfolklore:werewolf_incident",
+  "trigger": "FULL_MOON_INCIDENT",
+  "concept": "darkfolklore:werewolf",
+  "weight": 1,
+  "cooldown_ticks": 24000,
+  "lifetime_ticks": 144000,
+  "required_secret": "WEREWOLF",
+  "contract_eligible": true,
+  "enabled": true
+}

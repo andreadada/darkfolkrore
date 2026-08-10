@@ -1,0 +1,12 @@
+{
+  "concept": "darkfolklore:silver",
+  "kind": "ITEM",
+  "canonical": "immersiveengineering:ingot_silver",
+  "implementations": [
+    "eidolon_repraised:silver_ingot",
+    "occultism:silver_ingot",
+    "werewolves:silver_ingot"
+  ],
+  "policy": "FULL_CANONICALIZATION",
+  "reason": "Almost Unified already rewrites recipes to Immersive Engineering; Core supplies semantics and targeted worldgen policy."
+}

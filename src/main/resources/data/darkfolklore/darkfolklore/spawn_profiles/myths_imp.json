@@ -1,0 +1,7 @@
+{
+  "entity": "mythsandlegends:imp",
+  "rarity": "RARE",
+  "natural_spawn_enabled": true,
+  "nocturnal": false,
+  "event_multiplier": 1.15
+}

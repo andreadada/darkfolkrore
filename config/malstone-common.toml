@@ -1,0 +1,111 @@
+#破命刀的血量最多恢复到的值
+#The maximum amount of health restored to the value of the Life-Breaking Knife
+# Default: 0.5
+# Range: 0.0 ~ 1.0
+life_max_BreakingTheLife = 0.5
+#白镴刀锋的物理伤害
+#The physical damage of the white blade
+# Default: 1.3
+# Range: 0.0 ~ 2.147483647E9
+WhiteArrowBladeAttack = 1.3
+#白镴刀锋的恶念转化
+#The transformation of the evil thoughts of the blade of the white arrow
+# Default: 0.5
+# Range: 0.0 ~ 2.147483647E9
+WhiteArrowBladeMagic = 0.5
+#白镴方体的每个恶念要塞装备或者饰品给予的邪念之护
+#The protection of evil thoughts given by each evil thought fortress equipment in the white cypress cube
+# Default: 0.02500000037252903
+# Range: 0.0 ~ 2.147483647E9
+armorHugeSouls = 0.02500000037252903
+#白镴方体的给予的邪念之护
+#The protection of evil thoughts given by the white cypress cube
+# Default: 0.10000000149011612
+# Range: 0.0 ~ 2.147483647E9
+armorDefHugeSouls = 0.10000000149011612
+#永堕灵魂符文的叠加速度
+#The stacking speed of the Eternal Fallen Soul rune
+# Default: 0.02500000037252903
+# Range: 0.0 ~ 2.147483647E9
+speedEternalFallenSoul = 0.02500000037252903
+#永堕灵魂符文的最大叠加值
+#The maximum stack value of the Eternal Fallen Soul Rune
+# Default: 0.25
+# Range: 0.0 ~ 2.147483647E9
+maxEternalFallenSoul = 0.25
+#锋刀誓言符文的第二次伤害的值
+#The value of the second damage of the Blade Oath rune
+# Default: 0.5
+# Range: 0.0 ~ 2.147483647E9
+doubleBladeOath = 0.5
+#殉锋符文记录的上一次伤害比率
+#The last damage ratio recorded by the Rune of the Martyrdom
+# Default: 0.8999999761581421
+# Range: 0.0 ~ 2.147483647E9
+mMartyrdomDamage = 0.8999999761581421
+#殉锋符文在触发连击奖励时给予的次数
+#The number of times the Rune of Martyrdom is given when triggering a combo bonus
+# Default: 1
+# Range: > 1
+attackDoubleMartyrdom = 1
+#破极兵刃的最大宽容度数
+#The maximum tolerance of the Broken Blade
+# Default: 45
+# Range: 0 ~ 360
+theBreakingTheWeapon = 45
+#破极兵刃的最大额外伤害（护甲，灵魂护盾）
+#The maximum bonus damage of the Extreme Blade（Armor，Soul shield）
+# Default: 30
+# Range: > 0
+maxArmorDamageBreakingTheWeapon = 30
+#破极兵刃的最大额外伤害倍率（满生命值）
+#The maximum bonus damage multiplier of the Extreme Blade（Full health）
+# Default: 1.5
+# Range: 0.0 ~ 2.147483647E9
+healthDamageBreakingTheWeapon = 1.5
+#堕井充能后的属性加成
+#Attribute bonus after falling well charge
+# Default: 0.20000000298023224
+# Range: 0.0 ~ 2.147483647E9
+addPowerFallingWell = 0.20000000298023224
+#极殇的幽影精魂机率
+#The probability of the ghost spirit of extreme death
+# Default: 2
+# Range: > 0
+lvlExtremelyDead_1 = 2
+#极殇的伤害
+#Extremely deadly injuries
+# Default: 0.25
+# Range: 0.0 ~ 2.147483647E9
+damageExtremelyDead = 0.25
+#泣仙的属性加成
+#Weeping Immortal's attribute bonus
+# Default: 0.15000000596046448
+# Range: 0.0 ~ 2.147483647E9
+attributeWeepingImmortal = 0.15000000596046448
+#启用堕落诅咒的属性
+#Enables the Curse of the Corruption attribute
+attributeFallCurse = true
+#尸釜的激活属性
+#The activation attribute of the cauldron
+# Default: 0.15000000596046448
+# Range: 0.0 ~ 2.147483647E9
+attributeCorpseCauldron = 0.15000000596046448
+#堕井的堕落诅咒添加生物黑名单
+#Fallen Curse of the Fall Well adds mob blacklist
+effectFallWell = ["minecraft:player"]
+#棋陨最多可降低的最大生命值次数
+#The maximum number of times the Fall can be reduced
+# Default: 10
+# Range: > 0
+lostChessFell = 10
+#棋陨最多有效的属性，也就是最小可以获得正面属性的次数，不过是正数
+#Chess falls the most effective attributes，That is, the minimum number of times you can get positive attributes, but it is a positive number
+# Default: -4
+# Range: > 0
+attributeChessFell = 0
+#奥术谐振对物品的属性影响
+#Arcane resonance affects the attributes of items
+# Default: 1.0
+# Range: 0.0 ~ 2.147483647E9
+ArcaneHarmonics = 1.0

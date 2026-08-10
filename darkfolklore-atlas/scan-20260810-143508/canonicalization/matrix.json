@@ -1,0 +1,4783 @@
+[
+  {
+    "kind": "item",
+    "concept": "antique_atlas",
+    "relation": "SIMILAR_NAME",
+    "left": "aa4-atlas:antique_atlas",
+    "right": "antiqueatlas:antique_atlas",
+    "score": 100,
+    "normalized_left": "antiqueatla",
+    "normalized_right": "antiqueatla",
+    "semantic_left": "antique_atlas",
+    "semantic_right": "antique_atlas",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "chupacabra_spawn_egg",
+    "relation": "SIMILAR_NAME",
+    "left": "cnc:chupacabra_spawn_egg",
+    "right": "mobs_of_mythology:chupacabra_spawn_egg",
+    "score": 100,
+    "normalized_left": "chupacabraspawnegg",
+    "normalized_right": "chupacabraspawnegg",
+    "semantic_left": "chupacabra_spawn_egg",
+    "semantic_right": "chupacabra_spawn_egg",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:candlestick",
+    "right": "vampirism:candle_stick",
+    "score": 100,
+    "normalized_left": "candlestick",
+    "normalized_right": "candlestick",
+    "semantic_left": "candlestick",
+    "semantic_right": "candle_stick",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 19,
+      "resource_roots": {
+        "loot_table": 18,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_lead",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_lead",
+    "right": "immersiveengineering:raw_lead",
+    "score": 100,
+    "normalized_left": "rawlead",
+    "normalized_right": "rawlead",
+    "semantic_left": "raw_lead",
+    "semantic_right": "raw_lead",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:raw_materials, c:raw_materials/lead, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 8,
+      "resource_references": 11,
+      "resource_roots": {
+        "advancement": 4,
+        "loot_table": 2,
+        "recipe": 4,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver",
+    "right": "immersiveengineering:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 8,
+      "resource_references": 10,
+      "resource_roots": {
+        "advancement": 4,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver",
+    "right": "occultism:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver",
+    "right": "werewolves:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 9,
+      "resource_roots": {
+        "advancement": 3,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver_block",
+    "right": "occultism:raw_silver_block",
+    "score": 100,
+    "normalized_left": "rawsilverblock",
+    "normalized_right": "rawsilverblock",
+    "semantic_left": "raw_silver_block",
+    "semantic_right": "raw_silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver_block",
+    "right": "werewolves:raw_silver_block",
+    "score": 100,
+    "normalized_left": "rawsilverblock",
+    "normalized_right": "rawsilverblock",
+    "semantic_left": "raw_silver_block",
+    "semantic_right": "raw_silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_axe",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_axe",
+    "right": "werewolves:silver_axe",
+    "score": 100,
+    "normalized_left": "silveraxe",
+    "normalized_right": "silveraxe",
+    "semantic_left": "silver_axe",
+    "semantic_right": "silver_axe",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:enchantables, c:tools, cnc:headhunter_enchantable, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, lodestone:enchantable/axe"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 2,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_block",
+    "right": "occultism:silver_block",
+    "score": 100,
+    "normalized_left": "silverblock",
+    "normalized_right": "silverblock",
+    "semantic_left": "silver_block",
+    "semantic_right": "silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_block",
+    "right": "werewolves:silver_block",
+    "score": 100,
+    "normalized_left": "silverblock",
+    "normalized_right": "silverblock",
+    "semantic_left": "silver_block",
+    "semantic_right": "silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_boots",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_boots",
+    "right": "werewolves:silver_boots",
+    "score": 100,
+    "normalized_left": "silverboot",
+    "normalized_right": "silverboot",
+    "semantic_left": "silver_boots",
+    "semantic_right": "silver_boots",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:armors, c:enchantables, enchanted:armors, minecraft:enchantable/armor, minecraft:enchantable/durability, minecraft:enchantable/equippable"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_chestplate",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_chestplate",
+    "right": "werewolves:silver_chestplate",
+    "score": 100,
+    "normalized_left": "silverchestplate",
+    "normalized_right": "silverchestplate",
+    "semantic_left": "silver_chestplate",
+    "semantic_right": "silver_chestplate",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:armors, c:enchantables, enchanted:armors, minecraft:chest_armor, minecraft:enchantable/armor, minecraft:enchantable/chest_armor"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_helmet",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_helmet",
+    "right": "werewolves:silver_helmet",
+    "score": 100,
+    "normalized_left": "silverhelmet",
+    "normalized_right": "silverhelmet",
+    "semantic_left": "silver_helmet",
+    "semantic_right": "silver_helmet",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:armors, c:enchantables, enchanted:armors, minecraft:enchantable/armor, minecraft:enchantable/durability, minecraft:enchantable/equippable"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_hoe",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_hoe",
+    "right": "werewolves:silver_hoe",
+    "score": 100,
+    "normalized_left": "silverhoe",
+    "normalized_right": "silverhoe",
+    "semantic_left": "silver_hoe",
+    "semantic_right": "silver_hoe",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: betterarcheology:tunneling_items, c:enchantables, c:tools, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, minecraft:breaks_decorated_pots"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 4,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ingot",
+    "right": "occultism:silver_ingot",
+    "score": 100,
+    "normalized_left": "silveringot",
+    "normalized_right": "silveringot",
+    "semantic_left": "silver_ingot",
+    "semantic_right": "silver_ingot",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 12,
+      "resource_roots": {
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 8,
+      "resource_roots": {
+        "recipe": 8
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ingot",
+    "right": "werewolves:silver_ingot",
+    "score": 100,
+    "normalized_left": "silveringot",
+    "normalized_right": "silveringot",
+    "semantic_left": "silver_ingot",
+    "semantic_right": "silver_ingot",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 12,
+      "resource_roots": {
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 11
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_leggings",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_leggings",
+    "right": "werewolves:silver_leggings",
+    "score": 100,
+    "normalized_left": "silverlegging",
+    "normalized_right": "silverlegging",
+    "semantic_left": "silver_leggings",
+    "semantic_right": "silver_leggings",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:armors, c:enchantables, enchanted:armors, minecraft:enchantable/armor, minecraft:enchantable/durability, minecraft:enchantable/equippable"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_nugget",
+    "right": "occultism:silver_nugget",
+    "score": 100,
+    "normalized_left": "silvernugget",
+    "normalized_right": "silvernugget",
+    "semantic_left": "silver_nugget",
+    "semantic_right": "silver_nugget",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_nugget",
+    "right": "werewolves:silver_nugget",
+    "score": 100,
+    "normalized_left": "silvernugget",
+    "normalized_right": "silvernugget",
+    "semantic_left": "silver_nugget",
+    "semantic_right": "silver_nugget",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 6
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ore",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ore",
+    "right": "occultism:silver_ore",
+    "score": 100,
+    "normalized_left": "silverore",
+    "normalized_right": "silverore",
+    "semantic_left": "silver_ore",
+    "semantic_right": "silver_ore",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ores, c:ores/silver, c:ores_in_ground/stone, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "worldgen": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 5,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ore",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ore",
+    "right": "werewolves:silver_ore",
+    "score": 100,
+    "normalized_left": "silverore",
+    "normalized_right": "silverore",
+    "semantic_left": "silver_ore",
+    "semantic_right": "silver_ore",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ores, c:ores/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "worldgen": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 8,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1,
+        "worldgen": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_pickaxe",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_pickaxe",
+    "right": "werewolves:silver_pickaxe",
+    "score": 100,
+    "normalized_left": "silverpickaxe",
+    "normalized_right": "silverpickaxe",
+    "semantic_left": "silver_pickaxe",
+    "semantic_right": "silver_pickaxe",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: betterarcheology:tunneling_items, c:enchantables, c:tools, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, minecraft:breaks_decorated_pots"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 2,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_shovel",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_shovel",
+    "right": "werewolves:silver_shovel",
+    "score": 100,
+    "normalized_left": "silvershovel",
+    "normalized_right": "silvershovel",
+    "semantic_left": "silver_shovel",
+    "semantic_right": "silver_shovel",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: betterarcheology:tunneling_items, c:enchantables, c:tools, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, minecraft:breaks_decorated_pots"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 2,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_sword",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_sword",
+    "right": "fangs_n_claws:silver_sword",
+    "score": 100,
+    "normalized_left": "silversword",
+    "normalized_right": "silversword",
+    "semantic_left": "silver_sword",
+    "semantic_right": "silver_sword",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:enchantables, c:tools, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, lodestone:enchantable/melee, lodestone:enchantable/weapon"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_sword",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_sword",
+    "right": "werewolves:silver_sword",
+    "score": 100,
+    "normalized_left": "silversword",
+    "normalized_right": "silversword",
+    "semantic_left": "silver_sword",
+    "semantic_right": "silver_sword",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:enchantables, c:tools, cnc:headhunter_enchantable, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, lodestone:enchantable/melee"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 4,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 4,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "soul_shard",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:soul_shard",
+    "right": "occultism:soul_shard",
+    "score": 100,
+    "normalized_left": "soulshard",
+    "normalized_right": "soulshard",
+    "semantic_left": "soul_shard",
+    "semantic_right": "soul_shard",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 21,
+      "resource_references": 43,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 2,
+        "recipe": 40
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "stone_altar",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:stone_altar",
+    "right": "werewolves:stone_altar",
+    "score": 100,
+    "normalized_left": "stonealtar",
+    "normalized_right": "stonealtar",
+    "semantic_left": "stone_altar",
+    "semantic_right": "stone_altar",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "tallow",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:tallow",
+    "right": "occultism:tallow",
+    "score": 100,
+    "normalized_left": "tallow",
+    "normalized_right": "tallow",
+    "semantic_left": "tallow",
+    "semantic_right": "tallow",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:tallow"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 4,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 3,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:top_hat",
+    "right": "malum:tophat",
+    "score": 100,
+    "normalized_left": "tophat",
+    "normalized_right": "tophat",
+    "semantic_left": "top_hat",
+    "semantic_right": "tophat",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "altar",
+    "relation": "SIMILAR_NAME",
+    "left": "enchanted:altar",
+    "right": "graveyard:altar",
+    "score": 100,
+    "normalized_left": "altar",
+    "normalized_right": "altar",
+    "semantic_left": "altar",
+    "semantic_right": "altar",
+    "evidence": [
+      "high registry-path string similarity",
+      "same generic semantic base; equivalence is not implied",
+      "same normalized registry path",
+      "same path tokens in different order/separators"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "worldgen": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "earmuffs",
+    "relation": "SIMILAR_NAME",
+    "left": "enchanted:earmuffs",
+    "right": "immersiveengineering:earmuffs",
+    "score": 100,
+    "normalized_left": "earmuff",
+    "normalized_right": "earmuff",
+    "semantic_left": "earmuffs",
+    "semantic_right": "earmuffs",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 1,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 3,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "garlic",
+    "relation": "SIMILAR_NAME",
+    "left": "enchanted:garlic",
+    "right": "vampirism:garlic",
+    "score": 100,
+    "normalized_left": "garlic",
+    "normalized_right": "garlic",
+    "semantic_left": "garlic",
+    "semantic_right": "garlic",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 2,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 30,
+      "resource_references": 38,
+      "resource_roots": {
+        "advancement": 10,
+        "loot_table": 13,
+        "recipe": 7,
+        "tags": 8
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "relation": "SIMILAR_NAME",
+    "left": "enchanted:mandrake_root",
+    "right": "feywild:mandrake_root",
+    "score": 100,
+    "normalized_left": "mandrakeroot",
+    "normalized_right": "mandrakeroot",
+    "semantic_left": "mandrake",
+    "semantic_right": "mandrake",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 14,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "poppet",
+    "relation": "SIMILAR_NAME",
+    "left": "enchanted:poppet",
+    "right": "malum:poppet",
+    "score": 100,
+    "normalized_left": "poppet",
+    "normalized_right": "poppet",
+    "semantic_left": "poppet",
+    "semantic_right": "poppet",
+    "evidence": [
+      "high registry-path string similarity",
+      "same generic semantic base; equivalence is not implied",
+      "same normalized registry path",
+      "same path tokens in different order/separators"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 13,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "imp_spawn_egg",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:imp_spawn_egg",
+    "right": "mythsandlegends:imp_spawn_egg",
+    "score": 100,
+    "normalized_left": "impspawnegg",
+    "normalized_right": "impspawnegg",
+    "semantic_left": "imp_spawn_egg",
+    "semantic_right": "imp_spawn_egg",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_sword",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:silver_sword",
+    "right": "werewolves:silver_sword",
+    "score": 100,
+    "normalized_left": "silversword",
+    "normalized_right": "silversword",
+    "semantic_left": "silver_sword",
+    "semantic_right": "silver_sword",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:enchantables, c:tools, c:tools/melee_weapon, enchanted:tool_poppet_whitelist, immersiveengineering:toolbox/tools, lodestone:enchantable/melee"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "tags": 4
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 4,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 4,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "geas",
+    "relation": "SIMILAR_NAME",
+    "left": "gaze:geas",
+    "right": "malum:geas",
+    "score": 100,
+    "normalized_left": "geas",
+    "normalized_right": "geas",
+    "semantic_left": "geas",
+    "semantic_right": "geas",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "blueprint",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:blueprint",
+    "right": "mca:blueprint",
+    "score": 100,
+    "normalized_left": "blueprint",
+    "normalized_right": "blueprint",
+    "semantic_left": "blueprint",
+    "semantic_right": "blueprint",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 5,
+      "recipe_consumers": 0,
+      "resource_references": 68,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 66
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 1,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:raw_silver",
+    "right": "occultism:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 8,
+      "resource_references": 10,
+      "resource_roots": {
+        "advancement": 4,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:raw_silver",
+    "right": "werewolves:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 8,
+      "resource_references": 10,
+      "resource_roots": {
+        "advancement": 4,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 9,
+      "resource_roots": {
+        "advancement": 3,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "screwdriver",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:screwdriver",
+    "right": "kaleidoscope_tavern:screwdriver",
+    "score": 100,
+    "normalized_left": "screwdriver",
+    "normalized_right": "screwdriver",
+    "semantic_left": "screwdriver",
+    "semantic_right": "screwdriver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 2,
+      "resource_references": 8,
+      "resource_roots": {
+        "recipe": 4,
+        "tags": 4
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "blood_bucket",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_bloodwine:blood_bucket",
+    "right": "vampirism:blood_bucket",
+    "score": 100,
+    "normalized_left": "bloodbucket",
+    "normalized_right": "bloodbucket",
+    "semantic_left": "blood_bucket",
+    "semantic_right": "blood_bucket",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 4,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "black_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:black_bar_stool",
+    "right": "vampiresdelight:black_bar_stool",
+    "score": 100,
+    "normalized_left": "blackbarstool",
+    "normalized_right": "blackbarstool",
+    "semantic_left": "black_bar_stool",
+    "semantic_right": "black_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "blue_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:blue_bar_stool",
+    "right": "vampiresdelight:blue_bar_stool",
+    "score": 100,
+    "normalized_left": "bluebarstool",
+    "normalized_right": "bluebarstool",
+    "semantic_left": "blue_bar_stool",
+    "semantic_right": "blue_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "brown_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:brown_bar_stool",
+    "right": "vampiresdelight:brown_bar_stool",
+    "score": 100,
+    "normalized_left": "brownbarstool",
+    "normalized_right": "brownbarstool",
+    "semantic_left": "brown_bar_stool",
+    "semantic_right": "brown_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "cyan_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:cyan_bar_stool",
+    "right": "vampiresdelight:cyan_bar_stool",
+    "score": 100,
+    "normalized_left": "cyanbarstool",
+    "normalized_right": "cyanbarstool",
+    "semantic_left": "cyan_bar_stool",
+    "semantic_right": "cyan_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "gray_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:gray_bar_stool",
+    "right": "vampiresdelight:gray_bar_stool",
+    "score": 100,
+    "normalized_left": "graybarstool",
+    "normalized_right": "graybarstool",
+    "semantic_left": "gray_bar_stool",
+    "semantic_right": "gray_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "green_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:green_bar_stool",
+    "right": "vampiresdelight:green_bar_stool",
+    "score": 100,
+    "normalized_left": "greenbarstool",
+    "normalized_right": "greenbarstool",
+    "semantic_left": "green_bar_stool",
+    "semantic_right": "green_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "light_blue_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:light_blue_bar_stool",
+    "right": "vampiresdelight:light_blue_bar_stool",
+    "score": 100,
+    "normalized_left": "lightbluebarstool",
+    "normalized_right": "lightbluebarstool",
+    "semantic_left": "light_blue_bar_stool",
+    "semantic_right": "light_blue_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "light_gray_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:light_gray_bar_stool",
+    "right": "vampiresdelight:light_gray_bar_stool",
+    "score": 100,
+    "normalized_left": "lightgraybarstool",
+    "normalized_right": "lightgraybarstool",
+    "semantic_left": "light_gray_bar_stool",
+    "semantic_right": "light_gray_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "lime_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:lime_bar_stool",
+    "right": "vampiresdelight:lime_bar_stool",
+    "score": 100,
+    "normalized_left": "limebarstool",
+    "normalized_right": "limebarstool",
+    "semantic_left": "lime_bar_stool",
+    "semantic_right": "lime_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "magenta_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:magenta_bar_stool",
+    "right": "vampiresdelight:magenta_bar_stool",
+    "score": 100,
+    "normalized_left": "magentabarstool",
+    "normalized_right": "magentabarstool",
+    "semantic_left": "magenta_bar_stool",
+    "semantic_right": "magenta_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "orange_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:orange_bar_stool",
+    "right": "vampiresdelight:orange_bar_stool",
+    "score": 100,
+    "normalized_left": "orangebarstool",
+    "normalized_right": "orangebarstool",
+    "semantic_left": "orange_bar_stool",
+    "semantic_right": "orange_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "pink_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:pink_bar_stool",
+    "right": "vampiresdelight:pink_bar_stool",
+    "score": 100,
+    "normalized_left": "pinkbarstool",
+    "normalized_right": "pinkbarstool",
+    "semantic_left": "pink_bar_stool",
+    "semantic_right": "pink_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "purple_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:purple_bar_stool",
+    "right": "vampiresdelight:purple_bar_stool",
+    "score": 100,
+    "normalized_left": "purplebarstool",
+    "normalized_right": "purplebarstool",
+    "semantic_left": "purple_bar_stool",
+    "semantic_right": "purple_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "red_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:red_bar_stool",
+    "right": "vampiresdelight:red_bar_stool",
+    "score": 100,
+    "normalized_left": "redbarstool",
+    "normalized_right": "redbarstool",
+    "semantic_left": "red_bar_stool",
+    "semantic_right": "red_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "white_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:white_bar_stool",
+    "right": "vampiresdelight:white_bar_stool",
+    "score": 100,
+    "normalized_left": "whitebarstool",
+    "normalized_right": "whitebarstool",
+    "semantic_left": "white_bar_stool",
+    "semantic_right": "white_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "yellow_bar_stool",
+    "relation": "SIMILAR_NAME",
+    "left": "kaleidoscope_tavern:yellow_bar_stool",
+    "right": "vampiresdelight:yellow_bar_stool",
+    "score": 100,
+    "normalized_left": "yellowbarstool",
+    "normalized_right": "yellowbarstool",
+    "semantic_left": "yellow_bar_stool",
+    "semantic_right": "yellow_bar_stool",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 2,
+      "recipe_consumers": 15,
+      "resource_references": 23,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 17,
+        "tags": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:raw_silver",
+    "right": "werewolves:raw_silver",
+    "score": 100,
+    "normalized_left": "rawsilver",
+    "normalized_right": "rawsilver",
+    "semantic_left": "raw_silver",
+    "semantic_right": "raw_silver",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:raw_materials, c:raw_materials/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure, malum:void_soulstone_material"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 1,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 9,
+      "resource_roots": {
+        "advancement": 3,
+        "loot_table": 2,
+        "recipe": 4
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:raw_silver_block",
+    "right": "werewolves:raw_silver_block",
+    "score": 100,
+    "normalized_left": "rawsilverblock",
+    "normalized_right": "rawsilverblock",
+    "semantic_left": "raw_silver_block",
+    "semantic_right": "raw_silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_block",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:silver_block",
+    "right": "werewolves:silver_block",
+    "score": 100,
+    "normalized_left": "silverblock",
+    "normalized_right": "silverblock",
+    "semantic_left": "silver_block",
+    "semantic_right": "silver_block",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:storage_blocks, c:storage_blocks/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:silver_ingot",
+    "right": "werewolves:silver_ingot",
+    "score": 100,
+    "normalized_left": "silveringot",
+    "normalized_right": "silveringot",
+    "semantic_left": "silver_ingot",
+    "semantic_right": "silver_ingot",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 8,
+      "resource_roots": {
+        "recipe": 8
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 11
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:silver_nugget",
+    "right": "werewolves:silver_nugget",
+    "score": 100,
+    "normalized_left": "silvernugget",
+    "normalized_right": "silvernugget",
+    "semantic_left": "silver_nugget",
+    "semantic_right": "silver_nugget",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 6
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ore",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:silver_ore",
+    "right": "werewolves:silver_ore",
+    "score": 100,
+    "normalized_left": "silverore",
+    "normalized_right": "silverore",
+    "semantic_left": "silver_ore",
+    "semantic_right": "silver_ore",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization",
+      "shared tags: almostunified:hide, c:ores, c:ores/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 5,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 8,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1,
+        "worldgen": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "spirit_lantern",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:spirit_lantern",
+    "right": "vampiresdelight:spirit_lantern",
+    "score": 100,
+    "normalized_left": "spiritlantern",
+    "normalized_right": "spiritlantern",
+    "semantic_left": "spirit_lantern",
+    "semantic_right": "spirit_lantern",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "relation": "SHARED_CONCEPT_VARIANTS",
+    "left": "enchanted:mandrake_root",
+    "right": "feywild:mandrake",
+    "score": 90,
+    "normalized_left": "mandrakeroot",
+    "normalized_right": "mandrake",
+    "semantic_left": "mandrake",
+    "semantic_right": "mandrake",
+    "evidence": [
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 14,
+      "resource_roots": {
+        "loot_table": 2,
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 4,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "relation": "SHARED_CONCEPT_VARIANTS",
+    "left": "enchanted:mandrake_seeds",
+    "right": "feywild:mandrake",
+    "score": 90,
+    "normalized_left": "mandrakeseed",
+    "normalized_right": "mandrake",
+    "semantic_left": "mandrake",
+    "semantic_right": "mandrake",
+    "evidence": [
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 1,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 3,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 4,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "COMPARE_IMPLEMENTATIONS_AND_CHOOSE_CANONICAL_IF_EQUIVALENT",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "relation": "SHARED_CONCEPT_VARIANTS",
+    "left": "enchanted:mandrake_seeds",
+    "right": "feywild:mandrake_root",
+    "score": 90,
+    "normalized_left": "mandrakeseed",
+    "normalized_right": "mandrakeroot",
+    "semantic_left": "mandrake",
+    "semantic_right": "mandrake",
+    "evidence": [
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 1,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 3,
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "COMPARE_IMPLEMENTATIONS_AND_CHOOSE_CANONICAL_IF_EQUIVALENT",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "wolfsbane",
+    "relation": "SHARED_CONCEPT_VARIANTS",
+    "left": "enchanted:wolfsbane_flower",
+    "right": "werewolves:wolfsbane",
+    "score": 90,
+    "normalized_left": "wolfsbaneflower",
+    "normalized_right": "wolfsbane",
+    "semantic_left": "wolfsbane",
+    "semantic_right": "wolfsbane",
+    "evidence": [
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "loot_table": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 10,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 2,
+        "recipe": 4,
+        "worldgen": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "wolfsbane",
+    "relation": "SHARED_CONCEPT_VARIANTS",
+    "left": "enchanted:wolfsbane_seeds",
+    "right": "werewolves:wolfsbane",
+    "score": 90,
+    "normalized_left": "wolfsbaneseed",
+    "normalized_right": "wolfsbane",
+    "semantic_left": "wolfsbane",
+    "semantic_right": "wolfsbane",
+    "evidence": [
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 10,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 2,
+        "recipe": 4,
+        "worldgen": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "",
+    "relation": "SIMILAR_NAME",
+    "left": "mythsandlegends:tombstone",
+    "right": "vampirism:tombstone1",
+    "score": 90,
+    "normalized_left": "tombstone",
+    "normalized_right": "tombstone1",
+    "semantic_left": "tombstone",
+    "semantic_right": "tombstone1",
+    "evidence": [
+      "high registry-path string similarity"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "",
+    "relation": "SIMILAR_NAME",
+    "left": "mythsandlegends:tombstone",
+    "right": "vampirism:tombstone2",
+    "score": 90,
+    "normalized_left": "tombstone",
+    "normalized_right": "tombstone2",
+    "semantic_left": "tombstone",
+    "semantic_right": "tombstone2",
+    "evidence": [
+      "high registry-path string similarity"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 2,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "",
+    "relation": "SIMILAR_NAME",
+    "left": "mythsandlegends:tombstone",
+    "right": "vampirism:tombstone3",
+    "score": 90,
+    "normalized_left": "tombstone",
+    "normalized_right": "tombstone3",
+    "semantic_left": "tombstone",
+    "semantic_right": "tombstone3",
+    "evidence": [
+      "high registry-path string similarity"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:lead_ingot",
+    "right": "immersiveengineering:ingot_lead",
+    "score": 88,
+    "normalized_left": "leadingot",
+    "normalized_right": "ingotlead",
+    "semantic_left": "lead_ingot",
+    "semantic_right": "ingot_lead",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ingots, c:ingots/lead, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 10,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 9
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 19,
+      "recipe_consumers": 8,
+      "resource_references": 16,
+      "resource_roots": {
+        "advancement": 4,
+        "recipe": 12
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "lead",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:lead_nugget",
+    "right": "immersiveengineering:nugget_lead",
+    "score": 88,
+    "normalized_left": "leadnugget",
+    "normalized_right": "nuggetlead",
+    "semantic_left": "lead_nugget",
+    "semantic_right": "nugget_lead",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:nuggets, c:nuggets/lead, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 3,
+      "resource_references": 1,
+      "resource_roots": {
+        "recipe": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 3,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "lead",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:lead_ore",
+    "right": "immersiveengineering:ore_lead",
+    "score": 88,
+    "normalized_left": "leadore",
+    "normalized_right": "orelead",
+    "semantic_left": "lead_ore",
+    "semantic_right": "ore_lead",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ores, c:ores/lead, c:ores_in_ground/stone, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "worldgen": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 8,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 2,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_lead_block",
+    "right": "immersiveengineering:raw_block_lead",
+    "score": 88,
+    "normalized_left": "rawleadblock",
+    "normalized_right": "rawblocklead",
+    "semantic_left": "raw_lead_block",
+    "semantic_right": "raw_block_lead",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:storage_blocks, c:storage_blocks/raw_lead, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 2,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "block",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:raw_silver_block",
+    "right": "immersiveengineering:raw_block_silver",
+    "score": 88,
+    "normalized_left": "rawsilverblock",
+    "normalized_right": "rawblocksilver",
+    "semantic_left": "raw_silver_block",
+    "semantic_right": "raw_block_silver",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ingot",
+    "right": "immersiveengineering:ingot_silver",
+    "score": 88,
+    "normalized_left": "silveringot",
+    "normalized_right": "ingotsilver",
+    "semantic_left": "silver_ingot",
+    "semantic_right": "ingot_silver",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 12,
+      "resource_roots": {
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 19,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 12
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_nugget",
+    "right": "immersiveengineering:nugget_silver",
+    "score": 88,
+    "normalized_left": "silvernugget",
+    "normalized_right": "nuggetsilver",
+    "semantic_left": "silver_nugget",
+    "semantic_right": "nugget_silver",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 9,
+      "recipe_consumers": 5,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:silver_ore",
+    "right": "immersiveengineering:ore_silver",
+    "score": 88,
+    "normalized_left": "silverore",
+    "normalized_right": "oresilver",
+    "semantic_left": "silver_ore",
+    "semantic_right": "ore_silver",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ores, c:ores/silver, c:ores_in_ground/stone, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 3,
+      "resource_roots": {
+        "loot_table": 1,
+        "worldgen": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "deepslate",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:deepslate_ore_silver",
+    "right": "occultism:silver_ore_deepslate",
+    "score": 88,
+    "normalized_left": "deepslateoresilver",
+    "normalized_right": "silveroredeepslate",
+    "semantic_left": "deepslate_ore_silver",
+    "semantic_right": "silver_ore_deepslate",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ores, c:ores/silver, c:ores_in_ground/deepslate, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "deepslate",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:deepslate_ore_silver",
+    "right": "werewolves:deepslate_silver_ore",
+    "score": 88,
+    "normalized_left": "deepslateoresilver",
+    "normalized_right": "deepslatesilverore",
+    "semantic_left": "deepslate_ore_silver",
+    "semantic_right": "deepslate_silver_ore",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ore_rates/singular, c:ores, c:ores/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "copper",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:dust_copper",
+    "right": "occultism:copper_dust",
+    "score": 88,
+    "normalized_left": "dustcopper",
+    "normalized_right": "copperdust",
+    "semantic_left": "dust_copper",
+    "semantic_right": "copper_dust",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:dusts, c:dusts/copper"
+    ],
+    "left_usage": {
+      "recipe_producers": 10,
+      "recipe_consumers": 4,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 4,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "dust",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:dust_gold",
+    "right": "occultism:gold_dust",
+    "score": 88,
+    "normalized_left": "dustgold",
+    "normalized_right": "golddust",
+    "semantic_left": "dust_gold",
+    "semantic_right": "gold_dust",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:dusts, c:dusts/gold"
+    ],
+    "left_usage": {
+      "recipe_producers": 10,
+      "recipe_consumers": 7,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 7,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "dust",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:dust_iron",
+    "right": "occultism:iron_dust",
+    "score": 88,
+    "normalized_left": "dustiron",
+    "normalized_right": "irondust",
+    "semantic_left": "dust_iron",
+    "semantic_right": "iron_dust",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:dusts, c:dusts/iron"
+    ],
+    "left_usage": {
+      "recipe_producers": 10,
+      "recipe_consumers": 4,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 4,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "dust",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:dust_silver",
+    "right": "occultism:silver_dust",
+    "score": 88,
+    "normalized_left": "dustsilver",
+    "normalized_right": "silverdust",
+    "semantic_left": "dust_silver",
+    "semantic_right": "silver_dust",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:dusts, c:dusts/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 10,
+      "recipe_consumers": 8,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 8,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:ingot_silver",
+    "right": "occultism:silver_ingot",
+    "score": 88,
+    "normalized_left": "ingotsilver",
+    "normalized_right": "silveringot",
+    "semantic_left": "ingot_silver",
+    "semantic_right": "silver_ingot",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 19,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 8,
+      "resource_roots": {
+        "recipe": 8
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "ingot",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:ingot_silver",
+    "right": "werewolves:silver_ingot",
+    "score": 88,
+    "normalized_left": "ingotsilver",
+    "normalized_right": "silveringot",
+    "semantic_left": "ingot_silver",
+    "semantic_right": "silver_ingot",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ingots, c:ingots/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 19,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 12
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 44,
+      "resource_references": 14,
+      "resource_roots": {
+        "advancement": 3,
+        "recipe": 11
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "copper",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:nugget_copper",
+    "right": "malum:copper_nugget",
+    "score": 88,
+    "normalized_left": "nuggetcopper",
+    "normalized_right": "coppernugget",
+    "semantic_left": "nugget_copper",
+    "semantic_right": "copper_nugget",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:nuggets, c:nuggets/copper, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 2,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 2,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:nugget_silver",
+    "right": "occultism:silver_nugget",
+    "score": 88,
+    "normalized_left": "nuggetsilver",
+    "normalized_right": "silvernugget",
+    "semantic_left": "nugget_silver",
+    "semantic_right": "silver_nugget",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 9,
+      "recipe_consumers": 5,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 2,
+      "resource_roots": {
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "nugget",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:nugget_silver",
+    "right": "werewolves:silver_nugget",
+    "score": 88,
+    "normalized_left": "nuggetsilver",
+    "normalized_right": "silvernugget",
+    "semantic_left": "nugget_silver",
+    "semantic_right": "silver_nugget",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:nuggets, c:nuggets/silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 9,
+      "recipe_consumers": 5,
+      "resource_references": 5,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 5,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 1,
+        "recipe": 6
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:ore_silver",
+    "right": "occultism:silver_ore",
+    "score": 88,
+    "normalized_left": "oresilver",
+    "normalized_right": "silverore",
+    "semantic_left": "ore_silver",
+    "semantic_right": "silver_ore",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ores, c:ores/silver, c:ores_in_ground/stone, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 5,
+      "resource_roots": {
+        "loot_table": 1,
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "silver",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:ore_silver",
+    "right": "werewolves:silver_ore",
+    "score": 88,
+    "normalized_left": "oresilver",
+    "normalized_right": "silverore",
+    "semantic_left": "ore_silver",
+    "semantic_right": "silver_ore",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:ore_rates/singular, c:ores, c:ores/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 1,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 8,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1,
+        "worldgen": 2
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "block",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:raw_block_silver",
+    "right": "occultism:raw_silver_block",
+    "score": 88,
+    "normalized_left": "rawblocksilver",
+    "normalized_right": "rawsilverblock",
+    "semantic_left": "raw_block_silver",
+    "semantic_right": "raw_silver_block",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "block",
+    "relation": "SIMILAR_NAME",
+    "left": "immersiveengineering:raw_block_silver",
+    "right": "werewolves:raw_silver_block",
+    "score": 88,
+    "normalized_left": "rawblocksilver",
+    "normalized_right": "rawsilverblock",
+    "semantic_left": "raw_block_silver",
+    "semantic_right": "raw_silver_block",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: c:storage_blocks, c:storage_blocks/raw_silver, malum:prospectors_treasure, werewolves:type/silver"
+    ],
+    "left_usage": {
+      "recipe_producers": 3,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 2,
+      "resource_references": 4,
+      "resource_roots": {
+        "advancement": 1,
+        "loot_table": 1,
+        "recipe": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "item",
+    "concept": "deepslate",
+    "relation": "SIMILAR_NAME",
+    "left": "occultism:silver_ore_deepslate",
+    "right": "werewolves:deepslate_silver_ore",
+    "score": 88,
+    "normalized_left": "silveroredeepslate",
+    "normalized_right": "deepslatesilverore",
+    "semantic_left": "silver_ore_deepslate",
+    "semantic_right": "deepslate_silver_ore",
+    "evidence": [
+      "same path tokens in different order/separators",
+      "shared tags: almostunified:hide, c:ores, c:ores/silver, enchanted:witch_oven_blacklist, malum:prospectors_treasure"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 6,
+      "resource_roots": {
+        "loot_table": 1,
+        "recipe": 1,
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 6,
+      "resource_references": 7,
+      "resource_roots": {
+        "advancement": 2,
+        "loot_table": 1,
+        "recipe": 2,
+        "tags": 1,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "HIGH",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "SOURCE_API_AUDIT_BEFORE_CANONICALIZATION",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "relation": "SIMILAR_NAME",
+    "left": "cnc:chupacabra",
+    "right": "mobs_of_mythology:chupacabra",
+    "score": 100,
+    "normalized_left": "chupacabra",
+    "normalized_right": "chupacabra",
+    "semantic_left": "chupacabra",
+    "semantic_right": "chupacabra",
+    "evidence": [
+      "entity ids share the meaningful concept token 'chupacabra'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "wraith",
+    "relation": "SIMILAR_NAME",
+    "left": "eidolon_repraised:wraith",
+    "right": "graveyard:wraith",
+    "score": 100,
+    "normalized_left": "wraith",
+    "normalized_right": "wraith",
+    "semantic_left": "wraith",
+    "semantic_right": "wraith",
+    "evidence": [
+      "entity ids share the meaningful concept token 'wraith'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:ghost",
+    "right": "vampirism:ghost",
+    "score": 100,
+    "normalized_left": "ghost",
+    "normalized_right": "ghost",
+    "semantic_left": "ghost",
+    "semantic_right": "ghost",
+    "evidence": [
+      "entity ids share the meaningful concept token 'ghost'",
+      "high registry-path string similarity",
+      "same generic semantic base; equivalence is not implied",
+      "same normalized registry path",
+      "same path tokens in different order/separators"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "imp",
+    "relation": "SIMILAR_NAME",
+    "left": "fangs_n_claws:imp",
+    "right": "mythsandlegends:imp",
+    "score": 100,
+    "normalized_left": "imp",
+    "normalized_right": "imp",
+    "semantic_left": "imp",
+    "semantic_right": "imp",
+    "evidence": [
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "bellsnickel",
+    "relation": "SIMILAR_NAME",
+    "left": "feywild:bellsnickel",
+    "right": "lore_master:bellsnickel",
+    "score": 100,
+    "normalized_left": "bellsnickel",
+    "normalized_right": "bellsnickel",
+    "semantic_left": "bellsnickel",
+    "semantic_right": "bellsnickel",
+    "evidence": [
+      "entity ids share the meaningful concept token 'bellsnickel'",
+      "high registry-path string similarity",
+      "same normalized registry path",
+      "same path tokens in different order/separators",
+      "same semantic base after harmless plant-part suffix normalization"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "beaver",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "cnc:beaver",
+    "right": "occultism:beaver_familiar",
+    "score": 82,
+    "normalized_left": "beaver",
+    "normalized_right": "beaverfamiliar",
+    "semantic_left": "beaver",
+    "semantic_right": "beaver_familiar",
+    "evidence": [
+      "entity ids share the meaningful concept token 'beaver'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "chupacabra",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "cnc:chupacabra_spit",
+    "right": "mobs_of_mythology:chupacabra",
+    "score": 82,
+    "normalized_left": "chupacabraspit",
+    "normalized_right": "chupacabra",
+    "semantic_left": "chupacabra_spit",
+    "semantic_right": "chupacabra",
+    "evidence": [
+      "entity ids share the meaningful concept token 'chupacabra'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "ghost",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:fire_ghost",
+    "right": "vampirism:ghost",
+    "score": 82,
+    "normalized_left": "fireghost",
+    "normalized_right": "ghost",
+    "semantic_left": "fire_ghost",
+    "semantic_right": "ghost",
+    "evidence": [
+      "entity ids share the meaningful concept token 'ghost'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 2
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "golem",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:golem",
+    "right": "occultism:iesnium_golem",
+    "score": 82,
+    "normalized_left": "golem",
+    "normalized_right": "iesniumgolem",
+    "semantic_left": "golem",
+    "semantic_right": "iesnium_golem",
+    "evidence": [
+      "entity ids share the meaningful concept token 'golem'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 2,
+      "resource_roots": {
+        "advancement": 2
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "golem",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:ice_golem",
+    "right": "occultism:iesnium_golem",
+    "score": 82,
+    "normalized_left": "icegolem",
+    "normalized_right": "iesniumgolem",
+    "semantic_left": "ice_golem",
+    "semantic_right": "iesnium_golem",
+    "evidence": [
+      "entity ids share the meaningful concept token 'golem'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "recipe": 1,
+        "tags": 3
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "nightmare",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:nightmare_horse",
+    "right": "graveyard:nightmare",
+    "score": 82,
+    "normalized_left": "nightmarehorse",
+    "normalized_right": "nightmare",
+    "semantic_left": "nightmare_horse",
+    "semantic_right": "nightmare",
+    "evidence": [
+      "entity ids share the meaningful concept token 'nightmare'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 0,
+      "resource_roots": {}
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:alpha_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "alphawerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "alpha_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 6,
+      "resource_roots": {
+        "advancement": 1,
+        "tags": 4,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:human_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "humanwerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "human_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:task_master_werewolf",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "taskmasterwerewolf",
+    "semantic_left": "werewolf",
+    "semantic_right": "task_master_werewolf",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_beast",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfbeast",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_beast",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "tags": 2,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_minion",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfminion",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_minion",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "tags": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "werewolf",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "fangs_n_claws:werewolf",
+    "right": "werewolves:werewolf_survivalist",
+    "score": 82,
+    "normalized_left": "werewolf",
+    "normalized_right": "werewolfsurvivalist",
+    "semantic_left": "werewolf",
+    "semantic_right": "werewolf_survivalist",
+    "evidence": [
+      "entity ids share the meaningful concept token 'werewolf'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 3,
+      "resource_roots": {
+        "advancement": 3
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 4,
+      "resource_roots": {
+        "tags": 3,
+        "worldgen": 1
+      }
+    },
+    "replacement_risk": "MEDIUM",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  },
+  {
+    "kind": "entity",
+    "concept": "reaper",
+    "relation": "RELATED_CONCEPT_FAMILY",
+    "left": "graveyard:reaper",
+    "right": "mca:grim_reaper",
+    "score": 82,
+    "normalized_left": "reaper",
+    "normalized_right": "grimreaper",
+    "semantic_left": "reaper",
+    "semantic_right": "grim_reaper",
+    "evidence": [
+      "entity ids share the meaningful concept token 'reaper'"
+    ],
+    "left_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "right_usage": {
+      "recipe_producers": 0,
+      "recipe_consumers": 0,
+      "resource_references": 1,
+      "resource_roots": {
+        "advancement": 1
+      }
+    },
+    "replacement_risk": "LOW",
+    "hardcoded_reference_status": "UNKNOWN_NOT_SCANNED",
+    "decision": "UNDECIDED",
+    "suggested_action": "MANUAL_REVIEW",
+    "warning": "Candidate only. Never replace automatically without compatibility/source audit."
+  }
+]

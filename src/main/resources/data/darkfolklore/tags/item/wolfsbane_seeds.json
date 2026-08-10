@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "enchanted:wolfsbane_seeds", "required": false}
+  ]
+}

@@ -1,0 +1,14 @@
+package com.darkfolklore.core.canonical;
+
+public enum CanonicalPolicy {
+    CANONICAL,
+    FULL_CANONICALIZATION,
+    INTEROPERABILITY_ONLY,
+    KEEP_DISTINCT,
+    SUPPRESS_DUPLICATE_SPAWN,
+    KEEP_RARE,
+    EVENT_ONLY,
+    COMPATIBILITY_ONLY,
+    HIDDEN_FROM_NORMAL_ACQUISITION,
+    DEFERRED_UNSAFE
+}

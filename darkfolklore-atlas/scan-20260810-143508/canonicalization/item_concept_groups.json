@@ -1,0 +1,1209 @@
+[
+  {
+    "kind": "item",
+    "concept": "altar",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": true,
+    "members": [
+      "enchanted:altar",
+      "graveyard:altar"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "antique_atlas",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "aa4-atlas:antique_atlas",
+      "antiqueatlas:antique_atlas"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "black_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:black_bar_stool",
+      "vampiresdelight:black_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blood_bucket",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_bloodwine:blood_bucket",
+      "vampirism:blood_bucket"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blue_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:blue_bar_stool",
+      "vampiresdelight:blue_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blueprint",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "immersiveengineering:blueprint",
+      "mca:blueprint"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "brown_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:brown_bar_stool",
+      "vampiresdelight:brown_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "candlestick",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:candlestick",
+      "vampirism:candle_stick"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "chupacabra_spawn_egg",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "cnc:chupacabra_spawn_egg",
+      "mobs_of_mythology:chupacabra_spawn_egg"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "cyan_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:cyan_bar_stool",
+      "vampiresdelight:cyan_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "earmuffs",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:earmuffs",
+      "immersiveengineering:earmuffs"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "garlic",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:garlic",
+      "vampirism:garlic"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "geas",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "gaze:geas",
+      "malum:geas"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "gray_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:gray_bar_stool",
+      "vampiresdelight:gray_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "green_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:green_bar_stool",
+      "vampiresdelight:green_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "imp_spawn_egg",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:imp_spawn_egg",
+      "mythsandlegends:imp_spawn_egg"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "light_blue_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:light_blue_bar_stool",
+      "vampiresdelight:light_blue_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "light_gray_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:light_gray_bar_stool",
+      "vampiresdelight:light_gray_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "lime_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:lime_bar_stool",
+      "vampiresdelight:lime_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "magenta_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:magenta_bar_stool",
+      "vampiresdelight:magenta_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:mandrake_root",
+      "feywild:mandrake_root"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "orange_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:orange_bar_stool",
+      "vampiresdelight:orange_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "pink_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:pink_bar_stool",
+      "vampiresdelight:pink_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "poppet",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": true,
+    "members": [
+      "enchanted:poppet",
+      "malum:poppet"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "purple_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:purple_bar_stool",
+      "vampiresdelight:purple_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "raw_lead",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_lead",
+      "immersiveengineering:raw_lead"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_silver",
+      "immersiveengineering:raw_silver",
+      "occultism:raw_silver",
+      "werewolves:raw_silver"
+    ],
+    "member_count": 4,
+    "namespace_count": 4
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver_block",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_silver_block",
+      "occultism:raw_silver_block",
+      "werewolves:raw_silver_block"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "red_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:red_bar_stool",
+      "vampiresdelight:red_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "screwdriver",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "immersiveengineering:screwdriver",
+      "kaleidoscope_tavern:screwdriver"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_axe",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_axe",
+      "werewolves:silver_axe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_block",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_block",
+      "occultism:silver_block",
+      "werewolves:silver_block"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_boots",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_boots",
+      "werewolves:silver_boots"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_chestplate",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_chestplate",
+      "werewolves:silver_chestplate"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_helmet",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_helmet",
+      "werewolves:silver_helmet"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_hoe",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_hoe",
+      "werewolves:silver_hoe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ingot",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_ingot",
+      "occultism:silver_ingot",
+      "werewolves:silver_ingot"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_leggings",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_leggings",
+      "werewolves:silver_leggings"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_nugget",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_nugget",
+      "occultism:silver_nugget",
+      "werewolves:silver_nugget"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ore",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_ore",
+      "occultism:silver_ore",
+      "werewolves:silver_ore"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_pickaxe",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_pickaxe",
+      "werewolves:silver_pickaxe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_shovel",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_shovel",
+      "werewolves:silver_shovel"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_sword",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_sword",
+      "fangs_n_claws:silver_sword",
+      "werewolves:silver_sword"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "soul_shard",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:soul_shard",
+      "occultism:soul_shard"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "spirit_lantern",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "occultism:spirit_lantern",
+      "vampiresdelight:spirit_lantern"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "stone_altar",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:stone_altar",
+      "werewolves:stone_altar"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "tallow",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:tallow",
+      "occultism:tallow"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "top_hat",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:top_hat",
+      "malum:tophat"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "white_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:white_bar_stool",
+      "vampiresdelight:white_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "yellow_bar_stool",
+    "classification": "SAME_NAME_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:yellow_bar_stool",
+      "vampiresdelight:yellow_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "altar",
+    "classification": "GENERIC_NAME_COLLISION_GROUP",
+    "generic_name": true,
+    "members": [
+      "enchanted:altar",
+      "graveyard:altar"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "antique_atlas",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "aa4-atlas:antique_atlas",
+      "antiqueatlas:antique_atlas"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "black_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:black_bar_stool",
+      "vampiresdelight:black_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blood_bucket",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_bloodwine:blood_bucket",
+      "vampirism:blood_bucket"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blue_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:blue_bar_stool",
+      "vampiresdelight:blue_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "blueprint",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "immersiveengineering:blueprint",
+      "mca:blueprint"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "brown_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:brown_bar_stool",
+      "vampiresdelight:brown_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "chupacabra_spawn_egg",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "cnc:chupacabra_spawn_egg",
+      "mobs_of_mythology:chupacabra_spawn_egg"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "cyan_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:cyan_bar_stool",
+      "vampiresdelight:cyan_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "earmuffs",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:earmuffs",
+      "immersiveengineering:earmuffs"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "garlic",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:garlic",
+      "vampirism:garlic"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "geas",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "gaze:geas",
+      "malum:geas"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "gray_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:gray_bar_stool",
+      "vampiresdelight:gray_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "green_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:green_bar_stool",
+      "vampiresdelight:green_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "imp_spawn_egg",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "fangs_n_claws:imp_spawn_egg",
+      "mythsandlegends:imp_spawn_egg"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "light_blue_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:light_blue_bar_stool",
+      "vampiresdelight:light_blue_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "light_gray_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:light_gray_bar_stool",
+      "vampiresdelight:light_gray_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "lime_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:lime_bar_stool",
+      "vampiresdelight:lime_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "magenta_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:magenta_bar_stool",
+      "vampiresdelight:magenta_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "mandrake",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:mandrake_root",
+      "enchanted:mandrake_seeds",
+      "feywild:mandrake",
+      "feywild:mandrake_root"
+    ],
+    "member_count": 4,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "orange_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:orange_bar_stool",
+      "vampiresdelight:orange_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "pink_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:pink_bar_stool",
+      "vampiresdelight:pink_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "poppet",
+    "classification": "GENERIC_NAME_COLLISION_GROUP",
+    "generic_name": true,
+    "members": [
+      "enchanted:poppet",
+      "malum:poppet"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "purple_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:purple_bar_stool",
+      "vampiresdelight:purple_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "raw_lead",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_lead",
+      "immersiveengineering:raw_lead"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_silver",
+      "immersiveengineering:raw_silver",
+      "occultism:raw_silver",
+      "werewolves:raw_silver"
+    ],
+    "member_count": 4,
+    "namespace_count": 4
+  },
+  {
+    "kind": "item",
+    "concept": "raw_silver_block",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:raw_silver_block",
+      "occultism:raw_silver_block",
+      "werewolves:raw_silver_block"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "red_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:red_bar_stool",
+      "vampiresdelight:red_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "screwdriver",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "immersiveengineering:screwdriver",
+      "kaleidoscope_tavern:screwdriver"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_axe",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_axe",
+      "werewolves:silver_axe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_block",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_block",
+      "occultism:silver_block",
+      "werewolves:silver_block"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_boots",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_boots",
+      "werewolves:silver_boots"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_chestplate",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_chestplate",
+      "werewolves:silver_chestplate"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_helmet",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_helmet",
+      "werewolves:silver_helmet"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_hoe",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_hoe",
+      "werewolves:silver_hoe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ingot",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_ingot",
+      "occultism:silver_ingot",
+      "werewolves:silver_ingot"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_leggings",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_leggings",
+      "werewolves:silver_leggings"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_nugget",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_nugget",
+      "occultism:silver_nugget",
+      "werewolves:silver_nugget"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_ore",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_ore",
+      "occultism:silver_ore",
+      "werewolves:silver_ore"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "silver_pickaxe",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_pickaxe",
+      "werewolves:silver_pickaxe"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_shovel",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_shovel",
+      "werewolves:silver_shovel"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "silver_sword",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:silver_sword",
+      "fangs_n_claws:silver_sword",
+      "werewolves:silver_sword"
+    ],
+    "member_count": 3,
+    "namespace_count": 3
+  },
+  {
+    "kind": "item",
+    "concept": "soul_shard",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:soul_shard",
+      "occultism:soul_shard"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "spirit_lantern",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "occultism:spirit_lantern",
+      "vampiresdelight:spirit_lantern"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "stone_altar",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:stone_altar",
+      "werewolves:stone_altar"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "tallow",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "eidolon_repraised:tallow",
+      "occultism:tallow"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "white_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:white_bar_stool",
+      "vampiresdelight:white_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "wolfsbane",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "enchanted:wolfsbane_flower",
+      "enchanted:wolfsbane_seeds",
+      "werewolves:wolfsbane"
+    ],
+    "member_count": 3,
+    "namespace_count": 2
+  },
+  {
+    "kind": "item",
+    "concept": "yellow_bar_stool",
+    "classification": "SHARED_CONCEPT_GROUP",
+    "generic_name": false,
+    "members": [
+      "kaleidoscope_tavern:yellow_bar_stool",
+      "vampiresdelight:yellow_bar_stool"
+    ],
+    "member_count": 2,
+    "namespace_count": 2
+  }
+]

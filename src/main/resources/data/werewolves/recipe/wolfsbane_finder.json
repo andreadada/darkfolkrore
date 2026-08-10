@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:dusts/redstone"
+    },
+    "X": {
+      "tag": "c:ingots/silver"
+    },
+    "Y": {
+      "tag": "darkfolklore:wolfsbane"
+    },
+    "Z": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "ZAZ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "werewolves:wolfsbane_finder"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "werewolves"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "werewolves:wolfsbane_finder"
+    }
+  ]
+}

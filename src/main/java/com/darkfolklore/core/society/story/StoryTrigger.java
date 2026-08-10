@@ -1,0 +1,12 @@
+package com.darkfolklore.core.society.story;
+
+public enum StoryTrigger {
+    FAMILY_DISCOVERY,
+    PUBLIC_REVEAL,
+    HUNTER_INVESTIGATION,
+    ORGANIZATION_RECRUITMENT,
+    FULL_MOON_INCIDENT,
+    WITCHING_HOUR,
+    CONTROLLED_FALSE_ACCUSATION,
+    POLITICAL_EXPOSURE
+}

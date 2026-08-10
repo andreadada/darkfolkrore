@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "vampirism:garlic", "required": false},
+    {"id": "enchanted:garlic", "required": false},
+    {"id": "vampiresdelight:wild_garlic", "required": false}
+  ]
+}

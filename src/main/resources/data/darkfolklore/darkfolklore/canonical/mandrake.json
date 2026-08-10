@@ -1,0 +1,12 @@
+{
+  "concept": "darkfolklore:mandrake",
+  "kind": "ITEM",
+  "canonical": "",
+  "implementations": [
+    "enchanted:mandrake_root",
+    "feywild:mandrake",
+    "feywild:mandrake_root"
+  ],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Enchanted's witchcraft root and Feywild's fae crop/summoning chain are mechanically distinct."
+}

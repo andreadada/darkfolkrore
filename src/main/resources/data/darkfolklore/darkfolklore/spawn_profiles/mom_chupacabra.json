@@ -1,0 +1,8 @@
+{
+  "entity": "mobs_of_mythology:chupacabra",
+  "rarity": "VERY_RARE",
+  "natural_spawn_enabled": false,
+  "canonicalization_suppression": true,
+  "nocturnal": true,
+  "event_multiplier": 1.0
+}

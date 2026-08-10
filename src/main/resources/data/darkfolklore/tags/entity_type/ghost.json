@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "fangs_n_claws:ghost", "required": false},
+    {"id": "fangs_n_claws:fire_ghost", "required": false},
+    {"id": "vampirism:ghost", "required": false}
+  ]
+}

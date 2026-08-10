@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:wraith",
+  "kind": "ENTITY",
+  "canonical": "",
+  "implementations": ["eidolon_repraised:wraith", "graveyard:wraith"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Eidolon's chilled ritual wraith and Graveyard's light-extinguishing wraith are distinct."
+}

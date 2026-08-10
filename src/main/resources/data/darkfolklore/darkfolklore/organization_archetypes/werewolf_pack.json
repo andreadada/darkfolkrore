@@ -1,0 +1,8 @@
+{
+  "type": "WEREWOLF_PACK",
+  "base_influence": 5,
+  "max_members": 24,
+  "auto_found": true,
+  "public_reveal_authority": false,
+  "objectives": ["PROTECT_MEMBERS", "DEFEND_TERRITORY"]
+}

@@ -1,0 +1,1224 @@
+{
+  "minecraft:can_breathe_under_water": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:armor_stand",
+    "minecraft:axolotl",
+    "minecraft:bogged",
+    "minecraft:cod",
+    "minecraft:drowned",
+    "minecraft:elder_guardian",
+    "minecraft:frog",
+    "minecraft:glow_squid",
+    "minecraft:guardian",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:squid",
+    "minecraft:stray",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "myths_of_the_sea:abaia",
+    "myths_of_the_sea:bake_kujira",
+    "myths_of_the_sea:bunyip",
+    "myths_of_the_sea:hippocampus",
+    "myths_of_the_sea:kraken",
+    "myths_of_the_sea:leviathan",
+    "occultism:beaver_familiar",
+    "occultism:cthulhu_familiar",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_guardian",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:ignores_poison_and_regen": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:inverted_healing_and_harm": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:sensitive_to_smite": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:undead": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:wither_friends": [
+    "cnc:wechuge",
+    "cnc:wendigo",
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:necromancer",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute",
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "identity:burns_in_daylight": [
+    "eidolon_repraised:giant_skeleton",
+    "eidolon_repraised:wraith",
+    "eidolon_repraised:zombie_brute"
+  ],
+  "identity:flying": [
+    "eidolon_repraised:raven"
+  ],
+  "identity:lava_walking": [
+    "eidolon_repraised:wraith"
+  ],
+  "enchanted:taglock_blacklist": [
+    "enchanted:familiar_cat",
+    "minecraft:allay",
+    "minecraft:ender_dragon",
+    "minecraft:warden",
+    "minecraft:wither"
+  ],
+  "fieldguide:bosses": [
+    "graveyard:lich",
+    "minecraft:elder_guardian",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "mythsandlegends:black_charro"
+  ],
+  "fieldguide:kill_to_unlock": [
+    "graveyard:lich",
+    "minecraft:elder_guardian",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "mythsandlegends:black_charro"
+  ],
+  "minecraft:raiders": [
+    "immersiveengineering:bulwark",
+    "immersiveengineering:commando",
+    "immersiveengineering:fusilier",
+    "minecraft:evoker",
+    "minecraft:illusioner",
+    "minecraft:pillager",
+    "minecraft:ravager",
+    "minecraft:vindicator",
+    "minecraft:witch"
+  ],
+  "vampiresdelight:drops_human_eye": [
+    "immersiveengineering:bulwark",
+    "immersiveengineering:commando",
+    "immersiveengineering:fusilier",
+    "minecraft:evoker",
+    "minecraft:illusioner",
+    "minecraft:pillager",
+    "minecraft:ravager",
+    "minecraft:villager",
+    "minecraft:vindicator",
+    "minecraft:wandering_trader",
+    "minecraft:witch",
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:hunter_trainer",
+    "vampirism:hunter_trainer_dummy",
+    "vampirism:task_master_hunter"
+  ],
+  "minecraft:villager": [
+    "mca:female_villager",
+    "mca:male_villager",
+    "minecraft:villager"
+  ],
+  "c:allay": [
+    "minecraft:allay"
+  ],
+  "minecraft:fall_damage_immune": [
+    "minecraft:allay",
+    "minecraft:bat",
+    "minecraft:bee",
+    "minecraft:blaze",
+    "minecraft:breeze",
+    "minecraft:cat",
+    "minecraft:chicken",
+    "minecraft:ghast",
+    "minecraft:iron_golem",
+    "minecraft:magma_cube",
+    "minecraft:ocelot",
+    "minecraft:parrot",
+    "minecraft:phantom",
+    "minecraft:shulker",
+    "minecraft:snow_golem",
+    "minecraft:wither",
+    "occultism:bat_familiar",
+    "occultism:iesnium_golem",
+    "occultism:otherworld_bird",
+    "occultism:possessed_bee",
+    "occultism:possessed_blaze",
+    "occultism:possessed_breeze",
+    "occultism:possessed_ghast",
+    "occultism:possessed_phantom",
+    "occultism:possessed_shulker",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_weak_breeze",
+    "occultism:possessed_weak_shulker"
+  ],
+  "occultism:flying_passive": [
+    "minecraft:allay",
+    "minecraft:bat",
+    "minecraft:bee",
+    "minecraft:parrot",
+    "occultism:bat_familiar",
+    "occultism:possessed_bee"
+  ],
+  "occultism:random_animals_small": [
+    "minecraft:allay",
+    "minecraft:bat",
+    "minecraft:bee",
+    "minecraft:cat",
+    "minecraft:fox",
+    "minecraft:ocelot",
+    "minecraft:parrot",
+    "minecraft:rabbit"
+  ],
+  "c:armadillos": [
+    "minecraft:armadillo"
+  ],
+  "occultism:random_animals_special": [
+    "minecraft:armadillo",
+    "minecraft:goat",
+    "minecraft:iron_golem",
+    "minecraft:mooshroom",
+    "minecraft:panda",
+    "minecraft:polar_bear",
+    "minecraft:sniffer"
+  ],
+  "fieldguide:blacklisted": [
+    "minecraft:armor_stand",
+    "minecraft:giant",
+    "minecraft:illusioner",
+    "mythsandlegends:imp_clone",
+    "mythsandlegends:molten_ball"
+  ],
+  "minecraft:arrows": [
+    "minecraft:arrow",
+    "minecraft:spectral_arrow"
+  ],
+  "minecraft:impact_projectiles": [
+    "minecraft:arrow",
+    "minecraft:breeze_wind_charge",
+    "minecraft:dragon_fireball",
+    "minecraft:egg",
+    "minecraft:fireball",
+    "minecraft:firework_rocket",
+    "minecraft:small_fireball",
+    "minecraft:snowball",
+    "minecraft:spectral_arrow",
+    "minecraft:trident",
+    "minecraft:wind_charge",
+    "minecraft:wither_skull"
+  ],
+  "c:axolotls": [
+    "minecraft:axolotl"
+  ],
+  "minecraft:aquatic": [
+    "minecraft:axolotl",
+    "minecraft:cod",
+    "minecraft:dolphin",
+    "minecraft:elder_guardian",
+    "minecraft:glow_squid",
+    "minecraft:guardian",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:squid",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle",
+    "myths_of_the_sea:abaia",
+    "myths_of_the_sea:bake_kujira",
+    "myths_of_the_sea:hippocampus",
+    "myths_of_the_sea:kraken",
+    "myths_of_the_sea:leviathan",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_guardian"
+  ],
+  "minecraft:sensitive_to_impaling": [
+    "minecraft:axolotl",
+    "minecraft:cod",
+    "minecraft:dolphin",
+    "minecraft:elder_guardian",
+    "minecraft:glow_squid",
+    "minecraft:guardian",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:squid",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle",
+    "myths_of_the_sea:abaia",
+    "myths_of_the_sea:bake_kujira",
+    "myths_of_the_sea:hippocampus",
+    "myths_of_the_sea:kraken",
+    "myths_of_the_sea:leviathan",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_guardian"
+  ],
+  "occultism:random_animals_water": [
+    "minecraft:axolotl",
+    "minecraft:cod",
+    "minecraft:dolphin",
+    "minecraft:frog",
+    "minecraft:glow_squid",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:snow_golem",
+    "minecraft:squid",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle"
+  ],
+  "vampiricageing:infected_blacklist": [
+    "minecraft:axolotl",
+    "minecraft:cow",
+    "minecraft:donkey",
+    "minecraft:fox",
+    "minecraft:frog",
+    "minecraft:glow_squid",
+    "minecraft:goat",
+    "minecraft:horse",
+    "minecraft:pig",
+    "minecraft:sheep",
+    "minecraft:squid",
+    "minecraft:wolf"
+  ],
+  "vampiricageing:petty_devour": [
+    "minecraft:axolotl",
+    "minecraft:cow",
+    "minecraft:donkey",
+    "minecraft:fox",
+    "minecraft:frog",
+    "minecraft:glow_squid",
+    "minecraft:goat",
+    "minecraft:horse",
+    "minecraft:pig",
+    "minecraft:sheep",
+    "minecraft:squid",
+    "minecraft:wolf"
+  ],
+  "c:bats": [
+    "minecraft:bat",
+    "occultism:bat_familiar"
+  ],
+  "c:bees": [
+    "minecraft:bee",
+    "occultism:possessed_bee"
+  ],
+  "minecraft:arthropod": [
+    "minecraft:bee",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "occultism:possessed_bee",
+    "occultism:possessed_endermite",
+    "occultism:wild_cave_spider",
+    "occultism:wild_horde_silverfish",
+    "occultism:wild_silverfish",
+    "occultism:wild_spider"
+  ],
+  "minecraft:beehive_inhabitors": [
+    "minecraft:bee"
+  ],
+  "minecraft:sensitive_to_bane_of_arthropods": [
+    "minecraft:bee",
+    "minecraft:cave_spider",
+    "minecraft:endermite",
+    "minecraft:silverfish",
+    "minecraft:spider",
+    "occultism:possessed_bee",
+    "occultism:possessed_endermite",
+    "occultism:wild_cave_spider",
+    "occultism:wild_horde_silverfish",
+    "occultism:wild_silverfish",
+    "occultism:wild_spider"
+  ],
+  "enchanted:monsters": [
+    "minecraft:blaze",
+    "minecraft:cave_spider",
+    "minecraft:creeper",
+    "minecraft:drowned",
+    "minecraft:elder_guardian",
+    "minecraft:endermite",
+    "minecraft:ghast",
+    "minecraft:giant",
+    "minecraft:guardian",
+    "minecraft:hoglin",
+    "minecraft:husk",
+    "minecraft:illusioner",
+    "minecraft:magma_cube",
+    "minecraft:phantom",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:pillager",
+    "minecraft:ravager",
+    "minecraft:shulker",
+    "minecraft:silverfish",
+    "minecraft:skeleton",
+    "minecraft:slime",
+    "minecraft:spider",
+    "minecraft:stray",
+    "minecraft:vex",
+    "minecraft:warden",
+    "minecraft:witch",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin"
+  ],
+  "minecraft:freeze_hurts_extra_types": [
+    "minecraft:blaze",
+    "minecraft:magma_cube",
+    "minecraft:strider"
+  ],
+  "mythsandlegends:nether_mobs": [
+    "minecraft:blaze",
+    "minecraft:ghast",
+    "minecraft:hoglin",
+    "minecraft:magma_cube",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombified_piglin",
+    "mythsandlegends:abaddon",
+    "mythsandlegends:condemned",
+    "mythsandlegends:imp",
+    "mythsandlegends:imp_clone",
+    "mythsandlegends:scorched_sentinel",
+    "mythsandlegends:warborn_aegis"
+  ],
+  "occultism:afrit_allies": [
+    "minecraft:blaze"
+  ],
+  "vampiricageing:common_devour": [
+    "minecraft:blaze",
+    "minecraft:cave_spider",
+    "minecraft:creeper",
+    "minecraft:enderman",
+    "minecraft:ghast",
+    "minecraft:guardian",
+    "minecraft:spider",
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:vampire",
+    "vampirism:vampire_imob",
+    "werewolves:alpha_werewolf",
+    "werewolves:werewolf_survivalist"
+  ],
+  "c:boats": [
+    "minecraft:boat",
+    "minecraft:chest_boat"
+  ],
+  "bloodlines:possession_whitelist": [
+    "minecraft:bogged",
+    "minecraft:creeper",
+    "minecraft:drowned",
+    "minecraft:enderman",
+    "minecraft:husk",
+    "minecraft:phantom",
+    "minecraft:silverfish",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:villager",
+    "minecraft:wither_skeleton",
+    "minecraft:wolf",
+    "minecraft:zombie",
+    "minecraft:zombie_villager"
+  ],
+  "kaleidoscope_tavern:tomb_raider_disarmable": [
+    "minecraft:bogged",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:pillager",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:vindicator",
+    "minecraft:witch",
+    "minecraft:wither_skeleton",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_bogged",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:no_anger_from_wind_charge": [
+    "minecraft:bogged",
+    "minecraft:breeze",
+    "minecraft:cave_spider",
+    "minecraft:husk",
+    "minecraft:skeleton",
+    "minecraft:slime",
+    "minecraft:spider",
+    "minecraft:stray",
+    "minecraft:zombie",
+    "occultism:possessed_breeze",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_weak_breeze",
+    "occultism:wild_bogged",
+    "occultism:wild_cave_spider",
+    "occultism:wild_horde_husk",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_skeleton",
+    "occultism:wild_slime",
+    "occultism:wild_spider",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "minecraft:skeletons": [
+    "minecraft:bogged",
+    "minecraft:skeleton",
+    "minecraft:skeleton_horse",
+    "minecraft:stray",
+    "minecraft:wither_skeleton",
+    "occultism:possessed_skeleton",
+    "occultism:wild_bogged",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_skeleton",
+    "occultism:wild_stray"
+  ],
+  "minecraft:can_turn_in_boats": [
+    "minecraft:breeze",
+    "occultism:possessed_breeze",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_weak_breeze"
+  ],
+  "minecraft:deflects_projectiles": [
+    "minecraft:breeze",
+    "occultism:possessed_breeze",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_weak_breeze"
+  ],
+  "minecraft:redirectable_projectile": [
+    "minecraft:breeze_wind_charge",
+    "minecraft:fireball",
+    "minecraft:wind_charge"
+  ],
+  "c:camels": [
+    "minecraft:camel"
+  ],
+  "minecraft:dismounts_underwater": [
+    "minecraft:camel",
+    "minecraft:chicken",
+    "minecraft:donkey",
+    "minecraft:horse",
+    "minecraft:llama",
+    "minecraft:mule",
+    "minecraft:pig",
+    "minecraft:ravager",
+    "minecraft:spider",
+    "minecraft:strider",
+    "minecraft:trader_llama",
+    "minecraft:zombie_horse",
+    "occultism:wild_spider"
+  ],
+  "occultism:random_animals_rideable": [
+    "minecraft:camel",
+    "minecraft:donkey",
+    "minecraft:horse",
+    "minecraft:llama",
+    "minecraft:mule",
+    "minecraft:pig",
+    "minecraft:skeleton_horse",
+    "minecraft:strider",
+    "minecraft:trader_llama",
+    "minecraft:zombie_horse"
+  ],
+  "c:cats": [
+    "minecraft:cat",
+    "minecraft:ocelot"
+  ],
+  "c:spiders": [
+    "minecraft:cave_spider",
+    "minecraft:spider"
+  ],
+  "c:minecarts": [
+    "minecraft:chest_minecart",
+    "minecraft:command_block_minecart",
+    "minecraft:furnace_minecart",
+    "minecraft:hopper_minecart",
+    "minecraft:minecart",
+    "minecraft:spawner_minecart",
+    "minecraft:tnt_minecart"
+  ],
+  "c:chickens": [
+    "minecraft:chicken"
+  ],
+  "occultism:random_animals_common": [
+    "minecraft:chicken",
+    "minecraft:cow",
+    "minecraft:pig",
+    "minecraft:sheep",
+    "minecraft:squid",
+    "minecraft:wolf"
+  ],
+  "c:fish": [
+    "minecraft:cod",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:tropical_fish"
+  ],
+  "minecraft:axolotl_hunt_targets": [
+    "minecraft:cod",
+    "minecraft:glow_squid",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:squid",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish"
+  ],
+  "minecraft:not_scary_for_pufferfish": [
+    "minecraft:cod",
+    "minecraft:dolphin",
+    "minecraft:elder_guardian",
+    "minecraft:glow_squid",
+    "minecraft:guardian",
+    "minecraft:pufferfish",
+    "minecraft:salmon",
+    "minecraft:squid",
+    "minecraft:tadpole",
+    "minecraft:tropical_fish",
+    "minecraft:turtle",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_guardian"
+  ],
+  "c:cows": [
+    "minecraft:cow",
+    "minecraft:mooshroom"
+  ],
+  "c:dolphins": [
+    "minecraft:dolphin"
+  ],
+  "c:donkeys": [
+    "minecraft:donkey"
+  ],
+  "farmersdelight:horse_feed_tempted": [
+    "minecraft:donkey",
+    "minecraft:horse",
+    "minecraft:mule"
+  ],
+  "farmersdelight:horse_feed_users": [
+    "minecraft:donkey",
+    "minecraft:horse",
+    "minecraft:llama",
+    "minecraft:mule",
+    "minecraft:skeleton_horse",
+    "minecraft:zombie_horse"
+  ],
+  "minecraft:axolotl_always_hostiles": [
+    "minecraft:drowned",
+    "minecraft:elder_guardian",
+    "minecraft:guardian",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_guardian",
+    "occultism:wild_horde_drowned"
+  ],
+  "minecraft:zombies": [
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:zoglin",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:zombified_piglin",
+    "occultism:possessed_zombie_piglin",
+    "occultism:wild_horde_drowned",
+    "occultism:wild_horde_husk",
+    "occultism:wild_husk",
+    "occultism:wild_zombie"
+  ],
+  "vampirism:zombies": [
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:zombie",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager"
+  ],
+  "enchanted:grotesque_immune": [
+    "minecraft:elder_guardian",
+    "minecraft:ender_dragon",
+    "minecraft:evoker",
+    "minecraft:iron_golem",
+    "minecraft:piglin_brute",
+    "minecraft:pillager",
+    "minecraft:ravager",
+    "minecraft:vex",
+    "minecraft:vindicator",
+    "minecraft:warden",
+    "minecraft:witch"
+  ],
+  "vampiricageing:exquisite_devour": [
+    "minecraft:elder_guardian",
+    "vampirism:vampire_baron",
+    "werewolves:alpha_werewolf"
+  ],
+  "c:bosses": [
+    "minecraft:ender_dragon",
+    "minecraft:wither"
+  ],
+  "occultism:fragile_soul_gem_deny_list": [
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "occultism:iesnium_golem"
+  ],
+  "occultism:soul_gem_deny_list": [
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "occultism:iesnium_golem"
+  ],
+  "vampirism:ignore_vampire_sword_finisher": [
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "vampirism:ghost",
+    "vampirism:vulnerable_remains_dummy"
+  ],
+  "c:endermen": [
+    "minecraft:enderman",
+    "occultism:possessed_enderman"
+  ],
+  "minecraft:powder_snow_walkable_mobs": [
+    "minecraft:endermite",
+    "minecraft:fox",
+    "minecraft:rabbit",
+    "minecraft:silverfish",
+    "occultism:possessed_endermite",
+    "occultism:wild_horde_silverfish",
+    "occultism:wild_silverfish",
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:hunter_trainer",
+    "vampirism:hunter_trainer_dummy",
+    "vampirism:task_master_hunter",
+    "werewolves:werewolf_survivalist"
+  ],
+  "minecraft:illager": [
+    "minecraft:evoker",
+    "minecraft:illusioner",
+    "minecraft:pillager",
+    "minecraft:vindicator",
+    "occultism:possessed_evoker"
+  ],
+  "minecraft:illager_friends": [
+    "minecraft:evoker",
+    "minecraft:illusioner",
+    "minecraft:pillager",
+    "minecraft:vindicator",
+    "occultism:possessed_evoker"
+  ],
+  "c:squids": [
+    "minecraft:glow_squid",
+    "minecraft:squid"
+  ],
+  "c:goats": [
+    "minecraft:goat",
+    "occultism:goat_familiar",
+    "occultism:mercy_goat"
+  ],
+  "c:hoglins": [
+    "minecraft:hoglin",
+    "occultism:possessed_hoglin"
+  ],
+  "c:horses": [
+    "minecraft:horse"
+  ],
+  "c:golems/iron": [
+    "minecraft:iron_golem"
+  ],
+  "immersiveengineering:shaderbag/blacklist": [
+    "minecraft:iron_golem",
+    "minecraft:wither"
+  ],
+  "c:llamas": [
+    "minecraft:llama",
+    "minecraft:trader_llama"
+  ],
+  "minecraft:frog_food": [
+    "minecraft:magma_cube",
+    "minecraft:slime",
+    "occultism:wild_slime"
+  ],
+  "minecraft:non_controlling_rider": [
+    "minecraft:magma_cube",
+    "minecraft:slime",
+    "occultism:wild_slime"
+  ],
+  "occultism:cubemob": [
+    "minecraft:magma_cube",
+    "minecraft:slime"
+  ],
+  "c:mules": [
+    "minecraft:mule"
+  ],
+  "c:ocelots": [
+    "minecraft:ocelot"
+  ],
+  "c:pandas": [
+    "minecraft:panda"
+  ],
+  "c:parrots": [
+    "minecraft:parrot"
+  ],
+  "vampiresdelight:unholy_spirits": [
+    "minecraft:phantom",
+    "vampirism:ghost"
+  ],
+  "c:pigs": [
+    "minecraft:pig"
+  ],
+  "occultism:humans": [
+    "minecraft:player",
+    "minecraft:villager",
+    "minecraft:wandering_trader",
+    "occultism:wondering_trader"
+  ],
+  "minecraft:freeze_immune_entity_types": [
+    "minecraft:polar_bear",
+    "minecraft:snow_golem",
+    "minecraft:stray",
+    "minecraft:wither",
+    "occultism:wild_stray"
+  ],
+  "c:ravagers": [
+    "minecraft:ravager"
+  ],
+  "c:sheep": [
+    "minecraft:sheep"
+  ],
+  "c:shulkers": [
+    "minecraft:shulker",
+    "occultism:possessed_shulker",
+    "occultism:possessed_weak_shulker"
+  ],
+  "minecraft:immune_to_infested": [
+    "minecraft:silverfish"
+  ],
+  "minecraft:immune_to_oozing": [
+    "minecraft:slime"
+  ],
+  "c:golems/snow": [
+    "minecraft:snow_golem"
+  ],
+  "c:tadpoles": [
+    "minecraft:tadpole"
+  ],
+  "c:vex": [
+    "minecraft:vex"
+  ],
+  "c:villagers": [
+    "minecraft:villager",
+    "minecraft:wandering_trader",
+    "occultism:wondering_trader"
+  ],
+  "c:wardens": [
+    "minecraft:warden",
+    "occultism:possessed_warden"
+  ],
+  "c:wolfs": [
+    "minecraft:wolf"
+  ],
+  "farmersdelight:dog_food_users": [
+    "minecraft:wolf"
+  ],
+  "mythsandlegends:possessed_armors": [
+    "mythsandlegends:possessed_armor",
+    "mythsandlegends:possessed_armor_archer",
+    "mythsandlegends:possessed_armor_inquisitor"
+  ],
+  "occultism:healed_by_demons_dream_fruit": [
+    "occultism:afrit",
+    "occultism:afrit_wild",
+    "occultism:bat_familiar",
+    "occultism:beaver_familiar",
+    "occultism:beholder_familiar",
+    "occultism:blacksmith_familiar",
+    "occultism:chimera_familiar",
+    "occultism:cthulhu_familiar",
+    "occultism:deer_familiar",
+    "occultism:demonic_husband",
+    "occultism:demonic_wife",
+    "occultism:devil_familiar",
+    "occultism:djinni",
+    "occultism:dragon_familiar",
+    "occultism:fairy_familiar",
+    "occultism:foliot",
+    "occultism:goat_familiar",
+    "occultism:greedy_familiar",
+    "occultism:guardian_familiar",
+    "occultism:headless_familiar",
+    "occultism:marid",
+    "occultism:marid_unbound",
+    "occultism:mercy_goat",
+    "occultism:mummy_familiar",
+    "occultism:otherworld_bird",
+    "occultism:possessed_bee",
+    "occultism:possessed_blaze",
+    "occultism:possessed_breeze",
+    "occultism:possessed_elder_guardian",
+    "occultism:possessed_enderman",
+    "occultism:possessed_endermite",
+    "occultism:possessed_ghast",
+    "occultism:possessed_guardian",
+    "occultism:possessed_hoglin",
+    "occultism:possessed_phantom",
+    "occultism:possessed_shulker",
+    "occultism:possessed_skeleton",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_warden",
+    "occultism:possessed_weak_breeze",
+    "occultism:possessed_weak_shulker",
+    "occultism:possessed_witch",
+    "occultism:possessed_zombie_piglin",
+    "occultism:shub_niggurath_familiar",
+    "occultism:shub_niggurath_spawn",
+    "occultism:wild_bogged",
+    "occultism:wild_cave_spider",
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton",
+    "occultism:wild_husk",
+    "occultism:wild_silverfish",
+    "occultism:wild_skeleton",
+    "occultism:wild_slime",
+    "occultism:wild_spider",
+    "occultism:wild_stray",
+    "occultism:wild_zombie",
+    "occultism:wondering_trader"
+  ],
+  "per_viam_invenire:replace_vanilla_navigator": [
+    "occultism:afrit",
+    "occultism:beaver_familiar",
+    "occultism:beholder_familiar",
+    "occultism:blacksmith_familiar",
+    "occultism:chimera_familiar",
+    "occultism:cthulhu_familiar",
+    "occultism:deer_familiar",
+    "occultism:devil_familiar",
+    "occultism:djinni",
+    "occultism:foliot",
+    "occultism:goat_familiar",
+    "occultism:greedy_familiar",
+    "occultism:guardian_familiar",
+    "occultism:headless_familiar",
+    "occultism:marid",
+    "occultism:mummy_familiar",
+    "occultism:shub_niggurath_familiar"
+  ],
+  "occultism:wild_trial": [
+    "occultism:possessed_breeze",
+    "occultism:possessed_strong_breeze",
+    "occultism:possessed_weak_breeze",
+    "occultism:wild_bogged",
+    "occultism:wild_cave_spider",
+    "occultism:wild_husk",
+    "occultism:wild_silverfish",
+    "occultism:wild_skeleton",
+    "occultism:wild_slime",
+    "occultism:wild_spider",
+    "occultism:wild_stray",
+    "occultism:wild_zombie"
+  ],
+  "occultism:wild_hunt": [
+    "occultism:wild_hunt_skeleton",
+    "occultism:wild_hunt_wither_skeleton"
+  ],
+  "vampiricageing:common_hunt_vampire": [
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob"
+  ],
+  "vampiricageing:common_hunt_werewolf": [
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob"
+  ],
+  "vampiricageing:greater_devour": [
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob"
+  ],
+  "vampirism:advanced_hunter": [
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob"
+  ],
+  "vampirism:hunter": [
+    "vampirism:advanced_hunter",
+    "vampirism:advanced_hunter_imob",
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:hunter_trainer",
+    "vampirism:hunter_trainer_dummy",
+    "vampirism:task_master_hunter"
+  ],
+  "vampiricageing:common_hunt": [
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob",
+    "werewolves:werewolf_beast"
+  ],
+  "vampirism:advanced_vampire": [
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob"
+  ],
+  "vampirism:vampire": [
+    "vampirism:advanced_vampire",
+    "vampirism:advanced_vampire_imob",
+    "vampirism:converted_camel",
+    "vampirism:converted_cow",
+    "vampirism:converted_creature",
+    "vampirism:converted_creature_imob",
+    "vampirism:converted_donkey",
+    "vampirism:converted_fox",
+    "vampirism:converted_goat",
+    "vampirism:converted_horse",
+    "vampirism:converted_mule",
+    "vampirism:converted_sheep",
+    "vampirism:task_master_vampire",
+    "vampirism:vampire",
+    "vampirism:vampire_baron",
+    "vampirism:vampire_imob",
+    "vampirism:villager_converted"
+  ],
+  "vampirism:converted_creatures": [
+    "vampirism:converted_camel",
+    "vampirism:converted_cow",
+    "vampirism:converted_creature",
+    "vampirism:converted_creature_imob",
+    "vampirism:converted_donkey",
+    "vampirism:converted_fox",
+    "vampirism:converted_goat",
+    "vampirism:converted_horse",
+    "vampirism:converted_mule",
+    "vampirism:converted_sheep",
+    "vampirism:villager_converted"
+  ],
+  "vampiricageing:petty_hunt_vampire": [
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:vampire",
+    "vampirism:vampire_imob"
+  ],
+  "vampiricageing:petty_hunt_werewolf": [
+    "vampirism:hunter",
+    "vampirism:hunter_imob",
+    "vampirism:vampire",
+    "vampirism:vampire_imob"
+  ],
+  "vampiricageing:petty_hunt": [
+    "vampirism:vampire",
+    "vampirism:vampire_imob",
+    "werewolves:werewolf_survivalist"
+  ],
+  "vampiricageing:graeter_hunt_vampire": [
+    "vampirism:vampire_baron"
+  ],
+  "vampiricageing:greater_hunt": [
+    "vampirism:vampire_baron",
+    "werewolves:alpha_werewolf"
+  ],
+  "vampiricageing:greater_hunt_werewolf": [
+    "vampirism:vampire_baron"
+  ],
+  "werewolves:werewolf": [
+    "werewolves:alpha_werewolf",
+    "werewolves:human_werewolf",
+    "werewolves:task_master_werewolf",
+    "werewolves:werewolf_beast",
+    "werewolves:werewolf_minion",
+    "werewolves:werewolf_survivalist"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:ghost",
+  "kind": "ENTITY",
+  "canonical": "",
+  "implementations": ["fangs_n_claws:ghost", "fangs_n_claws:fire_ghost", "vampirism:ghost"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Fangs wandering ghosts and Vampirism's Mother Tree boss follower serve different gameplay roles."
+}

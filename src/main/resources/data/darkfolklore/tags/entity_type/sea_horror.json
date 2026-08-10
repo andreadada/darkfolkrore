@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "myths_of_the_sea:abaia", "required": false},
+    {"id": "myths_of_the_sea:bake_kujira", "required": false},
+    {"id": "myths_of_the_sea:bunyip", "required": false},
+    {"id": "myths_of_the_sea:kraken", "required": false},
+    {"id": "myths_of_the_sea:leviathan", "required": false}
+  ]
+}

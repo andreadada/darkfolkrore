@@ -1,0 +1,12 @@
+{
+  "sort_index": 21,
+  "icon": "fieldguide:textures/gui/icons/wolf.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:werewolves/human_werewolf",
+      "canonical_concept": "darkfolklore:werewolf",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "sort_index": 26,
+  "icon": "fieldguide:textures/gui/icons/wolf.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:cnc/wendigo",
+      "canonical_concept": "darkfolklore:wendigo",
+      "unlock": {"triggers": ["scan", "kill"]}
+    },
+    {
+      "type": "entry",
+      "id": "entity:cnc/chupacabra",
+      "canonical_concept": "darkfolklore:chupacabra",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}

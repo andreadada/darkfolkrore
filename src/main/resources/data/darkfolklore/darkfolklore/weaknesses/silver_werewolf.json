@@ -1,0 +1,8 @@
+{
+  "id": "darkfolklore:silver_vs_werewolf",
+  "target_traits": ["WEREWOLF"],
+  "item_traits": ["SILVER_WEAPON"],
+  "multiplier": 1.5,
+  "native_provider_namespaces": ["werewolves"],
+  "priority": 100
+}
