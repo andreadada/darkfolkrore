@@ -288,6 +288,9 @@ public final class ContractEngine {
     private static boolean relevantToCase(CreatureSightingRecord record, FolkloreSavedData data,
                                           InvestigationSavedData investigation, ContractAssignment assignment) {
         InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        if (link != null && link.culpritId().isPresent() && !link.culpritFallbackAllowed()) {
+            if (record.entityId().isEmpty() || !record.entityId().get().equals(link.culpritId().get())) return false;
+        }
         if (link == null || link.storyId().isEmpty()) return true;
         PersistentStory story = data.story(link.storyId().get()).orElse(null);
         return story == null || record.gameTime() >= Math.max(0L, story.story().createdAt() - 200L);
