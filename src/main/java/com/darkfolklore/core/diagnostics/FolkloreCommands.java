@@ -7,9 +7,12 @@ import com.darkfolklore.core.compat.wolfsbane.WolfsbaneIntegration;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractAssignment;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.investigation.MagicPracticeResolver;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.knowledge.social.*;
+import com.darkfolklore.core.magic.MagicTradition;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
+import com.darkfolklore.core.persistence.InvestigationSavedData;
 import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.society.organization.*;
 import com.darkfolklore.core.society.rumor.RumorEngine;
@@ -36,6 +39,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public final class FolkloreCommands {
+    private static final Set<String> BUILTIN_LORE_CONCEPTS = Set.of(
+            "darkfolklore:monster_lore",
+            "darkfolklore:supernatural",
+            "darkfolklore:hunter",
+            "darkfolklore:witch",
+            "darkfolklore:curse",
+            "darkfolklore:fae"
+    );
+
     private FolkloreCommands() {}
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -104,8 +116,8 @@ public final class FolkloreCommands {
 
     private static int diagnostics(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
-        send(source, "Dark Folklore Core | MC 1.21.1 | NeoForge target 21.1.248 | schema "
-                + FolkloreSavedData.SCHEMA_VERSION);
+        send(source, "Dark Folklore Core | MC 1.21.1 | NeoForge target 21.1.248 | societySchema "
+                + FolkloreSavedData.SCHEMA_VERSION + " investigationSchema " + InvestigationSavedData.SCHEMA_VERSION);
         for (CompatibilityReport report : CompatibilityManager.INSTANCE.reports()) {
             send(source, report.displayName() + " tested=" + report.testedVersion() + " actual="
                     + report.actualVersion() + " status=" + report.status() + " via " + report.mechanism());
@@ -185,6 +197,10 @@ public final class FolkloreCommands {
     private static int knowledgeGet(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
         String concept = ResourceLocationArgument.getId(context, "concept").toString();
+        if (!knownLoreConcept(concept)) {
+            send(context.getSource(), "Unknown lore concept " + concept + "; command rejected without creating data.");
+            return 0;
+        }
         var progress = FolkloreSavedData.get(context.getSource().getServer()).lore(player.getUUID(), concept);
         send(context.getSource(), player.getName().getString() + " " + concept + "=" + progress.points() + " " + progress.stage());
         return progress.points();
@@ -193,6 +209,10 @@ public final class FolkloreCommands {
     private static int knowledgeGrant(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
         String concept = ResourceLocationArgument.getId(context, "concept").toString();
+        if (!knownLoreConcept(concept)) {
+            send(context.getSource(), "Unknown lore concept " + concept + "; grant rejected without creating data.");
+            return 0;
+        }
         int points = IntegerArgumentType.getInteger(context, "points");
         var progress = LoreEngine.INSTANCE.grant(player, concept, points);
         send(context.getSource(), "Granted; now " + progress.points() + " " + progress.stage());
@@ -259,9 +279,10 @@ public final class FolkloreCommands {
         int categories = context.getSource().getServer().getResourceManager()
                 .listResources("fieldguide/categories", id -> id.getNamespace().equals("darkfolklore")).size();
         send(context.getSource(), "Field Guide compat=" + (report == null ? "not initialized" : report.status())
-                + " tested=1.14.0 actual=" + (report == null ? "-" : report.actualVersion()));
+                + " tested=1.14.0 actual=" + (report == null ? "-" : report.actualVersion())
+                + " runtimeBridge=" + CompatibilityManager.INSTANCE.fieldGuideRuntimeAvailable());
         send(context.getSource(), "Dark Folklore categories=" + categories
-                + " expectedEntries=9 localization=en_us+it_it progress=binary server bridge");
+                + " expectedCategories=7 expectedEntries=10 localization=en_us+it_it progress=binary server bridge");
         send(context.getSource(), "Startup validator contract: nonempty categories, exact translation keys, "
                 + "canonical targets, audited icons, SCAN+KILL triggers");
         return categories;
@@ -357,6 +378,17 @@ public final class FolkloreCommands {
                 + " target=" + value.contract().targetConcept() + " status=" + value.contract().status()
                 + " clues=" + value.contract().evidence()));
         return values.size();
+    }
+
+    private static boolean knownLoreConcept(String concept) {
+        if (FolkloreDataManager.INSTANCE.canonical().concept(concept).isPresent()) return true;
+        if (BUILTIN_LORE_CONCEPTS.contains(concept)) return true;
+        if (FolkloreDataManager.INSTANCE.magic().stream()
+                .anyMatch(definition -> definition.knowledgeReward().equals(concept))) return true;
+        for (MagicTradition tradition : MagicTradition.values()) {
+            if (MagicPracticeResolver.knowledgeConcept(tradition).equals(concept)) return true;
+        }
+        return false;
     }
 
     private static <E extends Enum<E>> E parse(Class<E> type, String value) {
