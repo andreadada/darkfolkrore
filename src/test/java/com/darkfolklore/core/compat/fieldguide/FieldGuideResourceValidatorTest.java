@@ -20,8 +20,8 @@ class FieldGuideResourceValidatorTest {
                 FieldGuideResourceValidator.load(resources));
 
         assertTrue(report.isClean(), () -> String.join(System.lineSeparator(), report.problems()));
-        assertEquals(6, report.categories());
-        assertEquals(9, report.entries());
+        assertEquals(7, report.categories());
+        assertEquals(10, report.entries());
         assertEquals(0, report.missingCategoryTranslations());
         assertEquals(0, report.missingEntryTranslations());
         assertEquals(0, report.orphanEntries());
