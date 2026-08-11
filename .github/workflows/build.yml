@@ -38,6 +38,16 @@ jobs:
       - name: Run NeoForge GameTests
         run: ./gradlew runGameTestServer --no-daemon --no-configuration-cache --stacktrace
 
+      - name: Record production JAR identity
+        shell: bash
+        run: |
+          JAR=build/libs/darkfolklore-core-0.3.1.jar
+          test -f "$JAR"
+          echo "JAR=$JAR"
+          echo "SIZE_BYTES=$(stat -c '%s' "$JAR")"
+          echo "SHA256=$(sha256sum "$JAR" | awk '{print toupper($1)}')"
+          echo "CLASS_COUNT=$(jar tf "$JAR" | grep -c '\.class$')"
+
       - name: Upload production JAR
         uses: actions/upload-artifact@v4
         with:
