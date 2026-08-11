@@ -3,6 +3,7 @@ package com.darkfolklore.core.diagnostics;
 import com.darkfolklore.core.investigation.Hypothesis;
 import com.darkfolklore.core.investigation.InvestigationProfile;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -10,15 +11,12 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
+/** Investigation diagnostics are registered from the single CoreServerEvents command hook. */
 public final class InvestigationCommands {
-    public static final InvestigationCommands INSTANCE = new InvestigationCommands();
     private InvestigationCommands() {}
 
-    @SubscribeEvent
-    public void onRegisterCommands(RegisterCommandsEvent event) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> investigation = Commands.literal("investigation")
                 .then(Commands.literal("status")
                         .then(Commands.argument("player", EntityArgument.player())
@@ -59,7 +57,7 @@ public final class InvestigationCommands {
                                     return 1;
                                 })));
 
-        event.getDispatcher().register(Commands.literal("folklore")
+        dispatcher.register(Commands.literal("folklore")
                 .requires(source -> source.hasPermission(2))
                 .then(investigation));
     }
