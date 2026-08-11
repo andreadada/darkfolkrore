@@ -3,6 +3,7 @@ package com.darkfolklore.core.compat.fieldguide;
 import com.darkfolklore.core.DarkFolkloreCore;
 import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.canonical.CanonicalKind;
+import com.darkfolklore.core.compat.FieldGuideBridge;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.knowledge.lore.KnowledgeStage;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
@@ -22,7 +23,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /** Exact 1.14.0 bridge. Field Guide remains binary; Dark Folklore owns tiered lore. */
-public final class FieldGuideAdapter {
+public final class FieldGuideAdapter implements FieldGuideBridge {
     private static final int GUIDE_UNLOCK_THRESHOLD = KnowledgeStage.OBSERVED.threshold();
     private boolean runtimeAvailable = true;
 
@@ -76,6 +77,34 @@ public final class FieldGuideAdapter {
         } catch (RuntimeException | LinkageError exception) {
             disableAfterFailure(exception);
         }
+    }
+
+    /**
+     * Unlocks the exact implementation observed by an investigation. This is the
+     * safe path for KEEP_DISTINCT concepts such as the two Wraith providers.
+     */
+    @Override
+    public boolean unlockObservedImplementation(ServerPlayer player, String registryId) {
+        if (!runtimeAvailable || registryId == null || registryId.isBlank()) return false;
+        try {
+            FieldGuideProgressManager manager = FieldGuideProgressManager.getInstance();
+            PlayerFieldGuideProgress progress = manager.getProgress(player);
+            if (progress == null) return false;
+            ResourceLocation entry = entryId(registryId);
+            if (!manager.isValidEntry(entry)) return false;
+            if (progress.isUnlocked(entry)) return true;
+            if (!progress.canUnlock(entry)) return false;
+            progress.unlock(player, entry, "", false);
+            return progress.isUnlocked(entry);
+        } catch (RuntimeException | LinkageError exception) {
+            disableAfterFailure(exception);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean runtimeAvailable() {
+        return runtimeAvailable;
     }
 
     private static Set<String> entityImplementations(CanonicalDefinition definition) {
