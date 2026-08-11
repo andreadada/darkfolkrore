@@ -1,0 +1,22 @@
+{
+  "concept": "darkfolklore:sprite",
+  "creature_traits": [
+    "FAE",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "TRACK",
+    "MAGICAL_RESIDUE",
+    "TESTIMONY",
+    "GLAMOUR_TRACE"
+  ],
+  "analysis_results": {
+    "FAE": "GLAMOUR_TRACE"
+  },
+  "incident_evidence": [
+    "TRACK",
+    "MAGICAL_RESIDUE"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 80
+}
