@@ -1,28 +1,27 @@
 package com.darkfolklore.core.investigation;
 
+import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractAssignment;
 import com.darkfolklore.core.contracts.ContractStatus;
 import com.darkfolklore.core.data.FolkloreDataManager;
-import com.darkfolklore.core.investigation.EvidenceRecord;
 import com.darkfolklore.core.knowledge.lore.KnowledgeStage;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.knowledge.social.EvidenceType;
 import com.darkfolklore.core.magic.MagicTradition;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
+import com.darkfolklore.core.persistence.InvestigationSavedData;
 import com.darkfolklore.core.reputation.ReputationFaction;
-import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.traits.ItemTrait;
 import com.darkfolklore.core.traits.TraitResolver;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -33,9 +32,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import java.util.*;
 
 /**
- * 0.3 gameplay bridge: physical clues + five existing magic traditions +
- * hypotheses + Field Guide/lore progression + preparation + explicit
- * bounded tracking.
+ * Physical clues + five existing magic traditions + hypotheses + lore/Field
+ * Guide progression + knowledge-gated preparation + explicit bounded tracking.
  */
 public final class OccultInvestigationEngine {
     public static final OccultInvestigationEngine INSTANCE = new OccultInvestigationEngine();
@@ -60,7 +58,8 @@ public final class OccultInvestigationEngine {
 
         MagicTradition tradition = MagicPracticeResolver.resolve(player.getMainHandItem()).orElse(null);
         if (tradition == null) return;
-        InvestigationProfile profile = FolkloreDataManager.INSTANCE.investigationProfile(assignment.contract().targetConcept()).orElse(null);
+        InvestigationProfile profile = FolkloreDataManager.INSTANCE
+                .investigationProfile(assignment.contract().targetConcept()).orElse(null);
         if (profile == null) return;
         EvidenceType derived = derivedEvidence(profile, tradition, player.getMainHandItem());
         if (derived == null) {
@@ -100,8 +99,7 @@ public final class OccultInvestigationEngine {
         player.displayClientMessage(Component.literal("Occult analysis [" + tradition + "]: " + derived
                 + ". " + hypothesisSummary(assignment)), false);
         ensureObservedIfIdentified(player, data, assignment);
-        // Analysis is additive: the optional provider keeps ownership of the
-        // held item's native block interaction and progression.
+        // Analysis is additive: provider-owned right-click behavior remains untouched.
     }
 
     @SubscribeEvent
@@ -114,7 +112,8 @@ public final class OccultInvestigationEngine {
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED) return;
-        InvestigationProfile profile = FolkloreDataManager.INSTANCE.investigationProfile(assignment.contract().targetConcept()).orElse(null);
+        InvestigationProfile profile = FolkloreDataManager.INSTANCE
+                .investigationProfile(assignment.contract().targetConcept()).orElse(null);
         if (profile == null || !isTrackingImplement(player.getMainHandItem(), profile)) return;
 
         long now = level.getGameTime();
@@ -126,15 +125,15 @@ public final class OccultInvestigationEngine {
         trackingCooldown.put(player.getUUID(), now + FolkloreConfig.TRACKING_COOLDOWN.get());
 
         int radius = Math.min(profile.trackingRadius(), FolkloreConfig.TRACKING_RADIUS.get());
-        LivingEntity target = level.getEntitiesOfClass(LivingEntity.class,
-                        player.getBoundingBox().inflate(radius),
-                        entity -> entity.isAlive() && entity != player
-                                && canonicalConcept(entity).equals(assignment.contract().targetConcept()))
-                .stream().min(Comparator.comparingDouble(player::distanceToSqr)).orElse(null);
+        InvestigationSavedData investigation = InvestigationSavedData.get(player.getServer());
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        LivingEntity target = resolveTrackingTarget(level, player, assignment, link, radius);
 
         if (target == null) {
-            player.displayClientMessage(Component.literal(
-                    "No matching supernatural trace is present in the loaded area."), true);
+            String message = link != null && link.culpritId().isPresent() && !link.culpritFallbackAllowed()
+                    ? "The incident culprit's trace is not present in the loaded search area."
+                    : "No matching supernatural trace is present in the loaded search area.";
+            player.displayClientMessage(Component.literal(message), true);
             return;
         }
 
@@ -146,8 +145,7 @@ public final class OccultInvestigationEngine {
         player.displayClientMessage(Component.literal("Tracking pulse: " + Math.round(distance)
                 + "m " + direction + ", elevation " + signed(Math.round(dy)) + "."), false);
         drawTrace(level, player, target);
-        // Tracking is an additive sneak-use pulse. Do not cancel the provider item's
-        // native right-click action: Dark Folklore must not steal another mod's gameplay.
+        // Never force-load chunks and never cancel the provider item's native use.
     }
 
     @SubscribeEvent
@@ -175,16 +173,19 @@ public final class OccultInvestigationEngine {
                 || !(event.getSource().getEntity() instanceof ServerPlayer player)) return;
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
-        if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED
-                || !canonicalConcept(event.getEntity()).equals(assignment.contract().targetConcept())) return;
-        InvestigationProfile profile = FolkloreDataManager.INSTANCE.investigationProfile(assignment.contract().targetConcept()).orElse(null);
+        if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED) return;
+        InvestigationCaseLink link = InvestigationSavedData.get(player.getServer())
+                .caseLink(assignment.contract().id()).orElse(null);
+        if (!InvestigationTargeting.matches(assignment, event.getEntity(), link)) return;
+        InvestigationProfile profile = FolkloreDataManager.INSTANCE
+                .investigationProfile(assignment.contract().targetConcept()).orElse(null);
         if (profile == null) return;
         PreparationAssessment preparation = PreparationAssessment.evaluate(player, profile);
         if (!preparation.prepared()) return;
         LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 5);
         data.addReputation(player.getUUID(), ReputationFaction.HUNTERS, 2);
         player.displayClientMessage(Component.literal(
-                "Prepared hunt: your researched countermeasure earned bonus lore and hunter reputation."), true);
+                "Prepared hunt: your studied countermeasure earned bonus lore and hunter reputation."), true);
     }
 
     public List<String> status(ServerPlayer player) {
@@ -194,15 +195,23 @@ public final class OccultInvestigationEngine {
         List<String> lines = new ArrayList<>();
         lines.add("Contract=" + assignment.contract().id() + " status=" + assignment.contract().status());
         lines.add("Evidence=" + assignment.contract().evidence());
-        if (assignment.contract().status() == ContractStatus.INVESTIGATING) {
-            lines.add(hypothesisSummary(assignment));
+        InvestigationCaseLink link = InvestigationSavedData.get(player.getServer())
+                .caseLink(assignment.contract().id()).orElse(null);
+        if (link != null) {
+            lines.add("Incident story=" + link.storyId().orElse(null)
+                    + " culprit=" + link.culpritId().orElse(null)
+                    + " implementation=" + (link.observedImplementation().isBlank() ? "-" : link.observedImplementation())
+                    + " culpritFallback=" + link.culpritFallbackAllowed()
+                    + " issuerFallback=" + link.issuerFallbackAllowed());
         }
+        if (assignment.contract().status() == ContractStatus.INVESTIGATING) lines.add(hypothesisSummary(assignment));
         FolkloreDataManager.INSTANCE.investigationProfile(assignment.contract().targetConcept()).ifPresent(profile -> {
             if (assignment.contract().status() == ContractStatus.IDENTIFIED
                     || assignment.contract().status() == ContractStatus.HUNTED) {
                 PreparationAssessment p = PreparationAssessment.evaluate(player, profile);
-                lines.add("Preparation known=" + p.hasKnownCountermeasure() + " prepared=" + p.prepared()
-                        + " satisfied=" + p.satisfiedRules() + " missingOptions=" + p.missingOptions());
+                lines.add("Preparation knowledge=" + p.knowledgeStage() + " known=" + p.hasKnownCountermeasure()
+                        + " prepared=" + p.prepared() + " satisfied=" + p.satisfiedRules()
+                        + " missingOptions=" + p.missingOptions());
                 lines.add("Tracking traditions=" + profile.analysisResults().keySet()
                         + " radius=" + Math.min(profile.trackingRadius(), FolkloreConfig.TRACKING_RADIUS.get()));
             }
@@ -228,15 +237,36 @@ public final class OccultInvestigationEngine {
         }
         UUID previous = announcedIdentification.put(player.getUUID(), assignment.contract().id());
         if (assignment.contract().id().equals(previous)) return;
-        InvestigationProfile profile = FolkloreDataManager.INSTANCE.investigationProfile(assignment.contract().targetConcept()).orElse(null);
+
+        InvestigationCaseLink link = InvestigationSavedData.get(player.getServer())
+                .caseLink(assignment.contract().id()).orElse(null);
+        String implementation = link == null ? "" : link.observedImplementation();
+        if (implementation.isBlank()) {
+            implementation = FolkloreDataManager.INSTANCE.canonical().concept(assignment.contract().targetConcept())
+                    .map(value -> value.canonicalId()).orElse("");
+        }
+        boolean guideSynced = !implementation.isBlank()
+                && CompatibilityManager.INSTANCE.unlockFieldGuideImplementation(player, implementation);
+
+        InvestigationProfile profile = FolkloreDataManager.INSTANCE
+                .investigationProfile(assignment.contract().targetConcept()).orElse(null);
         PreparationAssessment preparation = profile == null ? null : PreparationAssessment.evaluate(player, profile);
+        String preparationMessage;
+        if (preparation == null) {
+            preparationMessage = "";
+        } else if (preparation.knowledgeStage().ordinal() < KnowledgeStage.STUDIED.ordinal()) {
+            preparationMessage = " Weakness details remain hidden until this lore is STUDIED.";
+        } else if (!preparation.hasKnownCountermeasure()) {
+            preparationMessage = " No Core cross-mod countermeasure is currently documented.";
+        } else if (preparation.prepared()) {
+            preparationMessage = " You already carry a studied countermeasure.";
+        } else {
+            preparationMessage = " A studied countermeasure is known but not currently carried.";
+        }
         player.displayClientMessage(Component.literal("Target identified: " + assignment.contract().targetConcept()
-                + ". Field Guide/lore research advanced to OBSERVED."
-                + (preparation == null || !preparation.hasKnownCountermeasure()
-                ? " No Core cross-mod countermeasure is currently documented."
-                : preparation.prepared()
-                ? " You already carry a documented countermeasure."
-                : " Deeper research/preparation is recommended before the hunt.")), false);
+                + ". Lore advanced to OBSERVED."
+                + (guideSynced ? " The observed Field Guide entry was synchronized." : "")
+                + preparationMessage), false);
     }
 
     private static EvidenceType derivedEvidence(InvestigationProfile profile, MagicTradition tradition,
@@ -268,14 +298,24 @@ public final class OccultInvestigationEngine {
         List<Hypothesis> values = HypothesisEngine.rank(assignment.contract().evidence());
         if (values.isEmpty()) return "Hypotheses: insufficient evidence.";
         return "Hypotheses: " + values.stream().limit(3)
-                .map(value -> value.concept() + " " + Math.round(value.confidence() * 100.0F) + "%")
+                .map(value -> value.concept() + " support=" + Math.round(value.confidence() * 100.0F) + "%")
                 .toList();
     }
 
-    private static String canonicalConcept(LivingEntity entity) {
-        String registry = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
-        return FolkloreDataManager.INSTANCE.canonical().resolve(registry)
-                .map(value -> value.concept()).orElseGet(() -> SecretFacts.canonicalConcept(entity));
+    private static LivingEntity resolveTrackingTarget(ServerLevel level, ServerPlayer player,
+                                                      ContractAssignment assignment, InvestigationCaseLink link,
+                                                      int radius) {
+        if (link != null && link.culpritId().isPresent() && !link.culpritFallbackAllowed()) {
+            Entity exact = level.getEntity(link.culpritId().get());
+            if (exact instanceof LivingEntity living && living.isAlive() && living != player
+                    && player.distanceToSqr(living) <= (double) radius * radius
+                    && InvestigationTargeting.matches(assignment, living, link)) return living;
+            return null;
+        }
+        return level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(radius),
+                        entity -> entity.isAlive() && entity != player
+                                && InvestigationTargeting.matches(assignment, entity, link))
+                .stream().min(Comparator.comparingDouble(player::distanceToSqr)).orElse(null);
     }
 
     private static void sendAnalysisParticles(ServerLevel level, EvidenceRecord clue, MagicTradition tradition) {
@@ -313,5 +353,4 @@ public final class OccultInvestigationEngine {
     private static String signed(long value) {
         return value >= 0 ? "+" + value : Long.toString(value);
     }
-
 }
