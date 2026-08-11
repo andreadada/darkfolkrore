@@ -3,16 +3,14 @@ package com.darkfolklore.core.contracts;
 import com.darkfolklore.core.api.event.*;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
-import com.darkfolklore.core.investigation.EvidenceRecord;
-import com.darkfolklore.core.investigation.InvestigationProfile;
-import com.darkfolklore.core.investigation.OccultInvestigationEngine;
-import com.darkfolklore.core.knowledge.social.*;
+import com.darkfolklore.core.investigation.*;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
+import com.darkfolklore.core.knowledge.observation.CreatureSightingRecord;
+import com.darkfolklore.core.knowledge.social.*;
 import com.darkfolklore.core.persistence.*;
 import com.darkfolklore.core.reputation.ReputationFaction;
-import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.society.story.*;
-import com.darkfolklore.core.society.organization.OrganizationType;
+import com.darkfolklore.core.society.organization.*;
 import com.darkfolklore.core.society.village.VillageKey;
 import com.darkfolklore.core.society.village.VillageSocietyState;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -33,11 +31,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public final class ContractEngine {
     public static final ContractEngine INSTANCE = new ContractEngine();
@@ -50,18 +44,19 @@ public final class ContractEngine {
                 || !(event.getEntity() instanceof ServerPlayer player) || !player.isShiftKeyDown()
                 || !player.getMainHandItem().isEmpty() || !isIssuer(event.getTarget())) return;
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
+        InvestigationSavedData investigation = InvestigationSavedData.get(player.getServer());
         Optional<ContractAssignment> existing = data.activeContract(player.getUUID());
         if (existing.isPresent()) {
             ContractAssignment assignment = existing.get();
             if (assignment.contract().status() == ContractStatus.HUNTED
-                    && assignment.contract().issuer().equals(event.getTarget().getUUID())) {
-                complete(player, data, assignment);
+                    && canTurnIn(player.serverLevel(), event.getTarget(), data, investigation, assignment)) {
+                complete(player, data, investigation, assignment);
                 consume(event);
             } else if (assignment.contract().status() == ContractStatus.INVESTIGATING
-                    && tryCollectTestimony(player, event.getTarget(), data, assignment)) {
+                    && tryCollectTestimony(player, event.getTarget(), data, investigation, assignment)) {
                 consume(event);
             } else if (assignment.contract().issuer().equals(event.getTarget().getUUID())) {
-                player.displayClientMessage(Component.literal(statusMessage(assignment)), false);
+                player.displayClientMessage(Component.literal(statusMessage(investigation, assignment)), false);
                 consume(event);
             }
             return;
@@ -84,6 +79,12 @@ public final class ContractEngine {
         ContractAssignment assignment = new ContractAssignment(player.getUUID(), contract,
                 available.location(), village, requiredEvidence);
         data.putContract(assignment);
+
+        IncidentFact fact = investigation.incidentFact(available.story().id())
+                .orElseGet(() -> inferIncidentFact(level, data, available));
+        if (fact != null) investigation.putIncidentFact(available.story().id(), fact);
+        investigation.putCaseLink(contract.id(), InvestigationCaseLink.fromStory(available.story().id(), fact));
+
         available.story().advance(StoryStatus.INVESTIGATING);
         data.putStory(available);
         player.displayClientMessage(Component.literal("Contract accepted: investigate the incident near "
@@ -103,8 +104,10 @@ public final class ContractEngine {
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || assignment.contract().status() != ContractStatus.INVESTIGATING) return;
         String dimension = level.dimension().location().toString();
+        long now = level.getGameTime();
         EvidenceRecord clue = data.evidence().stream()
-                .filter(value -> value.collectedBy().isEmpty()
+                .filter(value -> !value.expired(now)
+                        && value.collectedBy().isEmpty()
                         && value.concept().equals(assignment.contract().targetConcept())
                         && !assignment.contract().evidence().contains(value.type())
                         && value.position().dimension().equals(dimension)
@@ -114,7 +117,6 @@ public final class ContractEngine {
         if (clue == null) {
             if (assignment.investigationCenter().dimension().equals(dimension)
                     && assignment.investigationCenter().distanceSquared(event.getPos()) <= 1024.0D) {
-                long now = level.getGameTime();
                 if (now - feedbackCooldowns.getOrDefault(player.getUUID(), Long.MIN_VALUE / 2) >= 40) {
                     feedbackCooldowns.put(player.getUUID(), now);
                     player.displayClientMessage(Component.literal("No usable clue here; search close to visible incident traces."), true);
@@ -147,30 +149,47 @@ public final class ContractEngine {
     }
 
     @SubscribeEvent
-    public void onTargetKilled(LivingDeathEvent event) {
-        if (!FolkloreConfig.CONTRACTS.get() || !(event.getSource().getEntity() instanceof ServerPlayer player)) return;
-        FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
+    public void onLivingDeath(LivingDeathEvent event) {
+        if (!FolkloreConfig.CONTRACTS.get() || !(event.getEntity().level() instanceof ServerLevel level)) return;
+        FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
+        InvestigationSavedData investigation = InvestigationSavedData.get(level.getServer());
+        UUID dead = event.getEntity().getUUID();
+
+        // Only a confirmed death, never an unload, enables semantic fallbacks.
+        for (ContractAssignment value : data.contracts()) {
+            if (value.contract().status().terminal()) continue;
+            InvestigationCaseLink link = investigation.caseLink(value.contract().id()).orElse(null);
+            if (value.contract().issuer().equals(dead)) investigation.allowIssuerFallback(value.contract().id());
+            if (link != null && link.culpritId().filter(dead::equals).isPresent()) {
+                boolean ownerKill = event.getSource().getEntity() instanceof ServerPlayer killer
+                        && killer.getUUID().equals(value.player())
+                        && value.contract().status() == ContractStatus.IDENTIFIED;
+                if (!ownerKill) investigation.allowCulpritFallback(value.contract().id());
+            }
+        }
+
+        if (!(event.getSource().getEntity() instanceof ServerPlayer player)) return;
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED) return;
-        String actual = SecretFacts.canonicalConcept(event.getEntity());
-        String registry = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()).toString();
-        boolean matches = actual.equals(assignment.contract().targetConcept())
-                || com.darkfolklore.core.data.FolkloreDataManager.INSTANCE.canonical().resolve(registry)
-                .map(value -> value.concept().equals(assignment.contract().targetConcept())).orElse(false);
-        if (!matches || !assignment.contract().markHunted()) return;
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        if (!InvestigationTargeting.matches(assignment, event.getEntity(), link)
+                || !assignment.contract().markHunted()) return;
         data.putContract(assignment);
-        data.stories().stream().filter(value -> value.villageKey().equals(assignment.villageKey())
-                && value.story().concept().equals(assignment.contract().targetConcept())
-                && value.story().status() == StoryStatus.INVESTIGATING).findFirst().ifPresent(story -> {
-            story.story().advance(StoryStatus.CONFRONTATION); data.putStory(story);
-        });
-        player.displayClientMessage(Component.literal("Target defeated. Return to the contract issuer."), false);
+        PersistentStory story = linkedStory(data, investigation, assignment);
+        if (story != null && story.story().status() == StoryStatus.INVESTIGATING) {
+            story.story().advance(StoryStatus.CONFRONTATION);
+            data.putStory(story);
+        }
+        player.displayClientMessage(Component.literal(link != null && link.issuerFallbackAllowed()
+                ? "Target defeated. The original issuer is unavailable; return to an authorized local representative."
+                : "Target defeated. Return to the contract issuer."), false);
     }
 
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
         if (!FolkloreConfig.CONTRACTS.get() || event.getServer().getTickCount() % 200 != 0) return;
         FolkloreSavedData data = FolkloreSavedData.get(event.getServer());
+        InvestigationSavedData investigation = InvestigationSavedData.get(event.getServer());
         long now = event.getServer().overworld().getGameTime();
         for (ContractAssignment assignment : data.contracts()) {
             if (assignment.contract().expire(now)) data.putContract(assignment);
@@ -178,10 +197,15 @@ public final class ContractEngine {
         for (PersistentStory story : data.stories()) {
             if (story.story().expire(now)) data.putStory(story);
         }
+        investigation.pruneSightings(now, 0.08F, Math.max(2400L, (long) FolkloreConfig.RUMOR_HALF_LIFE.get() * 4L));
+        Set<UUID> storyIds = new HashSet<>();
+        for (PersistentStory story : data.stories()) storyIds.add(story.story().id());
+        investigation.pruneOrphans(data.contracts(), storyIds);
         feedbackCooldowns.entrySet().removeIf(entry -> now - entry.getValue() > 1200L);
     }
 
-    private static void complete(ServerPlayer player, FolkloreSavedData data, ContractAssignment assignment) {
+    private static void complete(ServerPlayer player, FolkloreSavedData data, InvestigationSavedData investigation,
+                                 ContractAssignment assignment) {
         if (!assignment.contract().complete()) return;
         data.putContract(assignment);
         ItemStack reward = new ItemStack(Items.EMERALD, 8);
@@ -195,35 +219,56 @@ public final class ContractEngine {
         village.adjustSuspicion(-3);
         village.adjustInfluence(OrganizationType.HUNTER_SOCIETY, 3);
         data.setDirty();
-        data.stories().stream().filter(value -> value.villageKey().equals(assignment.villageKey())
-                && value.story().concept().equals(assignment.contract().targetConcept())
-                && !value.story().status().terminal()).findFirst().ifPresent(story -> {
-            if (story.story().status() == StoryStatus.INVESTIGATING) story.story().advance(StoryStatus.RESOLVED);
-            else if (story.story().status() == StoryStatus.CONFRONTATION) story.story().advance(StoryStatus.RESOLVED);
-            data.putStory(story);
-        });
+        PersistentStory story = linkedStory(data, investigation, assignment);
+        if (story != null && !story.story().status().terminal()) {
+            if (story.story().status() == StoryStatus.INVESTIGATING
+                    || story.story().status() == StoryStatus.CONFRONTATION) {
+                story.story().advance(StoryStatus.RESOLVED);
+                data.putStory(story);
+            }
+        }
         player.displayClientMessage(Component.literal("Contract complete: 8 emeralds, 150 XP, reputation and lore awarded."), false);
         NeoForge.EVENT_BUS.post(new ContractCompletedEvent(assignment));
     }
 
-    private static String statusMessage(ContractAssignment assignment) {
+    private static String statusMessage(InvestigationSavedData investigation, ContractAssignment assignment) {
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
         return switch (assignment.contract().status()) {
             case INVESTIGATING -> "Active contract: collect distinct evidence near the investigation area.";
-            case IDENTIFIED -> "Active contract: hunt " + assignment.contract().targetConcept() + ".";
-            case HUNTED -> "Active contract: return to issuer " + assignment.contract().issuer() + ".";
+            case IDENTIFIED -> link != null && link.culpritId().isPresent() && !link.culpritFallbackAllowed()
+                    ? "Active contract: track and hunt the identified incident culprit."
+                    : "Active contract: hunt " + assignment.contract().targetConcept() + ".";
+            case HUNTED -> link != null && link.issuerFallbackAllowed()
+                    ? "Active contract: the issuer is unavailable; return to an authorized local representative."
+                    : "Active contract: return to issuer " + assignment.contract().issuer() + ".";
             default -> "Contract status: " + assignment.contract().status();
         };
     }
 
     private static boolean tryCollectTestimony(ServerPlayer player, Entity witness, FolkloreSavedData data,
-                                               ContractAssignment assignment) {
+                                               InvestigationSavedData investigation, ContractAssignment assignment) {
         if (!(witness instanceof LivingEntity) || witness.getUUID().equals(player.getUUID())) return false;
+
+        CreatureSightingRecord sighting = investigation.sighting(witness.getUUID(), assignment.contract().targetConcept())
+                .filter(value -> value.confidence() >= 0.35F
+                        && value.state().strength() >= SocialKnowledgeState.SUSPECTED.strength()
+                        && relevantToCase(value, data, investigation, assignment))
+                .orElse(null);
+        if (sighting != null) {
+            return recordTestimony(player, data, assignment, sighting.confidence(), "creature sighting");
+        }
+
         Map.Entry<SocialKnowledgeKey, SocialKnowledgeRecord> testimony = data.knowledgeHeldBy(witness.getUUID())
                 .stream().filter(entry -> entry.getValue().confidence() >= 0.35F
                         && entry.getValue().state().strength() >= SocialKnowledgeState.SUSPECTED.strength()
                         && concept(entry.getKey().secret()).equals(assignment.contract().targetConcept()))
                 .max(Comparator.comparingDouble(entry -> entry.getValue().confidence())).orElse(null);
         if (testimony == null) return false;
+        return recordTestimony(player, data, assignment, testimony.getValue().confidence(), "identity testimony");
+    }
+
+    private static boolean recordTestimony(ServerPlayer player, FolkloreSavedData data, ContractAssignment assignment,
+                                           float confidence, String source) {
         ContractStatus before = assignment.contract().status();
         if (!assignment.contract().addEvidence(EvidenceType.TESTIMONY, assignment.requiredDistinctClues())) return false;
         data.putContract(assignment);
@@ -232,12 +277,63 @@ public final class ContractEngine {
                 && assignment.contract().status() == ContractStatus.IDENTIFIED) {
             LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 8);
         }
-        player.displayClientMessage(Component.literal("Credible witness testimony recorded (confidence "
-                + Math.round(testimony.getValue().confidence() * 100.0F) + "%)."
+        player.displayClientMessage(Component.literal("Credible " + source + " recorded (confidence "
+                + Math.round(confidence * 100.0F) + "%)."
                 + (assignment.contract().status() == ContractStatus.IDENTIFIED
                 ? " The evidence now identifies " + assignment.contract().targetConcept() + "."
                 : " " + OccultInvestigationEngine.INSTANCE.hypothesisSummary(assignment))), false);
         return true;
+    }
+
+    private static boolean relevantToCase(CreatureSightingRecord record, FolkloreSavedData data,
+                                          InvestigationSavedData investigation, ContractAssignment assignment) {
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        if (link == null || link.storyId().isEmpty()) return true;
+        PersistentStory story = data.story(link.storyId().get()).orElse(null);
+        return story == null || record.gameTime() >= Math.max(0L, story.story().createdAt() - 200L);
+    }
+
+    private static PersistentStory linkedStory(FolkloreSavedData data, InvestigationSavedData investigation,
+                                               ContractAssignment assignment) {
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        if (link != null && link.storyId().isPresent()) {
+            PersistentStory exact = data.story(link.storyId().get()).orElse(null);
+            if (exact != null) return exact;
+        }
+        // Backward-compatible fallback for pre-0.3.1 contracts that have no sidecar link.
+        return data.stories().stream().filter(value -> value.villageKey().equals(assignment.villageKey())
+                && value.story().concept().equals(assignment.contract().targetConcept())
+                && !value.story().status().terminal()).min(Comparator.comparingLong(value -> value.story().createdAt()))
+                .orElse(null);
+    }
+
+    private static IncidentFact inferIncidentFact(ServerLevel level, FolkloreSavedData data, PersistentStory story) {
+        EvidenceRecord evidence = data.evidence().stream()
+                .filter(value -> value.concept().equals(story.story().concept())
+                        && value.subject().isPresent()
+                        && Math.abs(value.createdAt() - story.story().createdAt()) <= 20L)
+                .min(Comparator.comparingLong(EvidenceRecord::createdAt)).orElse(null);
+        if (evidence == null || evidence.subject().isEmpty()) return null;
+        UUID culprit = evidence.subject().get();
+        Entity loaded = level.getEntity(culprit);
+        String implementation = loaded == null ? "" : BuiltInRegistries.ENTITY_TYPE.getKey(loaded.getType()).toString();
+        return new IncidentFact(Optional.of(culprit), implementation, story.story().createdAt());
+    }
+
+    private static boolean canTurnIn(ServerLevel level, Entity target, FolkloreSavedData data,
+                                     InvestigationSavedData investigation, ContractAssignment assignment) {
+        if (assignment.contract().issuer().equals(target.getUUID())) return true;
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        if (link == null || !link.issuerFallbackAllowed()) return false;
+        if (!VillageKey.at(level, target.blockPosition()).serialized().equals(assignment.villageKey())) return false;
+
+        boolean localHunterSociety = data.organizations().stream().anyMatch(org ->
+                org.type() == OrganizationType.HUNTER_SOCIETY && org.home().equals(assignment.villageKey()));
+        boolean authorizedHunter = data.organizationsForMember(target.getUUID()).stream()
+                .map(data::organization).flatMap(Optional::stream)
+                .anyMatch(org -> org.type() == OrganizationType.HUNTER_SOCIETY
+                        && org.home().equals(assignment.villageKey()));
+        return localHunterSociety ? authorizedHunter : isIssuer(target);
     }
 
     private static String concept(SecretType secret) {
