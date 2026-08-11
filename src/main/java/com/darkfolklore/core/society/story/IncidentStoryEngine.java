@@ -3,6 +3,7 @@ package com.darkfolklore.core.society.story;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.investigation.EvidenceRecord;
+import com.darkfolklore.core.investigation.IncidentFact;
 import com.darkfolklore.core.investigation.InvestigationProfile;
 import com.darkfolklore.core.knowledge.social.*;
 import com.darkfolklore.core.persistence.*;
@@ -33,8 +34,8 @@ public final class IncidentStoryEngine {
                 .map(value -> value.concept()).orElseGet(() -> SecretFacts.canonicalConcept(actor));
         InvestigationProfile profile = FolkloreDataManager.INSTANCE.investigationProfile(concept).orElse(null);
         Set<SecretType> factualSecrets = SecretFacts.actualSecrets(actor);
-        // 0.2 only admitted actors with social identity facts. 0.3 also admits
-        // explicitly curated monster-hunting profiles (cryptids, spirits, demons, constructs).
+        // Social identities remain owned by SecretFacts. Curated monster profiles can
+        // independently enter investigation without pretending to be secret villagers.
         if (profile == null && factualSecrets.isEmpty()) return;
         FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
         long now = level.getGameTime();
@@ -48,9 +49,12 @@ public final class IncidentStoryEngine {
         String template = event.getEntity() instanceof Animal ? "drained_animal" : "body_discovered";
         StoryInstance story = new StoryInstance(UUID.randomUUID(), template, concept, now,
                 now + FolkloreConfig.CONTRACT_LIFETIME.get() * 2L);
-        story.addActor(actor.getUUID()); story.addActor(event.getEntity().getUUID());
+        story.addActor(actor.getUUID());
+        story.addActor(event.getEntity().getUUID());
         WorldPosition location = WorldPosition.of(level, event.getEntity().blockPosition());
         data.putStory(new PersistentStory(story, location, village.serialized()));
+        InvestigationSavedData.get(level.getServer()).putIncidentFact(story.id(),
+                new IncidentFact(Optional.of(actor.getUUID()), registry, now));
 
         long expires = now + FolkloreConfig.EVIDENCE_LIFETIME.get();
         List<EvidenceType> incidentEvidence;
@@ -70,10 +74,19 @@ public final class IncidentStoryEngine {
             data.addEvidence(new EvidenceRecord(UUID.randomUUID(), type, concept, Optional.of(actor.getUUID()),
                     evidencePosition, now, expires, Optional.empty()));
         }
-        SecretType witnessedSecret = factualSecrets.stream()
-                .filter(value -> value != SecretType.SUPERNATURAL_IDENTITY).findFirst()
-                .orElse(SecretType.SUPERNATURAL_IDENTITY);
-        WitnessEngine.INSTANCE.recordIncident(level, actor, event.getEntity(), witnessedSecret, EvidenceType.BODY, 8);
+
+        Optional<SecretType> specificSecret = factualSecrets.stream()
+                .filter(value -> value != SecretType.SUPERNATURAL_IDENTITY).findFirst();
+        if (specificSecret.isPresent()) {
+            WitnessEngine.INSTANCE.recordIncident(level, actor, event.getEntity(), specificSecret.get(),
+                    EvidenceType.BODY, 8);
+        } else if (profile != null) {
+            WitnessEngine.INSTANCE.recordCreatureSighting(level, actor, event.getEntity(), concept,
+                    EvidenceType.BODY, 8);
+        } else {
+            WitnessEngine.INSTANCE.recordIncident(level, actor, event.getEntity(),
+                    SecretType.SUPERNATURAL_IDENTITY, EvidenceType.BODY, 8);
+        }
     }
 
     private static boolean isSocialVictim(LivingEntity entity) {
