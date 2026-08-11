@@ -5,6 +5,7 @@ import com.darkfolklore.core.compat.mca.McaSocialAdapter;
 import com.darkfolklore.core.compat.mca.McaVampCompatAdapter;
 import com.darkfolklore.core.compat.mcacapitals.McaCapitalsCompat;
 import com.darkfolklore.core.knowledge.social.SecretType;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
@@ -33,6 +34,7 @@ public final class CompatibilityManager {
 
     private volatile List<CompatibilityReport> reports = List.of();
     private volatile List<SupernaturalStateAdapter> stateAdapters = List.of();
+    private volatile FieldGuideBridge fieldGuideBridge;
     private final McaSocialAdapter mcaSocial = new McaSocialAdapter();
     private final McaCapitalsCompat mcaCapitals = new McaCapitalsCompat();
 
@@ -42,6 +44,7 @@ public final class CompatibilityManager {
         List<CompatibilityReport> nextReports = new ArrayList<>();
         List<SupernaturalStateAdapter> nextAdapters = new ArrayList<>();
         ModList mods = ModList.get();
+        fieldGuideBridge = null;
         mcaSocial.initialize("not-installed-or-untested");
         mcaCapitals.initialize("not-installed-or-untested");
 
@@ -100,8 +103,13 @@ public final class CompatibilityManager {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.fieldguide.FieldGuideAdapter", true,
                         CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                if (!(adapter instanceof FieldGuideBridge bridge)) {
+                    throw new LinkageError("FieldGuideAdapter does not implement FieldGuideBridge");
+                }
+                fieldGuideBridge = bridge;
                 NeoForge.EVENT_BUS.register(adapter);
             } catch (ReflectiveOperationException | LinkageError exception) {
+                fieldGuideBridge = null;
                 replaceStatus(nextReports, "fieldguide", CompatibilityStatus.ERROR,
                         "1.14.0 progress bridge failed to load: " + exception.getClass().getSimpleName());
                 DarkFolkloreCore.LOGGER.error("[compat/fieldguide] Progress bridge failed to load", exception);
@@ -113,9 +121,7 @@ public final class CompatibilityManager {
                 report.modId(), report.testedVersion(), report.actualVersion(), report.status()));
     }
 
-    public List<CompatibilityReport> reports() {
-        return reports;
-    }
+    public List<CompatibilityReport> reports() { return reports; }
 
     public Optional<CompatibilityReport> report(String modId) {
         return reports.stream().filter(report -> report.modId().equals(modId)).findFirst();
@@ -125,19 +131,23 @@ public final class CompatibilityManager {
 
     public McaCapitalsCompat mcaCapitals() { return mcaCapitals; }
 
+    public boolean unlockFieldGuideImplementation(ServerPlayer player, String registryId) {
+        FieldGuideBridge bridge = fieldGuideBridge;
+        return bridge != null && bridge.runtimeAvailable() && bridge.unlockObservedImplementation(player, registryId);
+    }
+
+    public boolean fieldGuideRuntimeAvailable() {
+        FieldGuideBridge bridge = fieldGuideBridge;
+        return bridge != null && bridge.runtimeAvailable();
+    }
+
     public void clearRuntimeCaches() { mcaCapitals.clearCache(); }
 
-    public FactResult isVampire(Entity entity) {
-        return aggregate(entity, Query.VAMPIRE);
-    }
+    public FactResult isVampire(Entity entity) { return aggregate(entity, Query.VAMPIRE); }
 
-    public FactResult isWerewolf(Entity entity) {
-        return aggregate(entity, Query.WEREWOLF);
-    }
+    public FactResult isWerewolf(Entity entity) { return aggregate(entity, Query.WEREWOLF); }
 
-    public FactResult isHunter(Entity entity) {
-        return aggregate(entity, Query.HUNTER);
-    }
+    public FactResult isHunter(Entity entity) { return aggregate(entity, Query.HUNTER); }
 
     public Optional<UUID> conversionSource(Entity entity, SecretType type) {
         return stateAdapters.stream().map(adapter -> adapter.conversionSource(entity, type))
