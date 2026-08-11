@@ -8,12 +8,14 @@ Dark Folklore Core is the server-authoritative integration layer for the Dark Fo
 - NeoForge **21.1.248** (the 21.1 line)
 - Java **21**
 - Mod ID `darkfolklore`
-- Version **0.2.0**
+- Version **0.3.0**
 - Persistent data schema **2**, with an idempotent schema-1 upgrade
 
 Minecraft and NeoForge are required. Every third-party gameplay integration is optional. Code adapters activate only for exact audited versions; missing or different versions report `DISABLED` or `UNTESTED_VERSION` and fail closed without guessing supernatural or political facts.
 
-## What 0.2.0 implements
+## What 0.3.0 implements
+
+- A unified occult-investigation loop: curated physical evidence and testimony produce evidence-only hypotheses; five cross-mod magical traditions can analyze nearby clues; identification unlocks research, preparation assessment, bounded tracking, and prepared-hunt rewards. See [Occult Investigation](docs/OCCULT_INVESTIGATION.md).
 
 - Reloadable canonical concepts, weakness rules, spawn profiles, magic integrations, story templates, organization archetypes, social parameters, and political weights.
 - A completed `darkfolklore:vampire` canonical concept and audited wolfsbane canonicalization. Enchanted owns the farmable canonical crop while Werewolves keeps its native diffuser, finder, contact-effect, and recipe mechanics through a strict bridge. See [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md).
@@ -30,7 +32,7 @@ The implementation deliberately avoids Mixins and does not mutate optional mods'
 ## Install
 
 1. Use Minecraft 1.21.1, NeoForge 21.1.248, and Java 21.
-2. Build or obtain `darkfolklore-core-0.2.0.jar`.
+2. Build or obtain `darkfolklore-core-0.3.0.jar`.
 3. Place only the production JAR, not the sources JAR, in the instance `mods` directory.
 4. Install whichever optional provider mods the pack uses. Exact adapter versions are listed in [Compatibility](docs/COMPATIBILITY.md).
 5. Back up an existing world, start the server, and review `config/darkfolklore-common.toml`.
@@ -51,8 +53,8 @@ $env:Path = "$env:JAVA_HOME\bin;$env:Path"
 Artifacts:
 
 ```text
-build/libs/darkfolklore-core-0.2.0.jar
-build/libs/darkfolklore-core-0.2.0-sources.jar
+build/libs/darkfolklore-core-0.3.0.jar
+build/libs/darkfolklore-core-0.3.0-sources.jar
 ```
 
 Useful tasks:
@@ -64,7 +66,7 @@ Useful tasks:
 .\gradlew.bat runClient
 ```
 
-The final automated snapshot is **53 passing JUnit tests**, **3 passing GameTests**, two byte-identical clean builds, and a successfully audited production JAR. Mandatory-only, exact-adapter, curated headless, final 0.2.0 dedicated-server startup/save/shutdown, graphical client startup to the title state, schema-migration fixture, and fresh-world smokes are recorded. No client world/UI gameplay pass or authentic 0.1-world upgrade has been completed, so the current release classification is **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`. See [Testing](docs/TESTING.md) and [Production release](docs/PRODUCTION_RELEASE.md).
+The 0.3.0 automated snapshot is **59 passing JUnit tests**, **3 passing GameTests**, and a successfully audited production JAR. The broader mandatory-only, exact-adapter, dedicated-server, graphical-startup, and migration evidence in [Testing](docs/TESTING.md) was recorded for 0.2.0; the new interactive occult-investigation loop still needs the manual acceptance matrix in [Occult Investigation](docs/OCCULT_INVESTIGATION.md). The current release classification therefore remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.
 
 The curated dedicated-server staging also emitted one unowned NeoForge client-`Screen` dist warning while continuing through startup, save, and shutdown. No Dark Folklore class was identified as its owner; the exact evidence and boundary are recorded in [Testing](docs/TESTING.md).
 
@@ -77,13 +79,14 @@ data/<namespace>/darkfolklore/canonical/
 data/<namespace>/darkfolklore/weaknesses/
 data/<namespace>/darkfolklore/spawn_profiles/
 data/<namespace>/darkfolklore/magic_integrations/
+data/<namespace>/darkfolklore/investigation_profiles/
 data/<namespace>/darkfolklore/story_templates/
 data/<namespace>/darkfolklore/organization_archetypes/
 data/<namespace>/darkfolklore/social_parameters/
 data/<namespace>/darkfolklore/political_weights/
 ```
 
-The entire candidate state must validate. If any definition or cross-definition invariant fails, Core logs the precise resource error and retains the previous validated snapshot. Field Guide categories, standard tags, loot modifiers, recipes, and NeoForge biome modifiers use their owning formats and are outside this eight-directory transaction. See [Data formats](docs/DATA_FORMATS.md).
+The entire candidate state must validate. If any definition or cross-definition invariant fails, Core logs the precise resource error and retains the previous validated snapshot. Field Guide categories, standard tags, loot modifiers, recipes, and NeoForge biome modifiers use their owning formats and are outside this nine-directory transaction. See [Data formats](docs/DATA_FORMATS.md).
 
 ## Operator commands
 
@@ -108,25 +111,29 @@ All `/folklore` commands require permission level 2.
 /folklore story list
 /folklore stories
 /folklore contracts
+/folklore investigation status <player>
+/folklore investigation hypotheses <player>
+/folklore investigation profile <concept>
 ```
 
 `inspect` and social/political diagnostics expose ground truth and are administrative tools, not ordinary-player knowledge.
 
 ## Contract quick start
 
-A recognized supernatural actor killing an animal, villager, or MCA person can create a local incident with logical evidence. Empty-handed sneak-right-click a villager/MCA issuer in the same 8-by-8-chunk society region, then either collect nearby clues by sneak-right-clicking blocks or record credible testimony from a knowledgeable villager/MCA person. Two distinct evidence types identify the canonical target. Defeat a matching entity and return to the exact issuer for the reward. See [Contracts](docs/CONTRACTS.md).
+A recognized supernatural actor killing an animal, villager, or MCA person can create a local incident with logical evidence. Empty-handed sneak-right-click a villager/MCA issuer in the same 8-by-8-chunk society region, then collect nearby clues, record credible testimony, or analyze the scene with a compatible magical implement. The profile's required number of distinct evidence types identifies the canonical target. Defeat a matching entity and return to the exact issuer for the reward. See [Contracts](docs/CONTRACTS.md) and [Occult Investigation](docs/OCCULT_INVESTIGATION.md).
 
 ## Documentation
 
 - [Architecture](docs/ARCHITECTURE.md)
 - [Society](docs/SOCIETY.md)
 - [Contracts](docs/CONTRACTS.md)
+- [Occult Investigation](docs/OCCULT_INVESTIGATION.md)
 - [Data formats and schema 2](docs/DATA_FORMATS.md)
 - [Compatibility](docs/COMPATIBILITY.md), [MCA social audit](docs/MCA_SOCIAL_AUDIT.md), and [MCA Capitals](docs/MCA_CAPITALS.md)
 - [Field Guide](docs/FIELD_GUIDE.md) and [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md)
 - [Development](docs/DEVELOPMENT.md) and [Testing](docs/TESTING.md)
 - [Known Limitations](docs/KNOWN_LIMITATIONS.md)
-- [0.2.0 changelog](docs/CHANGELOG_0.2.0.md)
+- [Changelog](CHANGELOG.md) and [0.2.0 historical changelog](docs/CHANGELOG_0.2.0.md)
 
 ## License
 

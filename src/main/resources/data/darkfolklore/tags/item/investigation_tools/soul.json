@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "malum:arcane_spirit", "required": false},
+    {"id": "malum:eldritch_spirit", "required": false},
+    {"id": "malum:sacred_spirit", "required": false},
+    {"id": "malum:wicked_spirit", "required": false}
+  ]
+}

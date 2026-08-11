@@ -29,4 +29,17 @@ class MonsterContractTest {
         assertTrue(contract.expire(100));
         assertFalse(contract.start());
     }
+
+    @Test
+    void identifiedContractCanRetainPostIdentificationOccultResearch() {
+        MonsterContract contract = new MonsterContract(UUID.randomUUID(), UUID.randomUUID(),
+                "darkfolklore:vampire", 10_000);
+        assertTrue(contract.start());
+        assertTrue(contract.addEvidence(EvidenceType.BLOOD, 2));
+        assertTrue(contract.addEvidence(EvidenceType.BITE_MARK, 2));
+        assertEquals(ContractStatus.IDENTIFIED, contract.status());
+        assertTrue(contract.recordEvidence(EvidenceType.SOUL_ECHO));
+        assertTrue(contract.evidence().contains(EvidenceType.SOUL_ECHO));
+        assertEquals(ContractStatus.IDENTIFIED, contract.status());
+    }
 }

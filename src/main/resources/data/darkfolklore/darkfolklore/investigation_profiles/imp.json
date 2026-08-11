@@ -1,0 +1,25 @@
+{
+  "concept": "darkfolklore:imp",
+  "creature_traits": [
+    "DEMON",
+    "MYTHICAL_BEAST",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "TRACK",
+    "MAGICAL_RESIDUE",
+    "SCORCH",
+    "SPIRIT_ECHO",
+    "OCCULT_SIGNATURE"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "FORBIDDEN_THEURGY": "OCCULT_SIGNATURE"
+  },
+  "incident_evidence": [
+    "TRACK",
+    "SCORCH"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 96
+}

@@ -26,6 +26,7 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.*;
@@ -48,9 +49,9 @@ public final class FolkloreCommands {
 
         LiteralArgumentBuilder<CommandSourceStack> knowledge = Commands.literal("knowledge");
         knowledge.then(Commands.literal("get").then(Commands.argument("player", EntityArgument.player())
-                .then(Commands.argument("concept", StringArgumentType.word()).executes(FolkloreCommands::knowledgeGet))));
+                .then(Commands.argument("concept", ResourceLocationArgument.id()).executes(FolkloreCommands::knowledgeGet))));
         knowledge.then(Commands.literal("grant").then(Commands.argument("player", EntityArgument.player())
-                .then(Commands.argument("concept", StringArgumentType.word())
+                .then(Commands.argument("concept", ResourceLocationArgument.id())
                         .then(Commands.argument("points", IntegerArgumentType.integer(1, 100))
                                 .executes(FolkloreCommands::knowledgeGrant)))));
         root.then(knowledge);
@@ -113,6 +114,7 @@ public final class FolkloreCommands {
                 + " weaknesses=" + FolkloreDataManager.INSTANCE.weaknesses().rules().size()
                 + " spawns=" + FolkloreDataManager.INSTANCE.spawns().profiles().size()
                 + " magic=" + FolkloreDataManager.INSTANCE.magic().size()
+                + " investigationProfiles=" + FolkloreDataManager.INSTANCE.investigationProfiles().size()
                 + " storyTemplates=" + FolkloreDataManager.INSTANCE.storyTemplates().size()
                 + " invalid=" + FolkloreDataManager.INSTANCE.validationErrors().size());
         send(source, "Rumor queue=" + RumorEngine.INSTANCE.queued());
@@ -182,7 +184,7 @@ public final class FolkloreCommands {
 
     private static int knowledgeGet(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
-        String concept = StringArgumentType.getString(context, "concept");
+        String concept = ResourceLocationArgument.getId(context, "concept").toString();
         var progress = FolkloreSavedData.get(context.getSource().getServer()).lore(player.getUUID(), concept);
         send(context.getSource(), player.getName().getString() + " " + concept + "=" + progress.points() + " " + progress.stage());
         return progress.points();
@@ -190,7 +192,7 @@ public final class FolkloreCommands {
 
     private static int knowledgeGrant(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
-        String concept = StringArgumentType.getString(context, "concept");
+        String concept = ResourceLocationArgument.getId(context, "concept").toString();
         int points = IntegerArgumentType.getInteger(context, "points");
         var progress = LoreEngine.INSTANCE.grant(player, concept, points);
         send(context.getSource(), "Granted; now " + progress.points() + " " + progress.stage());

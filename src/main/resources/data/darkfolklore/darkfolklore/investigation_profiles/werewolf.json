@@ -1,0 +1,28 @@
+{
+  "concept": "darkfolklore:werewolf",
+  "creature_traits": [
+    "WEREWOLF",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "BLOOD",
+    "FOOTPRINT",
+    "HAIR",
+    "SCENT",
+    "TESTIMONY",
+    "HERBAL_REACTION",
+    "WOLFSBANE_REACTION",
+    "SOUL_ECHO"
+  ],
+  "analysis_results": {
+    "WITCHCRAFT": "HERBAL_REACTION",
+    "SOUL": "SOUL_ECHO"
+  },
+  "incident_evidence": [
+    "BLOOD",
+    "FOOTPRINT",
+    "HAIR"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 112
+}

@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.0 — Occult Investigation (2026-08-11)
+
+### Added
+
+- Eight reloadable, atomically validated investigation profiles for the curated supernatural concepts.
+- Evidence-only hypothesis ranking that does not expose the hidden contract target.
+- Additive clue analysis through Enchanted, Occultism, Malum, Eidolon, and Feywild item semantics without importing optional-provider internals.
+- Explicit, cooldown-bound tracking of identified targets in loaded areas only.
+- Weakness-rule-based preparation assessment, prepared-hunt lore/reputation rewards, operator diagnostics, and five investigation-tool tags.
+
+### Changed
+
+- Curated cryptids, spirits, demons, and constructs can now enter the incident-to-contract loop without requiring an MCA-style secret identity.
+- Incident evidence is profile-specific, and contracts retain evidence collected after identification for further research.
+- The production artifact version is now `darkfolklore-core-0.3.0.jar`; persistent data remains schema 2.
+
+### Fixed
+
+- Preserved provider-owned right-click actions during both occult analysis and tracking.
+- Added the missing build-time import in the generated contract integration and expanded the release-JAR audit for investigation resources.
+
+### Known Issues
+
+- Automated validation covers 59 JUnit tests and three GameTests. The interactive investigation, Field Guide, tracking, preparation, save/restart, and optional-provider client matrix remains a manual release gate.
+- The curated dedicated-server staging retains the previously documented unowned NeoForge client-`Screen` dist warning from the external pack.
+
 ## 0.2.0 — Living Society (2026-08-10)
 
 ### Added

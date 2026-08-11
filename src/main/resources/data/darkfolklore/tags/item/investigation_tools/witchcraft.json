@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "enchanted:ritual_chalk",
+      "required": false
+    },
+    {
+      "id": "enchanted:wolfsbane_flower",
+      "required": false
+    },
+    {
+      "id": "vampirism:garlic",
+      "required": false
+    },
+    {
+      "id": "enchanted:garlic",
+      "required": false
+    }
+  ]
+}

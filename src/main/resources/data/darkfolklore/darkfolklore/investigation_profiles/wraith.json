@@ -1,0 +1,27 @@
+{
+  "concept": "darkfolklore:wraith",
+  "creature_traits": [
+    "SPIRIT",
+    "UNDEAD",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "BODY",
+    "MAGICAL_RESIDUE",
+    "SCORCH",
+    "SPIRIT_ECHO",
+    "SOUL_ECHO",
+    "OCCULT_SIGNATURE"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "SOUL": "SOUL_ECHO",
+    "FORBIDDEN_THEURGY": "OCCULT_SIGNATURE"
+  },
+  "incident_evidence": [
+    "BODY",
+    "SCORCH"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 96
+}

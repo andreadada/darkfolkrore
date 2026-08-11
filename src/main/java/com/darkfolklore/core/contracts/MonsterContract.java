@@ -36,9 +36,19 @@ public final class MonsterContract {
 
     public boolean addEvidence(EvidenceType type, int requiredDistinctClues) {
         if (status != ContractStatus.INVESTIGATING) return false;
-        boolean changed = evidence.add(Objects.requireNonNull(type));
+        boolean changed = recordEvidence(type);
         if (evidence.size() >= Math.max(1, requiredDistinctClues)) status = ContractStatus.IDENTIFIED;
         return changed;
+    }
+
+    /**
+     * Records additional research evidence after the target has already been identified.
+     * This is used by the 0.3 occult-analysis loop without changing the historical
+     * INVESTIGATING -> IDENTIFIED threshold behavior.
+     */
+    public boolean recordEvidence(EvidenceType type) {
+        if (status != ContractStatus.INVESTIGATING && status != ContractStatus.IDENTIFIED) return false;
+        return evidence.add(Objects.requireNonNull(type));
     }
 
     public boolean markHunted() { return transition(ContractStatus.IDENTIFIED, ContractStatus.HUNTED); }

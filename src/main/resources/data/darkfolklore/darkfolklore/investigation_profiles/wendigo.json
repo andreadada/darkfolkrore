@@ -1,0 +1,29 @@
+{
+  "concept": "darkfolklore:wendigo",
+  "creature_traits": [
+    "CRYPTID",
+    "UNDEAD",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "BLOOD",
+    "FOOTPRINT",
+    "BONE",
+    "SCENT",
+    "SPIRIT_ECHO",
+    "SOUL_ECHO",
+    "CURSE_TRACE"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "SOUL": "SOUL_ECHO",
+    "FORBIDDEN_THEURGY": "CURSE_TRACE"
+  },
+  "incident_evidence": [
+    "BLOOD",
+    "FOOTPRINT",
+    "BONE"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 128
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "feywild:elven_quartz", "required": false},
+    {"id": "feywild:mandrake_root", "required": false}
+  ]
+}

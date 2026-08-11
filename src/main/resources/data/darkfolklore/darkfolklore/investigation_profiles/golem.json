@@ -1,0 +1,22 @@
+{
+  "concept": "darkfolklore:golem",
+  "creature_traits": [
+    "CONSTRUCT"
+  ],
+  "signatures": [
+    "TRACK",
+    "MAGICAL_RESIDUE",
+    "BINDING_TRACE",
+    "SOUL_ECHO"
+  ],
+  "analysis_results": {
+    "SPIRIT": "BINDING_TRACE",
+    "SOUL": "SOUL_ECHO"
+  },
+  "incident_evidence": [
+    "TRACK",
+    "MAGICAL_RESIDUE"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 80
+}

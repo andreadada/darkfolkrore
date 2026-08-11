@@ -2,11 +2,13 @@ package com.darkfolklore.core.data;
 
 import com.darkfolklore.core.DarkFolkloreCore;
 import com.darkfolklore.core.canonical.*;
+import com.darkfolklore.core.investigation.InvestigationProfile;
 import com.darkfolklore.core.magic.MagicIntegrationDefinition;
 import com.darkfolklore.core.magic.MagicTradition;
 import com.darkfolklore.core.spawn.*;
 import com.darkfolklore.core.society.story.StoryTemplateDefinition;
 import com.darkfolklore.core.society.story.StoryTrigger;
+import com.darkfolklore.core.knowledge.social.EvidenceType;
 import com.darkfolklore.core.knowledge.social.SecretType;
 import com.darkfolklore.core.compat.mca.McaTrustSettings;
 import com.darkfolklore.core.compat.mcacapitals.*;
@@ -36,6 +38,12 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
     public WeaknessRegistry weaknesses() { return state.get().weaknesses(); }
     public SpawnProfileRegistry spawns() { return state.get().spawns(); }
     public List<MagicIntegrationDefinition> magic() { return state.get().magic(); }
+    public Collection<InvestigationProfile> investigationProfiles() {
+        return state.get().investigationProfiles().values();
+    }
+    public Optional<InvestigationProfile> investigationProfile(String concept) {
+        return Optional.ofNullable(state.get().investigationProfiles().get(concept));
+    }
     public List<StoryTemplateDefinition> storyTemplates() { return state.get().storyTemplates(); }
     public Optional<OrganizationArchetypeDefinition> organizationArchetype(OrganizationType type) {
         return Optional.ofNullable(state.get().organizationArchetypes().get(type));
@@ -53,6 +61,7 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
         List<WeaknessRule> weaknessRules = new ArrayList<>();
         List<SpawnProfile> spawnProfiles = new ArrayList<>();
         List<MagicIntegrationDefinition> magicDefinitions = new ArrayList<>();
+        List<InvestigationProfile> investigationProfiles = new ArrayList<>();
         List<StoryTemplateDefinition> storyTemplates = new ArrayList<>();
         List<OrganizationArchetypeDefinition> organizationArchetypes = new ArrayList<>();
         List<McaTrustSettings> socialParameters = new ArrayList<>();
@@ -67,6 +76,8 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
                 spawnProfiles.add(parseSpawn(id, json)), errors);
         parseDirectory(manager, "darkfolklore/magic_integrations", (id, json) ->
                 magicDefinitions.add(parseMagic(id, json)), errors);
+        parseDirectory(manager, "darkfolklore/investigation_profiles", (id, json) ->
+                investigationProfiles.add(parseInvestigationProfile(id, json)), errors);
         parseDirectory(manager, "darkfolklore/story_templates", (id, json) ->
                 storyTemplates.add(parseStoryTemplate(id, json)), errors);
         parseDirectory(manager, "darkfolklore/organization_archetypes", (id, json) ->
@@ -87,6 +98,8 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
                 spawns.replace(spawnProfiles);
                 validateUnique(magicDefinitions.stream().map(MagicIntegrationDefinition::id).toList(),
                         "magic integration id");
+                validateUnique(investigationProfiles.stream().map(InvestigationProfile::concept).toList(),
+                        "investigation profile concept");
                 validateUnique(storyTemplates.stream().map(StoryTemplateDefinition::id).toList(),
                         "story template id");
                 validateUnique(organizationArchetypes.stream().map(value -> value.type().name()).toList(),
@@ -100,8 +113,16 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
                 organizationArchetypes.forEach(value -> archetypes.put(value.type(), value));
                 Map<PoliticalRole, PoliticalWeights> weights = new EnumMap<>(PoliticalRole.class);
                 politicalWeights.forEach(value -> weights.put(value.role(), value.weights()));
+                Map<String, InvestigationProfile> investigations = new LinkedHashMap<>();
+                investigationProfiles.forEach(value -> {
+                    if (canonical.concept(value.concept()).isEmpty()) {
+                        throw new IllegalArgumentException("Investigation profile references missing canonical concept "
+                                + value.concept());
+                    }
+                    investigations.put(value.concept(), value);
+                });
                 candidate = new State(canonical, weaknesses, spawns, List.copyOf(magicDefinitions),
-                        List.copyOf(storyTemplates), Map.copyOf(archetypes),
+                        Map.copyOf(investigations), List.copyOf(storyTemplates), Map.copyOf(archetypes),
                         socialParameters.isEmpty() ? McaTrustSettings.DEFAULTS : socialParameters.getFirst(),
                         Map.copyOf(weights));
             } catch (RuntimeException exception) {
@@ -136,11 +157,11 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
         }
         State loaded = state.get();
         DarkFolkloreCore.LOGGER.info("[data] Atomically loaded {} canonical concepts, {} weaknesses, {} spawn profiles, "
-                        + "{} magic integrations, {} story templates, {} organization archetypes, "
+                        + "{} magic integrations, {} investigation profiles, {} story templates, {} organization archetypes, "
                         + "{} political overrides (0 invalid)",
                 loaded.canonical().definitions().size(), loaded.weaknesses().rules().size(),
-                loaded.spawns().profiles().size(), loaded.magic().size(), loaded.storyTemplates().size(),
-                loaded.organizationArchetypes().size(), loaded.politicalWeights().size());
+                loaded.spawns().profiles().size(), loaded.magic().size(), loaded.investigationProfiles().size(),
+                loaded.storyTemplates().size(), loaded.organizationArchetypes().size(), loaded.politicalWeights().size());
     }
 
     private static CanonicalDefinition parseCanonical(ResourceLocation file, JsonObject json) {
@@ -175,6 +196,23 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
                 enumSet(ItemTrait.class, json, "required_traits"),
                 string(json, "knowledge_reward", "darkfolklore:magic"),
                 integer(json, "knowledge_points", 5));
+    }
+
+    private static InvestigationProfile parseInvestigationProfile(ResourceLocation file, JsonObject json) {
+        String concept = string(json, "concept", file.toString());
+        Set<CreatureTrait> creatureTraits = enumSet(CreatureTrait.class, json, "creature_traits");
+        Set<EvidenceType> signatures = enumSet(EvidenceType.class, json, "signatures");
+        EnumMap<MagicTradition, EvidenceType> analyses = new EnumMap<>(MagicTradition.class);
+        if (json.has("analysis_results")) {
+            for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject("analysis_results").entrySet()) {
+                analyses.put(enumValue(MagicTradition.class, entry.getKey()),
+                        enumValue(EvidenceType.class, entry.getValue().getAsString()));
+            }
+        }
+        List<EvidenceType> incidentEvidence = strings(json, "incident_evidence").stream()
+                .map(value -> enumValue(EvidenceType.class, value)).toList();
+        return new InvestigationProfile(concept, creatureTraits, signatures, analyses, incidentEvidence,
+                integer(json, "required_evidence", 3), integer(json, "tracking_radius", 96));
     }
 
     private static StoryTemplateDefinition parseStoryTemplate(ResourceLocation file, JsonObject json) {
@@ -265,13 +303,14 @@ public final class FolkloreDataManager extends SimplePreparableReloadListener<Fo
 
     protected record State(CanonicalRegistry canonical, WeaknessRegistry weaknesses,
                            SpawnProfileRegistry spawns, List<MagicIntegrationDefinition> magic,
+                           Map<String, InvestigationProfile> investigationProfiles,
                            List<StoryTemplateDefinition> storyTemplates,
                            Map<OrganizationType, OrganizationArchetypeDefinition> organizationArchetypes,
                            McaTrustSettings socialTrustSettings,
                            Map<PoliticalRole, PoliticalWeights> politicalWeights) {
         private static State empty() {
             return new State(new CanonicalRegistry(), new WeaknessRegistry(),
-                    new SpawnProfileRegistry(), List.of(), List.of(), Map.of(),
+                    new SpawnProfileRegistry(), List.of(), Map.of(), List.of(), Map.of(),
                     McaTrustSettings.DEFAULTS, Map.of());
         }
     }

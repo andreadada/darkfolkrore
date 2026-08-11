@@ -42,8 +42,8 @@ The first development-server launch may stop after creating `run/eula.txt`. Set 
 Expected artifacts:
 
 ```text
-build/libs/darkfolklore-core-0.2.0.jar
-build/libs/darkfolklore-core-0.2.0-sources.jar
+build/libs/darkfolklore-core-0.3.0.jar
+build/libs/darkfolklore-core-0.3.0-sources.jar
 ```
 
 `clean build` runs JUnit, resource validators, dependency checksum verification, and `auditReleaseJar`. Archives use stable entry ordering and stripped timestamps. The JAR audit rejects metadata placeholders, absent required resources, Java classes other than version 65, local absolute user paths, test/Atlas/cache content, nested JARs, and shaded optional-mod packages.
@@ -62,7 +62,7 @@ src/main/java/com/darkfolklore/core/
   data/            atomic JSON reload preparation/validation
   diagnostics/     permission-level-2 command tree
   gametest/        three live NeoForge regression tests
-  investigation/   logical evidence records
+  investigation/   evidence, hypotheses, magical analysis, preparation, and tracking
   knowledge/       player lore and observer-specific beliefs
   persistence/     schema-2 SavedData and schema-1 migration
   society/         witnesses, rumors, families, organizations, stories, villages, lineage

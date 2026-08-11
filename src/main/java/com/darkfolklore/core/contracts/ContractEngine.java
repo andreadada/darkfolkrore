@@ -2,7 +2,10 @@ package com.darkfolklore.core.contracts;
 
 import com.darkfolklore.core.api.event.*;
 import com.darkfolklore.core.config.FolkloreConfig;
+import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.investigation.EvidenceRecord;
+import com.darkfolklore.core.investigation.InvestigationProfile;
+import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.social.*;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.persistence.*;
@@ -76,14 +79,17 @@ public final class ContractEngine {
         MonsterContract contract = new MonsterContract(UUID.randomUUID(), event.getTarget().getUUID(),
                 available.story().concept(), level.getGameTime() + FolkloreConfig.CONTRACT_LIFETIME.get());
         contract.start();
+        int requiredEvidence = FolkloreDataManager.INSTANCE.investigationProfile(available.story().concept())
+                .map(InvestigationProfile::requiredEvidence).orElse(2);
         ContractAssignment assignment = new ContractAssignment(player.getUUID(), contract,
-                available.location(), village, 2);
+                available.location(), village, requiredEvidence);
         data.putContract(assignment);
         available.story().advance(StoryStatus.INVESTIGATING);
         data.putStory(available);
         player.displayClientMessage(Component.literal("Contract accepted: investigate the incident near "
                 + available.location().x() + ", " + available.location().y() + ", " + available.location().z()
-                + ". Sneak-right-click nearby clue locations."), false);
+                + ". Sneak-right-click nearby clue locations. Physical clues, credible testimony, and occult analysis "
+                + "can all advance the investigation."), false);
         NeoForge.EVENT_BUS.post(new ContractStartedEvent(assignment));
         consume(event);
     }
@@ -134,7 +140,8 @@ public final class ContractEngine {
         player.displayClientMessage(Component.literal("Evidence collected: " + clue.type()
                 + " (" + assignment.contract().evidence().size() + "/" + assignment.requiredDistinctClues() + ")"
                 + (assignment.contract().status() == ContractStatus.IDENTIFIED
-                ? ". Target identified: " + assignment.contract().targetConcept() : "")), false);
+                ? ". Target identified: " + assignment.contract().targetConcept()
+                : ". " + OccultInvestigationEngine.INSTANCE.hypothesisSummary(assignment))), false);
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
     }
@@ -228,7 +235,8 @@ public final class ContractEngine {
         player.displayClientMessage(Component.literal("Credible witness testimony recorded (confidence "
                 + Math.round(testimony.getValue().confidence() * 100.0F) + "%)."
                 + (assignment.contract().status() == ContractStatus.IDENTIFIED
-                ? " The evidence now identifies " + assignment.contract().targetConcept() + "." : "")), false);
+                ? " The evidence now identifies " + assignment.contract().targetConcept() + "."
+                : " " + OccultInvestigationEngine.INSTANCE.hypothesisSummary(assignment))), false);
         return true;
     }
 

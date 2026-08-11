@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "occultism:spirit_attuned_crystal", "required": false},
+    {"id": "occultism:spirit_attuned_gem", "required": false},
+    {"id": "occultism:otherstone_tablet", "required": false}
+  ]
+}

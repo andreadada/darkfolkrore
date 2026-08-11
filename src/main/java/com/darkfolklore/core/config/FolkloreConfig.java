@@ -24,6 +24,8 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue ORGANIZATION_BEHAVIOR = toggle("organizationBehavior", true);
     public static final ModConfigSpec.BooleanValue MCA_CAPITALS = toggle("mcaCapitalsIntegration", true);
     public static final ModConfigSpec.BooleanValue FALSE_ACCUSATIONS = toggle("falseAccusations", true);
+    public static final ModConfigSpec.BooleanValue OCCULT_INVESTIGATION = toggle("occultInvestigation", true);
+    public static final ModConfigSpec.BooleanValue PREPARED_HUNT_BONUS = toggle("preparedHuntBonus", true);
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING = toggle("debugLogging", false);
 
     public static final ModConfigSpec.IntValue WITNESS_RADIUS = BUILDER.comment("Maximum event-driven witness radius in blocks")
@@ -66,6 +68,12 @@ public final class FolkloreConfig {
             .defineInRange("maxSocialKnowledgeRecords", 50000, 1000, 500000);
     public static final ModConfigSpec.IntValue MAX_ORGANIZATIONS = BUILDER.comment("Hard safety cap for persisted supernatural social organizations")
             .defineInRange("maxOrganizations", 512, 16, 4096);
+    public static final ModConfigSpec.IntValue OCCULT_ANALYSIS_RADIUS = BUILDER.comment("Maximum distance in blocks from a clue for occult analysis")
+            .defineInRange("occultAnalysisRadius", 6, 2, 16);
+    public static final ModConfigSpec.IntValue TRACKING_RADIUS = BUILDER.comment("Maximum loaded-area radius in blocks for an explicit monster-tracking pulse")
+            .defineInRange("monsterTrackingRadius", 96, 16, 192);
+    public static final ModConfigSpec.IntValue TRACKING_COOLDOWN = BUILDER.comment("Ticks between explicit monster-tracking pulses")
+            .defineInRange("monsterTrackingCooldownTicks", 80, 20, 1200);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 

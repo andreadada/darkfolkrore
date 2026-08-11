@@ -1,0 +1,27 @@
+{
+  "concept": "darkfolklore:vampire",
+  "creature_traits": [
+    "VAMPIRE",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "BLOOD",
+    "BITE_MARK",
+    "TESTIMONY",
+    "HERBAL_REACTION",
+    "GARLIC_REACTION",
+    "SOUL_ECHO",
+    "OCCULT_SIGNATURE"
+  ],
+  "analysis_results": {
+    "WITCHCRAFT": "HERBAL_REACTION",
+    "SOUL": "SOUL_ECHO",
+    "FORBIDDEN_THEURGY": "OCCULT_SIGNATURE"
+  },
+  "incident_evidence": [
+    "BLOOD",
+    "BITE_MARK"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 96
+}

@@ -1,0 +1,25 @@
+{
+  "concept": "darkfolklore:ghost",
+  "creature_traits": [
+    "GHOST",
+    "SPIRIT",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "BODY",
+    "MAGICAL_RESIDUE",
+    "TESTIMONY",
+    "SPIRIT_ECHO",
+    "SOUL_ECHO"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "SOUL": "SOUL_ECHO"
+  },
+  "incident_evidence": [
+    "BODY",
+    "MAGICAL_RESIDUE"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 80
+}

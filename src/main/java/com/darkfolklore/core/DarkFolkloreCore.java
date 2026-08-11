@@ -7,6 +7,8 @@ import com.darkfolklore.core.canonical.FolkloreBiomeModifiers;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractEngine;
 import com.darkfolklore.core.diagnostics.CoreServerEvents;
+import com.darkfolklore.core.diagnostics.InvestigationCommands;
+import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.society.bloodline.LineageEngine;
 import com.darkfolklore.core.society.organization.OrganizationEngine;
@@ -51,6 +53,8 @@ public final class DarkFolkloreCore {
         bus.register(IncidentStoryEngine.INSTANCE);
         bus.register(SocietyStoryEngine.INSTANCE);
         bus.register(ContractEngine.INSTANCE);
+        bus.register(OccultInvestigationEngine.INSTANCE);
+        bus.register(InvestigationCommands.INSTANCE);
         bus.register(WorldEventDirector.INSTANCE);
     }
 
