@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -25,18 +26,21 @@ public record PreparationAssessment(
     public static PreparationAssessment evaluate(ServerPlayer player, InvestigationProfile profile) {
         KnowledgeStage stage = FolkloreSavedData.get(player.getServer())
                 .lore(player.getUUID(), profile.concept()).stage();
-        if (stage.ordinal() < KnowledgeStage.STUDIED.ordinal()) {
-            return new PreparationAssessment(stage, false, false, List.of(), List.of());
-        }
-
         EnumSet<ItemTrait> inventory = EnumSet.noneOf(ItemTrait.class);
         for (ItemStack stack : player.getInventory().items) inventory.addAll(TraitResolver.itemTraits(stack));
         inventory.addAll(TraitResolver.itemTraits(player.getOffhandItem()));
         inventory.addAll(TraitResolver.itemTraits(player.getMainHandItem()));
+        return evaluate(stage, inventory, profile, FolkloreDataManager.INSTANCE.weaknesses().rules());
+    }
 
+    static PreparationAssessment evaluate(KnowledgeStage stage, Set<ItemTrait> inventory,
+                                          InvestigationProfile profile, Collection<WeaknessRule> rules) {
+        if (stage.ordinal() < KnowledgeStage.STUDIED.ordinal()) {
+            return new PreparationAssessment(stage, false, false, List.of(), List.of());
+        }
         List<String> satisfied = new ArrayList<>();
         List<Set<ItemTrait>> missing = new ArrayList<>();
-        for (WeaknessRule rule : FolkloreDataManager.INSTANCE.weaknesses().rules()) {
+        for (WeaknessRule rule : rules) {
             if (!profile.creatureTraits().containsAll(rule.targetTraits())) continue;
             if (inventory.containsAll(rule.requiredItemTraits())) satisfied.add(rule.id());
             else missing.add(rule.requiredItemTraits());
