@@ -35,6 +35,9 @@ jobs:
       - name: Build, test, validate resources, and audit release JAR
         run: ./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
 
+      - name: Run NeoForge GameTests
+        run: ./gradlew runGameTestServer --no-daemon --no-configuration-cache --stacktrace
+
       - name: Upload production JAR
         uses: actions/upload-artifact@v4
         with:
