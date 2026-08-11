@@ -1,57 +1,74 @@
-# Dark Folklore 0.3 — Occult Investigation & Monster Hunting
+# Dark Folklore 0.3.1 — Occult Investigation & Monster Hunting
 
-0.3 deliberately does **not** add a sixth spell system, a new mana bar, a replacement ritual altar, a clue item, or a custom monster registry.
-It turns the five existing magical traditions into different investigative disciplines that operate on the existing 0.2 contract/evidence/lore/society foundation.
+Dark Folklore deliberately does **not** add a sixth spell system, mana bar, replacement ritual altar, clue item, or custom monster registry. The five existing magical traditions are investigative disciplines layered over the existing contract, lore, society, Field Guide, and Weakness systems.
 
 ## Unified loop
 
 ```text
 supernatural incident
- -> curated physical clues / testimony
- -> hypotheses
+ -> physical clues / concept-level testimony
+ -> evidence-supported hypotheses
  -> optional magical analysis
  -> identification
- -> Field Guide OBSERVED unlock
- -> deeper occult research
- -> preparation against existing weakness rules
- -> explicit bounded tracking pulse
- -> hunt
- -> society / reputation / contract consequences
+ -> exact observed Field Guide entry + OBSERVED lore
+ -> deeper research
+ -> STUDIED countermeasure knowledge
+ -> bounded culprit tracking
+ -> prepared hunt
+ -> story / village / organization consequences
 ```
 
-## Traditions
+Provider mods remain authoritative for their creatures, transformations, rituals, items, and progression.
 
-Dark Folklore resolves an investigation implement first by exact provider namespace, then by existing item traits:
+## Five traditions
 
-| Tradition | Primary provider |
-| --- | --- |
-| WITCHCRAFT | Enchanted |
-| SPIRIT | Occultism |
-| SOUL | Malum |
-| FORBIDDEN_THEURGY | Eidolon: Repraised |
-| FAE | Feywild |
+| Tradition | Primary provider | Investigation role |
+| --- | --- | --- |
+| `WITCHCRAFT` | Enchanted | herbal reactions, garlic/wolfsbane semantics, ritual traces |
+| `SPIRIT` | Occultism | spirit echoes and bindings |
+| `SOUL` | Malum | soul echoes / death resonance |
+| `FORBIDDEN_THEURGY` | Eidolon: Repraised | occult and curse signatures |
+| `FAE` | Feywild | glamour traces |
 
-No provider Java class is imported. Optional-mod absence is therefore safe.
+The first 0.3.x integration layer is semantic and additive: Dark Folklore recognizes curated existing items/tags and adds investigation evidence without stealing the provider item's own right-click behavior. Native provider ritual hooks are intentionally deferred until exact-version APIs/events are audited.
 
-During an active `INVESTIGATING` or `IDENTIFIED` contract, sneak-right-click a block close to an existing logical clue while holding a compatible magical item.
-If that tradition is meaningful for the target profile, Core records one tradition-specific evidence type and awards target/tradition lore.
-The item is not consumed and the external mod retains ownership of its native progression.
+## Reloadable investigation profiles
 
-Examples:
+Investigation profiles are already validated, reloadable JSON under:
 
-- Witchcraft can expose a `HERBAL_REACTION` for vampire/werewolf/chupacabra cases.
-- Occultism-style spirit practice can expose `SPIRIT_ECHO`.
-- Malum-style soul practice can expose `SOUL_ECHO`.
-- Eidolon-style forbidden practice can expose `OCCULT_SIGNATURE` or `CURSE_TRACE`.
-- Fey practice is wired through `GLAMOUR_TRACE` for future curated fae case profiles rather than globally guessing every Feywild entity.
+```text
+data/<namespace>/darkfolklore/investigation_profiles/
+```
+
+0.3.1 ships nine curated profiles:
+
+- Vampire
+- Werewolf
+- Wendigo
+- Chupacabra
+- Ghost
+- Wraith
+- Imp
+- Iesnium Golem
+- Feywild Sprite
+
+A profile defines creature traits, possible signatures, tradition-specific analysis results, incident evidence, identification threshold, and tracking radius. Cross-definition validation rejects profiles whose canonical concept does not exist.
+
+The Sprite profile is intentionally narrow rather than classifying every Feywild entity. It produces two physical traces but requires a third clue; Fae analysis can expose `GLAMOUR_TRACE` to complete the case.
+
+## Physical evidence and expiry
+
+Incident evidence is logical server data, not placeholder inventory items. Evidence is associated with a canonical concept and can retain the factual incident actor UUID.
+
+Physical collection now rejects expired evidence at interaction time. Periodic pruning is maintenance only; it is not the security boundary for clue validity.
 
 ## Hypotheses
 
-`HypothesisEngine` ranks only the evidence currently known to the contract.
-It never reads the hidden target to manufacture certainty.
-Magical evidence is weighted more strongly than generic blood/body/testimony because it represents a deliberate analysis step.
+`HypothesisEngine` ranks only evidence currently recorded on the contract. It never reads the hidden target to manufacture certainty.
 
-Admin diagnostics:
+Generic traces can support multiple possibilities. More diagnostic occult evidence carries more weight. The displayed percentage is called **support**, not probability: it is an evidence-consistency score, not a calibrated statistical likelihood.
+
+Operator diagnostics:
 
 ```text
 /folklore investigation status <player>
@@ -59,46 +76,96 @@ Admin diagnostics:
 /folklore investigation profile <concept>
 ```
 
+## Social identity versus creature sightings
+
+0.3.1 keeps two different facts separate:
+
+```text
+"This villager is secretly a vampire"
+= social identity secret
+
+"This witness saw a Wendigo near the incident"
+= concept-level creature sighting
+```
+
+Cryptids, spirits, demons, constructs, and Fae are therefore not forced into an ever-growing `SecretType` enum. A bounded investigation SavedData sidecar persists concept sightings with state, confidence, source, time, optional observed entity UUID, location, and evidence.
+
+Credible matching sightings can supply `TESTIMONY` to a contract. Existing Vampire/Werewolf identity testimony continues to use the social-knowledge path.
+
+## Case continuity
+
+0.3.1 adds explicit factual continuity metadata without rewriting the established society schema.
+
+For new incidents the sidecar can retain:
+
+```text
+story UUID
+culprit UUID
+observed provider implementation
+```
+
+A contract created from that incident gets a case link to the exact story. This avoids resolving an arbitrary same-concept story when several incidents exist in one village region.
+
+### Culprit policy
+
+If a factual culprit UUID is known:
+
+1. tracking prefers that exact entity;
+2. a matching different creature is **not** enough while the original culprit remains valid;
+3. merely unloading the culprit never authorizes fallback;
+4. a confirmed culprit death outside the owner's valid hunt path can enable a same-concept fallback so the contract does not become permanently impossible.
+
+Older contracts without sidecar metadata retain the legacy concept-level fallback behavior for compatibility.
+
+### Issuer policy
+
+The exact living issuer remains the normal hand-in target. If that issuer is confirmed dead, a fallback can be enabled. The fallback remains local to the contract's village region. If a local Hunter Society exists, an authorized local member is required; otherwise a valid local villager/MCA representative can accept completion.
+
 ## Identification and Field Guide
 
-0.3 replaces the old hard-coded two-clue runtime threshold with a per-creature investigation profile.
-The shipped profiles use three distinct evidence types. Vampire and spectral cases intentionally start with fewer physical clues, so testimony or occult analysis can complete identification; cryptid cases can remain solvable through physical tracking evidence.
-Once identified, Occult Investigation ensures the target's Dark Folklore lore reaches `OBSERVED` (25 points).
-The existing exact Field Guide 1.14.0 bridge can then unlock the canonical page on its normal 100-tick poll.
+Identification advances target lore to `OBSERVED` (25 points).
 
-Additional magical analyses can still be recorded after identification through `MonsterContract.recordEvidence`, allowing research to continue before the hunt.
+For ordinary canonical concepts, the existing Field Guide bridge can use the canonical entity ID. For `KEEP_DISTINCT` concepts, 0.3.1 also retains the **observed implementation** from the incident, such as:
 
-## Preparation
+```text
+eidolon_repraised:wraith
+graveyard:wraith
+```
 
-Preparation is **not hard-coded per monster**.
-The engine combines the profile's verified creature traits with the already-loaded `WeaknessRule` registry.
-Inventory/offhand item traits are compared against the rule requirements.
+The exact Field Guide 1.14.0 bridge can therefore unlock the page that was actually observed instead of arbitrarily collapsing distinct provider creatures.
 
-This means:
+The Fae Sprite addition expands Dark Folklore's curated Field Guide content to seven categories and ten explicit entries.
 
-- the Weakness Engine remains the single authority for Dark Folklore cross-mod weakness semantics;
-- provider-native exclusions remain intact;
-- adding a datapack weakness can automatically become visible to preparation assessment without a second monster-specific switch statement.
+## Research and preparation
 
-If a player kills the identified contract target while carrying a currently satisfied documented countermeasure, the optional prepared-hunt bonus grants 5 lore and +2 Hunter reputation.
+Weakness ground truth and player knowledge are separate.
+
+```text
+UNKNOWN / DISCOVERED / OBSERVED
+ -> weakness details are not exposed
+
+STUDIED / MASTERED
+ -> documented WeaknessRule countermeasures may be shown and evaluated
+```
+
+`PreparationAssessment` combines the player's learned lore stage, inventory item traits, the investigation profile's creature traits, and the existing `WeaknessRule` registry. The Weakness Engine remains the sole authority that applies Dark Folklore's cross-mod damage multipliers and provider-native exclusions.
+
+The prepared-hunt bonus therefore requires a **studied** relevant countermeasure, not accidental possession of the correct item.
 
 ## Tracking
 
-After identification, sneak-use a suitable magical implement/monster-part in the air.
-The server performs one explicit bounded search of **already loaded entities only**.
-It never loads chunks.
-The result is a coarse direction, range and elevation plus a short particle trace.
+After identification, sneak-use a compatible investigation implement in the air. Tracking performs a bounded search of **already loaded entities only** and never force-loads chunks.
 
-Default global cap: 96 blocks.
-Profiles may request less/more but are clamped by config and hard limits.
-Tracking has a server-side cooldown.
+When case continuity knows the culprit, the pulse tracks that culprit. Only an explicitly authorized fallback changes tracking to another matching canonical entity.
 
-The tracking pulse locates a nearby matching canonical concept, not the original incident UUID; this intentionally matches the existing 0.2 contract hunt semantics.
+The result remains deliberately coarse: direction, distance, elevation, and a short particle trace.
 
-## New evidence types
+## Evidence types added by the investigation layer
 
 ```text
 HERBAL_REACTION
+GARLIC_REACTION
+WOLFSBANE_REACTION
 SPIRIT_ECHO
 SOUL_ECHO
 OCCULT_SIGNATURE
@@ -107,50 +174,62 @@ CURSE_TRACE
 BINDING_TRACE
 ```
 
-These are logical evidence values. No low-quality custom models or placeholder items are introduced.
+No duplicate clue-item registry is created.
 
-## 0.2 bug fix included
+## Knowledge command parser fix
 
-The admin knowledge commands now use Minecraft's `ResourceLocationArgument`:
+The 0.2 namespaced-argument bug remains fixed through Minecraft's `ResourceLocationArgument`:
 
 ```text
 /folklore knowledge get <player> darkfolklore:vampire
 /folklore knowledge grant <player> darkfolklore:vampire 25
 ```
 
-Namespaced concepts no longer fail at the colon.
+## Persistence boundary
 
-## Production boundaries
+Existing society state remains in schema 2. New 0.3.1 case/sighting continuity is stored separately as:
 
-- This release adds deep **gameplay integration of the existing traditions**, not undocumented invasive hooks into provider ritual internals.
-- Native Enchanted/Occultism/Malum/Eidolon/Feywild rituals remain owned by those mods.
-- A later provider-specific ritual adapter should only be added after auditing the exact recipe/event/codecs for the installed JAR and proving it does not bypass native progression.
-- Investigation profiles are curated Java data in this patch to keep the first unified gameplay pass small and safe. Moving the profile catalogue to validated reloadable JSON is a follow-up hardening task if the manual loop proves fun and stable.
+```text
+darkfolklore_investigation
+```
 
-## Manual acceptance
+with sidecar schema 1. This minimizes upgrade risk and allows old contracts that lack new metadata to retain safe compatibility defaults.
 
-1. Run `/folklore diagnostics` and confirm `invalid=0`.
-2. Verify `/folklore knowledge grant @s darkfolklore:vampire 25`.
-3. Create a vampire incident and accept the contract.
-4. Collect BLOOD.
-5. Hold an Enchanted investigation-capable item and sneak-right-click close to the scene; verify `HERBAL_REACTION` when the profile supports it.
-6. Run `/folklore investigation hypotheses @s`.
-7. Identify the target; within 100 ticks verify the Field Guide page unlocks.
-8. Continue analysis with a second supported magical tradition and verify evidence/lore grows without changing the identified status.
-9. Run `/folklore investigation status @s` and inspect preparation assessment.
-10. With an identified target nearby, sneak-use a compatible magical item in air; verify bounded direction/range tracking.
-11. Hunt with and without a documented countermeasure; verify the prepared-hunt bonus only in the prepared case.
-12. Restart and confirm contract evidence/lore/Field Guide state persists through the existing schema-2 persistence.
+The sidecar contains hard caps and periodic pruning for sightings, incident facts, and contract links.
 
 ## Automated validation
 
-`InvestigationResourceValidatorTest` verifies the shipped profile catalogue against the shipped canonical concepts, checks non-empty creature/signature sets, validates tracking bounds, guarantees every magical analysis result is also a declared signature, and requires all five investigation-tool tags to exist and contain curated values.
+0.3.1 adds/extends tests for:
 
-`auditReleaseJar` additionally requires the vampire investigation profile and Witchcraft tool tag in the production artifact so a resource-copy regression cannot silently ship a code-only investigation system.
+- profile/resource consistency and Fae coverage;
+- Field Guide category/entry consistency after the Sprite addition;
+- knowledge-gated preparation;
+- case-link continuity and fallback flags;
+- concept-sighting merge/decay behavior;
+- investigation-sidecar NBT round trips;
+- the existing hypothesis and contract state machines.
 
-## Incident expansion
+GitHub Actions performs a Java 21 clean build, resource validation, release-JAR audit, unit tests, NeoForge GameTests, and production artifact upload.
 
-0.2 only created contract incidents when the attacker exposed a social secret such as VAMPIRE or WEREWOLF.
-0.3 also accepts canonical creatures that have an explicit investigation profile, allowing Wendigo, Chupacabra, Ghost, Wraith, Imp and Golem cases to enter the same contract loop without pretending they are MCA-style secret identities. Their incident evidence is profile-driven instead of always being BLOOD plus a generic magical residue.
+## Manual acceptance matrix
 
-Witchcraft analysis also distinguishes canonical countermeasure reagents where the existing trait system supports them: canonical garlic can produce `GARLIC_REACTION` in vampire cases and canonical wolfsbane can produce `WOLFSBANE_REACTION` in werewolf cases. This makes an Enchanted/Vampirism/Werewolves preparation item part of evidence reasoning instead of a decorative inventory check.
+Before promotion beyond `RELEASE_CANDIDATE`, test at least:
+
+1. `/folklore diagnostics` with `invalid=0` on the intended modpack.
+2. A Vampire case using physical evidence plus Witchcraft analysis.
+3. A Wendigo case where an NPC sighting becomes valid concept-level testimony.
+4. A `KEEP_DISTINCT` Wraith case and verify the observed provider page, not an arbitrary Wraith page, unlocks in Field Guide.
+5. A Feywild Sprite case where physical evidence alone remains insufficient and Fae analysis yields `GLAMOUR_TRACE`.
+6. `OBSERVED` lore must not reveal weakness details; `STUDIED` must reveal documented options.
+7. Prepared-hunt bonus with and without learned/carrying countermeasure.
+8. Exact culprit tracking while loaded, no fallback merely after unload, then confirmed-death fallback behavior.
+9. Issuer death followed by the documented local fallback hand-in.
+10. Two same-concept incidents in one region and verify each contract advances its linked story.
+11. Save/restart and verify contract evidence, sidecar case link, creature sighting, lore, and Field Guide progress persist.
+12. English and Italian Field Guide presentation, Recent Discoveries, and the new Fae category.
+
+## Production boundary
+
+0.3.1 is a hardening release, not Deep Magic Phase 2. It does not claim native Enchanted/Occultism/Malum/Eidolon/Feywild ritual-event integration that has not been audited against the exact installed JARs.
+
+That deeper provider-specific work belongs in a later release after exact API/event/recipe-codec inspection. Until the full client/in-world matrix is actually recorded, 0.3.1 remains `RELEASE_CANDIDATE`, not `PRODUCTION_READY`.
