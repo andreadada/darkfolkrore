@@ -80,8 +80,11 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
     }
 
     /**
-     * Unlocks the exact implementation observed by an investigation. This is the
-     * safe path for KEEP_DISTINCT concepts such as the two Wraith providers.
+     * Unlocks the implementation actually observed by an investigation. For
+     * KEEP_DISTINCT concepts that exact provider entry is authoritative. For
+     * canonical concepts whose runtime implementation has no dedicated guide
+     * page (for example an internal provider variant), the bridge falls back to
+     * the concept's canonical entity page instead of silently losing the unlock.
      */
     @Override
     public boolean unlockObservedImplementation(ServerPlayer player, String registryId) {
@@ -90,12 +93,15 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
             FieldGuideProgressManager manager = FieldGuideProgressManager.getInstance();
             PlayerFieldGuideProgress progress = manager.getProgress(player);
             if (progress == null) return false;
-            ResourceLocation entry = entryId(registryId);
-            if (!manager.isValidEntry(entry)) return false;
-            if (progress.isUnlocked(entry)) return true;
-            if (!progress.canUnlock(entry)) return false;
-            progress.unlock(player, entry, "", false);
-            return progress.isUnlocked(entry);
+
+            if (unlockEntry(manager, progress, player, registryId)) return true;
+
+            String canonicalId = FolkloreDataManager.INSTANCE.canonical().resolve(registryId)
+                    .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
+                    .map(CanonicalDefinition::canonicalId)
+                    .filter(value -> !value.isBlank() && !value.equals(registryId))
+                    .orElse("");
+            return !canonicalId.isBlank() && unlockEntry(manager, progress, player, canonicalId);
         } catch (RuntimeException | LinkageError exception) {
             disableAfterFailure(exception);
             return false;
@@ -105,6 +111,16 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
     @Override
     public boolean runtimeAvailable() {
         return runtimeAvailable;
+    }
+
+    private static boolean unlockEntry(FieldGuideProgressManager manager, PlayerFieldGuideProgress progress,
+                                       ServerPlayer player, String registryId) {
+        ResourceLocation entry = entryId(registryId);
+        if (!manager.isValidEntry(entry)) return false;
+        if (progress.isUnlocked(entry)) return true;
+        if (!progress.canUnlock(entry)) return false;
+        progress.unlock(player, entry, "", false);
+        return progress.isUnlocked(entry);
     }
 
     private static Set<String> entityImplementations(CanonicalDefinition definition) {
