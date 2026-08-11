@@ -2,6 +2,7 @@
   "category.darkfolklore.fieldguide.vampires": "Vampires",
   "category.darkfolklore.fieldguide.werewolves": "Werewolves",
   "category.darkfolklore.fieldguide.spirits": "Spirits",
+  "category.darkfolklore.fieldguide.fae": "Fae",
   "category.darkfolklore.fieldguide.cryptids": "Cryptids",
   "category.darkfolklore.fieldguide.mythical_beasts": "Mythical Beasts",
   "category.darkfolklore.fieldguide.constructs": "Constructs",
@@ -32,6 +33,9 @@
 
   "fieldguide.name.entity.occultism.iesnium_golem": "Iesnium Golem",
   "fieldguide.entity.occultism.iesnium_golem.description": "An occult construct shaped from iesnium. Treat its forged body as a deliberate magical creation, not a naturally occurring beast.",
+
+  "fieldguide.name.entity.feywild.sprite": "Sprite",
+  "fieldguide.entity.feywild.sprite.description": "A small Fae being whose presence can leave magical traces that mundane observation cannot fully explain. Fae-attuned analysis can reveal a glamour signature.",
 
   "message.darkfolklore.wolfsbane_finder.found": "Wolfsbane crop found at %s, %s, %s (%s blocks away)",
   "message.darkfolklore.wolfsbane_finder.not_found": "No planted wolfsbane crop was found in loaded chunks within %s blocks"
