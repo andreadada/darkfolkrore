@@ -1,0 +1,12 @@
+{
+  "sort_index": 24,
+  "icon": "fieldguide:textures/gui/icons/allay.png",
+  "contents": [
+    {
+      "type": "entry",
+      "id": "entity:feywild/sprite",
+      "canonical_concept": "darkfolklore:sprite",
+      "unlock": {"triggers": ["scan", "kill"]}
+    }
+  ]
+}
