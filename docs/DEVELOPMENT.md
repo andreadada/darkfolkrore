@@ -80,7 +80,7 @@ src/main/resources/
   data/neoforge/loot_modifiers/    global loot-modifier index
   assets/darkfolklore/lang/        English and Italian localization
 
-src/test/java/                     49 JUnit tests and resource validators
+src/test/java/                     53 JUnit tests and resource validators
 .github/workflows/build.yml        clean-build CI
 docs/                              behavior, audits, release gates, and limitations
 ```
@@ -141,7 +141,7 @@ Back up a real 0.1 world and exercise the upgrade path as part of the production
 
 ## Release checklist
 
-1. Run the 49-test JUnit suite and the three GameTests with Java 21.
+1. Run the 53-test JUnit suite and the three GameTests with Java 21.
 2. Run a clean build twice if checking reproducibility.
 3. Inspect the production JAR and record its filename, size, and SHA-256.
 4. Run the A-G matrix in [Testing](TESTING.md), including mandatory-only, exact adapters, curated pack, dedicated server, client, upgraded 0.1 world, and fresh 0.2 world.

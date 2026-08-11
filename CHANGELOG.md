@@ -9,7 +9,7 @@
 - Read-only MCA Capitals political context, allowing verified offices and influence to affect rumor credibility and investigations without changing MCA's own state.
 - Public-secret reveal rules, controlled false accusations, and additional incident-driven society stories.
 - Expanded investigation testimony, evidence feedback, organization consequences, and lore rewards.
-- A complete Dark Folklore Field Guide dataset with localized English and Italian entries, entity mappings, discovery tiers, and server-side unlock synchronization.
+- A complete Dark Folklore Field Guide dataset with six localized English/Italian categories, nine explicit entity mappings, native binary discoveries, and server-side synchronization with Core lore thresholds.
 - Production diagnostics for social state, organizations, stories, compatibility adapters, and canonicalization.
 
 ### Changed
@@ -36,6 +36,8 @@
 
 ### Known Issues
 
+- Release classification is `RELEASE_CANDIDATE`: graphical startup to the title state passed, but no client world/UI gameplay pass or authentic 0.1-world upgrade has been completed, so presentation and real-save migration remain manual gates.
+- Curated dedicated-server staging logged one unowned NeoForge `RuntimeDistCleaner` request for the client `Screen` class. Startup, save, and shutdown completed, and no Dark Folklore class was identified as the requester, but the pack run is not claimed to be warning-free.
 - A complete interactive client UX smoke pass and every optional-mod permutation must be completed before promoting this build beyond release-candidate status.
 - Quest Giver remains a detected optional front end; Dark Folklore continues to own contract state and does not publish contracts into Quest Giver 1.5.1.
 - Versions outside the audited integration set retain safe data/tag interoperability where possible, but their reflective or direct adapters remain disabled until audited.

@@ -36,7 +36,7 @@ The public facade resolves an EntityType or ItemStack to its CanonicalDefinition
 | HIDDEN_FROM_NORMAL_ACQUISITION | The entry stays registered for save safety but new ordinary acquisition is routed elsewhere. |
 | DEFERRED_UNSAFE | No change is made because the audit did not establish a safe replacement. |
 
-Not every enum value is used by the 0.1.0 defaults. The detailed audit records the selected outcomes and actual enforcement status.
+Not every enum value is used by the 0.2.0 defaults. The detailed audit records the selected outcomes and actual enforcement status.
 
 ## Enforcement layers
 

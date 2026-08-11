@@ -164,7 +164,7 @@ The audited pack keeps Field Guide scanning enabled, spyglass scanning enabled a
 
 ## Validation boundary
 
-The pure resource tests prove schema, mappings and localization completeness. Java compilation proves the exact 1.14.0 server signatures. A dedicated-server boot can prove common-side safety and datapack reload, but it cannot prove category rendering, translated labels, entry models, toast behavior or Recent Discoveries layout. Those require a real client.
+The pure resource tests prove schema, mappings and localization completeness. Java compilation proves the exact 1.14.0 server signatures. Dedicated-server and title-screen client startup prove common-side safety, resource reload, and exact bridge activation, but they cannot prove category rendering, translated labels, entry models, toast behavior or Recent Discoveries layout. Those require opening the UI in a joined world.
 
 The final Field Guide workstream smoke used Java 21, NeoForge 21.1.248 and the existing 23-external-JAR curated server staging. Field Guide reported exact version `1.14.0` and status `ACTIVE`; Dark Folklore atomically loaded 16 canonical concepts with zero invalid definitions; no `Failed to load category`, `Unknown unlock trigger`, Field Guide bridge-disable, or Dark Folklore/Field Guide exception appeared. The server reached `Done (1.567s)!`, then the harness requested a normal halt and the log recorded `Stopping server`, `Saving players`, `Saving worlds`, all dimensions saved, and `BUILD SUCCESSFUL`. The harness's dynamic-agent warning is a serviceability warning from requesting that graceful halt, not shipped mod behavior.
 
@@ -172,7 +172,7 @@ The wider staging did emit one NeoForge `RuntimeDistCleaner` error saying that `
 
 The reduced server staging did not contain Graveyard, so Field Guide correctly omitted `entity:graveyard/wraith` during that runtime. The Spirits category still contained its Vampirism and Eidolon entries. The complete-pack registry audit and pure resource validator cover the Graveyard mapping, but only the real complete client can prove its rendering.
 
-No automated graphical client was available while this integration was implemented. The release-level runtime report must therefore distinguish the successful dedicated-server result from the manual client checks below rather than treating server startup as UI validation.
+A final graphical client startup later reached the NeoForge title state with Field Guide 1.14.0 and the wolfsbane bridge active, then exited cleanly. No world was loaded and no Field Guide page was opened, so the release-level report must distinguish successful client startup from the manual UI checks below.
 
 ## Manual client test matrix
 
@@ -195,4 +195,4 @@ No automated graphical client was available while this integration was implement
 - The nine entries require their provider mods. Field Guide correctly omits an entry whose registry target is absent, so a deliberately reduced pack can have fewer entries than the complete-pack counts.
 - `KEEP_DISTINCT` concepts do not receive an automatic lore-threshold page because there is no honest single page to choose.
 - Custom Field Guide names, descriptions and photographs are not copied into Dark Folklore knowledge.
-- Final UI confirmation remains a manual client test; dedicated-server success is not evidence of correct rendering.
+- Final UI confirmation remains a manual in-world client test; dedicated-server success and title-screen client startup are not evidence of correct Field Guide rendering.

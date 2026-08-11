@@ -2,7 +2,7 @@
 
 ## Scope and method
 
-Target: Minecraft 1.21.1, NeoForge 21.1.248, Java 21, Dark Folklore Core 0.1.0.
+Target: Minecraft 1.21.1, NeoForge 21.1.248, Java 21, Dark Folklore Core 0.2.0.
 
 The installed JAR is authoritative. Auditing used JAR metadata, class/resource listings, public signatures, Atlas 0.2.0 registry/recipe/reference output, supplied configuration, and the implementation now in src/main. No method or event is assumed from a different mod version.
 
@@ -40,26 +40,39 @@ The faction registry is preferred over guessing from entity IDs or treating an a
 | Audit item | Finding |
 | --- | --- |
 | JAR | Werewolves-1.21-2.0.3.3.jar; SHA-256 ECBCA2CD344E24AD48157834A8F321D1A7D2221C727FE8E61E4436D1219C6CFB. |
-| Public surface inspected | Werewolves' faction registration through Vampirism, the werewolves:werewolf faction ID, and data/werewolves/tags/item/tools/silver.json. Wolfsbane/silver behavior classes and config were inspected to establish ownership, not called. |
-| API used | The same public Vampirism faction-registry query, comparing IFaction.getID() with werewolves:werewolf. |
-| Data used | Native silver tag, common material tags, Dark Folklore entity/item tags, spawn profiles, and optional biome/loot data. |
-| Internal classes touched | None. No call is made to SilverEffect, WolfsbaneEffect, LevelWolfsbane, diffuser classes, or player implementation state. |
-| Failure containment | Werewolf faction queries are enabled only when both Vampirism 1.10.12 and Werewolves 2.0.3.3 are exact. |
-| Stability risk | Low-to-medium: faction API is public, but the external faction ID and tag IDs are versioned data. |
+| Public surface inspected | Werewolves' faction registration through Vampirism, the `werewolves:werewolf` faction ID, native silver tags, and the exact 2.0.3.3 wolfsbane effect/diffuser behavior. |
+| API used | The public Vampirism faction-registry query compares `IFaction.getID()` with `werewolves:werewolf`. The separate exact wolfsbane bridge calls the audited diffuser fuel hook and native wolfsbane-effect factory for Enchanted's canonical flower. |
+| Data used | Native silver tag, common material tags, Dark Folklore entity/item tags, spawn profiles, exact-provider recipes, loot routing, and biome-feature removal. |
+| Public implementation classes touched | `WolfsbaneDiffuserBlockEntity` and `WolfsbaneEffect` are used only by the isolated bridge documented in [Wolfsbane audit](WOLFSBANE_AUDIT.md). No player transformation/progression implementation is written. |
+| Failure containment | Werewolf faction queries require exact Vampirism 1.10.12 and Werewolves 2.0.3.3. The wolfsbane implementation class is loaded once only when both Werewolves 2.0.3.3 and Enchanted 4.2.7 are exact; otherwise the bridge remains disabled. |
+| Stability risk | Medium: the faction query is public, but the wolfsbane bridge uses exact-version public implementation classes and must be re-audited on either provider update. |
 
-Werewolves owns native silver and wolfsbane mechanics. The Core's silver-versus-werewolf rule lists werewolves as a native provider namespace, so it does not stack the Core's damage multiplier onto native Werewolves entities.
+Werewolves owns native silver and wolfsbane effects. Core does not stack its silver multiplier onto native Werewolves entities. Enchanted owns the 0.2.0 farmable canonical wolfsbane; the strict bridge delegates the small verified diffuser/contact surfaces back to Werewolves rather than recreating transformation or faction rules.
 
 ## MCA Reborn 7.7.32+1.21.1
 
 | Audit item | Finding |
 | --- | --- |
 | JAR | mca-neoforge-7.7.32+1.21.1.jar; SHA-256 874B5BD82D754033117EE6C1E7B5EBD142EC5DC0DF2881C9BB2F38A05AE7F4AB. |
-| API used | No MCA implementation method is called by the Core. |
-| Standard surface | MCA entities are scoped by their mca registry namespace and handled through ordinary NeoForge Entity, LivingEntity, interaction, join, death, and damage events. |
-| Internal classes touched | None. Core source does not import net.conczin.mca classes. |
-| Stability risk | Low for generic event handling. The exact MCA version remains important because the compatibility add-on below is built for it. |
+| API used | Ordinary NeoForge entity/events plus exact-version reflective reads of verified MCA relationships, hearts, player reputation/bounty context, and personality labels. |
+| Standard surface | MCA entities are scoped by their `mca` registry namespace and handled through ordinary NeoForge `Entity`, `LivingEntity`, interaction, join, death, and damage events. |
+| Public implementation access | `McaSocialAdapter` resolves and caches the expected reflection handles at initialization. It imports no MCA type, returns Core DTOs without retaining foreign world/entity state, and performs no relationship, heart, personality, family, or AI write. |
+| Stability risk | Medium for exact social reads and low for generic event handling. An unknown/unsupported relationship contributes zero instead of being guessed. |
 
-Dark Folklore does not create a parallel MCA supernatural attachment or write MCA traits.
+Dark Folklore does not create a parallel MCA supernatural attachment or write MCA relationships, traits, personalities, hearts, or family state. Detailed supported/blocked categories are recorded in [MCA social audit](MCA_SOCIAL_AUDIT.md).
+
+## MCA Capitals 1.1.0
+
+| Audit item | Finding |
+| --- | --- |
+| JAR | mcacapitals-1.1.0.jar; SHA-256 73AF01FAE88C9698D93EF0372854EA57373EFA0276C0CB33CC38FEFEEDED7B56. |
+| API available | No stable API namespace for the required office/capital reads was found. |
+| Integration method | `McaCapitalsCompat` resolves exact 1.1.0 public implementation signatures once and maps results into Core `PoliticalRole`/context DTOs. |
+| Cache | Core DTOs only, bounded to 1,024 entries for 20 game ticks; cleared at server stop. |
+| Writes performed | None. Core does not change titles, monarchies, capitals, villages, families, succession, or MCA state. |
+| Failure containment | Absent/untested versions never resolve the implementation. Signature/query failure returns unavailable context and an actionable adapter report. |
+
+The focused class/signature and title-mapping evidence is in [MCA Capitals](MCA_CAPITALS.md). A founded-capital gameplay smoke remains manual.
 
 ## MCA Reborn x Vampirism Compat 2.0.12
 
@@ -84,12 +97,12 @@ The returned source UUID is provenance. The API does not justify treating it as 
 | Audit item | Finding |
 | --- | --- |
 | Surface inspected | Atlas/JAR registry entries and recipe/resource references for garlic, mandrake, wolfsbane, altars, poppets, seeds, and crop items. |
-| Public API used | None required. |
-| Integration used | Optional semantic tags, canonical definitions, and a config-aware Core global loot replacement for newly generated enchanted:garlic. |
-| Internal classes touched | None. |
-| Stability risk | Low for exact registry IDs; medium if future versions change crop loot or item semantics. |
+| Public API used | No Enchanted Java type is called. Exact registry IDs and normal NeoForge item/block events are sufficient. |
+| Integration used | Optional semantic tags, canonical definitions, config-aware generated-loot/feature routing, and one half of the exact Werewolves/Enchanted wolfsbane gate. |
+| Internal classes touched | None from Enchanted. The external implementation calls are confined to the Werewolves side of the isolated bridge. |
+| Stability risk | Medium: exact registry, crop/seed, loot, and block semantics must be re-audited if Enchanted changes. |
 
-Mandrake, altar, and poppet are deliberately not substituted. Enchanted wolfsbane gains semantic classification but is not injected into Werewolves' private aura state.
+Mandrake, altar, and poppet are deliberately not substituted. Enchanted wolfsbane is the canonical farmable plant; Core gives it only the audited Werewolves contact/diffuser/finder interoperability and does not write player aura, transformation, or faction progression state.
 
 ## Occultism 1.224.2
 
@@ -138,14 +151,14 @@ Mandrake, altar, and poppet are deliberately not substituted. Enchanted wolfsban
 | JAR | fieldguide-neoforge-1.21.1-1.14.0.jar; SHA-256 00B26B1351CB85B90ED86675C49BFC054A3141BEDAE22358D5A6AD4FE7CB0740. |
 | Public API inspected | EntryUnlockData and EntryUnlockData.UnlockTrigger. |
 | Public implementation inspected | FieldGuideProgressManager and PlayerFieldGuideProgress in com.evandev.fieldguide.server.progress. |
-| Methods used | FieldGuideProgressManager.getInstance().getProgress(ServerPlayer), PlayerFieldGuideProgress.tryUnlock(..., KILL), and isUnlocked(ResourceLocation). |
+| Methods used | `FieldGuideProgressManager.getInstance().getProgress(ServerPlayer)`, `PlayerFieldGuideProgress.tryUnlock(..., KILL)`, `isUnlocked`, `canUnlock`, and `unlock(..., grantXp=false)`. |
 | Events used | Standard LivingDeathEvent and PlayerTickEvent.Post. No suitable Field Guide unlock NeoForge event was found/used. |
-| Data used | Field Guide category JSON, auto_populate tag strategies, language keys, and entity entry IDs of the form entity:<namespace>/<path>. |
+| Data used | Six category JSON files with nine explicit entity entries, English/Italian language keys, and entity entry IDs of the form `entity:<namespace>/<path>`. |
 | Internal classes touched | Public implementation classes outside the API package are used. No private fields, reflection, client classes, or Mixins. |
-| Failure containment | FieldGuideAdapter is loaded by name only at exact 1.14.0; runtime calls catch RuntimeException. Polling is bounded to once per 100 player ticks and only unresolved canonical entity concepts. |
+| Failure containment | `FieldGuideAdapter` is loaded by name only at exact 1.14.0; runtime calls catch `RuntimeException` and `LinkageError` and disable the instance once. Polling is bounded to once per 100 player ticks and only unresolved canonical entity concepts. |
 | Stability risk | Medium. The progress classes are public but not a declared stable API; exact pinning is mandatory. |
 
-CompatibilityManager now labels this mechanism “exact 1.14.0 server progress bridge,” matching the implementation. There is no Core command injection into Field Guide and no Field Guide scan event dependency.
+CompatibilityManager labels this mechanism “exact 1.14.0 server progress bridge,” matching the implementation. Native Field Guide scanning remains native; Core forwards qualifying kills, polls binary unlocks into one Core discovery, and forwards Core's 25-point `OBSERVED` threshold to an existing unlockable page. There is no command injection or Field Guide scan-event dependency.
 
 ## Ancillary data integrations
 

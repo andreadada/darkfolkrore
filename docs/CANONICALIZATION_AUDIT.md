@@ -16,7 +16,7 @@ Atlas similarity is evidence for review, not proof of equivalence. Every outcome
 | SUPPRESS_DUPLICATE_SPAWN | A duplicate remains addressable but cannot enter through natural spawning. |
 | DEFERRED_UNSAFE | Evidence is insufficient for a safe change. |
 
-“Implementation status” distinguishes the declared metadata policy from the actual mechanisms present in 0.1.0.
+“Implementation status” distinguishes the declared metadata policy from the actual mechanisms present in 0.2.0.
 
 Unless a row says otherwise, Core-owned loot conversion, duplicate feature/spawn-list removal, and duplicate spawn-profile suppression apply while the common canonicalization toggle is true (its default). AlmostUnified recipe rewriting and provider-owned configuration are independent of that toggle.
 
@@ -68,12 +68,12 @@ The placed-feature list is optional. If a provider is absent, the tag entry is i
 | --- | --- |
 | Concept | darkfolklore:wolfsbane |
 | Candidates | werewolves:wolfsbane and enchanted:wolfsbane_flower. |
-| Decision | INTEROPERABILITY_ONLY with Werewolves as the representative implementation. |
-| Reason | Werewolves' item is integrated with WolfsbaneBlock, diffuser block entities, LevelWolfsbane aura state, effects, recipes, and faction behavior. Replacing it with the Enchanted crop would bypass those mechanics. |
-| Runtime policy | Both items receive the Dark Folklore WOLFSBANE trait. No stack rewrite occurs. |
-| Implementation status | Partial by design: shared semantic queries work, but Enchanted's flower does not become a native Werewolves aura/diffuser item. |
-| Migration impact | None. Both crop chains remain intact. |
-| API/code finding | Registry/tag bridge only. No internal aura calls. |
+| Decision | FULL_CANONICALIZATION toward `enchanted:wolfsbane_flower`, with exact-version native-mechanics interoperability. |
+| Reason | Enchanted 4.2.7 owns the audited farmable crop/seed/flower chain. Werewolves 2.0.3.3 still owns diffuser, contact-effect, finder, recipe, and faction behavior, so those narrow mechanics are preserved through a strict bridge rather than duplicated. |
+| Runtime policy | Both items receive the Dark Folklore WOLFSBANE trait. New audited recipe, loot, and worldgen acquisition routes prefer the Enchanted flower; exact Werewolves+Enchanted installs also enable diffuser fuel, native contact effect, and loaded-chunk finder support. |
+| Implementation status | Enforced for the finite audited acquisition and mechanics surfaces. No broad inventory/container rewrite or player progression mutation occurs. |
+| Migration impact | Existing `werewolves:wolfsbane` stacks remain valid and are not bulk-migrated. Enchanted remains the farmable canonical path going forward. |
+| API/code finding | The exact bridge class is loaded once only for Werewolves 2.0.3.3 plus Enchanted 4.2.7; it calls the audited Werewolves diffuser/effect surfaces and otherwise fails closed. See [Wolfsbane audit](WOLFSBANE_AUDIT.md). |
 
 ## Garlic
 

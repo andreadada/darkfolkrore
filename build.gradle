@@ -230,7 +230,7 @@ def auditReleaseJar = tasks.register('auditReleaseJar') {
                 throw new GradleException('Release JAR contains no Dark Folklore Field Guide resources')
             }
 
-            List<String> forbidden = names.findAll { name ->
+            Set<String> forbidden = names.findAll { name ->
                 String lower = name.toLowerCase(Locale.ROOT)
                 lower.startsWith('com/darkfolklore/atlas/') ||
                         lower.startsWith('org/junit/') ||

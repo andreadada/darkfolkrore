@@ -288,7 +288,7 @@ Core anchors overworld `SavedData` file ID `darkfolklore_society`. Root integer 
 | `family_reactions` | `observer`, `subject`, `secret`, `reaction` |
 | `reputation` | `holder`, `faction`, `value` |
 | `organizations` | `id`, `type`, `name`, `leader`, `home`, `influence`; string `members`; compound `member_seen`, `intelligence`, `relations`, `events`; string `objectives` |
-| `villages` | `key`, `awareness`, `vampire`, `hunter`, `werewolf`, `witch`, `fear`, `suspicion` |
+| `villages` | `key`, `awareness`, `vampire`, `hunter`, `werewolf`, `witch`, `fear`, `suspicion`, `political` |
 | `lineages` | `descendant`, `source`, `type`, `time` |
 | `evidence` | `id`, `type`, `concept`, optional `subject`, position, `created`, `expires`, optional `collected` |
 | `contracts` | `id`, `player`, `issuer`, `concept`, `expires`, `status`, `village`, `required`, position, string `clues` |
@@ -321,4 +321,4 @@ Reopening the written schema-2 save does not rerun migration, making the upgrade
 
 Every 1,200 ticks Core decays/prunes rumors, expires evidence, removes expired rumor-silence rows, and removes terminal contracts/stories after the configured retention window. Organization maintenance enforces the configurable social limit and a derived public-claim limit while organizations are enabled. Organizations, member/intelligence/relation/event collections, public claims, and rumor-silence rows also have insertion/load caps. Encounter pressure is clamped to 0..100; zero removes the row.
 
-The 49-test JUnit suite includes schema-2 round trips and an idempotent schema-1 organization migration fixture. A real backed-up 0.1 world upgrade remains a production smoke requirement.
+The 53-test JUnit suite includes schema-2 round trips and an idempotent schema-1 organization migration fixture. Keep a backed-up real-world upgrade in the release smoke matrix because the fixture does not exercise every foreign attachment in a modpack save.

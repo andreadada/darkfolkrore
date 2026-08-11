@@ -59,7 +59,7 @@ KubeJS Eidolon is currently unused. Its presence is not evidence that Eidolon in
 
 ## Safe cleanup plan
 
-No automatic cleanup is required for 0.1.0. If the pack owner chooses to remove the examples later:
+No automatic cleanup is required for 0.2.0. If the pack owner chooses to remove the examples later:
 
 1. Confirm logs/kubejs contain only the three Hello World messages and no undeclared generated script.
 2. Remove the three example main.js files and two example PNGs in a dedicated, reviewable change.

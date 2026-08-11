@@ -25,9 +25,10 @@ The first development-server launch may create `run/eula.txt` and stop. Continue
 
 ## Current automated snapshot
 
-- **49 JUnit tests passed** with no skipped, failed, or errored tests in the recorded 0.2.0 pass.
+- **53 JUnit tests passed** with no skipped, failed, or errored tests in the recorded 0.2.0 pass.
 - **3 GameTests passed** on the NeoForge GameTest server.
-- The project contains 49 concrete `@Test` methods and three concrete `@GameTest` methods; these are no longer inherited 0.1 counts or an empty GameTest task.
+- **Graphical client startup passed** with final Core 0.2.0 and the curated 23-JAR set: resource reload completed, the audited Field Guide/wolfsbane adapters were active, the title screen was reached, and Alt+F4 produced `Stopping!` plus `BUILD SUCCESSFUL` with empty stderr.
+- The project contains 53 concrete `@Test` methods and three concrete `@GameTest` methods; these are no longer inherited 0.1 counts or an empty GameTest task.
 
 The JUnit suite covers:
 
@@ -47,7 +48,7 @@ The JUnit suite covers:
 
 The live GameTests verify:
 
-1. The validated datapack state is available in a running level, including `darkfolklore:vampire` and at least ten society templates.
+1. The validated datapack state is available in a running level, including `darkfolklore:vampire`, all four organization archetypes, twelve society templates, and the sovereign political weight.
 2. A persisted public vampire belief about an ordinary villager is visible to another observer but never changes the villager's factual supernatural state.
 3. Confirmed organization-leader death performs deterministic succession and removes the dead leader from the membership index.
 
@@ -55,19 +56,25 @@ These tests use Minecraft/NeoForge classes and a real server level. They do not 
 
 ## Production smoke matrix A-G
 
-Record each row as `PASS`, `FAIL`, or `BLOCKED`, with the exact command/mod set, log path, and reason. The automated snapshot above does not close this matrix by itself.
+The statuses below record the final evidence available on 2026-08-11. A `PASS` is limited to the stated smoke scope; it does not imply that every manual high-risk case later in this document was exercised.
 
-| ID | Configuration | Acceptance evidence |
-| --- | --- | --- |
-| A | Dark Folklore plus mandatory Minecraft/NeoForge environment only | Startup completes; all optional adapters are `DISABLED`; no optional-class linkage failure; `/folklore diagnostics` shows `invalid=0`. |
-| B | Dark Folklore plus primary exact adapters | Exact adapters report `ACTIVE`; missing non-primary integrations remain safely disabled; focused factual, social, Field Guide, and wolfsbane checks pass. |
-| C | Curated real modpack integration set | Startup/reload complete with real providers; canonical resources resolve; no known incompatibility or data error. |
-| D | Dedicated server | Headless startup reaches `Done`; reload, commands, save, shutdown, and restart complete without critical errors. |
-| E | Client | Join a world/server; exercise Field Guide UI, recent discoveries, localized entries, contract feedback, and normal provider gameplay without client crash. |
-| F | Existing 0.1 world upgraded to 0.2 | Backed-up schema-1 world loads, retains old records, receives safe new defaults, saves schema 2, and reopens without rerunning migration or corrupting state. |
-| G | Fresh 0.2 world | New world creates schema 2 and exercises witnesses, organizations, stories, contracts, save/restart, and reload cleanly. |
+| ID | Status | Configuration and recorded reason | Evidence |
+| --- | --- | --- | --- |
+| A | `PASS` | Mandatory Minecraft/NeoForge environment only: every optional adapter disabled cleanly, all Core data loaded with `invalid=0`, all three GameTests passed, and the world saved and stopped. | `run/matrix-a-mandatory.log` |
+| B | `PASS` | Primary exact adapters: Vampirism, Werewolves, MCA, MCA Capitals, MCA Vamp Compat, Enchanted, Field Guide, and the wolfsbane bridge reported `ACTIVE`; all three GameTests passed. | `run/matrix-b-exact-adapters.log` |
+| C | `PASS` | Curated real-provider headless staging loaded final Core 0.2.0, validated all included data with `invalid=0`, and passed all three GameTests. The unowned dedicated-side `Screen` warning described below remains open. | `run/release-audit-020/02-runGameTestServer.log` |
+| D | `PASS` | A real headless `DedicatedServer` loaded final Core 0.2.0, validated Core data with `invalid=0`, reached `Done (6.923s)`, then stopped gracefully and saved every dimension. Focused commands, `/reload`, and restart remain manual. | `run/release-audit-020/10-final-dedicated-server-latest.log` |
+| E | `BLOCKED` | Graphical startup itself passed: final Core 0.2.0 reached the NeoForge title state, completed resource reload, activated the exact Field Guide/wolfsbane adapters, and exited cleanly. No world was joined, so Field Guide rendering/Recent Discoveries, Italian presentation, contract feedback, and provider gameplay remain unverified. | `run/release-audit-020/11-final-client.log`; in-world UI/gameplay pass still required. |
+| F | `BLOCKED` | The schema-1 NBT fixture proves retained legacy rows, safe schema-2 defaults, dirty-once migration, and idempotent reopen, but no authentic 0.1 world directory was upgraded and inspected end to end. | `FolkloreSavedDataTest` passes; real backed-up 0.1 save required. |
+| G | `PASS` | A fresh 0.2 test world loaded all Core data with `invalid=0`, passed all three live GameTests, saved every dimension, and stopped. Deeper society interactions remain manual. | `run/matrix-g-fresh-world.log` |
 
-At this documentation snapshot the 49 JUnit and three GameTest passes are recorded. Client behavior and the full manual A-G evidence remain separate promotion gates. If client validation (or an explicitly accepted equivalent) is outstanding, the maximum release classification is `RELEASE_CANDIDATE`.
+The exact-adapter and curated dedicated-server staging emitted one NeoForge `RuntimeDistCleaner` error stating that `net.minecraft.client.gui.screens.Screen` was requested on `DEDICATED_SERVER`. The line had no stack trace or owning mod; startup, tests, save, and shutdown continued, and Dark Folklore's audited common/server adapter classes contain no client reference. It is therefore an unowned staging warning, not evidence of a Core crash, but the pack smoke must not be described as error-free until its owner is identified.
+
+The final dedicated-server harness requested the graceful halt through a dynamically attached stop agent. Any dynamic-agent/serviceability warning produced by that request belongs to the test harness, not to the shipped mod; the server lifecycle itself logged `Stopping server`, player/world saves, and all dimensions saved.
+
+The client log contains provider/resource warnings for missing Easy Villagers compatibility classes, invalid upstream sound paths, models, and subtitle translations. It contains no Dark Folklore `ERROR`, bridge-disable, or client crash. These upstream warnings mean the curated client startup is not claimed to be warning-free.
+
+At this documentation snapshot the 53 JUnit, three GameTest, final dedicated-server lifecycle, and graphical client-startup passes are recorded. Because full row-E in-world/UI acceptance and row-F real-world migration remain blocked, the 0.2.0 release classification is **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.
 
 ## Manual high-risk matrix
 
@@ -99,7 +106,7 @@ Run on disposable worlds or backed-up copies. Retain `latest.log`, relevant conf
 - GameTests do not yet drive the full event-bus witness LOS path, natural-spawn cancellation, contract interactions, or cross-restart disk persistence.
 - Optional adapter models and gates are unit tested, but every real foreign JAR permutation and runtime signature still needs smoke coverage.
 - Syntactic/resource validation cannot prove every optional registry ID exists in every pack variant.
-- The schema-1 unit migration fixture is not a substitute for upgrading a real 0.1 world directory.
+- The schema-1 unit migration fixture is not a substitute for upgrading and inspecting an authentic 0.1 world directory; row F remains blocked.
 - No automated performance benchmark proves tick-time behavior at a particular player/entity scale.
 
 Release acceptance requires the final completion report to record the clean build, production JAR audit/hash, migration result, and A-G statuses. Never infer `PRODUCTION_READY` from compilation or unit tests alone.

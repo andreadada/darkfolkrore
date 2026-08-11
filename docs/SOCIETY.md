@@ -121,7 +121,7 @@ A Core village is a social region, not a vanilla POI boundary. `VillageKey` divi
 <dimension>|<floor(chunkX / 8)>|<floor(chunkZ / 8)>
 ```
 
-Each region stores public awareness, vampire/hunter/werewolf/witch influence, fear, and suspicion, clamped to 0..100. Witness incidents increase suspicion/fear and confirmed awareness. Political witnesses can add awareness. Family fear adds fear. Contract completion adds 4 awareness, removes 3 suspicion, and adds 3 hunter influence. Reading an unknown region creates an all-zero durable state.
+Each region stores public awareness, vampire/hunter/werewolf/witch influence, fear, suspicion, and political importance, clamped to 0..100. Witness incidents increase suspicion/fear and confirmed awareness. Verified political consequences can add awareness and political importance only after knowledge exists. Family fear adds fear. Contract completion adds 4 awareness, removes 3 suspicion, and adds 3 hunter influence. Reading an unknown region creates an all-zero durable state.
 
 These values are Core narrative pressure, not provider faction reputation or vanilla village statistics.
 

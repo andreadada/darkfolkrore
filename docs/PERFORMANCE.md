@@ -2,7 +2,7 @@
 
 ## Summary
 
-Dark Folklore's gameplay work is predominantly event-driven and local. It does not run a whole-world entity scan every tick. The main explicit bounds are a 1,024-task rumor queue, a configurable rumor batch budget, a maximum rumor-task hop index of 3 (a hop-3 task cannot enqueue a successor), and a configurable maximum number of witnesses processed per incident.
+Dark Folklore's gameplay work is predominantly event-driven and local. It does not run a whole-world entity scan every tick. The main explicit runtime bounds include a 1,024-task rumor queue, at most 24 local rumor candidates per task, a configurable rumor batch budget, a maximum rumor-task hop index of 3 (a hop-3 task cannot enqueue a successor), a 128-row rumor diagnostic ring, a configurable maximum number of witnesses per incident, and budgeted organization maintenance.
 
 This document describes code-level complexity and configured schedules. It is not a benchmark report; no production tick-time or heap measurements are currently checked into the project.
 
@@ -15,9 +15,9 @@ This document describes code-level complexity and configured schedules. It is no
 | Every 100 player ticks, exact Field Guide adapter only | For that player, scan canonical entity definitions not yet discovered and query their implementation entries. |
 | Every 200 server ticks | Scan active contracts/stories for expiry and recompute two world-event predicates for each loaded server level. |
 | Every `max(1, encounterCooldownTicks / 100)` ticks (default 120) | Remove one encounter-pressure point from each online player with positive pressure; reaching zero removes the map entry. |
-| Every 1,200 ticks | Decay persisted rumors; scan social records, evidence, terminal narrative history, and rumor cooldowns for cleanup. |
+| Every 1,200 ticks | Decay/prune persisted rumors; clean evidence, terminal narrative history, silence/cooldown state; and, when organizations are enabled, enforce social/public caps and process at most the configured organization-maintenance budget. |
 
-World-event checks cover `FULL_MOON` and `WITCHING_HOUR`; they do not inspect entities. Encounter relaxation is linear in online player count. Field Guide work is linear in loaded canonical entity definitions and their implementation lists, not in all registered entity types.
+World-event predicate checks cover `FULL_MOON` and `WITCHING_HOUR` without scanning entities. When a transition is eligible for a society story, the story engine inspects at most four players per level and at most sixteen nearby actors per player. Encounter relaxation is linear in online player count. Field Guide work is linear in loaded canonical entity definitions and their implementation lists, not in all registered entity types.
 
 ## Event-local work
 
@@ -33,13 +33,13 @@ A qualifying supernatural damage incident performs one living-entity query in th
 
 Repeated actor/victim/secret damage is suppressed for 100 ticks. When the incident-cooldown map grows beyond 2,048 entries, values older than 1,200 ticks are removed. This is age-based cleanup rather than a strict 2,048-entry bound.
 
-Automatic organization creation scans the stored organization collection to ensure there is only one hunter society for the region. That cost grows with historical organization count.
+Automatic hunter-organization creation scans the capped organization collection to ensure there is only one hunter society for the region. That cost grows with current organization count, whose production default cap is 512.
 
 ### Rumors
 
 The rumor queue has a strict admission limit of 1,024 tasks. Hop count is limited to 3, work is batch-budgeted, and each task stops after one successful recipient or one failed chance. A local query still evaluates the living entities inside 12 blocks, but only players, villager-like NPCs, and MCA people can receive a rumor.
 
-Organization trust checks scan organizations linearly. Rumor cooldowns and the queue are transient and reset on restart. If the queue is full, new tasks are dropped silently by design; diagnostics exposes only the current queue length.
+Organization trust uses the persisted membership index rather than scanning every organization for each actor. Social records also maintain subject/observer indexes for participant queries. Rumor cooldowns and the queue are transient and reset on restart, while explicit witness-intimidation silence is persisted. If the queue is full, new tasks are rejected; `/folklore rumor inspect` exposes queue size and a bounded recent diagnostic history, not an unbounded event log.
 
 ### Canonicalization
 
@@ -65,15 +65,16 @@ Terminal contracts and stories are retained only until their original deadline i
 
 ## Persistence and growth
 
-`FolkloreSavedData` serializes each logical map/collection as a list. Save and load are linear in total stored rows. The following collections have no explicit cardinality limit or historical compaction:
+`FolkloreSavedData` serializes each logical map/collection as a list. Save and load are linear in total stored rows. The following collections do not have a single global cardinality cap, although some are naturally limited by loaded concepts or pruned by expiry/retention:
 
 - lore concepts per player;
-- social observer/subject/secret records;
 - reputation holders;
-- organizations and village regions;
+- village regions;
 - lineage records;
 - active and recently terminal contracts and stories;
 - positive encounter-pressure UUIDs, including offline players until their pressure can resume decaying while online.
+
+When organization maintenance is enabled, observer-specific social records are periodically reduced to `maxSocialKnowledgeRecords` (default 50,000). Organizations have a configurable global cap (default 512), plus hard per-organization limits of 256 members, 256 intelligence entries, 1,024 relations, and 64 recent events. Public claims and persisted rumor-silence rows have a 50,000 hard ceiling; periodic public-claim maintenance derives a lower operational cap from the configured social limit. Public claims are stored once globally rather than copied to every observer.
 
 Rumor records receive exponential half-life decay every 1,200 ticks and are removed below 0.08. The general social prune also removes sufficiently old non-public records below 0.12. Stronger non-rumor records and permanent lineage can remain indefinitely by design. Terminal story/contract history is pruned after the configurable post-deadline retention period. Encounter pressure is clamped to 0 through 100, and the setter removes rather than stores zero values.
 
@@ -103,6 +104,9 @@ The main performance-sensitive common-config values are:
 | `evidenceLifetimeTicks` | 24,000 | 1,200–2,147,483,647 | Controls evidence retention. |
 | `contractLifetimeTicks` | 72,000 | 2,400–2,147,483,647 | Controls active contract lifetime and contributes to story expiry. |
 | `terminalHistoryRetentionTicks` | 168,000 | 24,000–2,147,483,647 | Keeps completed/expired stories and contracts this long after their original deadline. |
+| `organizationMaintenanceBudget` | 16 | 1–128 | Maximum organizations processed in one 1,200-tick maintenance pass. |
+| `maxSocialKnowledgeRecords` | 50,000 | 1,000–500,000 | Operational cap enforced for observer-specific persisted beliefs. |
+| `maxOrganizations` | 512 | 16–4,096 | Admission cap for persisted organizations. |
 
 Feature toggles can eliminate their event work. `canonicalization` disables generated-loot rewriting, the two custom biome-removal actions, and profile suppressions marked as canonicalization-driven; it intentionally does not disable datapack reload, tag semantics, or canonical API lookups.
 
@@ -117,4 +121,4 @@ Feature toggles can eliminate their event work. `canonicalization` disables gene
 
 ## Known optimization opportunities
 
-The clearest safe optimizations for a future release are to pre-sort weakness rules at reload, pre-index stories/evidence by region and concept, use expiry indexes instead of full maintenance scans, cap or index organization lookups, and expose saved-state cardinalities/timing counters in diagnostics. None of those indexing optimizations is implemented in schema 1, so capacity planning should use the current behavior rather than assume them.
+The clearest safe optimizations for a future release are to pre-sort weakness rules at reload, pre-index stories/evidence by region and concept, use expiry indexes instead of full maintenance scans, index hunter-organization lookup by home/type, and expose more saved-state cardinalities/timing counters in diagnostics. Schema 2 already indexes social records by subject/observer and organization membership by member; capacity planning should not assume the remaining indexes exist.

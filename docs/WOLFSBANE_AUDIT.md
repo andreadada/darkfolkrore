@@ -337,5 +337,6 @@ worldgen-removal resource.
   was not added because the legacy item remains valid and future acquisition is already routed.
 - Data-pack recipe overrides are robust tag integration rather than implementation-bound code. The
   native diffuser/contact/Finder bridge is the only version-pinned code path.
-- Client visual behavior still requires an in-game client smoke test; dedicated-server startup
-  alone cannot validate the native diffuser marker or localized Finder messages.
+- Graphical client startup to the title state passed with the exact bridge active, but in-world
+  visual behavior still requires a client smoke; startup alone cannot validate the native diffuser
+  marker or localized Finder messages.

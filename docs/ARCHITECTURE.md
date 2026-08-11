@@ -103,9 +103,10 @@ Schema 2 persists:
 - observer-specific social beliefs;
 - global public secret claims without per-observer fan-out;
 - family-secret reactions;
+- witness-intimidation rumor-silence deadlines;
 - reputation ledgers;
 - organizations, objectives, intelligence, relations, bounded event histories, membership, and influence;
-- 8-by-8-chunk regional village state;
+- 8-by-8-chunk regional village state, including political importance;
 - provider-supplied conversion lineage provenance;
 - logical evidence and collection ownership;
 - contract assignments and state;
@@ -116,7 +117,7 @@ Schema-1 rows are decoded using their existing fields. New lists are absent and 
 
 Every compound-list row is read independently. A malformed row is logged and skipped rather than aborting other rows. This defensive behavior is corruption containment, not a guarantee that an arbitrarily damaged world can be repaired.
 
-Transient state includes rumor tasks/cooldowns/diagnostics, witness cooldowns, active computed world events, compatibility reports, reload errors, Field Guide polling state, organization maintenance cursor, and MCA Capitals role cache. Restarting clears these without erasing durable outcomes.
+Transient state includes rumor tasks/general cooldowns/diagnostics, witness incident cooldowns, active computed world events, compatibility reports, reload errors, Field Guide polling state, organization maintenance cursor, and MCA Capitals role cache. Restarting clears these without erasing durable beliefs or persisted witness-intimidation silence deadlines.
 
 ## Scheduling and growth control
 

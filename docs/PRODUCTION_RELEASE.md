@@ -58,6 +58,29 @@ Dark Folklore Core 0.2.0 does not expose a stable public Java API. Classes under
 
 GitHub Actions repeats the Java 21 clean build without configuration-cache reuse and uploads only `darkfolklore-core-0.2.0.jar`. Local third-party JARs are ignored by Git and are not needed by CI.
 
+## Final artifact audit
+
+Two clean Java 21 builds from the frozen source produced byte-identical production JARs:
+
+| Property | Final value |
+| --- | --- |
+| Filename | `darkfolklore-core-0.2.0.jar` |
+| Size | 355,749 bytes |
+| SHA-256 | `CCA1A4FE4F3D53A6F891FE05F51095EEE26A048CD6E850738100A4423176EBC7` |
+| Java classes | 147, all class-file version 65 |
+
+The independent audit confirmed 0.2.0 manifest/metadata, required resources/license, and no Atlas, JUnit, test, temporary, cache, nested-JAR, local-path, or shaded optional-mod content. Evidence is archived under `run/release-audit-020/`.
+
 ## Manual promotion gate
 
 Automated success is necessary but not sufficient. Before publication, record the final filename, byte size, SHA-256, migration result, and smoke-matrix A–G results. Promotion to `PRODUCTION_READY` additionally requires successful dedicated-server and client validation, a fresh 0.2 world, and an upgraded 0.1 world with no known corruption or critical crash. If client validation remains outstanding, the maximum classification is `RELEASE_CANDIDATE`.
+
+## Current classification
+
+**`RELEASE_CANDIDATE`**. The 53-test JUnit suite, three live GameTests, deterministic clean builds, final JAR audit, mandatory-only/exact-adapter/curated headless smokes, final 0.2.0 dedicated-server startup/save/shutdown, graphical client startup to the title state, migration fixtures, and fresh-world smoke are recorded in [Testing](TESTING.md). Full in-world client/UI acceptance and an authentic 0.1-world upgrade remain unverified, so this build does not meet the `PRODUCTION_READY` gate.
+
+The curated dedicated-server staging also logged one unowned NeoForge `RuntimeDistCleaner` request for `net.minecraft.client.gui.screens.Screen` on `DEDICATED_SERVER`. It did not prevent startup, save, or clean shutdown, and no Dark Folklore common/server class was identified as its owner. Treat it as an unresolved pack warning rather than claiming an error-free full-pack run.
+
+The final graceful stop was requested by a dynamically attached test-harness agent. Its dynamic-attach/serviceability warning is not shipped mod behavior; the retained server log independently records the normal stop and complete world saves.
+
+The final graphical client run loaded Core 0.2.0, completed resource reload with the exact Field Guide and wolfsbane bridges active, reached the NeoForge title state, and exited normally through Alt+F4 (`Stopping!`, `BUILD SUCCESSFUL`, empty stderr, no residual Java process). It did not join a world or exercise Field Guide pages, Recent Discoveries, Italian UI, contracts, or provider gameplay; matrix E therefore remains `BLOCKED`. The log also contains upstream provider model/sound/subtitle warnings but no Dark Folklore `ERROR`.

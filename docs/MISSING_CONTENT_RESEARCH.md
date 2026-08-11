@@ -2,7 +2,7 @@
 
 ## Current conclusion
 
-No new entity, item, block, model, texture, or animation is required to ship Dark Folklore Core 0.1.0.
+No new entity, item, block, model, texture, or animation is required to ship Dark Folklore Core 0.2.0.
 
 The implemented architecture is deliberately systemic. Canonical concepts point at installed providers, and concepts without safe equivalence are kept distinct rather than replaced by placeholders. Because no necessary concept failed the installed-content audit, no external asset/mod candidate was selected and no licensing claim is made here.
 
@@ -19,7 +19,7 @@ The implemented architecture is deliberately systemic. Canonical concepts point 
 | Fae | Feywild 5.5.5 plus related occult entities | Classified through data; no duplicate Core entity. |
 | Undead and spirits | The Graveyard, Eidolon, Occultism, Malum, Vampirism, and vanilla | Classified through semantic tags. |
 | Constructs/golems | Fangs 'n Claws, Occultism, Myths & Legends | Distinct implementations retained. |
-| Garlic/wolfsbane/silver/blood herbs and materials | Vampirism, Werewolves, Enchanted, Immersive Engineering, Occultism, Eidolon, and add-ons | Canonical/interoperability policy uses semantic data plus config-aware future-loot/worldgen routing; no Core item needed. |
+| Garlic/wolfsbane/silver/blood herbs and materials | Vampirism, Werewolves, Enchanted, Immersive Engineering, Occultism, Eidolon, and add-ons | Canonical/interoperability policy uses semantic data plus finite config-aware generated-loot/worldgen routing and the exact wolfsbane mechanics bridge; no Core item needed. |
 | Ritual altars and poppets | Enchanted, Eidolon, Werewolves, The Graveyard, and Malum | Name collisions kept distinct. |
 
 This table establishes coverage, not ownership of the providers' art assets. Dark Folklore does not copy those assets into its own JAR.
@@ -41,7 +41,7 @@ They can use text, tags, and existing entities/items. A new model would not impr
 
 ## Deferred presentation work
 
-Field Guide currently provides five static descriptions and tag-driven categories. Additional prose, category refinement, icons chosen from existing licensed provider assets, or original Dark Folklore UI art may improve presentation, but these are not blockers and do not justify placeholder creatures/items.
+Field Guide currently provides six curated categories, nine explicit provider-backed entries, and English/Italian names and descriptions. Further prose, accessibility refinement, or original Dark Folklore UI art may improve presentation, but those are not blockers and do not justify placeholder creatures/items.
 
 Dynamic Field Guide tier descriptions are also a capability limitation, not missing visual content. Dark Folklore keeps the full lore-stage state in its own server data rather than manufacturing an asset workaround.
 
@@ -65,4 +65,4 @@ If no compliant candidate exists, use properly commissioned/original assets or d
 
 | Date | Missing concept | Candidate research | Licensing | Result |
 | --- | --- | --- | --- | --- |
-| 2026-08-10 | None required for 0.1.0 | Not initiated; installed pack covers the release scope. | Not applicable. | Release is not blocked by custom content. |
+| 2026-08-10 | None required for 0.2.0 | Not initiated; installed pack covers the release scope. | Not applicable. | Release is not blocked by custom content. |

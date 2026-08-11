@@ -39,9 +39,9 @@ This document records the boundary of the current implementation so server owner
 ## Knowledge, society, and organizations
 
 - Witness detection is event-driven and bounded but uses ordinary entity line-of-sight and proximity, not acoustic simulation or room topology.
-- Rumors consider nearby players, villager-like NPCs, and MCA people plus same-organization trust. MCA relationships, family closeness, personality, profession, and pathfinding distance are not inputs yet.
+- Rumors consider nearby players, villager-like NPCs, and MCA people. Explainable trust can include same-organization membership, prior suspicion, the exact audited MCA spouse/parent/child/sibling/player-friend/player-bounty categories, verified MCA personalities, and exact MCA Capitals roles. Unsupported NPC friendship/enmity, ordinary profession, and pathfinding distance are not invented as inputs.
 - Confidence degrades on each retelling and on bounded periodic half-life passes. This decay applies to `RUMOR` records only; direct confirmed and public facts are intentionally retained.
-- Organizations persist members and are auto-created for sufficiently suspicious regions, but there is no recruitment AI, headquarters structure, schedule, leadership succession, or cleanup for dead members.
+- Organizations have bounded factual recruitment, objectives, intelligence/events, influence, confirmed-death cleanup, deterministic leader succession, and empty-organization dissolution. They do not add headquarters structures, schedules, a rich role hierarchy, or foreign-mod AI. Unloaded members remain as diagnosable dormant members because unload alone is not proof of death/removal.
 - Village society uses fixed 8-by-8-chunk regions rather than Minecraft POI-derived village boundaries.
 - Secret awareness can answer whether an observer should be fooled, but Dark Folklore does not override another mod's renderer or disguise mechanics.
 - Lineage records only reliable conversion-source UUIDs exposed by the exact MCA Vamp Compat implementation. It is provenance, not a guaranteed biological parent/sire relationship.
@@ -56,14 +56,15 @@ This document records the boundary of the current implementation so server owner
 
 ## Persistence and migration
 
-- Save data carries schema version 1 and each entry is loaded defensively, but no migration from a future or older incompatible schema exists yet.
-- World events and rumor queues/cooldowns are runtime-derived and are not persisted. Durable social records are persisted.
+- Save data carries schema version 2 and each entry is loaded defensively. Schema 1 receives safe defaults, is marked dirty once, and rewrites as schema 2; a newer schema is only best-effort read with a warning, and there is no downgrade writer.
+- World events, rumor tasks, and general delivery cooldowns are runtime-derived and are not persisted. Durable social records and explicit witness-intimidation rumor-silence deadlines are persisted.
 - Corrupt individual entries are skipped where handled; administrators should still back up worlds before changing builds.
 
 ## Testing and presentation
 
 - Pure logic and NBT round-trip tests exist, but there are not yet real GameTests for witnesses, spawn cancellation, or live event persistence.
-- Full-pack behavior still requires the manual matrix in [Testing](TESTING.md), especially optional-classloading and registry/resource validation.
-- The curated 26-mod headless integration set passes startup with all included Core data valid. The raw 96-JAR ModDevGradle run is blocked by Sinytra Connector artifact resolution; after excluding Connector and its three dependent Fabric atlas JARs, unrelated `glowingeyes` and `mcqoy` fail during dedicated-server construction by loading client-only classes. A curated server mod list or client launch is therefore required for acceptance of the remaining client-oriented pack.
+- Full-pack behavior still requires the manual matrix in [Testing](TESTING.md), especially client UI, real MCA relationship/capital state, optional-provider gameplay, and registry/resource presentation.
+- Mandatory-only, exact-adapter, fresh-world, and curated 23-external-JAR headless smokes passed their recorded scopes. The exact/curated dedicated staging emitted one unowned NeoForge `RuntimeDistCleaner` request for `net.minecraft.client.gui.screens.Screen`; it continued through startup, tests/save, and shutdown, and no Dark Folklore class was identified as the requester. Graphical client startup with the curated set also reached the title state and exited cleanly, but no world/UI gameplay path was exercised. Neither pack run is claimed warning-free because upstream resource/model/sound warnings remain.
+- Schema-1-to-2 migration is covered by an idempotent NBT fixture, but no authentic 0.1 world directory has yet been upgraded and inspected end to end.
 - There are no custom models, textures, particles, sounds, screens, structures, or placeholder entities in this core. Visual content remains with provider mods.
 - Admin debug visualization is not implemented; diagnostics are text-based.

@@ -1,8 +1,22 @@
 # DARK FOLKLORE — FINAL HANDOFF
 
-_Last updated: 2026-08-10_
+_Last updated: 2026-08-11_
 
 This file summarizes the complete design direction for the Dark Folklore Minecraft 1.21.1 NeoForge project so the work can be resumed if the original conversation is lost.
+
+## 0.2.0 implementation status
+
+Sections below preserve the original design/research direction, including some “possible,” “suggested,” and “requires audit” language. For implemented behavior, exact compatibility boundaries, and remaining gaps, the repository documents are authoritative: [README](README.md), [Architecture](docs/ARCHITECTURE.md), [Compatibility](docs/COMPATIBILITY.md), [Testing](docs/TESTING.md), and [Known Limitations](docs/KNOWN_LIMITATIONS.md).
+
+The 0.2.0 implementation has resolved the major open work described by this handoff:
+
+- schema-2 living society includes relationship/personality/political trust, family reactions, bounded organizations, public reveal, controlled false accusation, twelve story templates, contracts/testimony, and operator diagnostics;
+- Enchanted 4.2.7 is the canonical farmable wolfsbane, with an exact Werewolves 2.0.3.3 bridge for diffuser, contact effect, finder, recipes, and legacy-stack safety;
+- Field Guide 1.14.0 receives six curated categories, nine explicit entries, English/Italian text, and binary-progress/Core-lore synchronization;
+- 53 JUnit tests and three live GameTests pass; mandatory-only, exact-adapter, curated headless, final dedicated-server lifecycle, and fresh-world smokes have recorded evidence;
+- two clean builds produced the identical audited `darkfolklore-core-0.2.0.jar` (355,749 bytes; SHA-256 `CCA1A4FE4F3D53A6F891FE05F51095EEE26A048CD6E850738100A4423176EBC7`).
+
+Release classification is **`RELEASE_CANDIDATE`**. Graphical client startup with Core 0.2.0 and the curated 23-JAR set reached the title state and exited cleanly, but no world/UI gameplay validation or authentic 0.1-world upgrade has been completed. Curated dedicated-server runs also contain one unowned, nonfatal NeoForge `RuntimeDistCleaner` request for the client `Screen` class; no Dark Folklore common/server class was identified as its owner.
 
 ---
 
@@ -190,7 +204,7 @@ Enchanted is a candidate visible/canonical herb.
 
 But Werewolves' wolfsbane is deeply integrated.
 
-Requires Java/API/source audit before replacement.
+Resolved in 0.2.0: Enchanted owns the canonical farmable flower/crop/seed path, while an exact-version bridge preserves the audited Werewolves mechanics and existing legacy stacks.
 
 Possible final policies:
 
