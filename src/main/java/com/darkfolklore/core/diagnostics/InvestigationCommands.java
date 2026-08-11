@@ -37,7 +37,7 @@ public final class InvestigationCommands {
                                     for (Hypothesis value : values) {
                                         send(context.getSource(), value.concept() + " score=" + value.score()
                                                 + " matched=" + value.matchedEvidence() + "/" + value.observedEvidence()
-                                                + " confidence=" + Math.round(value.confidence() * 100.0F) + "%");
+                                                + " support=" + Math.round(value.confidence() * 100.0F) + "%");
                                     }
                                     return values.size();
                                 })))
