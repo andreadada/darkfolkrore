@@ -60,8 +60,8 @@ This document records the current Dark Folklore Core 0.4.0 release-candidate bou
 ## Testing and release
 
 - Current local evidence: clean Java 21 build, **119/119 JUnit**, release JAR audit, exact-provider dedicated startup, and **3/3 GameTests** pass with `0 invalid` reload data.
-- Final-head CI run and artifact identities remain pending until the final documentation head is built.
+- Post-rebase push and PR workflows passed; the downloaded CI artifact identity is recorded in `RELEASE_0.4.0.md`.
 - No manual client/in-world lifecycle, Field Guide, or authentic-world row is claimed complete.
 - Historical 0.2/0.3.1 evidence remains context only and is not a 0.4 gameplay pass.
 
-Until final-head CI/artifact identity and the intended-pack client/in-world matrix are recorded, 0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.
+Until the intended-pack client/in-world matrix is recorded, 0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.

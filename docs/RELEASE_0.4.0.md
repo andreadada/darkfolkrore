@@ -40,18 +40,18 @@ Local Java 21 gate:
 
 The exact local startup is automated dedicated-server evidence, not a manual client/in-world pack pass.
 
-## Final-head CI/artifact — pending
+## Verified integration CI/artifact
 
-The earlier pre-rebase 0.4 CI run and artifact are superseded. Populate this table only from the final green documentation head:
+The earlier pre-rebase 0.4 CI run and artifact are superseded. The values below are from the post-rebase integration gate; the uploaded artifact was downloaded and independently hashed after the run:
 
 | Property | Final value |
 | --- | --- |
-| Commit | **PENDING FINAL HEAD** |
-| GitHub Actions run | **PENDING** |
-| Artifact | `darkfolklore-core-0.4.0.jar` — **PENDING** |
-| JAR size | **PENDING** |
-| SHA-256 | **PENDING** |
-| Class files | **PENDING** |
+| Commit | `f57b4f8424d445433e0e57f2d07aeecb96ac8307` |
+| GitHub Actions runs | [push `31604882766`](https://github.com/andreadada/darkfolkrore/actions/runs/31604882766) and [PR `31604885701`](https://github.com/andreadada/darkfolkrore/actions/runs/31604885701), both **PASS** |
+| Artifact | `darkfolklore-core-0.4.0.jar` |
+| JAR size | `498,581` bytes |
+| SHA-256 | `C161D2EFF75CABE9F3F25BAEC0DEB39BE4186F54848C88B288778620A06A74B3` |
+| Class files | `207` |
 
 The production artifact must contain Java 21 classes, required resources/license/metadata, no test/cache/local paths, no nested provider JARs, and no shaded optional-provider packages. The sources JAR is development-only and must not be installed.
 
@@ -118,4 +118,4 @@ Native ritual hooks for Enchanted, Occultism, Malum, Eidolon: Repraised, and Fey
 
 Current classification: **`RELEASE_CANDIDATE`**.
 
-Do not promote to `PRODUCTION_READY` until final-head CI/artifact identity and the exact-provider/full-pack manual gates have passed and been recorded.
+Do not promote to `PRODUCTION_READY` until the exact-provider/full-pack manual gates have passed and been recorded.

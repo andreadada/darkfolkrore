@@ -22,18 +22,18 @@ Executed locally on Java 21 against the current working 0.4 integration:
 
 The exact-stack run reused a local automated GameTest world and reported an expected `darkfolklore 0.3.1 -> 0.4.0` version-change warning. The wider external staging also emitted an unowned `RuntimeDistCleaner` client-class warning while the dedicated server continued and all GameTests passed. Neither warning is represented as a clean full-pack manual smoke.
 
-## Final-head CI and artifact identity
+## Verified integration CI and artifact identity
 
-These fields are intentionally pending until the final feature/documentation head receives a green GitHub Actions run. Do not reuse the earlier pre-rebase 0.4 run, head, size, or hash.
+The earlier pre-rebase 0.4 run, head, size, and hash are superseded. Both workflows passed on the post-rebase integration head, and the uploaded artifact from the push run was downloaded and independently checked:
 
 | Property | Final value |
 | --- | --- |
-| Commit | **PENDING FINAL HEAD** |
-| GitHub Actions run | **PENDING** |
-| Production artifact | `darkfolklore-core-0.4.0.jar` — **PENDING FINAL CI IDENTITY** |
-| JAR size | **PENDING** |
-| SHA-256 | **PENDING** |
-| Class files | **PENDING** |
+| Commit | `f57b4f8424d445433e0e57f2d07aeecb96ac8307` |
+| GitHub Actions runs | [push `31604882766`](https://github.com/andreadada/darkfolkrore/actions/runs/31604882766) and [PR `31604885701`](https://github.com/andreadada/darkfolkrore/actions/runs/31604885701), both **PASS** |
+| Production artifact | `darkfolklore-core-0.4.0.jar` |
+| JAR size | `498,581` bytes |
+| SHA-256 | `C161D2EFF75CABE9F3F25BAEC0DEB39BE4186F54848C88B288778620A06A74B3` |
+| Class files | `207` |
 
 Optional provider JARs must not be shaded into the production artifact. The `-sources.jar` is a development artifact and must not be installed in the pack.
 
@@ -112,4 +112,4 @@ No manual client or in-world row below has been run or claimed.
 
 ## Classification
 
-0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`, until final-head CI/artifact identity and the exact-provider/full-pack manual matrix are recorded.
+0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`, until the exact-provider/full-pack manual matrix is recorded.

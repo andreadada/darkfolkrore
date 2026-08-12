@@ -255,7 +255,7 @@ All ground-truth commands require permission level 2.
 
 ## Release classification
 
-0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`. Local automated validation currently covers 119 JUnit tests and three NeoForge GameTests. Final-head CI identity/artifact evidence and the exact-provider/full-pack client and in-world manual matrix must be recorded separately; no manual gameplay pass is claimed here.
+0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`. Local and GitHub Actions validation cover 119 JUnit tests and three NeoForge GameTests; the post-rebase production JAR identity is recorded in the [release gate](docs/RELEASE_0.4.0.md). The exact-provider/full-pack client and in-world manual matrix remains unrun, and no manual gameplay pass is claimed here.
 
 ## License
 

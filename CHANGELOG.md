@@ -42,7 +42,7 @@
 
 ### Release boundary
 
-- Local automated validation currently passes 119 JUnit tests and three NeoForge GameTests; final-head CI run and artifact identities remain pending until the final documentation head is built.
+- Local and GitHub Actions validation pass 119 JUnit tests, three NeoForge GameTests, the release JAR audit, and artifact upload; exact run and artifact identities are recorded in `docs/RELEASE_0.4.0.md`.
 - 0.4.0 remains `RELEASE_CANDIDATE` until the exact full provider stack is exercised in-world for named-MCA feeding, real provider infection, same-character conversion, native MCA vampire AI, cure, inheritance, Field Guide client rendering, and save/restart.
 - Core CI intentionally runs without the complete optional provider pack, so green automated tests do not substitute for those manual gates. No manual gameplay pass is claimed for this release candidate.
 

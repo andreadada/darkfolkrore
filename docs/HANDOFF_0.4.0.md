@@ -4,7 +4,7 @@
 
 Current classification: **`RELEASE_CANDIDATE`**.
 
-The code and local automated gate are suitable for final-head CI and review. They are not sufficient for `PRODUCTION_READY`; the exact-provider gameplay, Field Guide client, authentic-world, and full intended-pack manual gates remain unrun.
+The integrated code, documentation, and release artifact passed the PR gate. They are not sufficient for `PRODUCTION_READY`; the exact-provider gameplay, Field Guide client, authentic-world, and full intended-pack manual gates remain unrun.
 
 ## Non-negotiable ownership boundary
 
@@ -38,19 +38,19 @@ Local Java 21 evidence on the current integration:
 
 This is automated dedicated-server evidence. It is not a manual client/in-world full-pack pass.
 
-## Final-head evidence to fill
+## Verified integration gate
 
-Do not reuse the superseded pre-rebase 0.4 run/artifact.
+The superseded pre-rebase 0.4 run/artifact is not used. The production identity below comes from the post-rebase integration head and was independently checked by downloading the uploaded artifact.
 
 | Evidence | Value |
 | --- | --- |
-| Final commit | **PENDING** |
-| Green GitHub Actions run | **PENDING** |
-| `darkfolklore-core-0.4.0.jar` size | **PENDING** |
-| SHA-256 | **PENDING** |
-| Class-file count | **PENDING** |
+| Verified integration commit | `f57b4f8424d445433e0e57f2d07aeecb96ac8307` |
+| Green GitHub Actions runs | [push `31604882766`](https://github.com/andreadada/darkfolkrore/actions/runs/31604882766) and [PR `31604885701`](https://github.com/andreadada/darkfolkrore/actions/runs/31604885701) |
+| `darkfolklore-core-0.4.0.jar` size | `498,581` bytes |
+| SHA-256 | `C161D2EFF75CABE9F3F25BAEC0DEB39BE4186F54848C88B288778620A06A74B3` |
+| Class-file count | `207` |
 
-After the final documentation head is green, copy these exact identities into [0.4 testing](TESTING_0.4.0.md) and [0.4 release gate](RELEASE_0.4.0.md). Keep the sources JAR out of the pack.
+The uploaded artifact is retained by Actions for 14 days. Keep the sources JAR out of the pack. This evidence refresh is documentation-only; its own CI must remain green before merge.
 
 ## Manual acceptance still required
 
