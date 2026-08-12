@@ -2,6 +2,8 @@
 
 _Last updated: 2026-08-11_
 
+> **Historical design archive:** this file preserves the 0.2.0 handoff and long-form project direction. For the current integrated 0.4.0 state, use the [0.4.0 handoff](docs/HANDOFF_0.4.0.md), [release gate](docs/RELEASE_0.4.0.md), and [testing record](docs/TESTING_0.4.0.md).
+
 This file summarizes the complete design direction for the Dark Folklore Minecraft 1.21.1 NeoForge project so the work can be resumed if the original conversation is lost.
 
 ## 0.2.0 implementation status

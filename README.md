@@ -154,7 +154,7 @@ The binary is not committed, redistributed, or shaded into Core. See [the exact 
 Windows:
 
 ```powershell
-\.\gradlew.bat clean build --no-daemon --no-configuration-cache --stacktrace
+.\gradlew.bat clean build --no-daemon --no-configuration-cache --stacktrace
 ```
 
 Linux/macOS:

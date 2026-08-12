@@ -7,7 +7,7 @@ This document records the current 0.4.0 automated evidence and the still-unrun m
 Executed locally on Java 21 against the current working 0.4 integration:
 
 ```powershell
-\.\gradlew.bat clean build runGameTestServer --no-daemon
+.\gradlew.bat clean build runGameTestServer --no-daemon
 ```
 
 | Check | Result |
