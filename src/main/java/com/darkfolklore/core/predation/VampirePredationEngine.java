@@ -19,6 +19,7 @@ import com.darkfolklore.core.society.village.VillageKey;
 import com.darkfolklore.core.society.village.VillageSocietyState;
 import com.darkfolklore.core.society.witness.WitnessEngine;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
@@ -38,7 +39,7 @@ public final class VampirePredationEngine {
             McaRelationshipCategory.SPOUSE, McaRelationshipCategory.SOURCE_IS_PARENT,
             McaRelationshipCategory.SOURCE_IS_CHILD, McaRelationshipCategory.SIBLING);
 
-    private final Map<UUID, Session> sessions = new HashMap<>();
+    private final Map<UUID, PredationSession> sessions = new HashMap<>();
     private final Map<UUID, Long> predatorCooldowns = new HashMap<>();
     private final Map<UUID, Long> victimCooldowns = new HashMap<>();
     private final Map<String, ArrayDeque<Long>> regionalFeeds = new HashMap<>();
@@ -59,13 +60,19 @@ public final class VampirePredationEngine {
         PredatorKind kind = bridge.predatorKind(predator);
         if (kind == PredatorKind.NONE) return;
         long now = level.getGameTime();
+        boolean environmentAllowed = PredationPolicy.environmentAllowsPredation(
+                level.isDay(), level.canSeeSky(predator.blockPosition()));
 
-        Session current = sessions.get(predator.getUUID());
+        PredationSession current = sessions.get(predator.getUUID());
         if (current != null) {
-            if (continueSession(level, predator, current, bridge, now)) return;
+            if (continueSession(level, predator, current, bridge, now, environmentAllowed)) return;
             endSession(predator, current, bridge);
         }
 
+        if (!environmentAllowed) {
+            remember(predator, kind, null, 0, 0, "daylight exposure blocks autonomous predation", now);
+            return;
+        }
         if (!bridge.wantsBlood(predator)) {
             remember(predator, kind, null, 0, 0, "provider reports no feeding pressure", now);
             return;
@@ -82,7 +89,7 @@ public final class VampirePredationEngine {
 
         double localRisk = localRisk(level, predator);
         double personalRisk = personalRisk(level, predator);
-        Choice choice = choose(level, predator, kind, bridge, localRisk, personalRisk, now);
+        Choice choice = choose(level, predator, kind, bridge, localRisk, personalRisk, now, environmentAllowed);
         if (choice == null) {
             remember(predator, kind, null, localRisk, personalRisk, "no socially/provider-valid prey", now);
             return;
@@ -101,57 +108,81 @@ public final class VampirePredationEngine {
             directedTarget = !alreadyOwnsChosenTarget;
         }
 
-        sessions.put(predator.getUUID(), new Session(choice.target().getUUID(), choice.animal(), kind,
-                directedTarget, now, now + 240L));
+        PredationSession session = new PredationSession(choice.target().getUUID(), choice.animal(), kind,
+                directedTarget, now, now + 240L);
+        sessions.put(predator.getUUID(), session);
         remember(predator, kind, choice.target(), localRisk, personalRisk,
                 (directedTarget ? "directed " : "selected ") + choice.reason()
                         + " score=" + Math.round(choice.score()), now);
     }
 
-    private boolean continueSession(ServerLevel level, Mob predator, Session session,
-                                    VampirePredationBridge bridge, long now) {
-        if (now > session.expiresAt() || !predator.isAlive()) return false;
+    private boolean continueSession(ServerLevel level, Mob predator, PredationSession session,
+                                    VampirePredationBridge bridge, long now, boolean environmentAllowed) {
+        if (!environmentAllowed) return abort(session, "predator became exposed to daylight");
+        if (now > session.expiresAt() || !predator.isAlive()) return abort(session, "session expired or predator died");
         Entity loaded = level.getEntity(session.target());
-        if (!(loaded instanceof LivingEntity target) || !target.isAlive()) return false;
-        if (now < victimCooldowns.getOrDefault(target.getUUID(), 0L)) return false;
+        if (!(loaded instanceof LivingEntity target) || !target.isAlive()) return abort(session, "target is no longer alive/loaded");
+        if (now < victimCooldowns.getOrDefault(target.getUUID(), 0L)) return abort(session, "victim cooldown");
 
         if (session.kind() == PredatorKind.MCA_VAMPIRE && !session.animal()) {
             VampirePredationBridge.ProviderSnapshot snapshot = bridge.providerSnapshot(predator);
-            // Provider owns target selection. Core may retain intent only when its native AI independently selected
-            // the same entity; exact provider event correlation owns successful-feed evidence.
-            return PredationPolicy.mayContinueMcaSession(snapshot.available(), snapshot.converted(), snapshot.curing(),
-                    bridge.canMcaVampireTarget(predator, target), predator.getTarget() == target);
+            boolean providerOwns = predator.getTarget() == target;
+            boolean allowed = PredationPolicy.mayContinueMcaSession(snapshot.available(), snapshot.converted(),
+                    snapshot.curing(), bridge.canMcaVampireTarget(predator, target), providerOwns);
+            if (!allowed) return abort(session, "waiting for/provider-native MCA target no longer owns prey");
+            updateMovementPhase(predator, target, session);
+            return true;
         }
 
         boolean canFeed = session.kind() == PredatorKind.WILD_VAMPIRISM
                 ? bridge.canWildFeed(predator, target) : bridge.canMcaAnimalFeed(predator, target);
-        if (!canFeed) return false;
+        if (!canFeed) return abort(session, "provider rejected feeding target");
 
         if (session.kind() == PredatorKind.WILD_VAMPIRISM && session.directedTarget()
                 && !bridge.requestWildHuntTarget(predator, target)) {
-            return false;
+            return abort(session, "wild target steering was revoked");
         }
 
         boolean lineOfSight = predator.getSensing().hasLineOfSight(target);
         if (!lineOfSight) {
-            // A directed wild hunt may need to path around a corner. Provider-native melee/path goals consume the
-            // target hint; Core never teleports or force-loads the victim. Opportunistic animal feeding still
-            // requires current visibility.
-            return session.kind() == PredatorKind.WILD_VAMPIRISM && session.directedTarget();
+            if (session.kind() == PredatorKind.WILD_VAMPIRISM && session.directedTarget()) {
+                session.transition(PredationPhase.STALKING, "pathing toward hidden target");
+                return true;
+            }
+            return abort(session, "opportunistic prey left line of sight");
         }
-        if (predator.distanceToSqr(target) > 3.5D) return true;
-        if (session.kind() == PredatorKind.WILD_VAMPIRISM) {
-            bridge.performWildFeed(predator, target);
+        if (predator.distanceToSqr(target) > 3.5D) {
+            session.transition(PredationPhase.PURSUING, "closing distance");
+            return true;
+        }
+
+        session.transition(PredationPhase.ATTACKING, "in feeding range");
+        boolean fed = session.kind() == PredatorKind.WILD_VAMPIRISM
+                ? bridge.performWildFeed(predator, target)
+                : bridge.performMcaAnimalFeed(predator, target);
+        if (!fed && sessions.containsKey(predator.getUUID())) {
+            session.transition(PredationPhase.ABORTED, "provider feed action returned false");
+        }
+        return false;
+    }
+
+    private static void updateMovementPhase(Mob predator, LivingEntity target, PredationSession session) {
+        if (predator.distanceToSqr(target) <= 3.5D) {
+            session.transition(PredationPhase.ATTACKING, "provider-native MCA AI reached target");
+        } else if (predator.getSensing().hasLineOfSight(target)) {
+            session.transition(PredationPhase.PURSUING, "provider-native MCA AI pursuing target");
         } else {
-            bridge.performMcaAnimalFeed(predator, target);
+            session.transition(PredationPhase.STALKING, "provider-native MCA AI tracking hidden target");
         }
-        // Both provider paths synchronously report the completed feed back through onNativeFeed,
-        // which owns cooldowns and regional accounting exactly once.
+    }
+
+    private static boolean abort(PredationSession session, String reason) {
+        session.transition(PredationPhase.ABORTED, reason);
         return false;
     }
 
     private Choice choose(ServerLevel level, Mob predator, PredatorKind kind, VampirePredationBridge bridge,
-                          double localRisk, double personalRisk, long now) {
+                          double localRisk, double personalRisk, long now, boolean environmentAllowed) {
         int radius = FolkloreConfig.VAMPIRE_PREDATION_RADIUS.get();
         List<LivingEntity> candidates = level.getEntitiesOfClass(LivingEntity.class,
                 predator.getBoundingBox().inflate(radius, Math.max(4, radius / 2.0D), radius),
@@ -188,7 +219,7 @@ public final class VampirePredationEngine {
                     closeFamily, vampire || werewolf, hunter, target.hasCustomName() && !mca,
                     providerEligible, witnesses, distance, witnesses == 0);
             PredationPolicy.Decision decision = PredationPolicy.score(
-                    new PredationPolicy.Context(kind, !level.isDay(), localRisk, personalRisk), candidate);
+                    new PredationPolicy.Context(kind, environmentAllowed, localRisk, personalRisk), candidate);
             if (!decision.eligible()) continue;
             if (best == null || decision.score() > best.score()
                     || decision.score() == best.score() && target.getUUID().toString()
@@ -206,9 +237,10 @@ public final class VampirePredationEngine {
         FeedKey key = new FeedKey(predator.getUUID(), target.getUUID());
         if (now - observedFeeds.getOrDefault(key, Long.MIN_VALUE / 2) < 20L) return;
         observedFeeds.put(key, now);
+        PredationSession session = sessions.get(predator.getUUID());
+        if (session != null) session.transition(PredationPhase.FEEDING, "provider confirmed real blood feed");
         markFeedCooldowns(level, predator, target, now);
 
-        // Native lethal drains are handled by IncidentStoryEngine's death path; avoid creating a duplicate case.
         if (!FinalizedFeedPolicy.createsNonlethalEvidence(amount, false, target.isAlive())) return;
 
         FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
@@ -267,13 +299,13 @@ public final class VampirePredationEngine {
         ArrayDeque<Long> history = regionalFeeds.computeIfAbsent(region, ignored -> new ArrayDeque<>());
         pruneRegion(history, now);
         history.addLast(now);
-        Session completed = sessions.remove(predator.getUUID());
+        PredationSession completed = sessions.remove(predator.getUUID());
         if (completed != null && completed.directedTarget() && predator instanceof Mob mob) {
             CompatibilityManager.INSTANCE.vampirePredation().clearWildHuntTarget(mob, completed.target());
         }
     }
 
-    private void endSession(Mob predator, Session session, VampirePredationBridge bridge) {
+    private void endSession(Mob predator, PredationSession session, VampirePredationBridge bridge) {
         sessions.remove(predator.getUUID(), session);
         if (session.directedTarget()) bridge.clearWildHuntTarget(predator, session.target());
     }
@@ -332,17 +364,41 @@ public final class VampirePredationEngine {
         predatorCooldowns.entrySet().removeIf(entry -> now > entry.getValue() + 2400L);
         victimCooldowns.entrySet().removeIf(entry -> now > entry.getValue() + 2400L);
         observedFeeds.entrySet().removeIf(entry -> now - entry.getValue() > 2400L);
-        // Directed sessions are normally ended by the owning loaded predator tick so their temporary target can
-        // be cleared safely. Very stale unloaded sessions are eventually discarded; Mob targets are not kept by
-        // this runtime map across server restart.
-        sessions.entrySet().removeIf(entry -> now > entry.getValue().expiresAt()
-                + (entry.getValue().directedTarget() ? 2400L : 0L));
+        pruneExpiredSessions(event.getServer(), now);
         regionalFeeds.values().forEach(history -> pruneRegion(history, now));
         regionalFeeds.entrySet().removeIf(entry -> entry.getValue().isEmpty());
         while (diagnostics.size() > 128) diagnostics.remove(diagnostics.keySet().iterator().next());
     }
 
+    private void pruneExpiredSessions(MinecraftServer server, long now) {
+        VampirePredationBridge bridge = CompatibilityManager.INSTANCE.vampirePredation();
+        Iterator<Map.Entry<UUID, PredationSession>> iterator = sessions.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, PredationSession> entry = iterator.next();
+            PredationSession session = entry.getValue();
+            long retention = session.directedTarget() ? 2400L : 0L;
+            if (now <= session.expiresAt() + retention) continue;
+            session.transition(PredationPhase.ABORTED, "maintenance pruned expired session");
+            if (session.directedTarget()) {
+                for (ServerLevel level : server.getAllLevels()) {
+                    Entity entity = level.getEntity(entry.getKey());
+                    if (entity instanceof Mob mob) {
+                        bridge.clearWildHuntTarget(mob, session.target());
+                        break;
+                    }
+                }
+            }
+            iterator.remove();
+        }
+    }
+
     public Optional<Diagnostic> diagnostic(UUID predator) { return Optional.ofNullable(diagnostics.get(predator)); }
+    public Optional<PredationPhase> sessionPhase(UUID predator) {
+        return Optional.ofNullable(sessions.get(predator)).map(PredationSession::phase);
+    }
+    public Optional<String> sessionDetail(UUID predator) {
+        return Optional.ofNullable(sessions.get(predator)).map(PredationSession::detail);
+    }
     public int activeSessions() { return sessions.size(); }
     public int trackedRegions() { return regionalFeeds.size(); }
 
@@ -351,7 +407,8 @@ public final class VampirePredationEngine {
      * installed by Core on a wild Vampirism mob is cleared only when it still points at this session's victim.
      */
     public void cancelSession(Entity predator) {
-        Session session = sessions.remove(predator.getUUID());
+        PredationSession session = sessions.remove(predator.getUUID());
+        if (session != null) session.transition(PredationPhase.ABORTED, "session cancelled by lifecycle/cleanup");
         if (session != null && session.directedTarget() && predator instanceof Mob mob) {
             CompatibilityManager.INSTANCE.vampirePredation().clearWildHuntTarget(mob, session.target());
         }
@@ -376,8 +433,6 @@ public final class VampirePredationEngine {
 
     public record Diagnostic(UUID predator, PredatorKind kind, Optional<UUID> target,
                              double localRisk, double personalRisk, String reason, long gameTime) {}
-    private record Session(UUID target, boolean animal, PredatorKind kind, boolean directedTarget,
-                           long startedAt, long expiresAt) {}
     private record Choice(LivingEntity target, boolean animal, double score, String reason) {}
     private record FeedKey(UUID predator, UUID victim) {}
 }

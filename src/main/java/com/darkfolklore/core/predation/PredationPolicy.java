@@ -8,7 +8,7 @@ public final class PredationPolicy {
 
     public static Decision score(Context context, Candidate candidate) {
         if (context.predatorKind() == PredatorKind.NONE) return Decision.rejected("not a supported vampire predator");
-        if (!context.night()) return Decision.rejected("predation is restricted to night");
+        if (!context.night()) return Decision.rejected("daylight exposure blocks autonomous predation");
         if (!candidate.alive()) return Decision.rejected("target is not alive");
         if (candidate.child()) return Decision.rejected("children are never autonomous feeding targets");
         if (candidate.closeFamily()) return Decision.rejected("close family is protected from autonomous feeding");
@@ -32,7 +32,6 @@ public final class PredationPolicy {
         double score;
 
         if (context.predatorKind() == PredatorKind.MCA_VAMPIRE) {
-            // Social vampires adapt: rising suspicion strongly pushes them toward livestock.
             if (candidate.animal()) {
                 score = 62.0D + socialRisk * 0.42D - witnessPenalty * 0.20D - distancePenalty;
             } else {
@@ -40,7 +39,6 @@ public final class PredationPolicy {
                 if (socialRisk >= 70.0D) score -= 25.0D;
             }
         } else {
-            // Wild Vampirism mobs remain predatory but still avoid very exposed civilian attacks.
             if (candidate.animal()) {
                 score = 58.0D + socialRisk * 0.10D - witnessPenalty * 0.15D - distancePenalty;
             } else {
@@ -51,6 +49,20 @@ public final class PredationPolicy {
         if (candidate.isolated()) score += candidate.mcaCivilian() ? 14.0D : 6.0D;
         return score < 10.0D ? Decision.rejected("social risk makes this prey unsuitable")
                 : new Decision(true, score, candidate.animal() ? "animal" : "mca_civilian");
+    }
+
+    /**
+     * Daytime hunting is permitted only when the vampire is sheltered from open sky. This is deliberately a
+     * conservative environmental gate: provider-owned sunlight equipment/immunity remains provider-owned and can
+     * be added later through an exact capability without Core guessing provider state.
+     */
+    public static boolean environmentAllowsPredation(boolean day, boolean skyVisible) {
+        return !day || !skyVisible;
+    }
+
+    /** MCA registry identity is an authority boundary and may never fall through to generic wild Vampirism. */
+    public static boolean mayUseWildAuthority(boolean mcaNamespace, boolean wildProviderAvailable) {
+        return !mcaNamespace && wildProviderAvailable;
     }
 
     public static boolean factsKnown(FactResult... facts) {
@@ -80,6 +92,7 @@ public final class PredationPolicy {
         return Math.max(min, Math.min(max, value));
     }
 
+    /** `night` means environment-safe for autonomous predation; callers may pass sheltered daytime as true. */
     public record Context(PredatorKind predatorKind, boolean night, double localRisk, double personalRisk) {}
 
     public record Candidate(boolean animal, boolean mcaCivilian, boolean alive, boolean child,

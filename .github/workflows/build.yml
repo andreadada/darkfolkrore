@@ -32,6 +32,13 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
 
+      - name: Validate Atlas tooling
+        shell: bash
+        run: |
+          python3 -m py_compile tools/*.py
+          rm -rf atlas-audit
+          python3 tools/atlas_recipe_audit.py darkfolklore-atlas/scan-20260810-143508 --out atlas-audit
+
       - name: Build, test, validate resources, and audit release JAR
         run: ./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
 
@@ -65,17 +72,26 @@ jobs:
       - name: Record production JAR identity
         shell: bash
         run: |
-          JAR=build/libs/darkfolklore-core-0.5.0.jar
-          test -f "$JAR"
+          JAR=$(find build/libs -maxdepth 1 -type f -name 'darkfolklore-core-*.jar' ! -name '*-sources.jar' | sort | head -n 1)
+          test -n "$JAR" -a -f "$JAR"
           echo "JAR=$JAR"
           echo "SIZE_BYTES=$(stat -c '%s' "$JAR")"
           echo "SHA256=$(sha256sum "$JAR" | awk '{print toupper($1)}')"
           echo "CLASS_COUNT=$(jar tf "$JAR" | grep -c '\.class$')"
+          cp "$JAR" build/darkfolklore-core-release.jar
 
       - name: Upload production JAR
         uses: actions/upload-artifact@v4
         with:
-          name: darkfolklore-core-0.5.0
-          path: build/libs/darkfolklore-core-0.5.0.jar
+          name: darkfolklore-core-release
+          path: build/darkfolklore-core-release.jar
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload Atlas audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: darkfolklore-atlas-audit
+          path: atlas-audit/
           if-no-files-found: error
           retention-days: 14

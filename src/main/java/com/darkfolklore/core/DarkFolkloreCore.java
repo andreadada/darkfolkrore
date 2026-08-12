@@ -11,12 +11,14 @@ import com.darkfolklore.core.diagnostics.CoreServerEvents;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
+import com.darkfolklore.core.predation.PredationTraceEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
 import com.darkfolklore.core.society.bloodline.LineageEngine;
 import com.darkfolklore.core.society.organization.OrganizationEngine;
 import com.darkfolklore.core.society.rumor.RumorEngine;
 import com.darkfolklore.core.society.story.IncidentStoryEngine;
 import com.darkfolklore.core.society.story.SocietyStoryEngine;
+import com.darkfolklore.core.society.village.VillageResponseEngine;
 import com.darkfolklore.core.society.witness.WitnessEngine;
 import com.darkfolklore.core.spawn.SpawnDirector;
 import com.darkfolklore.core.weakness.WeaknessEngine;
@@ -58,7 +60,9 @@ public final class DarkFolkloreCore {
         bus.register(ContractEngine.INSTANCE);
         bus.register(OccultInvestigationEngine.INSTANCE);
         bus.register(VampirePredationEngine.INSTANCE);
+        bus.register(PredationTraceEngine.INSTANCE);
         bus.register(McaVampireLifecycleEngine.INSTANCE);
+        bus.register(VillageResponseEngine.INSTANCE);
         bus.register(WorldEventDirector.INSTANCE);
     }
 

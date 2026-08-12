@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bloodlines:zealot_ritual_catalyst",
+      "required": false
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -17,6 +18,9 @@ public interface VampirePredationBridge {
     VampirePredationBridge DISABLED = new VampirePredationBridge() {};
 
     default boolean runtimeAvailable() { return false; }
+
+    /** Read-only per-capability health for diagnostics; an empty map means the bridge does not expose subcircuits. */
+    default Map<String, Boolean> circuitStatus() { return Map.of(); }
 
     default PredatorKind predatorKind(Mob entity) { return PredatorKind.NONE; }
 

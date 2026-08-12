@@ -3,7 +3,9 @@ package com.darkfolklore.core.diagnostics;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
+import com.darkfolklore.core.predation.PredationTraceEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
+import com.darkfolklore.core.society.village.VillageResponseEngine;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -24,6 +26,10 @@ public final class CoreServerEvents {
         InvestigationCommands.register(event.getDispatcher());
         PredationCommands.register(event.getDispatcher());
         LifecycleCommands.register(event.getDispatcher());
+        KnowledgeCommands.register(event.getDispatcher());
+        SocietyCommands.register(event.getDispatcher());
+        MagicCommands.register(event.getDispatcher());
+        WorldLoopCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
@@ -31,5 +37,7 @@ public final class CoreServerEvents {
         CompatibilityManager.INSTANCE.clearRuntimeCaches();
         McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
         VampirePredationEngine.INSTANCE.clearRuntimeState();
+        PredationTraceEngine.INSTANCE.clearRuntimeState();
+        VillageResponseEngine.INSTANCE.clearRuntimeState();
     }
 }

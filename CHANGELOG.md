@@ -1,5 +1,65 @@
 # Changelog
 
+## 0.6.0 — Supernatural World Loop (development release candidate, 2026-08-12)
+
+### Added
+
+- Explicit bounded vampire predation phases: `TARGET_SELECTED`, `PURSUING`, `STALKING`, `ATTACKING`, `FEEDING`, `COOLDOWN`, and `ABORTED`.
+- Active wild-Vampirism → MCA civilian hunt steering that never steals a different live combat target and never redirects provider-owned MCA vampire AI.
+- Conservative environment policy: autonomous predation works at night or while sheltered during daytime; open-sky daylight blocks/aborts the Dark Folklore session.
+- `/folklore predation trace <entity>` with environment, feeding pressure, current phase, social risk, selected target and bounded per-candidate rejection/scoring details.
+- Independent predation bridge circuits for wild feeding, MCA facts, MCA target eligibility, MCA animal feeding, and native MCA bite attribution.
+- Progressive `KnowledgeDossier` facets so OBSERVED lore exposes signs/behavior without leaking weaknesses, STUDIED exposes actionable weaknesses/countermeasures/cure, and MASTERED adds origin/bloodline lore.
+- `/folklore knowledge dossier <player> <concept>`.
+- Seven cross-mod magic disciplines: Witchcraft, Spiritualism, Soul Magic, Necromancy, Fae Magic, Blood Magic, and Ritual Magic, mapped to existing provider items/tags without declaring those items equivalent.
+- `/folklore magic disciplines` and `/folklore magic inspect-held`.
+- Village response tiers `CALM`, `UNEASY`, `ALERT`, `MOBILIZED`, `LOCKDOWN`, and `COMPROMISED`, derived from existing persisted society pressure.
+- Persistent `village_mobilization` and `village_compromised` stories through the existing SocietyStoryEngine when a previously observed village crosses a major response threshold.
+- `/folklore village response <player>` and unified `/folklore world status <player>` diagnostics.
+- Bounded runtime caches for predation traces and village/player response observations.
+- `tools/atlas_recipe_audit.py` for deterministic cross-mod recipe graph/audit reports from Atlas scans.
+- `tools/verify_reference_pack.py` for fail-closed verification of Atlas-reported provider versions against the audited integration stack.
+- CI validation/upload of both the production JAR and Atlas recipe-graph audit artifact.
+- `docs/SUPERNATURAL_WORLD_LOOP_0.6.md`, `docs/TESTING_0.6.0.md`, and `docs/RELEASE_0.6.0.md`.
+
+### Changed
+
+- Version advanced to `0.6.0` while preserving the complete audited Gradle/compatibility configuration.
+- `VampirePredationEngine` is now an explicit runtime state machine rather than a proximity-only session map.
+- Wild-vampire directed sessions reassert only the chosen provider-valid target and clear only their own target hint on abort/completion.
+- Converted MCA vampire human predation remains provider-owned end to end; Dark Folklore only observes/diagnoses provider-native target ownership and bite confirmation.
+- Runtime reflection/linkage failure in one predation capability no longer blackouts healthy unrelated predation capabilities; every failed circuit still fails closed and logs once.
+- `LoreEngine` discovers matching magical-discipline lore from audited investigation/ritual tools while existing occult-investigation profiles remain the authority for derived evidence.
+- Major village reaction changes become durable narrative consequences through the existing story store rather than a second persistence model or fake faction NPCs.
+- CI artifact selection is version-agnostic and validates Atlas Python tools before Gradle build/test.
+
+### Safety / ownership
+
+- MCA Reborn × Vampirism Compat remains sole factual owner of MCA infection, conversion, cure, inheritance, capability persistence, and native MCA-vampire target/navigation/AI.
+- Dark Folklore never installs replacement MCA vampire AI, never redirects an MCA vampire target, and never fabricates infection/cure/inheritance state.
+- Deep-magic disciplines are semantic gameplay capabilities, not universal item substitution tags and not alternate provider ritual implementations.
+- Village response never manufactures provider faction members or mutates provider NPC AI.
+- Atlas recipe audit is advisory only: same-name similarity never authorizes automatic recipe rewriting or canonicalization.
+- Existing 0.5 recipe-safe vs semantic-tag and `KEEP_DISTINCT` protections remain in force.
+
+### Automated evidence
+
+Final evidenced code head `d1cbea4e90700542532d7e2c2b1217f6fab2a79f`, GitHub Actions run `31629194226`: **PASS**.
+
+- JUnit: **139/139 PASS**, 0 failures/errors/skipped.
+- NeoForge GameTests: **3/3 PASS**.
+- Release JAR audit: **PASS**.
+- Atomic reload: 17 canonical concepts, 5 weaknesses, 8 spawn profiles, 2 magic integrations, 9 investigation profiles, **15 story templates**, 4 organization archetypes, 6 political overrides, **0 invalid**.
+- Baseline Atlas graph audit: 147 mods, 11,296 cross-mod ingredient uses, 176 namespace bridges.
+- `darkfolklore-core-0.6.0.jar`: **575,754 bytes**, **232 classes**, SHA-256 `BBE92BA67EE44ABD0AF010F271712FF4EDD5029FE6AF27C0AAF7A1E7D2AF6404`.
+- Production artifact ID: `9154389444`; Atlas audit artifact ID: `9154389923`.
+
+### Release boundary
+
+- 0.6.0 remains `DEVELOPMENT / RELEASE_CANDIDATE`. Standard CI intentionally runs without the complete optional provider pack.
+- Promotion requires the full intended-pack matrix in `docs/TESTING_0.6.0.md`: real wild-vampire → MCA hunt/feed, provider infection/conversion, provider-native MCA vampire AI, cure, inheritance, provenance/save-restart, Field Guide client UI, end-to-end investigation, deep-magic discovery, village response, 0.5 recipe serializers/JEI, fresh Atlas diff, and dedicated/client restart gates.
+- 0.6 is stacked on 0.5 and must not be merged to `main` before PR #3 is validated/merged and 0.6 is rebased/retargeted onto the resulting `main`.
+
 ## 0.5.0 — Recipe Weaving & Universal Interoperability (2026-08-12)
 
 ### Added
