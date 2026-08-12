@@ -51,6 +51,7 @@ public final class VampirePredationEngine {
     public void onEntityTick(EntityTickEvent.Post event) {
         if (!FolkloreConfig.VAMPIRE_PREDATION.get() || !(event.getEntity() instanceof Mob predator)
                 || !(predator.level() instanceof ServerLevel level) || !predator.isAlive()) return;
+        if (predator instanceof AgeableMob ageablePredator && ageablePredator.isBaby()) return;
         VampirePredationBridge bridge = CompatibilityManager.INSTANCE.vampirePredation();
         if (!bridge.runtimeAvailable()) return;
         PredatorKind kind = bridge.predatorKind(predator);
@@ -123,9 +124,13 @@ public final class VampirePredationEngine {
             predator.getNavigation().moveTo(target, session.kind() == PredatorKind.WILD_VAMPIRISM ? 0.9D : 0.75D);
             return true;
         }
-        boolean fed = session.kind() == PredatorKind.WILD_VAMPIRISM
-                ? bridge.performWildFeed(predator, target) : bridge.performMcaAnimalFeed(predator, target);
-        if (fed) markFeedCooldowns(level, predator, target, now);
+        if (session.kind() == PredatorKind.WILD_VAMPIRISM) {
+            bridge.performWildFeed(predator, target);
+        } else {
+            bridge.performMcaAnimalFeed(predator, target);
+        }
+        // Both provider paths synchronously report the completed feed back through onNativeFeed,
+        // which owns cooldowns and regional accounting exactly once.
         return false;
     }
 
