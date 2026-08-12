@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.5.0 — Recipe Weaving & Universal Interoperability (2026-08-12)
+
+### Added
+
+- Narrow `darkfolklore:recipe/*` tags that distinguish recipe-safe substitution from broader semantic traits.
+- Enchanted garlic support across the audited Vampirism/MCA Vamp Compat garlic recipe families while preserving Vampirism Weapon Table and Alchemical Cauldron ownership.
+- Enchanted garlic contribution to the common `c:crops/garlic` tag for provider recipes already written against common garlic.
+- Cross-mod recipe interoperability for Occultism/Eidolon tallow, Fangs/Naturalist fur, Enchanted/Hearth & Timber quicklime, selected Farm & Charm/Immersive Engineering fertilizer, and Enchanted/Eidolon/Occultism ritual ashes.
+- A woven MCA Vamp Compat Occult Arts Book requiring recipe-safe garlic plus an audited ritual focus.
+- A redesigned Werewolves Stone Altar recipe using shared wolfsbane, common silver, and an audited ritual focus with vanilla amethyst fallback.
+- An additive Vampirism Totem Top route using an audited Occultism/Feywild/Eidolon/Malum occult focus gem while leaving the provider recipe intact.
+- Five `RecipeWeavingResourceTest` regression tests covering narrow equivalence, provider-station ownership, recipe-safe references, KEEP_DISTINCT guardrails, and additive/fallback weaving behavior.
+- `docs/RECIPE_WEAVING_0.5.md`, `docs/TESTING_0.5.0.md`, and `docs/RELEASE_0.5.0.md`.
+
+### Changed
+
+- Version advanced to `0.5.0`; CI now builds, audits, and uploads `darkfolklore-core-0.5.0.jar`.
+- Garlic recipe interoperability is no longer represented only by the broad semantic `darkfolklore:garlic` tag; recipe consumers use a deliberately narrower audited tag that excludes Vampire's Delight wild garlic.
+- Eidolon Magician's Wax keeps its Crucible serializer and sequence but consumes common tallow in its two tallow positions.
+- Enchanted Ritual Chalk keeps Enchanted Tear of the Goddess and Gypsum requirements while allowing three audited ritual ash families only in the ash positions.
+- Canonical material ownership remains with AlmostUnified/Immersive Engineering where already established; 0.5 does not introduce a competing material-unification engine.
+
+### Safety / ownership
+
+- Same-name Atlas groups are not automatically treated as equivalent.
+- Eidolon/Occultism soul shards, Enchanted/Feywild mandrakes, Enchanted/Malum poppets, provider altars, broad holy/soul/spiritual traits, and distinct silver weapons remain protected from universal recipe substitution.
+- Provider recipe serializers, stations, skills, outputs, infection/conversion/cure state, AI, and progression remain provider-owned.
+- No foreign registry entry is removed and no existing inventory is bulk-migrated.
+
+### Automated evidence
+
+- GitHub Actions code gate `31621963509`: **PASS**.
+- JUnit: **124/124 PASS**, 0 failures/errors/skipped.
+- NeoForge GameTests: **3/3 PASS**.
+- Release JAR audit: **PASS**.
+- Artifact from the code gate: `darkfolklore-core-0.5.0.jar`, 523,311 bytes, SHA-256 `FFE398538955BF96743C91F324BB454336773E117534A722CCA0031C49F8C777`, 207 classes.
+
+### Release boundary
+
+- 0.5.0 remains `RELEASE_CANDIDATE`. Standard CI does not install the complete 192-mod provider pack and therefore cannot prove every third-party custom serializer, JEI/station interaction, or authentic recipe substitution path.
+- Promotion requires a full-pack `/reload`, the documented recipe matrix, the inherited 0.4 provider/client gates, and a fresh `/dfatlas scan` diff against `scan-20260812-154548`.
+
 ## 0.4.0 — Native MCA Vampire Lifecycle Integration (2026-08-12)
 
 ### Added
