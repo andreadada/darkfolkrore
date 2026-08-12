@@ -8,7 +8,6 @@ import de.teamlapen.vampirism.api.entity.player.vampire.IDrinkBloodContext;
 import de.teamlapen.vampirism.api.entity.vampire.IVampireMob;
 import de.teamlapen.vampirism.api.event.BloodDrinkEvent;
 import de.teamlapen.vampirism.entity.ExtendedCreature;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -99,6 +98,27 @@ public final class VampirePredationCompat implements VampirePredationBridge {
     @Override
     public boolean canMcaVampireTarget(Mob predator, LivingEntity target) {
         return invokeBoolean(targetEligible, null, predator, target);
+    }
+
+    @Override
+    public boolean canMcaAnimalFeed(Mob predator, LivingEntity target) {
+        if (predatorKind(predator) != PredatorKind.MCA_VAMPIRE || !target.isAlive()) return false;
+        return ExtendedCreature.getSafe(target)
+                .map(creature -> creature.getBlood() > 0 && creature.getMaxBlood() > 0 && !creature.hasPoisonousBlood())
+                .orElse(false);
+    }
+
+    @Override
+    public boolean performMcaAnimalFeed(Mob predator, LivingEntity target) {
+        if (!canMcaAnimalFeed(predator, target)) return false;
+        return ExtendedCreature.getSafe(target).map(creature -> {
+            int current = creature.getBlood();
+            int amount = Math.max(1, Math.min(current, Math.max(1, creature.getMaxBlood() / 3)));
+            creature.setBlood(Math.max(0, current - amount));
+            creature.sync();
+            VampirePredationEngine.INSTANCE.onNativeFeed(predator, target, amount);
+            return true;
+        }).orElse(false);
     }
 
     @Override
