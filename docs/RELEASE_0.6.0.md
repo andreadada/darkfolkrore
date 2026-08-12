@@ -10,11 +10,12 @@ Status: **DEVELOPMENT / RELEASE_CANDIDATE ONLY** until every required full-pack 
 - sheltered-daytime/open-sky environment gating;
 - detailed predation trace diagnostics;
 - capability-scoped predation bridge failure isolation;
+- strict MCA authority routing: an MCA entity can never fall through to generic wild-Vampirism predation if the MCA factual circuit fails;
 - progressive knowledge dossier facets;
 - seven cross-mod magic disciplines and lore discovery;
 - visible village response tiers with major changes persisted through the existing story engine;
 - a unified world-loop status command for end-to-end validation;
-- bounded runtime caches for traces, sessions and village observations;
+- bounded runtime caches for traces, sessions and village observations plus expired directed-target cleanup;
 - Atlas recipe graph audit and exact reference-pack version verifier;
 - release CI that validates Atlas tooling and publishes both JAR and audit artifacts.
 
@@ -22,12 +23,12 @@ All inherited 0.3.1/0.4/0.5 ownership and hardening rules remain mandatory.
 
 ## Final automated evidence
 
-Final evidenced branch head: `d1cbea4e90700542532d7e2c2b1217f6fab2a79f`.
+Final clean code commit: `44f86f35c7d82abab6f213e23105ba2ea998355c`.
 
-GitHub Actions run `31629194226`: **PASS**.
+GitHub Actions push run `31630231534`: **PASS**.
 
 - Java 21 clean build: PASS
-- JUnit: **139/139 PASS**, 0 failures, 0 errors, 0 skipped
+- JUnit: **141/141 PASS**, 0 failures, 0 errors, 0 skipped
 - NeoForge GameTests: **3/3 PASS**
 - release JAR audit: PASS
 - Core data reload: **17 canonical concepts, 5 weaknesses, 8 spawn profiles, 2 magic integrations, 9 investigation profiles, 15 story templates, 4 organization archetypes, 6 political overrides, 0 invalid**
@@ -35,11 +36,13 @@ GitHub Actions run `31629194226`: **PASS**.
 - committed baseline Atlas recipe graph audit: PASS
 - baseline audit: 147 mods, 11,296 cross-mod ingredient uses, 176 namespace bridges
 - artifact: `darkfolklore-core-0.6.0.jar`
-- JAR size: **575,754 bytes**
-- JAR SHA-256: `BBE92BA67EE44ABD0AF010F271712FF4EDD5029FE6AF27C0AAF7A1E7D2AF6404`
-- class count: **232**
-- production JAR artifact ID: **9154389444**
-- Atlas audit artifact ID: **9154389923**
+- JAR size: **576,563 bytes**
+- JAR SHA-256: `E70C79CE9D4FA0465145434474C63081696613315BAA50AD6F3000F5386A67A6`
+- class count: **233**
+- production JAR artifact ID: **9154801482**
+- Atlas audit artifact ID: **9154802118**
+
+The branch may contain a later documentation-only commit; the binary identity above is anchored to the clean functional commit and must remain unchanged by documentation edits.
 
 Standard CI deliberately does not install the complete optional provider pack, so the evidence above proves code/resource integrity rather than full provider gameplay.
 
