@@ -1,5 +1,6 @@
 package com.darkfolklore.core.knowledge.lore;
 
+import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
 import com.darkfolklore.core.api.event.KnowledgeChangedEvent;
 import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.config.FolkloreConfig;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
@@ -39,11 +39,11 @@ public final class LoreEngine {
     }
 
     @SubscribeEvent
-    public void onLivingDeath(LivingDeathEvent event) {
-        if (!FolkloreConfig.KNOWLEDGE.get() || !(event.getSource().getEntity() instanceof ServerPlayer player)) return;
-        Set<CreatureTrait> traits = TraitResolver.creatureTraits(event.getEntity());
+    public void onConfirmedDeath(ConfirmedLivingDeathEvent event) {
+        if (!FolkloreConfig.KNOWLEDGE.get() || !(event.source().getEntity() instanceof ServerPlayer player)) return;
+        Set<CreatureTrait> traits = TraitResolver.creatureTraits(event.entity());
         if (traits.isEmpty()) return;
-        grant(player, concept(event.getEntity()), 15);
+        grant(player, concept(event.entity()), 15);
         grant(player, "darkfolklore:monster_lore", 3);
     }
 

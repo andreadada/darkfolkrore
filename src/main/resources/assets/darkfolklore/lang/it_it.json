@@ -2,6 +2,7 @@
   "category.darkfolklore.fieldguide.vampires": "Vampiri",
   "category.darkfolklore.fieldguide.werewolves": "Licantropi",
   "category.darkfolklore.fieldguide.spirits": "Spiriti",
+  "category.darkfolklore.fieldguide.fae": "Fae",
   "category.darkfolklore.fieldguide.cryptids": "Criptidi",
   "category.darkfolklore.fieldguide.mythical_beasts": "Bestie mitiche",
   "category.darkfolklore.fieldguide.constructs": "Costrutti",
@@ -32,6 +33,9 @@
 
   "fieldguide.name.entity.occultism.iesnium_golem": "Golem d'iesnio",
   "fieldguide.entity.occultism.iesnium_golem.description": "Un costrutto occulto plasmato dall'iesnio. Il suo corpo forgiato è una creazione magica intenzionale, non una bestia naturale.",
+
+  "fieldguide.name.entity.feywild.sprite": "Sprite",
+  "fieldguide.entity.feywild.sprite.description": "Un piccolo essere Fae la cui presenza può lasciare tracce magiche che l'osservazione ordinaria non spiega del tutto. Un'analisi affine al mondo Fae può rivelare una firma di glamour.",
 
   "message.darkfolklore.wolfsbane_finder.found": "Coltivazione di aconito trovata a %s, %s, %s (%s blocchi di distanza)",
   "message.darkfolklore.wolfsbane_finder.not_found": "Nessuna coltivazione di aconito trovata nei chunk caricati entro %s blocchi"

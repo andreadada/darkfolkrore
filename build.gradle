@@ -221,8 +221,12 @@ def auditReleaseJar = tasks.register('auditReleaseJar') {
                     'assets/darkfolklore/lang/en_us.json',
                     'assets/darkfolklore/lang/it_it.json',
                     'data/darkfolklore/darkfolklore/canonical/vampire.json',
+                    'data/darkfolklore/darkfolklore/canonical/sprite.json',
                     'data/darkfolklore/darkfolklore/investigation_profiles/vampire.json',
-                    'data/darkfolklore/tags/item/investigation_tools/witchcraft.json'
+                    'data/darkfolklore/darkfolklore/investigation_profiles/sprite.json',
+                    'data/darkfolklore/fieldguide/categories/fae.json',
+                    'data/darkfolklore/tags/item/investigation_tools/witchcraft.json',
+                    'data/darkfolklore/tags/item/investigation_tools/fae.json'
             ].each { required ->
                 if (!names.contains(required)) {
                     throw new GradleException("Release JAR is missing required entry: ${required}")

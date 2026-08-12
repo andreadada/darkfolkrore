@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:sprite",
+  "kind": "ENTITY",
+  "canonical": "feywild:sprite",
+  "implementations": [],
+  "policy": "CANONICAL",
+  "reason": "Feywild exposes one verified Sprite implementation; the concept is intentionally specific and does not collapse unrelated Fae entities."
+}

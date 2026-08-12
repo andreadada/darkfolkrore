@@ -26,6 +26,7 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue FALSE_ACCUSATIONS = toggle("falseAccusations", true);
     public static final ModConfigSpec.BooleanValue OCCULT_INVESTIGATION = toggle("occultInvestigation", true);
     public static final ModConfigSpec.BooleanValue PREPARED_HUNT_BONUS = toggle("preparedHuntBonus", true);
+    public static final ModConfigSpec.BooleanValue VAMPIRE_PREDATION = toggle("vampirePredation", true);
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING = toggle("debugLogging", false);
 
     public static final ModConfigSpec.IntValue WITNESS_RADIUS = BUILDER.comment("Maximum event-driven witness radius in blocks")
@@ -74,6 +75,22 @@ public final class FolkloreConfig {
             .defineInRange("monsterTrackingRadius", 96, 16, 192);
     public static final ModConfigSpec.IntValue TRACKING_COOLDOWN = BUILDER.comment("Ticks between explicit monster-tracking pulses")
             .defineInRange("monsterTrackingCooldownTicks", 80, 20, 1200);
+
+    public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_SCAN_INTERVAL = BUILDER.comment(
+            "Ticks between staggered prey evaluations for an eligible vampire; each entity is phase-offset")
+            .defineInRange("vampirePredationScanIntervalTicks", 40, 20, 400);
+    public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_RADIUS = BUILDER.comment(
+            "Loaded-area prey search radius; predation never force-loads chunks")
+            .defineInRange("vampirePredationRadius", 12, 4, 32);
+    public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_COOLDOWN = BUILDER.comment(
+            "Minimum ticks before one vampire can complete another directed feeding attempt")
+            .defineInRange("vampirePredationCooldownTicks", 600, 100, 24000);
+    public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_LOCAL_WINDOW = BUILDER.comment(
+            "Rolling local anti-chaos window for completed feeding events")
+            .defineInRange("vampirePredationLocalWindowTicks", 2400, 200, 24000);
+    public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_MAX_LOCAL_FEEDS = BUILDER.comment(
+            "Maximum completed feedings in one village-region during the anti-chaos window")
+            .defineInRange("vampirePredationMaxLocalFeeds", 4, 1, 32);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 

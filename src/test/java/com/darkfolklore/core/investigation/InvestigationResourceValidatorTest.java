@@ -31,6 +31,7 @@ class InvestigationResourceValidatorTest {
         }
 
         int count = 0;
+        boolean faeAnalysisShipped = false;
         try (var paths = Files.list(profileDir)) {
             for (Path path : paths.filter(value -> value.getFileName().toString().endsWith(".json")).toList()) {
                 count++;
@@ -56,10 +57,15 @@ class InvestigationResourceValidatorTest {
                     json.getAsJsonObject("analysis_results").entrySet().forEach(entry ->
                             assertTrue(signatures.contains(entry.getValue().getAsString()),
                                     () -> entry.getKey() + " produces undeclared signature in " + path));
+                    if (json.getAsJsonObject("analysis_results").has("FAE")) {
+                        faeAnalysisShipped |= "GLAMOUR_TRACE".equals(
+                                json.getAsJsonObject("analysis_results").get("FAE").getAsString());
+                    }
                 }
             }
         }
-        assertEquals(8, count, "0.3 ships eight curated investigation profiles");
+        assertEquals(9, count, "0.3.1 ships nine curated investigation profiles");
+        assertTrue(faeAnalysisShipped, "FAE must be a real shipped analysis path, not only an unused tool tag");
 
         for (String tradition : Set.of("witchcraft", "spirit", "soul", "forbidden_theurgy", "fae")) {
             Path toolTag = root.resolve("data/darkfolklore/tags/item/investigation_tools/" + tradition + ".json");

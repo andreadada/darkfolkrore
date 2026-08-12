@@ -19,8 +19,9 @@ public final class LineageEngine {
         Entity entity = event.getEntity();
         for (SecretType type : new SecretType[]{SecretType.VAMPIRE, SecretType.WEREWOLF}) {
             if (!SecretFacts.actualSecrets(entity).contains(type)) continue;
-            CompatibilityManager.INSTANCE.conversionSource(entity, type).ifPresent(source ->
-                    FolkloreSavedData.get(level.getServer()).addLineage(
+            CompatibilityManager.INSTANCE.conversionSource(entity, type)
+                    .filter(source -> !source.equals(entity.getUUID()))
+                    .ifPresent(source -> FolkloreSavedData.get(level.getServer()).addLineage(
                             new LineageRecord(entity.getUUID(), source, type, level.getGameTime())));
         }
     }

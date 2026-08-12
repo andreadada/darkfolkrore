@@ -5,6 +5,7 @@ import com.darkfolklore.core.compat.mca.McaSocialAdapter;
 import com.darkfolklore.core.compat.mca.McaVampCompatAdapter;
 import com.darkfolklore.core.compat.mcacapitals.McaCapitalsCompat;
 import com.darkfolklore.core.knowledge.social.SecretType;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
@@ -19,7 +20,8 @@ public final class CompatibilityManager {
             new Spec("werewolves", "Werewolves", "2.0.3.3", "public API + tags"),
             new Spec("mca", "MCA Reborn", "7.7.32+1.21.1", "isolated public implementation reads"),
             new Spec("mcacapitals", "MCA Capitals", "1.1.0", "exact-version cached read-only bridge"),
-            new Spec("mca_vamp_compat", "MCA Reborn x Vampirism Compat", "2.0.12", "exact-version reflective service bridge"),
+            new Spec("mca_vamp_compat", "MCA Reborn x Vampirism Compat", "2.0.12",
+                    "exact-version state + native predation/lifecycle bridge"),
             new Spec("enchanted", "Enchanted", "4.2.7", "tags and recipes"),
             new Spec("occultism", "Occultism", "1.224.2", "tags and recipes"),
             new Spec("malum", "Malum", "1.8.2", "tags and recipes"),
@@ -33,6 +35,8 @@ public final class CompatibilityManager {
 
     private volatile List<CompatibilityReport> reports = List.of();
     private volatile List<SupernaturalStateAdapter> stateAdapters = List.of();
+    private volatile FieldGuideBridge fieldGuideBridge;
+    private volatile VampirePredationBridge vampirePredationBridge = VampirePredationBridge.DISABLED;
     private final McaSocialAdapter mcaSocial = new McaSocialAdapter();
     private final McaCapitalsCompat mcaCapitals = new McaCapitalsCompat();
 
@@ -42,6 +46,8 @@ public final class CompatibilityManager {
         List<CompatibilityReport> nextReports = new ArrayList<>();
         List<SupernaturalStateAdapter> nextAdapters = new ArrayList<>();
         ModList mods = ModList.get();
+        fieldGuideBridge = null;
+        vampirePredationBridge = VampirePredationBridge.DISABLED;
         mcaSocial.initialize("not-installed-or-untested");
         mcaCapitals.initialize("not-installed-or-untested");
 
@@ -82,6 +88,7 @@ public final class CompatibilityManager {
             nextReports.add(new CompatibilityReport(spec.modId(), spec.name(), spec.testedVersion(), actual,
                     spec.mechanism(), status, detail));
         }
+
         boolean vampirismExact = isExact(nextReports, "vampirism");
         boolean werewolvesExact = isExact(nextReports, "werewolves");
         if (vampirismExact) {
@@ -96,26 +103,48 @@ public final class CompatibilityManager {
                 DarkFolkloreCore.LOGGER.error("[compat/vampirism] Public API adapter failed to load", exception);
             }
         }
+
+        if (vampirismExact && isExact(nextReports, "mca") && isExact(nextReports, McaVampCompatAdapter.MOD_ID)) {
+            try {
+                Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
+                        CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                if (!(adapter instanceof VampirePredationBridge bridge)) {
+                    throw new LinkageError("VampirePredationCompat does not implement VampirePredationBridge");
+                }
+                vampirePredationBridge = bridge;
+                NeoForge.EVENT_BUS.register(adapter);
+            } catch (ReflectiveOperationException | LinkageError exception) {
+                vampirePredationBridge = VampirePredationBridge.DISABLED;
+                replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
+                        "2.0.12 predation signature validation failed: " + exception.getClass().getSimpleName());
+                DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Exact provider bridge failed to load", exception);
+            }
+        }
+
         if (isExact(nextReports, "fieldguide")) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.fieldguide.FieldGuideAdapter", true,
                         CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                if (!(adapter instanceof FieldGuideBridge bridge)) {
+                    throw new LinkageError("FieldGuideAdapter does not implement FieldGuideBridge");
+                }
+                fieldGuideBridge = bridge;
                 NeoForge.EVENT_BUS.register(adapter);
             } catch (ReflectiveOperationException | LinkageError exception) {
+                fieldGuideBridge = null;
                 replaceStatus(nextReports, "fieldguide", CompatibilityStatus.ERROR,
                         "1.14.0 progress bridge failed to load: " + exception.getClass().getSimpleName());
                 DarkFolkloreCore.LOGGER.error("[compat/fieldguide] Progress bridge failed to load", exception);
             }
         }
+
         reports = List.copyOf(nextReports);
         stateAdapters = List.copyOf(nextAdapters);
         reports.forEach(report -> DarkFolkloreCore.LOGGER.info("[compat/{}] tested={} actual={} status={}",
                 report.modId(), report.testedVersion(), report.actualVersion(), report.status()));
     }
 
-    public List<CompatibilityReport> reports() {
-        return reports;
-    }
+    public List<CompatibilityReport> reports() { return reports; }
 
     public Optional<CompatibilityReport> report(String modId) {
         return reports.stream().filter(report -> report.modId().equals(modId)).findFirst();
@@ -125,19 +154,25 @@ public final class CompatibilityManager {
 
     public McaCapitalsCompat mcaCapitals() { return mcaCapitals; }
 
+    public VampirePredationBridge vampirePredation() { return vampirePredationBridge; }
+
+    public boolean unlockFieldGuideImplementation(ServerPlayer player, String registryId) {
+        FieldGuideBridge bridge = fieldGuideBridge;
+        return bridge != null && bridge.runtimeAvailable() && bridge.unlockObservedImplementation(player, registryId);
+    }
+
+    public boolean fieldGuideRuntimeAvailable() {
+        FieldGuideBridge bridge = fieldGuideBridge;
+        return bridge != null && bridge.runtimeAvailable();
+    }
+
     public void clearRuntimeCaches() { mcaCapitals.clearCache(); }
 
-    public FactResult isVampire(Entity entity) {
-        return aggregate(entity, Query.VAMPIRE);
-    }
+    public FactResult isVampire(Entity entity) { return aggregate(entity, Query.VAMPIRE); }
 
-    public FactResult isWerewolf(Entity entity) {
-        return aggregate(entity, Query.WEREWOLF);
-    }
+    public FactResult isWerewolf(Entity entity) { return aggregate(entity, Query.WEREWOLF); }
 
-    public FactResult isHunter(Entity entity) {
-        return aggregate(entity, Query.HUNTER);
-    }
+    public FactResult isHunter(Entity entity) { return aggregate(entity, Query.HUNTER); }
 
     public Optional<UUID> conversionSource(Entity entity, SecretType type) {
         return stateAdapters.stream().map(adapter -> adapter.conversionSource(entity, type))

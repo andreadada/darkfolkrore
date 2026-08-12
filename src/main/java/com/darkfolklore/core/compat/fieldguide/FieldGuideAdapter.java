@@ -1,8 +1,10 @@
 package com.darkfolklore.core.compat.fieldguide;
 
 import com.darkfolklore.core.DarkFolkloreCore;
+import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
 import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.canonical.CanonicalKind;
+import com.darkfolklore.core.compat.FieldGuideBridge;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.knowledge.lore.KnowledgeStage;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
@@ -15,21 +17,20 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /** Exact 1.14.0 bridge. Field Guide remains binary; Dark Folklore owns tiered lore. */
-public final class FieldGuideAdapter {
+public final class FieldGuideAdapter implements FieldGuideBridge {
     private static final int GUIDE_UNLOCK_THRESHOLD = KnowledgeStage.OBSERVED.threshold();
     private boolean runtimeAvailable = true;
 
     @SubscribeEvent
-    public void onKill(LivingDeathEvent event) {
-        if (!runtimeAvailable || !(event.getSource().getEntity() instanceof ServerPlayer player)) return;
-        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType());
+    public void onKill(ConfirmedLivingDeathEvent event) {
+        if (!runtimeAvailable || !(event.source().getEntity() instanceof ServerPlayer player)) return;
+        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.entity().getType());
         String registryId = entityId.toString();
         String guideRegistryId = FolkloreDataManager.INSTANCE.canonical().resolve(registryId)
                 .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
@@ -76,6 +77,50 @@ public final class FieldGuideAdapter {
         } catch (RuntimeException | LinkageError exception) {
             disableAfterFailure(exception);
         }
+    }
+
+    /**
+     * Unlocks the implementation actually observed by an investigation. For
+     * KEEP_DISTINCT concepts that exact provider entry is authoritative. For
+     * canonical concepts whose runtime implementation has no dedicated guide
+     * page (for example an internal provider variant), the bridge falls back to
+     * the concept's canonical entity page instead of silently losing the unlock.
+     */
+    @Override
+    public boolean unlockObservedImplementation(ServerPlayer player, String registryId) {
+        if (!runtimeAvailable || registryId == null || registryId.isBlank()) return false;
+        try {
+            FieldGuideProgressManager manager = FieldGuideProgressManager.getInstance();
+            PlayerFieldGuideProgress progress = manager.getProgress(player);
+            if (progress == null) return false;
+
+            if (unlockEntry(manager, progress, player, registryId)) return true;
+
+            String canonicalId = FolkloreDataManager.INSTANCE.canonical().resolve(registryId)
+                    .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
+                    .map(CanonicalDefinition::canonicalId)
+                    .filter(value -> !value.isBlank() && !value.equals(registryId))
+                    .orElse("");
+            return !canonicalId.isBlank() && unlockEntry(manager, progress, player, canonicalId);
+        } catch (RuntimeException | LinkageError exception) {
+            disableAfterFailure(exception);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean runtimeAvailable() {
+        return runtimeAvailable;
+    }
+
+    private static boolean unlockEntry(FieldGuideProgressManager manager, PlayerFieldGuideProgress progress,
+                                       ServerPlayer player, String registryId) {
+        ResourceLocation entry = entryId(registryId);
+        if (!manager.isValidEntry(entry)) return false;
+        if (progress.isUnlocked(entry)) return true;
+        if (!progress.canUnlock(entry)) return false;
+        progress.unlock(player, entry, "", false);
+        return progress.isUnlocked(entry);
     }
 
     private static Set<String> entityImplementations(CanonicalDefinition definition) {

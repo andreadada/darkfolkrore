@@ -5,8 +5,12 @@ import com.darkfolklore.core.api.event.WitnessEvent;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.compat.mca.McaSocialContext;
 import com.darkfolklore.core.config.FolkloreConfig;
+import com.darkfolklore.core.knowledge.observation.CreatureSightingKey;
+import com.darkfolklore.core.knowledge.observation.CreatureSightingRecord;
 import com.darkfolklore.core.knowledge.social.*;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
+import com.darkfolklore.core.persistence.InvestigationSavedData;
+import com.darkfolklore.core.persistence.WorldPosition;
 import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.society.FamilySecretReaction;
 import com.darkfolklore.core.society.FamilySecretRules;
@@ -53,22 +57,11 @@ public final class WitnessEngine {
     public List<LivingEntity> recordIncident(ServerLevel level, LivingEntity actor, Entity victim,
                                              SecretType secret, EvidenceType evidence, int severity) {
         if (!FolkloreConfig.SOCIAL_KNOWLEDGE.get() || !FolkloreConfig.WITNESSES.get()) return List.of();
-        int radius = FolkloreConfig.WITNESS_RADIUS.get();
-        List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class,
-                actor.getBoundingBox().inflate(radius), observer -> observer.isAlive()
-                        && SocialEntityClassifier.isSocial(observer)
-                        && observer != actor && observer != victim
-                        && !observer.isSleeping()
-                        && !observer.hasEffect(MobEffects.BLINDNESS)
-                        && (!(observer instanceof Player player) || !player.isSpectator()));
-        nearby.sort(Comparator.comparingDouble(observer -> observer.distanceToSqr(actor)));
-        if (nearby.size() > FolkloreConfig.MAX_WITNESSES.get()) {
-            nearby = new ArrayList<>(nearby.subList(0, FolkloreConfig.MAX_WITNESSES.get()));
-        }
-
+        List<LivingEntity> nearby = candidateWitnesses(level, actor, victim);
         FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
         List<LivingEntity> accepted = new ArrayList<>();
         long now = level.getGameTime();
+        int radius = FolkloreConfig.WITNESS_RADIUS.get();
         for (LivingEntity observer : nearby) {
             boolean direct = observer.hasLineOfSight(actor);
             if (!direct && observer.distanceToSqr(actor) > radius * radius * 0.36D) continue;
@@ -98,14 +91,64 @@ public final class WitnessEngine {
             }
         }
 
-        if (FolkloreConfig.VILLAGE_SOCIETY.get()) {
-            VillageKey villageKey = VillageKey.at(level, actor.blockPosition());
-            VillageSocietyState village = data.village(villageKey.serialized());
-            village.recordIncident(accepted.size(), accepted.stream().anyMatch(observer -> observer.hasLineOfSight(actor)), severity);
-            data.setDirty();
-            maybeCreateHunterSociety(data, villageKey, village, accepted, now);
-        }
+        updateVillageAfterWitnesses(level, actor, accepted, severity, now);
         return List.copyOf(accepted);
+    }
+
+    /**
+     * Records concept-level creature observations without manufacturing a social
+     * identity secret. Used for cryptids, spirits, demons, constructs and Fae.
+     */
+    public List<LivingEntity> recordCreatureSighting(ServerLevel level, LivingEntity actor, Entity victim,
+                                                      String concept, EvidenceType evidence, int severity) {
+        if (!FolkloreConfig.SOCIAL_KNOWLEDGE.get() || !FolkloreConfig.WITNESSES.get()
+                || concept == null || !concept.contains(":")) return List.of();
+        List<LivingEntity> nearby = candidateWitnesses(level, actor, victim);
+        InvestigationSavedData observations = InvestigationSavedData.get(level.getServer());
+        List<LivingEntity> accepted = new ArrayList<>();
+        long now = level.getGameTime();
+        int radius = FolkloreConfig.WITNESS_RADIUS.get();
+        WorldPosition location = WorldPosition.of(level, actor.blockPosition());
+        for (LivingEntity observer : nearby) {
+            boolean direct = observer.hasLineOfSight(actor);
+            if (!direct && observer.distanceToSqr(actor) > radius * radius * 0.36D) continue;
+            SocialKnowledgeState state = direct ? SocialKnowledgeState.CONFIRMED : SocialKnowledgeState.RUMOR;
+            float confidence = direct ? Math.min(1.0F, 0.75F + severity * 0.025F) : 0.35F;
+            KnowledgeSource source = direct ? KnowledgeSource.DIRECT_WITNESS : KnowledgeSource.RUMOR;
+            observations.mergeSighting(new CreatureSightingKey(observer.getUUID(), concept),
+                    new CreatureSightingRecord(state, confidence, source, now, Optional.of(actor.getUUID()),
+                            Optional.of(location), direct ? evidence : EvidenceType.TESTIMONY));
+            accepted.add(observer);
+        }
+        updateVillageAfterWitnesses(level, actor, accepted, severity, now);
+        return List.copyOf(accepted);
+    }
+
+    private static List<LivingEntity> candidateWitnesses(ServerLevel level, LivingEntity actor, Entity victim) {
+        int radius = FolkloreConfig.WITNESS_RADIUS.get();
+        List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class,
+                actor.getBoundingBox().inflate(radius), observer -> observer.isAlive()
+                        && SocialEntityClassifier.isSocial(observer)
+                        && observer != actor && observer != victim
+                        && !observer.isSleeping()
+                        && !observer.hasEffect(MobEffects.BLINDNESS)
+                        && (!(observer instanceof Player player) || !player.isSpectator()));
+        nearby.sort(Comparator.comparingDouble(observer -> observer.distanceToSqr(actor)));
+        if (nearby.size() > FolkloreConfig.MAX_WITNESSES.get()) {
+            nearby = new ArrayList<>(nearby.subList(0, FolkloreConfig.MAX_WITNESSES.get()));
+        }
+        return nearby;
+    }
+
+    private static void updateVillageAfterWitnesses(ServerLevel level, LivingEntity actor,
+                                                    List<LivingEntity> accepted, int severity, long now) {
+        if (!FolkloreConfig.VILLAGE_SOCIETY.get()) return;
+        FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
+        VillageKey villageKey = VillageKey.at(level, actor.blockPosition());
+        VillageSocietyState village = data.village(villageKey.serialized());
+        village.recordIncident(accepted.size(), accepted.stream().anyMatch(observer -> observer.hasLineOfSight(actor)), severity);
+        data.setDirty();
+        maybeCreateHunterSociety(data, villageKey, village, accepted, now);
     }
 
     private static void maybeCreateHunterSociety(FolkloreSavedData data, VillageKey key,

@@ -1,60 +1,94 @@
 # Dark Folklore Core
 
-Dark Folklore Core is the server-authoritative integration layer for the Dark Folklore Minecraft modpack. It gives overlapping content a shared semantic vocabulary and connects supernatural facts to lore, witnesses, relationship-aware rumors, village pressure, living organizations, society stories, investigations, weaknesses, and encounter pacing. Provider mods remain authoritative for transformations, families, factions, spellcasting, rendering, and their own progression.
+Dark Folklore Core is the server-authoritative integration layer for the Dark Folklore Minecraft modpack. It gives overlapping supernatural content a shared semantic vocabulary and connects provider-owned facts to lore, witnesses, rumors, villages, organizations, investigations, weaknesses, contracts, and encounter pacing. Provider mods remain authoritative for transformations, families, factions, spellcasting, rendering, and their own progression.
 
 ## Target
 
 - Minecraft **1.21.1**
-- NeoForge **21.1.248** (the 21.1 line)
+- NeoForge **21.1.248** (21.1 line)
 - Java **21**
 - Mod ID `darkfolklore`
-- Version **0.3.0**
-- Persistent data schema **2**, with an idempotent schema-1 upgrade
+- Version **0.3.1**
+- Society persistence schema **2**
+- Investigation sidecar schema **1**
 
-Minecraft and NeoForge are required. Every third-party gameplay integration is optional. Code adapters activate only for exact audited versions; missing or different versions report `DISABLED` or `UNTESTED_VERSION` and fail closed without guessing supernatural or political facts.
+Minecraft and NeoForge are required. Third-party gameplay integrations are optional. Exact Java adapters activate only for audited versions; missing or different versions fail closed rather than guessing supernatural or political facts.
 
-## What 0.3.0 implements
+## What 0.3.1 implements
 
-- A unified occult-investigation loop: curated physical evidence and testimony produce evidence-only hypotheses; five cross-mod magical traditions can analyze nearby clues; identification unlocks research, preparation assessment, bounded tracking, and prepared-hunt rewards. See [Occult Investigation](docs/OCCULT_INVESTIGATION.md).
+0.3.1 hardens the unified occult-investigation loop introduced in 0.3.0:
 
-- Reloadable canonical concepts, weakness rules, spawn profiles, magic integrations, story templates, organization archetypes, social parameters, and political weights.
-- A completed `darkfolklore:vampire` canonical concept and audited wolfsbane canonicalization. Enchanted owns the farmable canonical crop while Werewolves keeps its native diffuser, finder, contact-effect, and recipe mechanics through a strict bridge. See [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md).
-- A curated Field Guide 1.14.0 dataset: six categories, nine explicit entity entries, English/Italian text, native binary unlocks, recent-discovery participation, and two-way lore threshold synchronization. See [Field Guide](docs/FIELD_GUIDE.md).
-- Event-driven witnesses and local rumor propagation with explainable contributions from prior knowledge, shared organizations, exact MCA relationships, verified MCA personalities, and exact MCA Capitals roles.
-- Family-secret reactions, controlled false accusations, explicit public-reveal thresholds, and a strict separation between factual supernatural state and social belief.
-- Four persistent organization types with objectives, bounded intelligence/event history, local recruitment, influence changes, contract consequences, confirmed-death cleanup, and deterministic leader succession.
-- Data-driven society stories for family discovery, public exposure, hunter investigations, recruitment, full moons, witching hour, controlled false accusations, and political scandal.
-- Persistent incident contracts with logical clues, witness testimony, search/collection particle feedback, lore rewards, canonical hunt validation, village consequences, and operator diagnostics.
-- Schema-2 server save data, atomic all-or-nothing definition reloads, bounded work queues, configurable growth limits, reproducible archives, CI, and a production-JAR audit.
+```text
+incident
+ -> physical evidence / credible testimony
+ -> evidence-only hypotheses
+ -> optional occult analysis
+ -> identification
+ -> Field Guide / lore
+ -> research
+ -> learned countermeasure
+ -> bounded tracking
+ -> hunt
+ -> social / village / organization consequences
+```
 
-The implementation deliberately avoids Mixins and does not mutate optional mods' private state. Current presentation and verification boundaries are recorded in [Known Limitations](docs/KNOWN_LIMITATIONS.md).
+Key 0.3.1 changes:
+
+- **Case continuity.** New investigation-sidecar data explicitly links a contract to the story that created it, the known incident culprit UUID, and the observed concrete provider implementation.
+- **Actual culprit hunting.** When a factual culprit is known, tracking and contract completion prefer that entity. A same-concept fallback is enabled only after confirmed culprit death; merely unloading the entity never authorizes a fallback.
+- **Issuer recovery.** A confirmed issuer death can enable a bounded local hand-in fallback. If a local Hunter Society exists, only an authorized member can receive it; otherwise a valid local villager/MCA representative can do so.
+- **Creature sightings.** Cryptids, spirits, demons, constructs, and Fae use persistent concept-level observations instead of being forced into MCA-style `SecretType` identities. This lets a witness genuinely testify about `darkfolklore:wendigo`, `darkfolklore:wraith`, and other curated concepts.
+- **Expired evidence safety.** Physical clue collection rejects logically expired evidence directly rather than relying only on later pruning.
+- **Knowledge-gated preparation.** Weakness ground truth no longer leaks to an ordinary player just because a matching item is in the inventory. Countermeasure details become player-facing at `STUDIED`; the prepared-hunt bonus requires that learned knowledge.
+- **KEEP_DISTINCT Field Guide support.** Investigation retains the concrete implementation, allowing the exact observed page to unlock for concepts such as provider-distinct Wraiths instead of arbitrarily collapsing them.
+- **Fae investigation.** Feywild's existing `feywild:sprite` is curated as `darkfolklore:sprite`; its case requires Fae analysis to expose `GLAMOUR_TRACE`. No new mob or duplicate magic system is added.
+- **Hypothesis terminology.** Player/operator output reports evidence `support`, not a misleading probability-like confidence percentage.
+- **CI hardening.** Linux wrapper execution is fixed, Java 21 clean builds run in GitHub Actions, the 0.3.1 JAR is audited/uploaded, and NeoForge GameTests are part of the branch release gate.
+
+The implementation deliberately avoids new Mixins for these systems and does not mutate optional mods' private state.
+
+## Existing systems retained
+
+- Reloadable canonical concepts, weakness rules, spawn profiles, magic integrations, investigation profiles, story templates, organization archetypes, social parameters, and political weights.
+- Enchanted-owned canonical wolfsbane with the strict Werewolves bridge for diffuser, finder, crop-contact, recipes, loot, and legacy compatibility.
+- Field Guide 1.14.0 integration with **seven** curated categories and **ten** explicit entity entries after the Fae Sprite addition, with English and Italian resources.
+- Relationship-aware witnesses/rumors, family-secret reactions, controlled false accusations, MCA Capitals political weighting, organizations, society stories, village state, and contract consequences.
+- Evidence-only hypothesis ranking: `HypothesisEngine` never reads the hidden target to manufacture certainty.
+- Loaded-area-only tracking: no chunk force-loading and no whole-world scan.
+- Weakness Engine remains the only Dark Folklore authority for cross-mod damage semantics; investigation does not apply a second damage multiplier.
 
 ## Install
 
 1. Use Minecraft 1.21.1, NeoForge 21.1.248, and Java 21.
-2. Build or obtain `darkfolklore-core-0.3.0.jar`.
+2. Build or obtain `darkfolklore-core-0.3.1.jar`.
 3. Place only the production JAR, not the sources JAR, in the instance `mods` directory.
 4. Install whichever optional provider mods the pack uses. Exact adapter versions are listed in [Compatibility](docs/COMPATIBILITY.md).
 5. Back up an existing world, start the server, and review `config/darkfolklore-common.toml`.
-6. Run `/folklore diagnostics`; require `invalid=0` and inspect every adapter status before enabling the world for players.
+6. Run `/folklore diagnostics`; require `invalid=0` and inspect adapter status before using the world for release validation.
 
-A 0.1 world is read as schema 1, receives safe defaults for new fields, is marked dirty once, and is written as schema 2 on the next save. Reopening schema 2 does not rerun the migration.
+The existing `darkfolklore_society` data remains schema 2. New 0.3.1 observation/case-continuity data is stored in a separate `darkfolklore_investigation` SavedData file so hardening does not destructively rewrite the established society schema.
 
 ## Build
 
-The build resolves the three typed compile-only integrations from immutable Modrinth Maven version IDs and verifies their SHA-256 hashes. It does **not** require files under a local `mods/` directory and does not shade those mods into Core.
+The build resolves typed compile-only integrations from immutable public artifacts and verifies the audited checksums. It does not require a local `mods/` directory and does not shade provider mods into Core.
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
 $env:Path = "$env:JAVA_HOME\bin;$env:Path"
-.\gradlew.bat clean build --no-daemon --no-configuration-cache
+.\gradlew.bat clean build --no-daemon --no-configuration-cache --stacktrace
+```
+
+Linux/macOS:
+
+```bash
+./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
 ```
 
 Artifacts:
 
 ```text
-build/libs/darkfolklore-core-0.3.0.jar
-build/libs/darkfolklore-core-0.3.0-sources.jar
+build/libs/darkfolklore-core-0.3.1.jar
+build/libs/darkfolklore-core-0.3.1-sources.jar
 ```
 
 Useful tasks:
@@ -66,13 +100,11 @@ Useful tasks:
 .\gradlew.bat runClient
 ```
 
-The 0.3.0 automated snapshot is **59 passing JUnit tests**, **3 passing GameTests**, and a successfully audited production JAR. The broader mandatory-only, exact-adapter, dedicated-server, graphical-startup, and migration evidence in [Testing](docs/TESTING.md) was recorded for 0.2.0; the new interactive occult-investigation loop still needs the manual acceptance matrix in [Occult Investigation](docs/OCCULT_INVESTIGATION.md). The current release classification therefore remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.
-
-The curated dedicated-server staging also emitted one unowned NeoForge client-`Screen` dist warning while continuing through startup, save, and shutdown. No Dark Folklore class was identified as its owner; the exact evidence and boundary are recorded in [Testing](docs/TESTING.md).
+See [0.3.1 testing](docs/TESTING_0.3.1.md) for evidence generated specifically from this branch. Historical 0.2 smoke evidence remains documented separately and must not be presented as if it validated 0.3.1 gameplay.
 
 ## Data and reloads
 
-Core atomically reloads these directories:
+Core atomically reloads:
 
 ```text
 data/<namespace>/darkfolklore/canonical/
@@ -86,11 +118,11 @@ data/<namespace>/darkfolklore/social_parameters/
 data/<namespace>/darkfolklore/political_weights/
 ```
 
-The entire candidate state must validate. If any definition or cross-definition invariant fails, Core logs the precise resource error and retains the previous validated snapshot. Field Guide categories, standard tags, loot modifiers, recipes, and NeoForge biome modifiers use their owning formats and are outside this nine-directory transaction. See [Data formats](docs/DATA_FORMATS.md).
+The entire candidate state must validate. If one definition or cross-definition invariant fails, Core retains the previous validated snapshot. Field Guide categories, standard tags, recipes, loot modifiers, and NeoForge biome modifiers remain in their owning formats outside that transaction.
 
 ## Operator commands
 
-All `/folklore` commands require permission level 2.
+All `/folklore` ground-truth commands require permission level 2.
 
 ```text
 /folklore diagnostics
@@ -116,11 +148,9 @@ All `/folklore` commands require permission level 2.
 /folklore investigation profile <concept>
 ```
 
-`inspect` and social/political diagnostics expose ground truth and are administrative tools, not ordinary-player knowledge.
-
 ## Contract quick start
 
-A recognized supernatural actor killing an animal, villager, or MCA person can create a local incident with logical evidence. Empty-handed sneak-right-click a villager/MCA issuer in the same 8-by-8-chunk society region, then collect nearby clues, record credible testimony, or analyze the scene with a compatible magical implement. The profile's required number of distinct evidence types identifies the canonical target. Defeat a matching entity and return to the exact issuer for the reward. See [Contracts](docs/CONTRACTS.md) and [Occult Investigation](docs/OCCULT_INVESTIGATION.md).
+A recognized supernatural actor killing an animal, villager, or MCA person can create a local incident. Empty-handed sneak-right-click a valid local issuer, then collect nearby physical clues, record credible testimony, or analyze the scene with a compatible existing magical implement. Identification advances lore to `OBSERVED`; weakness/preparation details remain hidden until `STUDIED`. If the incident recorded a factual culprit, tracking and hunt completion follow that culprit while it remains valid. Confirmed deaths can enable the documented fallback paths; unloads cannot.
 
 ## Documentation
 
@@ -128,12 +158,19 @@ A recognized supernatural actor killing an animal, villager, or MCA person can c
 - [Society](docs/SOCIETY.md)
 - [Contracts](docs/CONTRACTS.md)
 - [Occult Investigation](docs/OCCULT_INVESTIGATION.md)
-- [Data formats and schema 2](docs/DATA_FORMATS.md)
-- [Compatibility](docs/COMPATIBILITY.md), [MCA social audit](docs/MCA_SOCIAL_AUDIT.md), and [MCA Capitals](docs/MCA_CAPITALS.md)
-- [Field Guide](docs/FIELD_GUIDE.md) and [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md)
-- [Development](docs/DEVELOPMENT.md) and [Testing](docs/TESTING.md)
-- [Known Limitations](docs/KNOWN_LIMITATIONS.md)
-- [Changelog](CHANGELOG.md) and [0.2.0 historical changelog](docs/CHANGELOG_0.2.0.md)
+- [0.3.1 testing](docs/TESTING_0.3.1.md)
+- [0.3.1 release gate](docs/RELEASE_0.3.1.md)
+- [Data formats](docs/DATA_FORMATS.md)
+- [Compatibility](docs/COMPATIBILITY.md)
+- [Field Guide](docs/FIELD_GUIDE.md)
+- [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md)
+- [Historical testing](docs/TESTING.md)
+- [Historical 0.2 production record](docs/PRODUCTION_RELEASE.md)
+- [Changelog](CHANGELOG.md)
+
+## Release classification
+
+0.3.1 remains **`RELEASE_CANDIDATE`** until the final branch CI, in-world client investigation/Field Guide acceptance, and the required real-world migration/compatibility checks are recorded. Compilation or unit tests alone never promote it to `PRODUCTION_READY`.
 
 ## License
 

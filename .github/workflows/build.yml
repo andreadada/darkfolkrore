@@ -15,13 +15,13 @@ jobs:
 
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
 
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
@@ -29,13 +29,53 @@ jobs:
       - name: Set up Gradle cache
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
       - name: Build, test, validate resources, and audit release JAR
         run: ./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
+
+      - name: Record JUnit result count
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import glob
+          import xml.etree.ElementTree as ET
+          total = failures = errors = skipped = 0
+          for path in glob.glob('build/test-results/test/TEST-*.xml'):
+              root = ET.parse(path).getroot()
+              total += int(root.attrib.get('tests', 0))
+              failures += int(root.attrib.get('failures', 0))
+              errors += int(root.attrib.get('errors', 0))
+              skipped += int(root.attrib.get('skipped', 0))
+          print(f'JUNIT_TESTS={total}')
+          print(f'JUNIT_FAILURES={failures}')
+          print(f'JUNIT_ERRORS={errors}')
+          print(f'JUNIT_SKIPPED={skipped}')
+          if total <= 0 or failures or errors:
+              raise SystemExit(1)
+          PY
+
+      - name: Prepare GameTest server properties
+        run: printf 'online-mode=false\n' > server.properties
+
+      - name: Run NeoForge GameTests
+        run: ./gradlew runGameTestServer --no-daemon --no-configuration-cache --stacktrace
+
+      - name: Record production JAR identity
+        shell: bash
+        run: |
+          JAR=build/libs/darkfolklore-core-0.3.1.jar
+          test -f "$JAR"
+          echo "JAR=$JAR"
+          echo "SIZE_BYTES=$(stat -c '%s' "$JAR")"
+          echo "SHA256=$(sha256sum "$JAR" | awk '{print toupper($1)}')"
+          echo "CLASS_COUNT=$(jar tf "$JAR" | grep -c '\.class$')"
 
       - name: Upload production JAR
         uses: actions/upload-artifact@v4
         with:
-          name: darkfolklore-core-0.2.0
-          path: build/libs/darkfolklore-core-0.2.0.jar
+          name: darkfolklore-core-0.3.1
+          path: build/libs/darkfolklore-core-0.3.1.jar
           if-no-files-found: error
           retention-days: 14

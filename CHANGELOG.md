@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.3.1 — Investigation Hardening (2026-08-11)
+
+### Added
+
+- Persistent concept-level creature sightings for cryptids, spirits, demons, constructs, and Fae, kept separate from social identity secrets.
+- Investigation sidecar persistence for story/contract links, known culprit UUIDs, observed provider implementations, sightings, and confirmed-death fallback flags without rewriting society schema 2.
+- Exact story continuity for new contracts so same-concept incidents in one region do not rely on `findFirst()` narrative resolution.
+- Factual culprit tracking for new incidents, with same-concept fallback allowed only after a confirmed death rather than an unload.
+- Bounded issuer-death hand-in fallback: local Hunter Society members are preferred/required when such a society exists; otherwise a valid local villager/MCA representative can receive the completed hunt.
+- A curated Feywild Sprite concept/profile using `GLAMOUR_TRACE`, plus a localized Fae Field Guide category and exact Sprite entry.
+- Tests for investigation sidecar persistence, case-link continuity, sighting merge/decay semantics, knowledge-gated preparation, and Fae resource coverage.
+- NeoForge GameTests in the GitHub Actions release gate.
+
+### Changed
+
+- Version advanced to `0.3.1`; CI now builds, audits, and uploads `darkfolklore-core-0.3.1.jar`.
+- Weakness/preparation information is player-facing only from `STUDIED` lore onward. Accidentally carrying a correct item no longer qualifies an uninformed player for the prepared-hunt bonus.
+- `KEEP_DISTINCT` investigation cases retain the observed implementation so Field Guide 1.14.0 can unlock the actual provider page, such as a specific Wraith implementation.
+- Hypothesis percentages are presented as evidence `support`, not as calibrated probability.
+- Field Guide curated content expands from six categories/nine entries to seven categories/ten entries with the Sprite case.
+- Tracking and prepared-hunt validation share factual investigation-target matching rather than accepting any same-concept target when a known culprit remains valid.
+
+### Fixed
+
+- Linux GitHub Actions no longer stops at `./gradlew: Permission denied`; the workflow ensures wrapper execution before the clean Java 21 build.
+- Physical evidence collection rejects expired clues directly at interaction time.
+- Wendigo/Chupacabra/Ghost/Wraith/Imp/Golem/Fae observations can supply concept-specific testimony instead of being reduced to generic `SUPERNATURAL_IDENTITY` claims.
+- New contracts retain an exact incident/story association and can recover from confirmed culprit or issuer deaths without treating ordinary unloads as deaths.
+- Removed the already-applied 0.3 patch generator from the repository root.
+
+### Release boundary
+
+- 0.3.1 is a hardening release. Deep provider-native ritual hooks for Enchanted, Occultism, Malum, Eidolon, and Feywild remain deferred until their exact APIs/events/codecs are audited.
+- Automated build/tests are necessary but not sufficient. In-world client investigation, Field Guide/Recent Discoveries, exact optional-provider gameplay, and real-world migration remain manual promotion gates. Classification remains `RELEASE_CANDIDATE` until those checks are actually recorded.
+
 ## 0.3.0 — Occult Investigation (2026-08-11)
 
 ### Added
