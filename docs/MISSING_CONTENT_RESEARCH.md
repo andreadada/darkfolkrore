@@ -2,7 +2,7 @@
 
 ## Current conclusion
 
-No new entity, item, block, model, texture, or animation is required to ship Dark Folklore Core 0.2.0.
+No new entity, item, block, model, texture, or animation is required for the current Dark Folklore Core 0.4.0 release-candidate scope.
 
 The implemented architecture is deliberately systemic. Canonical concepts point at installed providers, and concepts without safe equivalence are kept distinct rather than replaced by placeholders. Because no necessary concept failed the installed-content audit, no external asset/mod candidate was selected and no licensing claim is made here.
 
@@ -41,7 +41,7 @@ They can use text, tags, and existing entities/items. A new model would not impr
 
 ## Deferred presentation work
 
-Field Guide currently provides six curated categories, nine explicit provider-backed entries, and English/Italian names and descriptions. Further prose, accessibility refinement, or original Dark Folklore UI art may improve presentation, but those are not blockers and do not justify placeholder creatures/items.
+Field Guide currently provides seven curated categories, ten explicit provider-backed entries, and English/Italian names and descriptions after the Fae Sprite addition. Final joined-world client rendering and Recent Discoveries remain a manual release gate; that presentation work does not justify placeholder creatures/items.
 
 Dynamic Field Guide tier descriptions are also a capability limitation, not missing visual content. Dark Folklore keeps the full lore-stage state in its own server data rather than manufacturing an asset workaround.
 

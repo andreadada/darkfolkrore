@@ -1,5 +1,7 @@
 # Dark Folklore Core 0.3.1 release gate
 
+> **Historical release record:** this document preserves the merged 0.3.1 gate. Its references to the then-future stacked 0.4 branch are historical. Current 0.4 status is in [RELEASE_0.4.0.md](RELEASE_0.4.0.md).
+
 ## Target
 
 | Property | Value |

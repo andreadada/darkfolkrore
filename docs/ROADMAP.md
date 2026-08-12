@@ -54,7 +54,7 @@ The current code already supplies complete initial paths for witnesses, rumors, 
 - Localize all player-facing contract and diagnostic messages; remove raw concept IDs from normal play where a translation exists.
 - Add accessible journal/status presentation that remains optional on dedicated servers.
 - Add structured debug counters for witness candidates, rumor transmissions, spawn denials, story creation, and contract transitions behind `debugLogging`.
-- Complete graphical-client accessibility/localization review for all six curated Field Guide categories and nine entries while preserving Field Guide-owned notes and photographs.
+- Complete graphical-client accessibility/localization review for all seven curated Field Guide categories and ten entries while preserving Field Guide-owned notes and photographs.
 
 ## Exit criteria for the next release
 
@@ -63,4 +63,4 @@ The current code already supplies complete initial paths for witnesses, rumors, 
 - The manual persistence, contract, spawn-reason, weakness, Field Guide, MCA state, and rumor cases pass.
 - Every new adapter has an exact API audit and fails closed on untested versions.
 - Config values either affect documented behavior or are removed.
-- No release claim exceeds the evidence recorded in [Testing](TESTING.md) and [Known Limitations](KNOWN_LIMITATIONS.md).
+- No release claim exceeds the current evidence recorded in [0.4 testing](TESTING_0.4.0.md), [0.4 release gate](RELEASE_0.4.0.md), and [Known Limitations](KNOWN_LIMITATIONS.md).

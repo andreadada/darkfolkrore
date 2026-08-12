@@ -105,6 +105,16 @@ Compatibility initialization should pass MCA's exact `ModInfo` version to `initi
 
 Diagnostics should print the relationship category, optional player hearts, exact personality names, trust contribution reasons, adapter status detail, and never dump raw reflective objects.
 
+## 0.4 supernatural authority boundary
+
+> MCA Reborn × Vampirism Compat remains authoritative for factual supernatural MCA mechanics. Dark Folklore observes those mechanics and implements knowledge, investigation, rumor, reputation and narrative consequences around them.
+
+This social adapter does not decide that an MCA person is a vampire, werewolf, hunter, infected, converted, curing, or inherited-vampire. In 0.4, all such **FACT** queries for MCA entities route only through the triple-gated exact MCA Vamp Compat factual component. A missing provider is `NOT_APPLICABLE`; an untested, partial, unsupported, or failed authority is `UNKNOWN`. Generic Vampirism detection and an MCA trait name cannot override that result.
+
+Relationship, hearts, personality, and political context affect only Dark Folklore **BELIEF** and narrative decisions such as trust, rumor transmission, witness response, or candidate scoring. They never write provider capability state, force conversion/cure/inheritance, select a provider target, or control provider navigation/native AI.
+
+Lifecycle, native-bite evidence, conversion provenance, and the exact component gate are documented in [MCA Vamp Compat 2.0.12 exact-provider audit](MCA_VAMP_COMPAT_2.0.12_AUDIT.md). A provider source UUID is provenance, not necessarily a biological parent or universally reliable sire.
+
 ## Validation and remaining smoke work
 
 Nine focused unit tests cover version fail-closed behavior, trust settings/reasons, refusal to map an invented personality, exact political-title mapping, and political weights. The exact signatures were also verified with `javap` against the installed binaries.

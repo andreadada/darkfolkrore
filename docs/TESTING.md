@@ -1,5 +1,7 @@
 # Testing
 
+> **Historical scope:** the detailed matrices below record the 0.3.1-era general gate and earlier 0.2 evidence. For the current 0.4.0 gate, 119-test local evidence, exact-provider boundaries, and unrun manual matrix, use [TESTING_0.4.0.md](TESTING_0.4.0.md). Historical rows are preserved rather than rewritten as if they validated 0.4.
+
 Dark Folklore uses four evidence layers: unit/resource tests, live NeoForge GameTests, clean-build/JAR validation, and manual server/client/world smokes. A lower layer never implies that the complete modpack or an optional-provider UI is release-ready.
 
 ## Commands

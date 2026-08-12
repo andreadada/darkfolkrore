@@ -7,11 +7,14 @@
 - Exact read-mostly lifecycle bridge for MCA Reborn x Vampirism Compat 2.0.12, with constructor-time class/method validation and fail-closed behavior on unsupported signatures.
 - Provider lifecycle states for MCA civilians: `HUMAN`, `INFECTED`, `VAMPIRE`, and `CURING`.
 - Observed transition classification for infection start, native-bite conversion, other conversion, inherited vampirism, cure start/cancel/completion, infection clear, and factual vampirism clear.
-- One-tick-delayed initial provider observation so MCA Vamp Compat normalization/attachments can settle before Core samples factual state.
+- Initial provider observation delayed by at least one server tick, with bounded retries for up to 200 ticks when the provider capability is not yet available.
 - Loaded-entity-only, staggered lifecycle observation without world scans or chunk force-loading.
 - Recovery of valid provider conversion-source lineage both during live conversion and after world/entity reload.
 - Birth context for inherited vampires that retains both provider parents in diagnostics without fabricating a single conversion source.
 - Exact provider-native AI repair through the audited idempotent `McaVampireAi.registerGoalsIfNeeded` extension point, only after factual conversion.
+- Strict, status-aware supernatural fact routing: MCA entities use only the exact MCA Vamp Compat authority; generic Vampirism state cannot override or replace an unavailable MCA result.
+- Independent factual, predation, and lifecycle component activation, reported as `ACTIVE`, `PARTIAL`, or `ERROR` without one optional component failure suppressing the others.
+- Exact native-MCA bite evidence correlation across the same incoming-damage event, direct attacker/target pair, and provider attacker-capability ready-to-cooldown transition, covering provider-valid MCA, player, and vanilla-human targets.
 - `/folklore lifecycle status` and `/folklore lifecycle inspect <entity>` diagnostics.
 - `docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md` documenting the exact user-supplied binary, provider methods, event chain, ownership boundary, cure/inheritance semantics, and runtime validation limits.
 - Pure lifecycle transition regression tests.
@@ -22,23 +25,26 @@
 - Vampire feeding observation runs at `LOWEST` event priority, after MCA Vamp Compat's normal `BloodDrinkEvent` handler, so provider-blocked/zeroed drains cannot create false Dark Folklore evidence.
 - MCA vampire animal feeding is disabled while the exact provider reports an active cure state.
 - Provider provenance is treated as durable factual data rather than only a live-transition edge, allowing conversion lineage to recover after load.
+- MCA human predation is provider-owned end to end: Core may score and retain bounded narrative intent, but never sets a target or navigation path and recognizes a feed only from an exact provider action.
 
 ### Fixed
 
 - Malformed provider conversion-source UUIDs equal to the descendant UUID are rejected before constructing lineage records.
-- Cure transitions stop transient Core target/navigation intent without deleting historical witness beliefs or rumors.
-- The stacked 0.4 branch is explicitly synchronized with the final 0.3.1 hardening base so PR #2 can be reviewed independently without duplicating already-landed 0.3.1 changes.
+- Cure cancellation now takes precedence over retained provider inheritance, bite-cause, and conversion-source metadata when the prior factual state was `CURING`.
+- Cure/cleared transitions cancel only Dark Folklore's scoped predation session without mutating provider/MCA target or navigation state and without deleting historical witness beliefs or rumors.
 
 ### Provider ownership boundary
 
 - Dark Folklore does **not** force infection, conversion, cure, inheritance, or MCA vampire replacement.
 - MCA Reborn x Vampirism Compat 2.0.12 remains sole factual owner of infection rules, conversion, cure, inherited vampirism, capability persistence, appearance normalization, and native MCA vampire bite AI.
+- MCA Reborn × Vampirism Compat remains authoritative for factual supernatural MCA mechanics. Dark Folklore observes those mechanics and implements knowledge, investigation, rumor, reputation and narrative consequences around them.
 - The exact audited user-supplied provider JAR SHA-256 is `BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF`; it is not redistributed or shaded.
 
 ### Release boundary
 
-- 0.4.0 remains `DEVELOPMENT / RELEASE_CANDIDATE` until the exact full provider stack is exercised in-world for named-MCA feeding, real provider infection, same-character conversion, native MCA vampire AI, cure, inheritance, and save/restart.
-- Core CI intentionally runs without the complete optional provider pack, so green automated tests do not substitute for that manual gate.
+- Local automated validation currently passes 119 JUnit tests and three NeoForge GameTests; final-head CI run and artifact identities remain pending until the final documentation head is built.
+- 0.4.0 remains `RELEASE_CANDIDATE` until the exact full provider stack is exercised in-world for named-MCA feeding, real provider infection, same-character conversion, native MCA vampire AI, cure, inheritance, Field Guide client rendering, and save/restart.
+- Core CI intentionally runs without the complete optional provider pack, so green automated tests do not substitute for those manual gates. No manual gameplay pass is claimed for this release candidate.
 
 ## 0.3.1 — Investigation Hardening (2026-08-11)
 
