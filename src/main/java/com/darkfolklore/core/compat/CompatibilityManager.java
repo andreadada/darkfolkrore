@@ -37,6 +37,7 @@ public final class CompatibilityManager {
     private volatile List<SupernaturalStateAdapter> stateAdapters = List.of();
     private volatile FieldGuideBridge fieldGuideBridge;
     private volatile VampirePredationBridge vampirePredationBridge = VampirePredationBridge.DISABLED;
+    private volatile McaVampireLifecycleBridge mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
     private final McaSocialAdapter mcaSocial = new McaSocialAdapter();
     private final McaCapitalsCompat mcaCapitals = new McaCapitalsCompat();
 
@@ -48,6 +49,7 @@ public final class CompatibilityManager {
         ModList mods = ModList.get();
         fieldGuideBridge = null;
         vampirePredationBridge = VampirePredationBridge.DISABLED;
+        mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
         mcaSocial.initialize("not-installed-or-untested");
         mcaCapitals.initialize("not-installed-or-untested");
 
@@ -104,7 +106,9 @@ public final class CompatibilityManager {
             }
         }
 
-        if (vampirismExact && isExact(nextReports, "mca") && isExact(nextReports, McaVampCompatAdapter.MOD_ID)) {
+        boolean exactMcaVampStack = vampirismExact && isExact(nextReports, "mca")
+                && isExact(nextReports, McaVampCompatAdapter.MOD_ID);
+        if (exactMcaVampStack) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
                         CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
@@ -118,6 +122,22 @@ public final class CompatibilityManager {
                 replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
                         "2.0.12 predation signature validation failed: " + exception.getClass().getSimpleName());
                 DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Exact provider bridge failed to load", exception);
+            }
+
+            if (isExact(nextReports, McaVampCompatAdapter.MOD_ID)) {
+                try {
+                    Object adapter = Class.forName("com.darkfolklore.core.compat.mca.McaVampireLifecycleCompat", true,
+                            CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                    if (!(adapter instanceof McaVampireLifecycleBridge bridge)) {
+                        throw new LinkageError("McaVampireLifecycleCompat does not implement McaVampireLifecycleBridge");
+                    }
+                    mcaVampireLifecycleBridge = bridge;
+                } catch (ReflectiveOperationException | LinkageError exception) {
+                    mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
+                    replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
+                            "2.0.12 lifecycle signature validation failed: " + exception.getClass().getSimpleName());
+                    DarkFolkloreCore.LOGGER.error("[compat/mca_vamp_lifecycle] Exact provider bridge failed to load", exception);
+                }
             }
         }
 
@@ -155,6 +175,8 @@ public final class CompatibilityManager {
     public McaCapitalsCompat mcaCapitals() { return mcaCapitals; }
 
     public VampirePredationBridge vampirePredation() { return vampirePredationBridge; }
+
+    public McaVampireLifecycleBridge mcaVampireLifecycle() { return mcaVampireLifecycleBridge; }
 
     public boolean unlockFieldGuideImplementation(ServerPlayer player, String registryId) {
         FieldGuideBridge bridge = fieldGuideBridge;
