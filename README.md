@@ -4,7 +4,7 @@ Dark Folklore Core is the server-authoritative integration and orchestration lay
 
 > **Provider mods own their facts and native mechanics. Dark Folklore connects them without silently replacing them.**
 
-For MCA entities, MCA Reborn × Vampirism Compat remains authoritative for factual supernatural state, infection, conversion, cure, inheritance, persistence, native targeting/navigation, and MCA vampire AI. Dark Folklore observes those facts and owns knowledge, evidence, investigation, rumor, reputation, stories, contracts, and bounded orchestration around them.
+For MCA entities, MCA Reborn × Vampirism Compat remains authoritative for factual supernatural state, infection, conversion, cure, inheritance, persistence, native targeting/navigation, and MCA vampire AI. Dark Folklore observes those facts and owns knowledge, evidence, investigation, rumor, reputation, stories, contracts, and bounded orchestration around them. MCA namespace identity is also an authority boundary: if the MCA factual predation circuit fails, an MCA entity is never reinterpreted through generic wild-Vampirism logic.
 
 ## Target
 
@@ -53,7 +53,7 @@ any active phase -> ABORTED
 
 Autonomous predation is allowed at night or while sheltered during daytime. Open-sky daytime exposure blocks/aborts the Dark Folklore session. This conservative rule does not guess provider sunscreen/equipment immunity.
 
-The exact predation adapter isolates runtime failure into separate circuits for wild feeding, MCA fact reads, MCA target eligibility, MCA animal feeding, and native bite attribution. One failed optional capability no longer disables the healthy ones; every failure still fails closed.
+The exact predation adapter isolates runtime failure into separate circuits for wild feeding, MCA fact reads, MCA target eligibility, MCA animal feeding, and native bite attribution. One failed optional capability no longer disables the healthy ones; every failure still fails closed. Expired directed sessions also clean up only the exact Dark Folklore-installed target hint when that predator is still loaded.
 
 ### Progressive knowledge
 
@@ -207,15 +207,17 @@ Ground-truth commands require permission level 2.
 
 ## 0.6 automated evidence
 
-Final evidenced code head `d1cbea4e90700542532d7e2c2b1217f6fab2a79f` passed GitHub Actions run `31629194226`:
+Clean functional commit `44f86f35c7d82abab6f213e23105ba2ea998355c` passed GitHub Actions run `31630231534`:
 
-- **139/139 JUnit PASS**;
+- **141/141 JUnit PASS**, 0 failures/errors/skipped;
 - **3/3 NeoForge GameTests PASS**;
 - release JAR audit PASS;
 - atomic reload: 17 canonical concepts, 5 weaknesses, 8 spawn profiles, 2 magic integrations, 9 investigation profiles, **15 story templates**, 4 organization archetypes, 6 political overrides, **0 invalid**;
 - baseline Atlas audit: 147 mods, 11,296 cross-mod ingredient uses, 176 namespace bridges;
-- `darkfolklore-core-0.6.0.jar`: **575,754 bytes**, **232 classes**;
-- SHA-256 `BBE92BA67EE44ABD0AF010F271712FF4EDD5029FE6AF27C0AAF7A1E7D2AF6404`.
+- `darkfolklore-core-0.6.0.jar`: **576,563 bytes**, **233 classes**;
+- SHA-256 `E70C79CE9D4FA0465145434474C63081696613315BAA50AD6F3000F5386A67A6`;
+- production JAR artifact ID `9154801482`;
+- Atlas audit artifact ID `9154802118`.
 
 Automated CI proves code/resource integrity, not complete provider gameplay.
 
