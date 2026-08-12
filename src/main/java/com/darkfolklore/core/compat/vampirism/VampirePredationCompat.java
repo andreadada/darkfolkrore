@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 
 import java.lang.reflect.Method;
@@ -109,7 +110,9 @@ public final class VampirePredationCompat implements VampirePredationBridge {
 
     @Override
     public boolean canMcaAnimalFeed(Mob predator, LivingEntity target) {
-        if (predatorKind(predator) != PredatorKind.MCA_VAMPIRE || !target.isAlive() || !mcaBiteReady(predator)) return false;
+        ProviderSnapshot snapshot = providerSnapshot(predator);
+        if (predatorKind(predator) != PredatorKind.MCA_VAMPIRE || !snapshot.available() || snapshot.curing()
+                || !target.isAlive() || !mcaBiteReady(predator)) return false;
         return ExtendedCreature.getSafe(target)
                 .map(creature -> creature.getBlood() > 0 && creature.getMaxBlood() > 0 && !creature.hasPoisonousBlood())
                 .orElse(false);
@@ -168,8 +171,10 @@ public final class VampirePredationCompat implements VampirePredationBridge {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onEntityDrinkBlood(BloodDrinkEvent.EntityDrinkBloodEvent event) {
+        // MCA Vamp Compat handles BloodDrinkEvent at NORMAL. Observe at LOWEST so its block/amount mutations are
+        // already final before Core records evidence, rumors or feeding cooldowns.
         LivingEntity predator = event.getVampire().asEntity();
         event.getBloodSource().getEntity().ifPresent(target ->
                 VampirePredationEngine.INSTANCE.onNativeFeed(predator, target, event.getAmount()));
