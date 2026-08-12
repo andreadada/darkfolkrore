@@ -14,6 +14,16 @@ public final class McaVampireLifecycleClassifier {
         return McaVampireLifecycleState.HUMAN;
     }
 
+    /** A reload baseline is not a lifecycle edge; only an attached provider birth context may classify inheritance. */
+    public static McaVampireLifecycleTransition initialTransition(McaVampireLifecycleBridge.Snapshot current,
+                                                                 boolean recentBirthObservation) {
+        if (state(current) == McaVampireLifecycleState.VAMPIRE && recentBirthObservation
+                && current.inheritanceProcessed() && current.source().isEmpty()) {
+            return McaVampireLifecycleTransition.INHERITED_VAMPIRE;
+        }
+        return McaVampireLifecycleTransition.NONE;
+    }
+
     public static McaVampireLifecycleTransition transition(McaVampireLifecycleBridge.Snapshot previous,
                                                            McaVampireLifecycleBridge.Snapshot current,
                                                            boolean recentBirthObservation) {
@@ -25,11 +35,13 @@ public final class McaVampireLifecycleClassifier {
         if (before == after) return McaVampireLifecycleTransition.NONE;
 
         if (after == McaVampireLifecycleState.VAMPIRE) {
+            // Provider 2.0.12 retains conversion/inheritance metadata when a cure is cancelled.
+            // The prior factual CURING state is therefore the authoritative discriminator.
+            if (before == McaVampireLifecycleState.CURING) return McaVampireLifecycleTransition.CURE_CANCELLED;
             if (recentBirthObservation && current.inheritanceProcessed() && current.source().isEmpty()) {
                 return McaVampireLifecycleTransition.INHERITED_VAMPIRE;
             }
             if (current.biteWasConversionCause()) return McaVampireLifecycleTransition.NATIVE_BITE_CONVERTED;
-            if (before == McaVampireLifecycleState.CURING) return McaVampireLifecycleTransition.CURE_CANCELLED;
             return McaVampireLifecycleTransition.CONVERTED;
         }
         if (after == McaVampireLifecycleState.INFECTED && before == McaVampireLifecycleState.HUMAN) {

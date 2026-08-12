@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /** Exact read-mostly adapter for MCA Reborn x Vampirism Compat 2.0.12. */
 public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridge {
     private final AtomicBoolean failureLogged = new AtomicBoolean();
+    private final AtomicBoolean available = new AtomicBoolean(true);
     private final Method isMcaVillager;
     private final Method capabilityGet;
     private final Method isInfected;
@@ -44,10 +45,11 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
     }
 
     @Override
-    public boolean runtimeAvailable() { return true; }
+    public boolean runtimeAvailable() { return available.get(); }
 
     @Override
     public Snapshot snapshot(Entity entity) {
+        if (!runtimeAvailable()) return Snapshot.unavailable("lifecycle provider circuit open");
         try {
             boolean mca = (boolean) isMcaVillager.invoke(null, entity);
             if (!mca) {
@@ -72,23 +74,25 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
                     (boolean) areAiGoalsAdded.invoke(state),
                     source,
                     "exact MCA Vamp Compat 2.0.12 state");
-        } catch (ReflectiveOperationException | RuntimeException exception) {
-            warnOnce("snapshot", exception);
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
+            fail("snapshot", exception);
             return Snapshot.unavailable("MCA Vamp Compat lifecycle query failed");
         }
     }
 
     @Override
     public boolean ensureNativeAi(LivingEntity entity) {
+        if (!runtimeAvailable()) return false;
         try {
             return (boolean) registerGoalsIfNeeded.invoke(null, entity);
-        } catch (ReflectiveOperationException | RuntimeException exception) {
-            warnOnce("native AI registration", exception);
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
+            fail("native AI registration", exception);
             return false;
         }
     }
 
-    private void warnOnce(String operation, Exception exception) {
+    private void fail(String operation, Throwable exception) {
+        available.set(false);
         if (failureLogged.compareAndSet(false, true)) {
             DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] {} failed; lifecycle observation fails closed",
                     operation, exception);

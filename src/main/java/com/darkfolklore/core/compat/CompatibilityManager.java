@@ -35,6 +35,9 @@ public final class CompatibilityManager {
 
     private volatile List<CompatibilityReport> reports = List.of();
     private volatile List<SupernaturalStateAdapter> stateAdapters = List.of();
+    private volatile SupernaturalStateAdapter mcaFactAdapter;
+    private volatile CompatibilityStatus mcaFactStatus = CompatibilityStatus.DISABLED;
+    private volatile ProviderComponents mcaVampComponents = ProviderComponents.disabled();
     private volatile FieldGuideBridge fieldGuideBridge;
     private volatile VampirePredationBridge vampirePredationBridge = VampirePredationBridge.DISABLED;
     private volatile McaVampireLifecycleBridge mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
@@ -50,9 +53,13 @@ public final class CompatibilityManager {
         fieldGuideBridge = null;
         vampirePredationBridge = VampirePredationBridge.DISABLED;
         mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
+        mcaFactAdapter = null;
+        mcaFactStatus = CompatibilityStatus.DISABLED;
+        mcaVampComponents = ProviderComponents.disabled();
         mcaSocial.initialize("not-installed-or-untested");
         mcaCapitals.initialize("not-installed-or-untested");
 
+        // Phase one is immutable version discovery. Component failures below must not disable unrelated bridges.
         for (Spec spec : SPECS) {
             Optional<? extends net.neoforged.fml.ModContainer> container = mods.getModContainerById(spec.modId());
             if (container.isEmpty()) {
@@ -66,49 +73,50 @@ public final class CompatibilityManager {
             String detail = status == CompatibilityStatus.ACTIVE ? "Exact audited version"
                     : "Adapter internals disabled until this version is audited";
 
-            if (spec.modId().equals(McaVampCompatAdapter.MOD_ID) && status == CompatibilityStatus.ACTIVE) {
-                McaVampCompatAdapter adapter = new McaVampCompatAdapter();
-                try {
-                    adapter.initialize();
-                    nextAdapters.add(adapter);
-                } catch (ReflectiveOperationException | LinkageError exception) {
-                    status = CompatibilityStatus.ERROR;
-                    detail = "Expected 2.0.12 signatures were not found: " + exception.getClass().getSimpleName();
-                    DarkFolkloreCore.LOGGER.error("[compat/mca_vamp] Exact-version signature validation failed", exception);
-                }
-            }
-            if (spec.modId().equals(McaSocialAdapter.MOD_ID) && status == CompatibilityStatus.ACTIVE
-                    && !mcaSocial.initialize(actual)) {
-                status = CompatibilityStatus.ERROR;
-                detail = mcaSocial.statusDetail();
-            }
-            if (spec.modId().equals(McaCapitalsCompat.MOD_ID) && status == CompatibilityStatus.ACTIVE
-                    && !mcaCapitals.initialize(actual)) {
-                status = CompatibilityStatus.ERROR;
-                detail = mcaCapitals.statusDetail();
-            }
             nextReports.add(new CompatibilityReport(spec.modId(), spec.name(), spec.testedVersion(), actual,
                     spec.mechanism(), status, detail));
         }
 
         boolean vampirismExact = isExact(nextReports, "vampirism");
         boolean werewolvesExact = isExact(nextReports, "werewolves");
+        boolean mcaExact = isExact(nextReports, McaSocialAdapter.MOD_ID);
+        boolean mcaCapitalsExact = isExact(nextReports, McaCapitalsCompat.MOD_ID);
+        boolean providerExact = isExact(nextReports, McaVampCompatAdapter.MOD_ID);
+        boolean fieldGuideExact = isExact(nextReports, "fieldguide");
+        boolean exactMcaVampStack = vampirismExact && mcaExact && providerExact;
+
+        if (mcaExact && !mcaSocial.initialize(actualVersion(nextReports, McaSocialAdapter.MOD_ID))) {
+            replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.ERROR, mcaSocial.statusDetail());
+        }
+        if (mcaCapitalsExact && !mcaCapitals.initialize(actualVersion(nextReports, McaCapitalsCompat.MOD_ID))) {
+            replaceStatus(nextReports, McaCapitalsCompat.MOD_ID, CompatibilityStatus.ERROR, mcaCapitals.statusDetail());
+        }
+
         if (vampirismExact) {
             try {
                 Class<?> type = Class.forName("com.darkfolklore.core.compat.vampirism.VampirismAdapter", true,
                         CompatibilityManager.class.getClassLoader());
                 nextAdapters.add((SupernaturalStateAdapter) type.getConstructor(boolean.class)
                         .newInstance(werewolvesExact));
-            } catch (ReflectiveOperationException | LinkageError exception) {
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
                 replaceStatus(nextReports, "vampirism", CompatibilityStatus.ERROR,
                         "Public API adapter failed to load: " + exception.getClass().getSimpleName());
                 DarkFolkloreCore.LOGGER.error("[compat/vampirism] Public API adapter failed to load", exception);
             }
         }
 
-        boolean exactMcaVampStack = vampirismExact && isExact(nextReports, "mca")
-                && isExact(nextReports, McaVampCompatAdapter.MOD_ID);
         if (exactMcaVampStack) {
+            CompatibilityStatus facts = CompatibilityStatus.ERROR;
+            CompatibilityStatus predation = CompatibilityStatus.ERROR;
+            CompatibilityStatus lifecycle = CompatibilityStatus.ERROR;
+            try {
+                McaVampCompatAdapter adapter = new McaVampCompatAdapter();
+                adapter.initialize();
+                mcaFactAdapter = adapter;
+                facts = CompatibilityStatus.ACTIVE;
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
+                DarkFolkloreCore.LOGGER.error("[compat/mca_vamp] Exact factual bridge failed to load", exception);
+            }
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
                         CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
@@ -117,31 +125,41 @@ public final class CompatibilityManager {
                 }
                 vampirePredationBridge = bridge;
                 NeoForge.EVENT_BUS.register(adapter);
-            } catch (ReflectiveOperationException | LinkageError exception) {
+                predation = CompatibilityStatus.ACTIVE;
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
                 vampirePredationBridge = VampirePredationBridge.DISABLED;
-                replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
-                        "2.0.12 predation signature validation failed: " + exception.getClass().getSimpleName());
                 DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Exact provider bridge failed to load", exception);
             }
 
-            if (isExact(nextReports, McaVampCompatAdapter.MOD_ID)) {
-                try {
-                    Object adapter = Class.forName("com.darkfolklore.core.compat.mca.McaVampireLifecycleCompat", true,
-                            CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
-                    if (!(adapter instanceof McaVampireLifecycleBridge bridge)) {
-                        throw new LinkageError("McaVampireLifecycleCompat does not implement McaVampireLifecycleBridge");
-                    }
-                    mcaVampireLifecycleBridge = bridge;
-                } catch (ReflectiveOperationException | LinkageError exception) {
-                    mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
-                    replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
-                            "2.0.12 lifecycle signature validation failed: " + exception.getClass().getSimpleName());
-                    DarkFolkloreCore.LOGGER.error("[compat/mca_vamp_lifecycle] Exact provider bridge failed to load", exception);
+            try {
+                Object adapter = Class.forName("com.darkfolklore.core.compat.mca.McaVampireLifecycleCompat", true,
+                        CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                if (!(adapter instanceof McaVampireLifecycleBridge bridge)) {
+                    throw new LinkageError("McaVampireLifecycleCompat does not implement McaVampireLifecycleBridge");
                 }
+                mcaVampireLifecycleBridge = bridge;
+                lifecycle = CompatibilityStatus.ACTIVE;
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
+                mcaVampireLifecycleBridge = McaVampireLifecycleBridge.DISABLED;
+                DarkFolkloreCore.LOGGER.error("[compat/mca_vamp_lifecycle] Exact provider bridge failed to load", exception);
+            }
+
+            mcaFactStatus = facts;
+            mcaVampComponents = new ProviderComponents(facts, predation, lifecycle);
+            CompatibilityStatus combined = mcaVampComponents.combinedStatus();
+            replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, combined,
+                    "Exact audited stack; facts=" + facts + ", predation=" + predation + ", lifecycle=" + lifecycle);
+        } else {
+            CompatibilityStatus unavailable = unavailableMcaAuthorityStatus(nextReports);
+            mcaFactStatus = unavailable;
+            mcaVampComponents = new ProviderComponents(unavailable, unavailable, unavailable);
+            if (providerExact) {
+                replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, unavailable,
+                        "Exact provider requires audited Vampirism + MCA versions; components disabled fail-closed");
             }
         }
 
-        if (isExact(nextReports, "fieldguide")) {
+        if (fieldGuideExact) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.fieldguide.FieldGuideAdapter", true,
                         CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
@@ -150,7 +168,7 @@ public final class CompatibilityManager {
                 }
                 fieldGuideBridge = bridge;
                 NeoForge.EVENT_BUS.register(adapter);
-            } catch (ReflectiveOperationException | LinkageError exception) {
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
                 fieldGuideBridge = null;
                 replaceStatus(nextReports, "fieldguide", CompatibilityStatus.ERROR,
                         "1.14.0 progress bridge failed to load: " + exception.getClass().getSimpleName());
@@ -178,6 +196,8 @@ public final class CompatibilityManager {
 
     public McaVampireLifecycleBridge mcaVampireLifecycle() { return mcaVampireLifecycleBridge; }
 
+    public ProviderComponents mcaVampComponents() { return mcaVampComponents; }
+
     public boolean unlockFieldGuideImplementation(ServerPlayer player, String registryId) {
         FieldGuideBridge bridge = fieldGuideBridge;
         return bridge != null && bridge.runtimeAvailable() && bridge.unlockObservedImplementation(player, registryId);
@@ -188,7 +208,10 @@ public final class CompatibilityManager {
         return bridge != null && bridge.runtimeAvailable();
     }
 
-    public void clearRuntimeCaches() { mcaCapitals.clearCache(); }
+    public void clearRuntimeCaches() {
+        mcaCapitals.clearCache();
+        vampirePredationBridge.clearRuntimeState();
+    }
 
     public FactResult isVampire(Entity entity) { return aggregate(entity, Query.VAMPIRE); }
 
@@ -197,30 +220,64 @@ public final class CompatibilityManager {
     public FactResult isHunter(Entity entity) { return aggregate(entity, Query.HUNTER); }
 
     public Optional<UUID> conversionSource(Entity entity, SecretType type) {
+        if (isMca(entity)) {
+            return mcaFactStatus == CompatibilityStatus.ACTIVE && mcaFactAdapter != null
+                    ? mcaFactAdapter.conversionSource(entity, type) : Optional.empty();
+        }
         return stateAdapters.stream().map(adapter -> adapter.conversionSource(entity, type))
                 .flatMap(Optional::stream).findFirst();
     }
 
     private FactResult aggregate(Entity entity, Query query) {
-        boolean hadFalse = false;
-        boolean hadUnknown = false;
-        for (SupernaturalStateAdapter adapter : stateAdapters) {
-            FactResult value = switch (query) {
-                case VAMPIRE -> adapter.isVampire(entity);
-                case WEREWOLF -> adapter.isWerewolf(entity);
-                case HUNTER -> adapter.isHunter(entity);
-            };
-            if (value == FactResult.TRUE) return value;
-            if (value == FactResult.FALSE) hadFalse = true;
-            if (value == FactResult.UNKNOWN) hadUnknown = true;
+        if (isMca(entity)) {
+            FactResult provider = mcaFactAdapter == null ? FactResult.NOT_APPLICABLE
+                    : query(mcaFactAdapter, entity, query);
+            return SupernaturalFactResolver.resolveMca(mcaFactStatus, provider);
         }
-        if (hadUnknown) return FactResult.UNKNOWN;
-        return hadFalse ? FactResult.FALSE : FactResult.NOT_APPLICABLE;
+        List<FactResult> results = new ArrayList<>();
+        for (SupernaturalStateAdapter adapter : stateAdapters) {
+            results.add(query(adapter, entity, query));
+        }
+        return SupernaturalFactResolver.resolveGeneric(results);
+    }
+
+    private static FactResult query(SupernaturalStateAdapter adapter, Entity entity, Query query) {
+        return switch (query) {
+            case VAMPIRE -> adapter.isVampire(entity);
+            case WEREWOLF -> adapter.isWerewolf(entity);
+            case HUNTER -> adapter.isHunter(entity);
+        };
     }
 
     private static boolean isExact(List<CompatibilityReport> reports, String modId) {
         return reports.stream().anyMatch(report -> report.modId().equals(modId)
                 && report.status() == CompatibilityStatus.ACTIVE);
+    }
+
+    private static String actualVersion(List<CompatibilityReport> reports, String modId) {
+        return reports.stream().filter(report -> report.modId().equals(modId))
+                .map(CompatibilityReport::actualVersion).findFirst().orElse("-");
+    }
+
+    private static CompatibilityStatus unavailableMcaAuthorityStatus(List<CompatibilityReport> reports) {
+        CompatibilityStatus provider = status(reports, McaVampCompatAdapter.MOD_ID);
+        if (provider == CompatibilityStatus.DISABLED) return CompatibilityStatus.DISABLED;
+        if (provider == CompatibilityStatus.UNTESTED_VERSION
+                || status(reports, "vampirism") == CompatibilityStatus.UNTESTED_VERSION
+                || status(reports, "mca") == CompatibilityStatus.UNTESTED_VERSION) {
+            return CompatibilityStatus.UNTESTED_VERSION;
+        }
+        return CompatibilityStatus.UNSUPPORTED;
+    }
+
+    private static CompatibilityStatus status(List<CompatibilityReport> reports, String modId) {
+        return reports.stream().filter(report -> report.modId().equals(modId))
+                .map(CompatibilityReport::status).findFirst().orElse(CompatibilityStatus.DISABLED);
+    }
+
+    private static boolean isMca(Entity entity) {
+        var id = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        return id != null && id.getNamespace().equals("mca");
     }
 
     private static void replaceStatus(List<CompatibilityReport> reports, String modId,
@@ -236,5 +293,24 @@ public final class CompatibilityManager {
     }
 
     private enum Query { VAMPIRE, WEREWOLF, HUNTER }
+    public record ProviderComponents(CompatibilityStatus facts, CompatibilityStatus predation,
+                                     CompatibilityStatus lifecycle) {
+        public static ProviderComponents disabled() {
+            return new ProviderComponents(CompatibilityStatus.DISABLED, CompatibilityStatus.DISABLED,
+                    CompatibilityStatus.DISABLED);
+        }
+
+        public CompatibilityStatus combinedStatus() {
+            int active = (facts == CompatibilityStatus.ACTIVE ? 1 : 0)
+                    + (predation == CompatibilityStatus.ACTIVE ? 1 : 0)
+                    + (lifecycle == CompatibilityStatus.ACTIVE ? 1 : 0);
+            return active == 3 ? CompatibilityStatus.ACTIVE
+                    : active > 0 ? CompatibilityStatus.PARTIAL : CompatibilityStatus.ERROR;
+        }
+
+        public boolean factualAuthorityAvailable() { return facts == CompatibilityStatus.ACTIVE; }
+        public boolean predationAvailable() { return predation == CompatibilityStatus.ACTIVE; }
+        public boolean lifecycleAvailable() { return lifecycle == CompatibilityStatus.ACTIVE; }
+    }
     private record Spec(String modId, String name, String testedVersion, String mechanism) {}
 }

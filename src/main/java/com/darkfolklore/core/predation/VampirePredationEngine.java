@@ -87,9 +87,8 @@ public final class VampirePredationEngine {
             remember(predator, kind, null, localRisk, personalRisk, "no socially/provider-valid prey", now);
             return;
         }
-        boolean recentAtStart = bridge.wasRecentlyBitten(choice.target());
         sessions.put(predator.getUUID(), new Session(choice.target().getUUID(), choice.animal(), kind,
-                now, now + 240L, recentAtStart));
+                now, now + 240L));
         remember(predator, kind, choice.target(), localRisk, personalRisk,
                 "selected " + choice.reason() + " score=" + Math.round(choice.score()), now);
     }
@@ -102,27 +101,19 @@ public final class VampirePredationEngine {
         if (now < victimCooldowns.getOrDefault(target.getUUID(), 0L)) return false;
 
         if (session.kind() == PredatorKind.MCA_VAMPIRE && !session.animal()) {
-            bridge.ensureMcaNativeAi(predator);
-            if (!bridge.canMcaVampireTarget(predator, target)) return false;
-            predator.setTarget(target);
-            if (predator.distanceToSqr(target) > 4.0D) predator.getNavigation().moveTo(target, 0.9D);
-            boolean recent = bridge.wasRecentlyBitten(target);
-            if (!session.recentAtStart() && recent) {
-                onNativeFeed(predator, target, 1);
-                predator.setTarget(null);
-                return false;
-            }
-            return true;
+            VampirePredationBridge.ProviderSnapshot snapshot = bridge.providerSnapshot(predator);
+            // Provider owns target selection. Core may retain intent only when its native AI independently selected
+            // the same entity; exact provider event correlation owns successful-feed evidence.
+            return PredationPolicy.mayContinueMcaSession(snapshot.available(), snapshot.converted(), snapshot.curing(),
+                    bridge.canMcaVampireTarget(predator, target), predator.getTarget() == target);
         }
 
         boolean canFeed = session.kind() == PredatorKind.WILD_VAMPIRISM
                 ? bridge.canWildFeed(predator, target) : bridge.canMcaAnimalFeed(predator, target);
         if (!canFeed) return false;
         if (!predator.getSensing().hasLineOfSight(target)) return false;
-        if (predator.distanceToSqr(target) > 3.5D) {
-            predator.getNavigation().moveTo(target, session.kind() == PredatorKind.WILD_VAMPIRISM ? 0.9D : 0.75D);
-            return true;
-        }
+        // No provider-supported target/navigation request API exists. Feed only opportunistically in range.
+        if (predator.distanceToSqr(target) > 3.5D) return true;
         if (session.kind() == PredatorKind.WILD_VAMPIRISM) {
             bridge.performWildFeed(predator, target);
         } else {
@@ -184,7 +175,7 @@ public final class VampirePredationEngine {
 
     public void onNativeFeed(LivingEntity predator, LivingEntity target, int amount) {
         if (!FolkloreConfig.VAMPIRE_PREDATION.get() || !(predator.level() instanceof ServerLevel level)
-                || amount <= 0 || predator == target) return;
+                || !FinalizedFeedPolicy.isRealFeed(amount, predator == target)) return;
         long now = level.getGameTime();
         FeedKey key = new FeedKey(predator.getUUID(), target.getUUID());
         if (now - observedFeeds.getOrDefault(key, Long.MIN_VALUE / 2) < 20L) return;
@@ -192,7 +183,7 @@ public final class VampirePredationEngine {
         markFeedCooldowns(level, predator, target, now);
 
         // Native lethal drains are handled by IncidentStoryEngine's death path; avoid creating a duplicate case.
-        if (!target.isAlive()) return;
+        if (!FinalizedFeedPolicy.createsNonlethalEvidence(amount, false, target.isAlive())) return;
 
         FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
         WorldPosition victimPos = WorldPosition.of(level, target.blockPosition());
@@ -317,17 +308,31 @@ public final class VampirePredationEngine {
     public int activeSessions() { return sessions.size(); }
     public int trackedRegions() { return regionalFeeds.size(); }
 
+    /** Cancels narrative orchestration without mutating provider/MCA target or navigation state. */
+    public void cancelSession(Entity predator) {
+        sessions.remove(predator.getUUID());
+    }
+
+    public void clearRuntimeState() {
+        sessions.clear();
+        predatorCooldowns.clear();
+        victimCooldowns.clear();
+        regionalFeeds.clear();
+        observedFeeds.clear();
+        diagnostics.clear();
+    }
+
     private void remember(LivingEntity predator, PredatorKind kind, LivingEntity target,
                           double localRisk, double personalRisk, String reason, long now) {
         diagnostics.remove(predator.getUUID());
         diagnostics.put(predator.getUUID(), new Diagnostic(predator.getUUID(), kind,
                 Optional.ofNullable(target).map(Entity::getUUID), localRisk, personalRisk, reason, now));
+        while (diagnostics.size() > 128) diagnostics.remove(diagnostics.keySet().iterator().next());
     }
 
     public record Diagnostic(UUID predator, PredatorKind kind, Optional<UUID> target,
                              double localRisk, double personalRisk, String reason, long gameTime) {}
-    private record Session(UUID target, boolean animal, PredatorKind kind, long startedAt, long expiresAt,
-                           boolean recentAtStart) {}
+    private record Session(UUID target, boolean animal, PredatorKind kind, long startedAt, long expiresAt) {}
     private record Choice(LivingEntity target, boolean animal, double score, String reason) {}
     private record FeedKey(UUID predator, UUID victim) {}
 }

@@ -13,7 +13,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -71,15 +70,22 @@ public final class McaVampireLifecycleEngine {
 
         int serverTick = level.getServer().getTickCount();
         Integer initialTick = initialObservationTick.get(entity.getUUID());
-        boolean initialReady = initialTick != null && serverTick >= initialTick;
-        if (!initialReady && Math.floorMod(entity.tickCount + entity.getId(), SAMPLE_INTERVAL) != 0) return;
-        if (initialReady) initialObservationTick.remove(entity.getUUID());
-        observe(level, entity, bridge);
+        boolean sampledTick = Math.floorMod(entity.tickCount + entity.getId(), SAMPLE_INTERVAL) == 0;
+        if (initialTick == null && !sampledTick) return;
+        if (initialTick != null && serverTick < initialTick) return;
+        if (initialTick != null && !InitialObservationPolicy.shouldAttempt(serverTick, initialTick, sampledTick)) {
+            initialObservationTick.remove(entity.getUUID());
+            return;
+        }
+        boolean observed = observe(level, entity, bridge);
+        if (initialTick != null && !InitialObservationPolicy.shouldRetain(serverTick, initialTick, observed)) {
+            initialObservationTick.remove(entity.getUUID());
+        }
     }
 
-    private void observe(ServerLevel level, LivingEntity entity, McaVampireLifecycleBridge bridge) {
+    private boolean observe(ServerLevel level, LivingEntity entity, McaVampireLifecycleBridge bridge) {
         McaVampireLifecycleBridge.Snapshot current = bridge.snapshot(entity);
-        if (!current.available() || !current.mcaVillager()) return;
+        if (!current.available() || !current.mcaVillager()) return false;
         long now = level.getGameTime();
         BirthContext birth = births.get(entity.getUUID());
         boolean recentBirth = birth != null && now - birth.gameTime() <= BIRTH_CONTEXT_TTL;
@@ -99,9 +105,7 @@ public final class McaVampireLifecycleEngine {
 
         McaVampireLifecycleTransition transition;
         if (previous == null) {
-            transition = recentBirth && current.converted() && current.inheritanceProcessed() && current.source().isEmpty()
-                    ? McaVampireLifecycleTransition.INHERITED_VAMPIRE
-                    : McaVampireLifecycleTransition.NONE;
+            transition = McaVampireLifecycleClassifier.initialTransition(current, recentBirth);
         } else {
             transition = McaVampireLifecycleClassifier.transition(previous, current, recentBirth);
         }
@@ -111,11 +115,12 @@ public final class McaVampireLifecycleEngine {
         if (recentBirth && (current.inheritanceProcessed() || now - birth.gameTime() > BIRTH_CONTEXT_TTL / 2)) {
             births.remove(entity.getUUID());
         }
+        return true;
     }
 
     private static void ensureProviderLineage(MinecraftServer server, UUID descendant,
                                               Optional<UUID> providerSource, long now) {
-        providerSource.filter(source -> !source.equals(descendant)).ifPresent(source ->
+        ProviderLineagePolicy.validSource(descendant, providerSource).ifPresent(source ->
                 FolkloreSavedData.get(server).addLineage(new LineageRecord(descendant, source,
                         SecretType.VAMPIRE, now)));
     }
@@ -132,10 +137,8 @@ public final class McaVampireLifecycleEngine {
         switch (transition) {
             case CURE_STARTED, CURED, VAMPIRISM_CLEARED, INFECTION_CLEARED -> {
                 // Historical beliefs deliberately remain. Only transient predatory intent is stopped.
-                if (entity instanceof Mob mob) {
-                    mob.setTarget(null);
-                    mob.getNavigation().stop();
-                }
+                // Provider owns generic combat/command targets and navigation; cancel only Core's session.
+                com.darkfolklore.core.predation.VampirePredationEngine.INSTANCE.cancelSession(entity);
             }
             case INHERITED_VAMPIRE -> {
                 // Provider inheritance intentionally has no conversion source. Preserve both parents only in
@@ -162,6 +165,13 @@ public final class McaVampireLifecycleEngine {
     public Optional<Observation> latest(UUID entity) { return Optional.ofNullable(latest.get(entity)); }
     public int trackedEntities() { return snapshots.size(); }
     public int pendingBirths() { return births.size(); }
+
+    public void clearRuntimeState() {
+        snapshots.clear();
+        initialObservationTick.clear();
+        births.clear();
+        latest.clear();
+    }
 
     private static boolean isMca(Entity entity) {
         var id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
