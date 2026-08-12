@@ -13,126 +13,73 @@
 | Investigation sidecar | schema 1 |
 | Classification | `RELEASE_CANDIDATE` |
 
-0.3.1 is a hardening release for the 0.3 Occult Investigation architecture. It does not claim completion of provider-native Deep Magic Phase 2.
+0.3.1 hardens Occult Investigation and now adds the bounded Vampire Society & Predation bridge needed for Vampirism/MCA to produce natural social incidents without taking ownership of provider transformations.
 
-## Automated build gate
+## Latest automated build gate
 
-The 0.3.1 branch GitHub Actions gate requires:
+Exact branch head: `f3a8635a15d46855e1eb4e0d78d2f5ab69a5b917`.
 
-```text
-wrapper validation
-Java 21 clean build
-JUnit + resource validators
-release JAR audit
-explicit JUnit XML count
-NeoForge GameTests
-artifact identity print
-artifact upload
-```
-
-A verified successful code run at `bdea1a9616b4c87081869e2f74585686742d783a` / Actions run `31525348730` produced:
+GitHub Actions run `31590162424`: **PASS**.
 
 | Property | Recorded value |
 | --- | --- |
 | Artifact | `darkfolklore-core-0.3.1.jar` |
-| JAR size | `415,902` bytes |
-| SHA-256 | `05FA8A21F91BFA61B0801CA88032B50A504F26894E2A928F598B2B0ACA0EAF5A` |
-| Class files | `164` |
-| Class-file version | `65` enforced by `auditReleaseJar` |
+| JAR size | `457,738` bytes |
+| SHA-256 | `A62623ED93B3912FDFB009DE62382B5C1CA7F014F7EAE9ACD5F2B0AF390BD10F` |
+| Class files | `182` |
+| JUnit | `78/78 PASS` |
 | GameTests | `3/3 PASS` |
-| Datapack reload | `0 invalid` |
+| Datapack reload | `17 canonical / 5 weaknesses / 8 spawn / 2 magic / 9 investigation / 13 stories / 4 organizations / 6 political, 0 invalid` |
+| Class-file version | `65`, enforced by `auditReleaseJar` |
 
-The artifact was uploaded by GitHub Actions. A later branch run after documentation-only updates must remain green before merge; if its deterministic artifact identity differs, this record must be updated rather than assuming equivalence.
+The release JAR audit rejects test/development classes, nested/shaded provider JARs, provider-owned packages, local user paths, wrong metadata/version, missing investigation/Field Guide resources, and non-Java-21 classes.
 
-## Release JAR audit
+## Vampire Society & Predation ownership model
 
-`auditReleaseJar` rejects at least:
+0.3.1 introduces a bounded director rather than replacing provider AI globally.
 
-- missing manifest/license/NeoForge metadata;
-- wrong or unresolved mod version;
-- missing EN/IT localization;
-- missing canonical Vampire resources;
-- missing 0.3 investigation resources;
-- missing 0.3.1 Sprite/Fae canonical, profile, Field Guide category, or Fae tool tag;
-- missing Field Guide data entirely;
-- Atlas classes;
-- JUnit/test dependencies/classes;
-- shaded Vampirism/Field Guide/MCA compatibility classes;
-- nested JARs;
-- temporary/cache/IDE artifacts;
-- leaked Windows user paths;
-- any class not emitted as Java 21 / major 65.
+- Wild Vampirism entities remain Vampirism entities. When eligible, Core may guide them toward an adult MCA target or animal, but the blood drain uses Vampirism's real blood attachment/API and emits the real `BloodDrinkEvent`.
+- MCA Vamp Compat remains the sole owner of MCA infection, conversion, cure, inherited vampirism and the MCA vampire's native infection-bite AI.
+- A named MCA civilian is no longer rejected merely because Vampirism's generic feed goal protects custom-named entities.
+- MCA vampires use social-risk scoring: public awareness, village suspicion, Hunter Society influence, personal VAMPIRE suspicion and visible witnesses make civilian feeding progressively less attractive. Animals become the safer option.
+- Children, close family, known hunters, supernatural civilians, tamed animals and named non-MCA entities are protected from autonomous feeding selection.
+- Feeding is night-only, local, staggered and bounded by per-predator/per-victim cooldowns plus a rolling regional feed budget. No chunk is force-loaded.
+- Nonlethal feeding can create `BITE_MARK`/`BLOOD`, victim knowledge, witnesses, rumors, Hunter pressure and the contract-eligible `feeding_assault` story. Lethal feeds remain owned by the existing death/incident path so the same event is not duplicated.
 
-The already-applied `apply_darkfolklore_0_3.py` development helper is removed from the 0.3.1 branch.
+## Exact provider audit boundary
+
+Development audit used the user-supplied MCA Reborn x Vampirism Compat 2.0.12 JAR with SHA-256:
+
+`BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF`
+
+The binary is not committed, redistributed or shaded. The bridge validates exact 2.0.12 method/class signatures at runtime and fails closed if they are missing. Normal CI intentionally does not install the full optional provider pack, so the green gate does not replace an in-world exact-provider test.
 
 ## Persistence decision
 
-The established `darkfolklore_society` save remains schema 2. New 0.3.1 hardening metadata uses a separate `darkfolklore_investigation` SavedData sidecar with schema 1.
+The established `darkfolklore_society` save remains schema 2. Investigation continuity remains in `darkfolklore_investigation` schema 1. Predation sessions, cooldowns and scoring diagnostics are transient runtime state and are deliberately not persisted as authoritative facts.
 
-This sidecar stores:
+## Correctness decisions retained
 
-- concept-level creature sightings;
-- factual incident metadata;
-- story → contract continuity;
-- known culprit UUID;
-- concrete observed implementation;
-- confirmed-death fallback authorization.
+- Fact and belief are separate: a provider-confirmed vampire state does not automatically become public social knowledge.
+- Known contract culprit UUID remains authoritative until confirmed death activates fallback; unload never equals death.
+- New contracts retain explicit story identity.
+- Weakness existence is not player knowledge; player-facing countermeasures require `STUDIED` lore.
+- `KEEP_DISTINCT` investigation cases retain their concrete provider implementation.
+- Fae remains curated rather than globally canonicalized.
+- Dark Folklore does not force infection/cure/inheritance; provider lifecycle state is the fact.
 
-This avoids forcing a broad schema-3 rewrite only to attach investigation metadata. New records are bounded and pruned. Pre-0.3.1 contracts without sidecar data retain documented legacy fallback behavior.
+## Deferred / manual gates
 
-## Correctness decisions
+Before any `PRODUCTION_READY` claim, retain in-world evidence for:
 
-### Factual state and belief remain separate
+- wild Vampirism vampire feeding on a named adult MCA civilian;
+- real BloodDrinkEvent → provider-configured MCA infection;
+- provider conversion retaining the same MCA person/entity rather than replacing it with a generic vampire mob;
+- MCA vampire low-risk civilian feeding versus high-risk animal preference;
+- child/family/hunter/supernatural/tamed protections;
+- witnessed nonlethal feeding → evidence/rumor/Hunter pressure/`feeding_assault`;
+- cure and inheritance observed from the exact provider;
+- existing investigation culprit/issuer/Field Guide/FAE/persistence acceptance;
+- intended full-modpack client/server and authentic backed-up world migration.
 
-Social identity secrets are not expanded into every monster species. Cryptid/spirit/demon/construct/Fae observations use concept-level sighting records instead.
-
-### Known culprit is authoritative
-
-A new case with a known culprit does not accept a different same-concept target while that culprit remains valid. Unload is not death. A same-concept fallback requires explicit policy activation after a confirmed death.
-
-### Story identity is explicit
-
-New contracts store the story UUID they came from, avoiding accidental advancement of a different same-concept story in the same village region.
-
-### Weakness truth is not player knowledge
-
-Dark Folklore may know a WeaknessRule internally without exposing it to the player. Preparation feedback and the prepared-hunt bonus require `STUDIED` target lore.
-
-### KEEP_DISTINCT remains distinct
-
-The investigation sidecar retains the concrete provider implementation. Field Guide 1.14.0 can therefore unlock the observed implementation page when no single canonical entity ID exists.
-
-### Fae is curated, not global
-
-0.3.1 adds only the existing `feywild:sprite` as the first Fae investigation case. It does not globally treat all Feywild entities as one canonical monster.
-
-## Deferred work
-
-The following is intentionally **not** claimed as complete in 0.3.1:
-
-- native provider ritual/event integration for all five magic mods;
-- full client/in-world acceptance;
-- every exact optional-provider permutation;
-- authentic user-created old-world upgrade acceptance;
-- multiplayer-scale performance benchmarking;
-- polished player-facing quest UI beyond existing interaction/messages/Field Guide integration.
-
-Deep provider-native integration belongs to a later exact-JAR/API audit rather than being simulated in this hardening patch.
-
-## Manual promotion gate
-
-Before any `PRODUCTION_READY` claim, complete and retain evidence for the manual matrix in [TESTING_0.3.1.md](TESTING_0.3.1.md), particularly:
-
-- real in-world incident/contract loop;
-- concept-level monster testimony;
-- exact culprit behavior and unload/death distinction;
-- issuer fallback;
-- expired evidence rejection;
-- STUDIED weakness gating;
-- KEEP_DISTINCT Field Guide unlock;
-- Sprite/FAE `GLAMOUR_TRACE` flow;
-- save/restart persistence;
-- EN/IT Field Guide and Recent Discoveries;
-- intended full modpack client/server smoke.
-
-Until those are actually completed, the maximum justified classification is **`RELEASE_CANDIDATE`**.
+Provider-native ritual integration for the five magic mods remains a later phase. Exact MCA vampire lifecycle observation is developed separately as the 0.4 stacked follow-up; 0.3.1 itself remains **`RELEASE_CANDIDATE`**.
