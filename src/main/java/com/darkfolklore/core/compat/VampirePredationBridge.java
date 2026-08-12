@@ -5,6 +5,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
+import java.util.UUID;
+
 /**
  * Exact-provider bridge used by the bounded predation director.
  *
@@ -21,6 +23,16 @@ public interface VampirePredationBridge {
     default boolean wantsBlood(Mob entity) { return false; }
 
     default boolean canWildFeed(Mob predator, LivingEntity target) { return false; }
+
+    /**
+     * Gives a wild Vampirism mob a bounded combat-target hint for a provider-valid prey target. Implementations
+     * must never steal a different live combat target. This hook is intentionally unavailable to MCA vampires,
+     * whose target selection/navigation remain owned by MCA Vamp Compat.
+     */
+    default boolean requestWildHuntTarget(Mob predator, LivingEntity target) { return false; }
+
+    /** Clears only a target previously selected by Dark Folklore for the expected victim. */
+    default void clearWildHuntTarget(Mob predator, UUID expectedTarget) {}
 
     /** Performs a real Vampirism blood drain and emits the provider BloodDrinkEvent. */
     default boolean performWildFeed(Mob predator, LivingEntity target) { return false; }

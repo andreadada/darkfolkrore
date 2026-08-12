@@ -2,6 +2,7 @@ package com.darkfolklore.core.compat.vampirism;
 
 import com.darkfolklore.core.DarkFolkloreCore;
 import com.darkfolklore.core.compat.VampirePredationBridge;
+import com.darkfolklore.core.predation.PredationPolicy;
 import com.darkfolklore.core.predation.PredatorKind;
 import com.darkfolklore.core.predation.VampirePredationEngine;
 import de.teamlapen.vampirism.api.entity.player.vampire.IDrinkBloodContext;
@@ -101,6 +102,26 @@ public final class VampirePredationCompat implements VampirePredationBridge {
             fail("wild-feed query", exception);
             return false;
         }
+    }
+
+    @Override
+    public boolean requestWildHuntTarget(Mob predator, LivingEntity target) {
+        if (!runtimeAvailable() || !(predator instanceof IVampireMob) || !target.isAlive()) return false;
+        boolean providerEligible = canWildFeed(predator, target);
+        LivingEntity current = predator.getTarget();
+        boolean currentAlive = current != null && current.isAlive();
+        boolean currentIsChosen = current != null && current.getUUID().equals(target.getUUID());
+        if (!PredationPolicy.mayDirectWildHunt(providerEligible, true, currentAlive, currentIsChosen)) return false;
+        predator.setTarget(target);
+        LivingEntity applied = predator.getTarget();
+        return applied != null && applied.getUUID().equals(target.getUUID());
+    }
+
+    @Override
+    public void clearWildHuntTarget(Mob predator, UUID expectedTarget) {
+        if (!(predator instanceof IVampireMob)) return;
+        LivingEntity current = predator.getTarget();
+        if (current != null && current.getUUID().equals(expectedTarget)) predator.setTarget(null);
     }
 
     @Override

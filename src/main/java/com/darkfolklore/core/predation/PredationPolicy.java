@@ -60,6 +60,16 @@ public final class PredationPolicy {
         return true;
     }
 
+    /**
+     * Wild Vampirism mobs may be directed toward a provider-valid target only when Core is not stealing a
+     * different live combat target. Reasserting the same chosen target is allowed so native target selectors
+     * cannot turn a bounded hunt into an inert proximity-only session.
+     */
+    public static boolean mayDirectWildHunt(boolean providerEligible, boolean targetAlive,
+                                            boolean existingTargetAlive, boolean existingTargetIsChosen) {
+        return providerEligible && targetAlive && (!existingTargetAlive || existingTargetIsChosen);
+    }
+
     /** Core may observe a provider-owned MCA bite session, but it may not create or redirect that target. */
     public static boolean mayContinueMcaSession(boolean providerAvailable, boolean converted, boolean curing,
                                                 boolean providerTargetEligible, boolean providerOwnsTarget) {
