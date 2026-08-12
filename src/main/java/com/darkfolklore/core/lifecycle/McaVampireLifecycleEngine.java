@@ -91,6 +91,12 @@ public final class McaVampireLifecycleEngine {
             snapshots.put(entity.getUUID(), current);
         }
 
+        // Provider provenance is a durable factual datum, not merely a transition edge. Recover it after world
+        // load as well as during a live conversion so event-listener order cannot make a valid source disappear.
+        if (current.converted()) {
+            ensureProviderLineage(level.getServer(), entity.getUUID(), current.source(), now);
+        }
+
         McaVampireLifecycleTransition transition;
         if (previous == null) {
             transition = recentBirth && current.converted() && current.inheritanceProcessed() && current.source().isEmpty()
@@ -107,6 +113,13 @@ public final class McaVampireLifecycleEngine {
         }
     }
 
+    private static void ensureProviderLineage(MinecraftServer server, UUID descendant,
+                                              Optional<UUID> providerSource, long now) {
+        providerSource.filter(source -> !source.equals(descendant)).ifPresent(source ->
+                FolkloreSavedData.get(server).addLineage(new LineageRecord(descendant, source,
+                        SecretType.VAMPIRE, now)));
+    }
+
     private void handleTransition(MinecraftServer server, LivingEntity entity,
                                   McaVampireLifecycleBridge.Snapshot current,
                                   McaVampireLifecycleTransition transition,
@@ -117,10 +130,6 @@ public final class McaVampireLifecycleEngine {
         while (latest.size() > 512) latest.remove(latest.keySet().iterator().next());
 
         switch (transition) {
-            case NATIVE_BITE_CONVERTED, CONVERTED -> current.source()
-                    .filter(source -> !source.equals(entity.getUUID()))
-                    .ifPresent(source -> FolkloreSavedData.get(server).addLineage(new LineageRecord(
-                            entity.getUUID(), source, SecretType.VAMPIRE, now)));
             case CURE_STARTED, CURED, VAMPIRISM_CLEARED, INFECTION_CLEARED -> {
                 // Historical beliefs deliberately remain. Only transient predatory intent is stopped.
                 if (entity instanceof Mob mob) {
