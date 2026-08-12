@@ -27,6 +27,7 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue OCCULT_INVESTIGATION = toggle("occultInvestigation", true);
     public static final ModConfigSpec.BooleanValue PREPARED_HUNT_BONUS = toggle("preparedHuntBonus", true);
     public static final ModConfigSpec.BooleanValue VAMPIRE_PREDATION = toggle("vampirePredation", true);
+    public static final ModConfigSpec.BooleanValue MCA_VAMPIRE_LIFECYCLE = toggle("mcaVampireLifecycle", true);
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING = toggle("debugLogging", false);
 
     public static final ModConfigSpec.IntValue WITNESS_RADIUS = BUILDER.comment("Maximum event-driven witness radius in blocks")
