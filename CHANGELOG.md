@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.4.0 — Native MCA Vampire Lifecycle Integration (2026-08-12)
+
+### Added
+
+- Exact read-mostly lifecycle bridge for MCA Reborn x Vampirism Compat 2.0.12, with constructor-time class/method validation and fail-closed behavior on unsupported signatures.
+- Provider lifecycle states for MCA civilians: `HUMAN`, `INFECTED`, `VAMPIRE`, and `CURING`.
+- Observed transition classification for infection start, native-bite conversion, other conversion, inherited vampirism, cure start/cancel/completion, infection clear, and factual vampirism clear.
+- One-tick-delayed initial provider observation so MCA Vamp Compat normalization/attachments can settle before Core samples factual state.
+- Loaded-entity-only, staggered lifecycle observation without world scans or chunk force-loading.
+- Recovery of valid provider conversion-source lineage both during live conversion and after world/entity reload.
+- Birth context for inherited vampires that retains both provider parents in diagnostics without fabricating a single conversion source.
+- Exact provider-native AI repair through the audited idempotent `McaVampireAi.registerGoalsIfNeeded` extension point, only after factual conversion.
+- `/folklore lifecycle status` and `/folklore lifecycle inspect <entity>` diagnostics.
+- `docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md` documenting the exact user-supplied binary, provider methods, event chain, ownership boundary, cure/inheritance semantics, and runtime validation limits.
+- Pure lifecycle transition regression tests.
+
+### Changed
+
+- Version advanced to `0.4.0`; CI builds/audits/uploads `darkfolklore-core-0.4.0.jar`.
+- Vampire feeding observation runs at `LOWEST` event priority, after MCA Vamp Compat's normal `BloodDrinkEvent` handler, so provider-blocked/zeroed drains cannot create false Dark Folklore evidence.
+- MCA vampire animal feeding is disabled while the exact provider reports an active cure state.
+- Provider provenance is treated as durable factual data rather than only a live-transition edge, allowing conversion lineage to recover after load.
+
+### Fixed
+
+- Malformed provider conversion-source UUIDs equal to the descendant UUID are rejected before constructing lineage records.
+- Cure transitions stop transient Core target/navigation intent without deleting historical witness beliefs or rumors.
+- The stacked 0.4 branch is explicitly synchronized with the final 0.3.1 hardening base so PR #2 can be reviewed independently without duplicating already-landed 0.3.1 changes.
+
+### Provider ownership boundary
+
+- Dark Folklore does **not** force infection, conversion, cure, inheritance, or MCA vampire replacement.
+- MCA Reborn x Vampirism Compat 2.0.12 remains sole factual owner of infection rules, conversion, cure, inherited vampirism, capability persistence, appearance normalization, and native MCA vampire bite AI.
+- The exact audited user-supplied provider JAR SHA-256 is `BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF`; it is not redistributed or shaded.
+
+### Release boundary
+
+- 0.4.0 remains `DEVELOPMENT / RELEASE_CANDIDATE` until the exact full provider stack is exercised in-world for named-MCA feeding, real provider infection, same-character conversion, native MCA vampire AI, cure, inheritance, and save/restart.
+- Core CI intentionally runs without the complete optional provider pack, so green automated tests do not substitute for that manual gate.
+
 ## 0.3.1 — Investigation Hardening (2026-08-11)
 
 ### Added
@@ -10,7 +50,8 @@
 - Factual culprit tracking for new incidents, with same-concept fallback allowed only after a confirmed death rather than an unload.
 - Bounded issuer-death hand-in fallback: local Hunter Society members are preferred/required when such a society exists; otherwise a valid local villager/MCA representative can receive the completed hunt.
 - A curated Feywild Sprite concept/profile using `GLAMOUR_TRACE`, plus a localized Fae Field Guide category and exact Sprite entry.
-- Tests for investigation sidecar persistence, case-link continuity, sighting merge/decay semantics, knowledge-gated preparation, and Fae resource coverage.
+- Vampire Society & Predation: bounded prey selection for wild Vampirism mobs and factual MCA vampires, social-risk-aware animal/civilian choice, native feeding observation, nonlethal feeding evidence/stories, witness/rumor/Hunter pressure, anti-chaos budgets, and predation diagnostics.
+- Tests for investigation sidecar persistence, case-link continuity, sighting merge/decay semantics, knowledge-gated preparation, Fae resources, death finality, and vampire predation policy.
 - NeoForge GameTests in the GitHub Actions release gate.
 
 ### Changed
@@ -21,6 +62,8 @@
 - Hypothesis percentages are presented as evidence `support`, not as calibrated probability.
 - Field Guide curated content expands from six categories/nine entries to seven categories/ten entries with the Sprite case.
 - Tracking and prepared-hunt validation share factual investigation-target matching rather than accepting any same-concept target when a known culprit remains valid.
+- Wild Vampirism feeding on named MCA civilians uses a real provider blood drain instead of globally removing custom-name protection; MCA Vamp Compat remains sole owner of native infection/conversion.
+- MCA vampire social stealth reacts to village/public/personal suspicion and visible witnesses; high risk strongly favors safer animal feeding.
 
 ### Fixed
 
@@ -28,6 +71,8 @@
 - Physical evidence collection rejects expired clues directly at interaction time.
 - Wendigo/Chupacabra/Ghost/Wraith/Imp/Golem/Fae observations can supply concept-specific testimony instead of being reduced to generic `SUPERNATURAL_IDENTITY` claims.
 - New contracts retain an exact incident/story association and can recover from confirmed culprit or issuer deaths without treating ordinary unloads as deaths.
+- Cancellable/rescued death events do not mark a hunt or authorize fallback before death is final.
+- Vampire predation rejects children, close family, known hunters, supernatural prey, tamed animals, and named non-MCA entities from autonomous feeding selection.
 - Removed the already-applied 0.3 patch generator from the repository root.
 
 ### Release boundary
