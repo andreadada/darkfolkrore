@@ -20,7 +20,8 @@ public final class CompatibilityManager {
             new Spec("werewolves", "Werewolves", "2.0.3.3", "public API + tags"),
             new Spec("mca", "MCA Reborn", "7.7.32+1.21.1", "isolated public implementation reads"),
             new Spec("mcacapitals", "MCA Capitals", "1.1.0", "exact-version cached read-only bridge"),
-            new Spec("mca_vamp_compat", "MCA Reborn x Vampirism Compat", "2.0.12", "exact-version reflective service bridge"),
+            new Spec("mca_vamp_compat", "MCA Reborn x Vampirism Compat", "2.0.12",
+                    "exact-version state + native predation/lifecycle bridge"),
             new Spec("enchanted", "Enchanted", "4.2.7", "tags and recipes"),
             new Spec("occultism", "Occultism", "1.224.2", "tags and recipes"),
             new Spec("malum", "Malum", "1.8.2", "tags and recipes"),
@@ -35,6 +36,7 @@ public final class CompatibilityManager {
     private volatile List<CompatibilityReport> reports = List.of();
     private volatile List<SupernaturalStateAdapter> stateAdapters = List.of();
     private volatile FieldGuideBridge fieldGuideBridge;
+    private volatile VampirePredationBridge vampirePredationBridge = VampirePredationBridge.DISABLED;
     private final McaSocialAdapter mcaSocial = new McaSocialAdapter();
     private final McaCapitalsCompat mcaCapitals = new McaCapitalsCompat();
 
@@ -45,6 +47,7 @@ public final class CompatibilityManager {
         List<SupernaturalStateAdapter> nextAdapters = new ArrayList<>();
         ModList mods = ModList.get();
         fieldGuideBridge = null;
+        vampirePredationBridge = VampirePredationBridge.DISABLED;
         mcaSocial.initialize("not-installed-or-untested");
         mcaCapitals.initialize("not-installed-or-untested");
 
@@ -85,6 +88,7 @@ public final class CompatibilityManager {
             nextReports.add(new CompatibilityReport(spec.modId(), spec.name(), spec.testedVersion(), actual,
                     spec.mechanism(), status, detail));
         }
+
         boolean vampirismExact = isExact(nextReports, "vampirism");
         boolean werewolvesExact = isExact(nextReports, "werewolves");
         if (vampirismExact) {
@@ -99,6 +103,24 @@ public final class CompatibilityManager {
                 DarkFolkloreCore.LOGGER.error("[compat/vampirism] Public API adapter failed to load", exception);
             }
         }
+
+        if (vampirismExact && isExact(nextReports, "mca") && isExact(nextReports, McaVampCompatAdapter.MOD_ID)) {
+            try {
+                Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
+                        CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                if (!(adapter instanceof VampirePredationBridge bridge)) {
+                    throw new LinkageError("VampirePredationCompat does not implement VampirePredationBridge");
+                }
+                vampirePredationBridge = bridge;
+                NeoForge.EVENT_BUS.register(adapter);
+            } catch (ReflectiveOperationException | LinkageError exception) {
+                vampirePredationBridge = VampirePredationBridge.DISABLED;
+                replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, CompatibilityStatus.ERROR,
+                        "2.0.12 predation signature validation failed: " + exception.getClass().getSimpleName());
+                DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Exact provider bridge failed to load", exception);
+            }
+        }
+
         if (isExact(nextReports, "fieldguide")) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.fieldguide.FieldGuideAdapter", true,
@@ -115,6 +137,7 @@ public final class CompatibilityManager {
                 DarkFolkloreCore.LOGGER.error("[compat/fieldguide] Progress bridge failed to load", exception);
             }
         }
+
         reports = List.copyOf(nextReports);
         stateAdapters = List.copyOf(nextAdapters);
         reports.forEach(report -> DarkFolkloreCore.LOGGER.info("[compat/{}] tested={} actual={} status={}",
@@ -130,6 +153,8 @@ public final class CompatibilityManager {
     public McaSocialAdapter mcaSocial() { return mcaSocial; }
 
     public McaCapitalsCompat mcaCapitals() { return mcaCapitals; }
+
+    public VampirePredationBridge vampirePredation() { return vampirePredationBridge; }
 
     public boolean unlockFieldGuideImplementation(ServerPlayer player, String registryId) {
         FieldGuideBridge bridge = fieldGuideBridge;
