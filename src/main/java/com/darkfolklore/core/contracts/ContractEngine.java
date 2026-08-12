@@ -80,7 +80,6 @@ public final class ContractEngine {
                 available.location(), village, requiredEvidence);
         IncidentFact fact = investigation.incidentFact(available.story().id())
                 .orElseGet(() -> inferIncidentFact(level, data, available));
-        if (fact != null) investigation.putIncidentFact(available.story().id(), fact);
         Set<UUID> liveStories = new HashSet<>();
         for (PersistentStory story : data.stories()) liveStories.add(story.story().id());
         investigation.pruneOrphans(data.contracts(), liveStories);
@@ -89,6 +88,7 @@ public final class ContractEngine {
                     "Investigation continuity storage is full; contract acceptance failed closed."), true);
             return;
         }
+        if (fact != null) investigation.putIncidentFact(available.story().id(), fact);
         data.putContract(assignment);
 
         available.story().advance(StoryStatus.INVESTIGATING);
@@ -107,14 +107,18 @@ public final class ContractEngine {
                 || !(event.getEntity() instanceof ServerPlayer player) || !player.isShiftKeyDown()
                 || !player.getMainHandItem().isEmpty() || !(player.level() instanceof ServerLevel level)) return;
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
+        InvestigationSavedData investigation = InvestigationSavedData.get(player.getServer());
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || assignment.contract().status() != ContractStatus.INVESTIGATING) return;
         String dimension = level.dimension().location().toString();
         long now = level.getGameTime();
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        PersistentStory caseStory = InvestigationTargeting.exactLinkedStory(data, link);
         EvidenceRecord clue = data.evidence().stream()
                 .filter(value -> !value.expired(now)
                         && value.collectedBy().isEmpty()
-                        && value.concept().equals(assignment.contract().targetConcept())
+                        && InvestigationTargeting.matchesEvidence(assignment.contract().targetConcept(), value,
+                        link, caseStory)
                         && !assignment.contract().evidence().contains(value.type())
                         && value.position().dimension().equals(dimension)
                         && value.position().distanceSquared(event.getPos()) <= 16.0D)
@@ -326,9 +330,8 @@ public final class ContractEngine {
     private static PersistentStory linkedStory(FolkloreSavedData data, InvestigationSavedData investigation,
                                                ContractAssignment assignment) {
         InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
-        if (link != null && link.storyId().isPresent()) {
-            PersistentStory exact = data.story(link.storyId().get()).orElse(null);
-            if (exact != null) return exact;
+        if (!InvestigationTargeting.mayUseLegacyStoryFallback(link)) {
+            return data.story(link.storyId().orElseThrow()).orElse(null);
         }
         // Backward-compatible fallback for pre-0.3.1 contracts that have no sidecar link.
         return data.stories().stream().filter(value -> value.villageKey().equals(assignment.villageKey())

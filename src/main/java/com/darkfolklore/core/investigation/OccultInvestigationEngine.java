@@ -13,6 +13,7 @@ import com.darkfolklore.core.magic.MagicTradition;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.persistence.InvestigationSavedData;
 import com.darkfolklore.core.reputation.ReputationFaction;
+import com.darkfolklore.core.society.story.PersistentStory;
 import com.darkfolklore.core.traits.ItemTrait;
 import com.darkfolklore.core.traits.TraitResolver;
 import net.minecraft.core.particles.ParticleOptions;
@@ -24,6 +25,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -51,6 +53,7 @@ public final class OccultInvestigationEngine {
                 || !(player.level() instanceof ServerLevel level)) return;
 
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
+        InvestigationSavedData investigation = InvestigationSavedData.get(player.getServer());
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || (assignment.contract().status() != ContractStatus.INVESTIGATING
                 && assignment.contract().status() != ContractStatus.IDENTIFIED)) return;
@@ -70,9 +73,12 @@ public final class OccultInvestigationEngine {
         String dimension = level.dimension().location().toString();
         double radiusSq = Math.pow(FolkloreConfig.OCCULT_ANALYSIS_RADIUS.get(), 2);
         long now = level.getGameTime();
+        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+        PersistentStory caseStory = InvestigationTargeting.exactLinkedStory(data, link);
         EvidenceRecord clue = data.evidence().stream()
                 .filter(value -> !value.expired(now)
-                        && value.concept().equals(assignment.contract().targetConcept())
+                        && InvestigationTargeting.matchesEvidence(assignment.contract().targetConcept(), value,
+                        link, caseStory)
                         && value.position().dimension().equals(dimension)
                         && value.position().distanceSquared(event.getPos()) <= radiusSq)
                 .min(Comparator.comparingDouble(value -> value.position().distanceSquared(event.getPos())))
@@ -166,7 +172,7 @@ public final class OccultInvestigationEngine {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public void onPreparedHunt(ConfirmedLivingDeathEvent event) {
         if (!FolkloreConfig.OCCULT_INVESTIGATION.get() || !FolkloreConfig.PREPARED_HUNT_BONUS.get()
                 || !(event.source().getEntity() instanceof ServerPlayer player)) return;
