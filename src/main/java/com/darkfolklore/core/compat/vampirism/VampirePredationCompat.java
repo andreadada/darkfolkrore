@@ -33,6 +33,9 @@ public final class VampirePredationCompat implements VampirePredationBridge {
     private final Method stateConverted;
     private final Method stateCuring;
     private final Method stateAiAdded;
+    private final Method stateCanBite;
+    private final Method stateMarkBite;
+    private final Method biteCooldownTicks;
 
     public VampirePredationCompat() throws ReflectiveOperationException {
         ClassLoader loader = VampirePredationCompat.class.getClassLoader();
@@ -42,6 +45,7 @@ public final class VampirePredationCompat implements VampirePredationBridge {
         Class<?> bite = Class.forName("com.guilh.mca_vampirism_compat.service.McaVampireBiteService", false, loader);
         Class<?> capabilities = Class.forName("com.guilh.mca_vampirism_compat.capability.ModCapabilities", false, loader);
         Class<?> state = Class.forName("com.guilh.mca_vampirism_compat.VampiricVillagerState", false, loader);
+        Class<?> config = Class.forName("com.guilh.mca_vampirism_compat.config.McaVampirismCompatConfig", false, loader);
 
         mcaIsVillager = stateService.getMethod("isMcaVillager", Entity.class);
         mcaIsVampire = stateService.getMethod("isVampire", Entity.class);
@@ -54,6 +58,9 @@ public final class VampirePredationCompat implements VampirePredationBridge {
         stateConverted = state.getMethod("isConverted");
         stateCuring = state.getMethod("isCuringVampire");
         stateAiAdded = state.getMethod("areAiGoalsAdded");
+        stateCanBite = state.getMethod("canBite", long.class, long.class);
+        stateMarkBite = state.getMethod("markBite", long.class);
+        biteCooldownTicks = config.getMethod("biteCooldownTicks");
     }
 
     @Override
@@ -71,7 +78,7 @@ public final class VampirePredationCompat implements VampirePredationBridge {
     public boolean wantsBlood(Mob entity) {
         if (entity instanceof IVampireMob vampire) return vampire.wantsBlood();
         ProviderSnapshot snapshot = providerSnapshot(entity);
-        return snapshot.available() && snapshot.vampire() && !snapshot.curing();
+        return snapshot.available() && snapshot.vampire() && !snapshot.curing() && mcaBiteReady(entity);
     }
 
     @Override
@@ -102,7 +109,7 @@ public final class VampirePredationCompat implements VampirePredationBridge {
 
     @Override
     public boolean canMcaAnimalFeed(Mob predator, LivingEntity target) {
-        if (predatorKind(predator) != PredatorKind.MCA_VAMPIRE || !target.isAlive()) return false;
+        if (predatorKind(predator) != PredatorKind.MCA_VAMPIRE || !target.isAlive() || !mcaBiteReady(predator)) return false;
         return ExtendedCreature.getSafe(target)
                 .map(creature -> creature.getBlood() > 0 && creature.getMaxBlood() > 0 && !creature.hasPoisonousBlood())
                 .orElse(false);
@@ -114,6 +121,7 @@ public final class VampirePredationCompat implements VampirePredationBridge {
         return ExtendedCreature.getSafe(target).map(creature -> {
             int current = creature.getBlood();
             int amount = Math.max(1, Math.min(current, Math.max(1, creature.getMaxBlood() / 3)));
+            if (!markMcaBite(predator)) return false;
             creature.setBlood(Math.max(0, current - amount));
             creature.sync();
             VampirePredationEngine.INSTANCE.onNativeFeed(predator, target, amount);
@@ -165,6 +173,31 @@ public final class VampirePredationCompat implements VampirePredationBridge {
         LivingEntity predator = event.getVampire().asEntity();
         event.getBloodSource().getEntity().ifPresent(target ->
                 VampirePredationEngine.INSTANCE.onNativeFeed(predator, target, event.getAmount()));
+    }
+
+    private boolean mcaBiteReady(Entity predator) {
+        try {
+            Object optionalValue = capabilityGet.invoke(null, predator);
+            if (!(optionalValue instanceof Optional<?> optional) || optional.isEmpty()) return false;
+            long now = predator.level().getGameTime();
+            long cooldown = ((Number) biteCooldownTicks.invoke(null)).longValue();
+            return (boolean) stateCanBite.invoke(optional.get(), now, cooldown);
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            warnOnce("MCA bite cooldown query", exception);
+            return false;
+        }
+    }
+
+    private boolean markMcaBite(Entity predator) {
+        try {
+            Object optionalValue = capabilityGet.invoke(null, predator);
+            if (!(optionalValue instanceof Optional<?> optional) || optional.isEmpty()) return false;
+            stateMarkBite.invoke(optional.get(), predator.level().getGameTime());
+            return true;
+        } catch (ReflectiveOperationException | RuntimeException exception) {
+            warnOnce("MCA bite cooldown mutation", exception);
+            return false;
+        }
     }
 
     private boolean queryBoolean(Method method, Object receiver, Object argument) {
