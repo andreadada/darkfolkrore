@@ -15,11 +15,11 @@
 
 0.4.0 is a stacked follow-up to 0.3.1. It deepens the exact MCA Reborn x Vampirism integration by observing native infection/conversion/cure/inheritance state and using the provider's audited native AI extension point, while leaving all lifecycle decisions with the provider.
 
-## Latest verified code gate
+## Latest verified stacked gate
 
-Latest verified 0.4 head before release-document creation: `d12c0a671fd181d9275203a4ec0eb7d84def5739`.
+Verified stacked branch head before this evidence refresh: `1c1bec00cad64bc7e8ef29462fce2b97ac00d445`.
 
-GitHub Actions run `31592481442`: **PASS**.
+GitHub Actions run `31593042850`: **PASS**.
 
 | Property | Recorded value |
 | --- | --- |
