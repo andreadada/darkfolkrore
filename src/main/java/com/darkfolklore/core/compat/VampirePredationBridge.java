@@ -36,12 +36,9 @@ public interface VampirePredationBridge {
 
     default boolean performMcaAnimalFeed(Mob predator, LivingEntity target) { return false; }
 
-    /** Idempotently asks MCA Vamp Compat to install its native vampire AI goals. */
-    default boolean ensureMcaNativeAi(LivingEntity entity) { return false; }
-
     default boolean wasRecentlyBitten(LivingEntity entity) { return false; }
 
-    default boolean canReceiveMcaInfection(LivingEntity entity) { return false; }
+    default void clearRuntimeState() {}
 
     default ProviderSnapshot providerSnapshot(Entity entity) {
         return ProviderSnapshot.unavailable("predation bridge disabled");

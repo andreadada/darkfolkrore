@@ -1,5 +1,7 @@
 # Source and API Audit
 
+> **Historical baseline:** this audit records the 0.2.0 source/API surface. The current 0.4.0 MCA lifecycle, component gate, provider-native AI extension, and exact bite evidence are documented in [MCA Vamp Compat 2.0.12 exact-provider audit](MCA_VAMP_COMPAT_2.0.12_AUDIT.md) and [Compatibility](COMPATIBILITY.md). Do not treat the historical “writes performed: none” row as a denial of 0.4's audited idempotent provider goal-repair call.
+
 ## Scope and method
 
 Target: Minecraft 1.21.1, NeoForge 21.1.248, Java 21, Dark Folklore Core 0.2.0.

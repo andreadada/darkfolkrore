@@ -42,9 +42,11 @@ The first development-server launch may stop after creating `run/eula.txt`. Set 
 Expected artifacts:
 
 ```text
-build/libs/darkfolklore-core-0.3.0.jar
-build/libs/darkfolklore-core-0.3.0-sources.jar
+build/libs/darkfolklore-core-0.4.0.jar
+build/libs/darkfolklore-core-0.4.0-sources.jar
 ```
+
+Install only the production JAR, never the sources JAR.
 
 `clean build` runs JUnit, resource validators, dependency checksum verification, and `auditReleaseJar`. Archives use stable entry ordering and stripped timestamps. The JAR audit rejects metadata placeholders, absent required resources, Java classes other than version 65, local absolute user paths, test/Atlas/cache content, nested JARs, and shaded optional-mod packages.
 
@@ -72,7 +74,7 @@ src/main/java/com/darkfolklore/core/
   world/           full-moon and witching-hour state
 
 src/main/resources/
-  data/darkfolklore/darkfolklore/  eight Core reload directories
+  data/darkfolklore/darkfolklore/  nine Core reload directories
   data/darkfolklore/fieldguide/    curated Field Guide categories
   data/darkfolklore/tags/          semantic tags
   data/darkfolklore/neoforge/      canonicalization biome modifiers
@@ -80,7 +82,7 @@ src/main/resources/
   data/neoforge/loot_modifiers/    global loot-modifier index
   assets/darkfolklore/lang/        English and Italian localization
 
-src/test/java/                     53 JUnit tests and resource validators
+src/test/java/                     119 JUnit tests and resource validators at the current 0.4 gate
 .github/workflows/build.yml        clean-build CI
 docs/                              behavior, audits, release gates, and limitations
 ```
@@ -109,6 +111,7 @@ darkfolklore/canonical
 darkfolklore/weaknesses
 darkfolklore/spawn_profiles
 darkfolklore/magic_integrations
+darkfolklore/investigation_profiles
 darkfolklore/story_templates
 darkfolklore/organization_archetypes
 darkfolklore/social_parameters
@@ -141,10 +144,10 @@ Back up a real 0.1 world and exercise the upgrade path as part of the production
 
 ## Release checklist
 
-1. Run the 53-test JUnit suite and the three GameTests with Java 21.
+1. Run the current 119-test JUnit suite and the three GameTests with Java 21.
 2. Run a clean build twice if checking reproducibility.
 3. Inspect the production JAR and record its filename, size, and SHA-256.
-4. Run the A-G matrix in [Testing](TESTING.md), including mandatory-only, exact adapters, curated pack, dedicated server, client, upgraded 0.1 world, and fresh 0.2 world.
+4. Run the current [0.4 testing matrix](TESTING_0.4.0.md), including exact adapters, dedicated server, client, authentic upgraded world, and fresh-world persistence.
 5. Test `/reload`, focused diagnostics, contract testimony, public reveal, organization succession, Field Guide UI/recent discoveries, and wolfsbane mechanics.
 6. Reconcile [Known Limitations](KNOWN_LIMITATIONS.md) and audit documents with observed results.
 

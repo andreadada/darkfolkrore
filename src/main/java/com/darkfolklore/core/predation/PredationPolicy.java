@@ -16,8 +16,10 @@ public final class PredationPolicy {
         if (candidate.hunter()) return Decision.rejected("known hunters are combat threats, not feeding prey");
         if (candidate.namedNonMca()) return Decision.rejected("named non-MCA entities retain Vampirism's protection");
         if (!candidate.animal() && !candidate.mcaCivilian()) return Decision.rejected("unsupported prey kind");
-        if (context.predatorKind() == PredatorKind.MCA_VAMPIRE && candidate.mcaCivilian() && !candidate.providerEligible()) {
-            return Decision.rejected("MCA Vamp Compat rejected infection-bite target");
+        if (context.predatorKind() == PredatorKind.MCA_VAMPIRE && !candidate.providerEligible()) {
+            return Decision.rejected(candidate.mcaCivilian()
+                    ? "MCA Vamp Compat rejected infection-bite target"
+                    : "audited provider bridge rejected animal blood source");
         }
         if (context.predatorKind() == PredatorKind.WILD_VAMPIRISM && !candidate.providerEligible()) {
             return Decision.rejected("Vampirism rejected blood source");
@@ -56,6 +58,12 @@ public final class PredationPolicy {
             if (fact != FactResult.TRUE && fact != FactResult.FALSE) return false;
         }
         return true;
+    }
+
+    /** Core may observe a provider-owned MCA bite session, but it may not create or redirect that target. */
+    public static boolean mayContinueMcaSession(boolean providerAvailable, boolean converted, boolean curing,
+                                                boolean providerTargetEligible, boolean providerOwnsTarget) {
+        return providerAvailable && converted && !curing && providerTargetEligible && providerOwnsTarget;
     }
 
     private static double clamp(double value, double min, double max) {

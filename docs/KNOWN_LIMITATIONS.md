@@ -1,72 +1,67 @@
 # Known Limitations
 
-This document records the boundary of Dark Folklore Core 0.3.1 so server owners can distinguish verified framework behavior from exact-provider behavior that still requires an intended-pack runtime pass.
+This document records the current Dark Folklore Core 0.4.0 release-candidate boundary. Automated compilation/tests/dedicated startup and manual intended-pack gameplay are different evidence layers.
 
 ## Investigation, stories, and contracts
 
-- Evidence remains server-side logical data, not a custom item/block/model. UX uses chat, particles, Field Guide integration and commands.
-- New 0.3.1 contracts explicitly link their source story and, when known, factual culprit UUID/provider implementation through the investigation sidecar. Pre-sidecar contracts use compatibility fallbacks.
+- Evidence is server-side logical data, not a custom item/block/model. UX uses chat, particles, Field Guide integration, and commands.
+- New contracts link their source story and, when known, factual culprit UUID/provider implementation. Pre-sidecar contracts use compatibility fallbacks.
 - A known culprit remains authoritative until confirmed death enables same-concept fallback. Unload is not death.
-- Confirmed issuer death can enable the bounded local hand-in fallback; no general transfer/abandonment UI exists.
-- Concept-level creature sightings are bounded merged observations, not unlimited spatial history.
-- Nonlethal vampire feeding can create a `feeding_assault` story; lethal feeding remains on the existing death-driven incident path to avoid duplicate narrative cases.
+- Confirmed issuer death can enable bounded local hand-in fallback; no general transfer/abandonment UI exists.
+- Concept sightings are bounded merged observations, not unlimited spatial history.
+- Nonlethal confirmed feeding can create one `feeding_assault`; lethal feeding remains on the confirmed-death incident path.
 
-## Vampire Society & Predation
+## FACT, BELIEF, and MCA authority
 
-- The predation director is exact-version gated to the audited Vampirism/MCA/MCA Vamp Compat combination. Different provider versions fail closed rather than guessing private state.
-- Autonomous feeding is night-only, loaded-area-only, staggered and bounded. It does not force-load chunks.
-- MCA vampire social stealth uses existing Core social pressure: village awareness/suspicion/Hunter influence, personal Vampire suspicion and visible witnesses. It is a behavior heuristic, not a perfect NPC planning simulation.
-- Children, close family, hunters, supernatural targets, tamed animals and named non-MCA entities are excluded from autonomous feeding selection. This does not prevent provider combat triggered by unrelated native systems.
-- Wild Vampirism mobs can be guided to named MCA civilians through a real provider blood drain. MCA Vamp Compat remains owner of whether that real blood-drink event applies infection.
-- MCA Vamp Compat 2.0.12 has native human infection-bite AI but no equivalent animal-feeding goal. Dark Folklore's exact bridge therefore drains animal blood through Vampirism's audited creature blood attachment while honoring the MCA provider's bite cooldown. It does not infect/replace the animal.
-- Predation cooldowns, regional feed history, sessions and diagnostics are transient. They are anti-chaos/director state, not supernatural facts that require persistence across restart.
-- CI does not install the full optional provider pack. Real named-MCA feeding, infection, conversion, cure and inheritance must still be exercised in the intended pack.
+> MCA Reborn × Vampirism Compat remains authoritative for factual supernatural MCA mechanics. Dark Folklore observes those mechanics and implements knowledge, investigation, rumor, reputation and narrative consequences around them.
+
+- Provider state is **FACT**; witness knowledge, rumors, reputation, investigations, stories, and contracts are **BELIEF**.
+- MCA supernatural facts route only through the exact MCA Vamp Compat factual component. An absent provider is `NOT_APPLICABLE`; untested/partial/unsupported/failed authority is `UNKNOWN`; no generic Vampirism fallback is used.
+- Core does not force infection, conversion, cure, or inheritance and does not replace an MCA person with a generic vampire.
+- A provider conversion-source UUID is provenance. It is not necessarily a biological parent or universally reliable sire.
+- Cure changes current fact but does not erase a truthful historical observation or rumor.
+
+## Vampire lifecycle and predation
+
+- Exact 0.4 components require Vampirism 1.10.12 + MCA 7.7.32+1.21.1 + MCA Vamp Compat 2.0.12. Different versions fail closed.
+- Initial provider observation cannot occur before join+1 tick and retries an unavailable capability only for a bounded 200 ticks.
+- Lifecycle sampling is loaded-entity-only, staggered, and bounded; no chunks are force-loaded.
+- Provider 2.0.12 can retain metadata during cure cancellation; Core uses prior `CURING` state to avoid misclassifying the return to `VAMPIRE`.
+- Provider owns target selection, navigation, and native MCA vampire AI. Core sets/clears no target or path and installs no replacement goal system.
+- Core may retain a bounded narrative candidate session. A human session survives only while provider-native AI independently selected the same target.
+- Native bite evidence requires one exact direct attacker/target incoming-damage event and a provider attacker-capability ready→cooldown transition. Provider post-success damage cancellation/zeroing does not suppress that evidence; pre-canceled/redirected/failed attempts without a cooldown transition and proximity/session state alone are not evidence.
+- Exact observation supports provider-valid MCA, player, and vanilla-human targets; narrative consequences still depend on which target types support the corresponding knowledge/story systems.
+- Animal feeding is an explicit fallback through Vampirism's creature blood attachment and provider cooldown; it does not infect/replace animals and Core does not command navigation to them.
+- Candidate policy excludes children, close family, hunters, supernatural targets, tamed animals, and named non-MCA entities. This does not prevent unrelated provider-native combat.
+- Predation cooldowns, budgets, sessions, correlations, and diagnostics are transient anti-chaos/orchestration state and clear on server stop.
 
 ## Magic and archaeology
 
-- 0.3.1 remains Deep Magic Phase 1. It recognizes curated provider items/tags/traits and turns explicit analysis into evidence while preserving provider-owned actions.
-- Core does not yet hook the exact completion lifecycle of Enchanted rituals, Occultism rites, Malum soul systems, Eidolon theurgy or Feywild progression.
-- Not every monster requires magic; some cryptids intentionally remain primarily physical investigations.
-- Fae integration remains narrow and curated around the existing Feywild Sprite case.
+- 0.4 retains Deep Magic Phase 1: curated provider items/tags/traits plus explicit analysis, without owning provider rituals.
+- Core does not hook exact completion lifecycles for Enchanted rituals, Occultism rites, Malum soul systems, Eidolon theurgy, or Feywild progression.
+- Not every monster needs magic; some cryptids remain primarily physical investigations.
 
-## Knowledge and weaknesses
+## Knowledge, weaknesses, and Field Guide
 
-- Weakness existence and player knowledge are separate. Player-facing preparation hides WeaknessRule details below `STUDIED`; prepared-hunt bonus requires learned + satisfied knowledge.
-- Not every investigation profile has a special Core weakness. Missing provider/lore evidence is not filled with invented folklore rules.
+- Weakness existence and player knowledge are separate. Preparation hides rule details below `STUDIED`; the bonus requires learned and satisfied knowledge.
 - Weakness Engine remains the only Dark Folklore cross-mod damage authority.
+- Field Guide 1.14.0 owns UI, notes/photos, binary discovery, and progress storage. Core does not create a parallel guide.
+- The current dataset contains seven categories and ten entries, including Feywild Sprite.
+- Joined-world EN/IT presentation, models, toasts, Recent Discoveries, and persistence remain unrun manual acceptance items.
 
-## Field Guide
+## Society, persistence, and migration
 
-- Field Guide 1.14.0 remains owner of the bestiary UI/discovery storage. Core does not create a parallel guide.
-- `KEEP_DISTINCT` investigations can retain the exact observed implementation and request the matching provider page.
-- The curated dataset contains seven categories and ten explicit entries, including Feywild Sprite.
-- Recent Discoveries ordering, visual layout and EN/IT client presentation remain manual acceptance items.
+- Witness detection is bounded line-of-sight/proximity logic, not acoustic/room-topology simulation.
+- Rumors and organizations use bounded queues/history; unloaded actors are not treated as dead.
+- Village society uses a bounded regional key rather than reconstructing all Minecraft POI boundaries.
+- Society remains schema 2; investigation sidecar remains schema 1. Provider capability remains the lifecycle save authority.
+- Unit NBT round trips are not an authentic user-world migration. A backed-up intended-pack world upgrade/restart remains mandatory.
 
-## Society and organizations
+## Testing and release
 
-- Social identity secrets remain separate from creature observations.
-- Witness detection is bounded LOS/proximity logic, not acoustic/room-topology simulation.
-- Rumors and organizations have bounded queues/histories; unloaded members are not treated as dead.
-- Village society uses Core's bounded regional key rather than reconstructing all Minecraft POI boundaries.
-- Factual provider conversion/cure does not automatically erase historical social beliefs. Fact and belief intentionally remain separate.
+- Current local evidence: clean Java 21 build, **119/119 JUnit**, release JAR audit, exact-provider dedicated startup, and **3/3 GameTests** pass with `0 invalid` reload data.
+- Post-rebase push and PR workflows passed; the downloaded CI artifact identity is recorded in `RELEASE_0.4.0.md`.
+- No manual client/in-world lifecycle, Field Guide, or authentic-world row is claimed complete.
+- Historical 0.2/0.3.1 evidence remains context only and is not a 0.4 gameplay pass.
 
-## Persistence and migration
-
-- Established society data remains schema 2; investigation continuity remains in `darkfolklore_investigation` schema 1.
-- Runtime predation caches are intentionally non-durable.
-- Unit NBT round trips do not equal an authentic user-world migration. Backed-up real-world validation remains mandatory.
-
-## Compatibility
-
-- Java/reflection adapters are exact-version gated. An unaudited update remains `UNTESTED_VERSION` for code-level bridging.
-- Missing optional mods are supported; their exact feature simply disappears or disables.
-- No third-party provider JAR is bundled/shaded into Core.
-- The MCA Vamp Compat 2.0.12 binary used for development audit had SHA-256 `BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF`; it is not redistributed by this repository.
-
-## Testing and presentation
-
-- Latest predation-hardening automated evidence: Actions run `31590162424`, 78/78 JUnit, 3/3 GameTests, release JAR audit PASS, validated reload 0 invalid.
-- Those GameTests run without the complete optional provider pack. High-risk manual checks remain exact provider predation/infection/conversion/cure/inheritance, culprit/issuer continuity, KEEP_DISTINCT Field Guide, Fae analysis, STUDIED weakness UX, save/restart and client localization.
-- Historical 0.2 evidence is context only and is not a substitute for a 0.3.1 in-world pass.
-
-Until the intended-pack client/in-world matrix and remaining real-save checks are recorded, 0.3.1 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.
+Until the intended-pack client/in-world matrix is recorded, 0.4.0 remains **`RELEASE_CANDIDATE`**, not `PRODUCTION_READY`.

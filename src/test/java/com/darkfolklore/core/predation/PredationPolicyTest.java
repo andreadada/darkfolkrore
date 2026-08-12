@@ -66,6 +66,30 @@ class PredationPolicyTest {
         assertFalse(PredationPolicy.factsKnown(FactResult.NOT_APPLICABLE, FactResult.FALSE, FactResult.FALSE));
     }
 
+    @Test
+    void everyMcaVampirePreyKindRequiresProviderApproval() {
+        var context = new PredationPolicy.Context(PredatorKind.MCA_VAMPIRE, true, 0, 0);
+        var rejectedCivilian = new PredationPolicy.Candidate(false, true, true, false, false,
+                false, false, false, false, 0, 2, true);
+        var rejectedAnimal = new PredationPolicy.Candidate(true, false, true, false, false,
+                false, false, false, false, 0, 2, true);
+
+        assertFalse(PredationPolicy.score(context, rejectedCivilian).eligible());
+        assertFalse(PredationPolicy.score(context, rejectedAnimal).eligible());
+        assertTrue(PredationPolicy.score(context, candidate(false, true, 0, true)).eligible());
+        assertTrue(PredationPolicy.score(context, candidate(true, false, 0, true)).eligible());
+    }
+
+    @Test
+    void curingOrNonProviderOwnedTargetCannotContinueMcaSession() {
+        assertTrue(PredationPolicy.mayContinueMcaSession(true, true, false, true, true));
+        assertFalse(PredationPolicy.mayContinueMcaSession(true, true, true, true, true));
+        assertFalse(PredationPolicy.mayContinueMcaSession(false, true, false, true, true));
+        assertFalse(PredationPolicy.mayContinueMcaSession(true, false, false, true, true));
+        assertFalse(PredationPolicy.mayContinueMcaSession(true, true, false, false, true));
+        assertFalse(PredationPolicy.mayContinueMcaSession(true, true, false, true, false));
+    }
+
     private static PredationPolicy.Candidate candidate(boolean animal, boolean mca, int witnesses, boolean isolated) {
         return new PredationPolicy.Candidate(animal, mca, true, false, false,
                 false, false, false, true, witnesses, 2.0D, isolated);

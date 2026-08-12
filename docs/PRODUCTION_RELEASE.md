@@ -1,5 +1,7 @@
 # Dark Folklore Core 0.3.1 release candidate
 
+> **Historical release record:** this file intentionally preserves the 0.3.1 gate and its evidence. It is not the current 0.4.0 release report. Use [RELEASE_0.4.0.md](RELEASE_0.4.0.md) and [HANDOFF_0.4.0.md](HANDOFF_0.4.0.md) for current status, final-head placeholders, and manual blockers.
+
 ## Release target
 
 | Property | Release value |

@@ -2,6 +2,8 @@ package com.darkfolklore.core.diagnostics;
 
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
+import com.darkfolklore.core.predation.VampirePredationEngine;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -21,10 +23,13 @@ public final class CoreServerEvents {
         FolkloreCommands.register(event.getDispatcher());
         InvestigationCommands.register(event.getDispatcher());
         PredationCommands.register(event.getDispatcher());
+        LifecycleCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
     public void onServerStopped(ServerStoppedEvent event) {
         CompatibilityManager.INSTANCE.clearRuntimeCaches();
+        McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
+        VampirePredationEngine.INSTANCE.clearRuntimeState();
     }
 }

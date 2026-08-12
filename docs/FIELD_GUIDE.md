@@ -1,6 +1,6 @@
 # Field Guide 1.14.0 Integration
 
-Dark Folklore 0.2.0 supplies a curated bestiary to Field Guide. Field Guide remains the owner of its UI, scanning, binary unlocks, per-player progress, discovery timestamps, recent-discovery ordering, photographs and editable notes. Dark Folklore owns its richer `UNKNOWN` / `DISCOVERED` / `OBSERVED` / `STUDIED` / `MASTERED` lore model.
+Dark Folklore 0.4.0 supplies a curated bestiary to Field Guide. The current resources contain **seven categories and ten explicit entries**, including the Feywild Sprite added in 0.3.1. Field Guide remains the owner of its UI, scanning, binary unlocks, per-player progress, discovery timestamps, recent-discovery ordering, photographs and editable notes. Dark Folklore owns its richer `UNKNOWN` / `DISCOVERED` / `OBSERVED` / `STUDIED` / `MASTERED` lore model.
 
 ## Repair made in 0.2.0
 
@@ -63,7 +63,7 @@ fieldguide.entity.vampirism.vampire.description
 
 Dark Folklore supplies every required category title, entry name and entry description in both `assets/darkfolklore/lang/en_us.json` and `assets/darkfolklore/lang/it_it.json`.
 
-## Curated 0.2.0 content
+## Current curated content
 
 | Category | Entry ID | Canonical concept |
 | --- | --- | --- |
@@ -76,10 +76,11 @@ Dark Folklore supplies every required category title, entry name and entry descr
 | Cryptids | `entity:cnc/chupacabra` | `darkfolklore:chupacabra` |
 | Mythical Beasts | `entity:mythsandlegends/imp` | `darkfolklore:imp` |
 | Constructs | `entity:occultism/iesnium_golem` | `darkfolklore:golem` |
+| Fae | `entity:feywild/sprite` | `darkfolklore:sprite` |
 
-This is six visible categories and nine explicit entries. `Undead`, `Fae`, `Witches & Occultists`, `Sea Horrors` and `Unknown` are not shipped in 0.2.0 because the current curated set does not justify separate non-empty pages. The broad `Unknown` overlap from 0.1.0 is gone.
+The original 0.2.0 set was six visible categories and nine entries. 0.3.1 added the non-empty Fae category and Sprite entry, producing the current seven/ten set retained by 0.4.0. `Undead`, `Witches & Occultists`, `Sea Horrors`, and `Unknown` are not shipped because the current curated set does not justify separate non-empty pages. The broad `Unknown` overlap from 0.1.0 remains removed.
 
-All nine raw entity IDs were verified in the installed registry audit and resolve through the named canonical definition. Category icons reference five assets verified inside the exact Field Guide JAR: `wither.png`, `wolf.png`, `ghast.png`, `spider.png` and `ore.png`.
+All ten shipped entity IDs map to named canonical definitions and are covered by the current resource validator. Category icons reference five assets verified inside the exact Field Guide JAR: `wither.png`, `wolf.png`, `ghast.png`, `spider.png` and `ore.png`.
 
 ## Binary unlock and lore synchronization
 
@@ -131,8 +132,8 @@ The validator checks:
 The shipped-content assertion is:
 
 ```text
-categories=6
-entries=9
+categories=7
+entries=10
 missingCategoryTranslations=0
 missingEntryTranslations=0
 orphanEntries=0
@@ -166,22 +167,24 @@ The audited pack keeps Field Guide scanning enabled, spyglass scanning enabled a
 
 The pure resource tests prove schema, mappings and localization completeness. Java compilation proves the exact 1.14.0 server signatures. Dedicated-server and title-screen client startup prove common-side safety, resource reload, and exact bridge activation, but they cannot prove category rendering, translated labels, entry models, toast behavior or Recent Discoveries layout. Those require opening the UI in a joined world.
 
-The final Field Guide workstream smoke used Java 21, NeoForge 21.1.248 and the existing 23-external-JAR curated server staging. Field Guide reported exact version `1.14.0` and status `ACTIVE`; Dark Folklore atomically loaded 16 canonical concepts with zero invalid definitions; no `Failed to load category`, `Unknown unlock trigger`, Field Guide bridge-disable, or Dark Folklore/Field Guide exception appeared. The server reached `Done (1.567s)!`, then the harness requested a normal halt and the log recorded `Stopping server`, `Saving players`, `Saving worlds`, all dimensions saved, and `BUILD SUCCESSFUL`. The harness's dynamic-agent warning is a serviceability warning from requesting that graceful halt, not shipped mod behavior.
+Historical 0.2 Field Guide workstream evidence used Java 21, NeoForge 21.1.248 and a 23-external-JAR curated server staging. Field Guide reported exact version `1.14.0` and status `ACTIVE`; the then-current 16-concept dataset loaded with zero invalid definitions and the server stopped cleanly. That historical smoke must not be presented as a current 0.4 client/in-world pass.
 
 The wider staging did emit one NeoForge `RuntimeDistCleaner` error saying that `net.minecraft.client.gui.screens.Screen` was requested on `DEDICATED_SERVER`. That line had no stack trace or owning mod, and loading continued. Dark Folklore's Field Guide adapter source and packaged class have no client references, so this did not identify the adapter as the requester; equally, without an owner it must not be presented as a completely error-free pack smoke. Other non-blocking staging warnings were missing development refmaps, optional MCA/Easy Villagers classes, external mob-category mismatches, legacy Forge tags and a CNC loot-item damage warning.
 
 The reduced server staging did not contain Graveyard, so Field Guide correctly omitted `entity:graveyard/wraith` during that runtime. The Spirits category still contained its Vampirism and Eidolon entries. The complete-pack registry audit and pure resource validator cover the Graveyard mapping, but only the real complete client can prove its rendering.
 
-A final graphical client startup later reached the NeoForge title state with Field Guide 1.14.0 and the wolfsbane bridge active, then exited cleanly. No world was loaded and no Field Guide page was opened, so the release-level report must distinguish successful client startup from the manual UI checks below.
+A historical graphical client startup reached the NeoForge title state with Field Guide 1.14.0 and the wolfsbane bridge active, then exited cleanly. No world was loaded and no Field Guide page was opened. No 0.4 joined-world client/UI pass is claimed.
 
 ## Manual client test matrix
 
-1. Start the exact pack with Field Guide 1.14.0 and Dark Folklore 0.2.0.
+**0.4 status: NOT RUN.** The following joined-world client checks remain a release-promotion gate.
+
+1. Start the exact pack with Field Guide 1.14.0 and Dark Folklore 0.4.0.
 2. Confirm the native Field Guide categories still populate normally.
-3. Open every Dark Folklore tab and confirm the six translated titles render in English.
-4. Switch to Italian and confirm the same category titles, nine entry names and nine descriptions render without raw keys.
+3. Open every Dark Folklore tab and confirm the seven translated titles render in English.
+4. Switch to Italian and confirm the same category titles, ten entry names and ten descriptions render without raw keys.
 5. Confirm each category contains exactly the entries in the curated table and no tab is empty.
-6. Scan Vampire, Werewolf, Wendigo, Chupacabra and Imp; confirm their pages unlock once and appear in Recent Discoveries.
+6. Scan Vampire, Werewolf, Wendigo, Chupacabra, Imp, and Sprite; confirm their pages unlock once and appear in Recent Discoveries.
 7. Kill a locked curated creature; confirm the declared `KILL` path unlocks it and records a discovery date.
 8. Kill a noncanonical implementation of a concept with a canonical page; confirm the canonical page is targeted rather than a nonexistent duplicate page.
 9. Reach 25 Dark Folklore points for a still-locked canonical creature; wait up to 100 ticks and confirm its page unlocks without scan XP.
@@ -192,7 +195,7 @@ A final graphical client startup later reached the NeoForge title state with Fie
 ## Remaining limitations
 
 - Field Guide remains binary; later Dark Folklore lore tiers are not rendered in its pages.
-- The nine entries require their provider mods. Field Guide correctly omits an entry whose registry target is absent, so a deliberately reduced pack can have fewer entries than the complete-pack counts.
+- The ten entries require their provider mods. Field Guide correctly omits an entry whose registry target is absent, so a deliberately reduced pack can have fewer entries than the complete-pack counts.
 - `KEEP_DISTINCT` concepts do not receive an automatic lore-threshold page because there is no honest single page to choose.
 - Custom Field Guide names, descriptions and photographs are not copied into Dark Folklore knowledge.
 - Final UI confirmation remains a manual in-world client test; dedicated-server success and title-screen client startup are not evidence of correct Field Guide rendering.

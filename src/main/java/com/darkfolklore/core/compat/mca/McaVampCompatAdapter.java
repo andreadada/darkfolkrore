@@ -89,7 +89,8 @@ public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
             if (sourceValue instanceof Optional<?> optional && optional.orElse(null) instanceof UUID uuid) {
                 return Optional.of(uuid);
             }
-        } catch (ReflectiveOperationException | RuntimeException exception) {
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
+            ready = false;
             DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp] Provenance query failed; returning unknown", exception);
         }
         return Optional.empty();
@@ -100,7 +101,8 @@ public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
         if (!ready || method == null) return FactResult.UNKNOWN;
         try {
             return FactResult.of((boolean) method.invoke(null, entity));
-        } catch (ReflectiveOperationException | RuntimeException exception) {
+        } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
+            ready = false;
             DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp] State query failed; returning unknown", exception);
             return FactResult.UNKNOWN;
         }

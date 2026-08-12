@@ -1,5 +1,7 @@
 # Dark Folklore Core 0.3.1 testing
 
+> **Historical evidence:** this document intentionally preserves the final 0.3.1 branch gate. Its “stacked 0.4 follow-up” wording describes the state at that release and is not current branch topology. Use [TESTING_0.4.0.md](TESTING_0.4.0.md) for current evidence.
+
 This file records evidence generated specifically for the 0.3.1 hardening branch. Historical 0.2 evidence remains in `TESTING.md` and must not be presented as 0.3.1 validation.
 
 ## Latest code gate
