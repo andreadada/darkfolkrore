@@ -10,6 +10,7 @@ import com.darkfolklore.core.contracts.ConfirmedDeathDispatcher;
 import com.darkfolklore.core.diagnostics.CoreServerEvents;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
+import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
 import com.darkfolklore.core.society.bloodline.LineageEngine;
 import com.darkfolklore.core.society.organization.OrganizationEngine;
@@ -57,6 +58,7 @@ public final class DarkFolkloreCore {
         bus.register(ContractEngine.INSTANCE);
         bus.register(OccultInvestigationEngine.INSTANCE);
         bus.register(VampirePredationEngine.INSTANCE);
+        bus.register(McaVampireLifecycleEngine.INSTANCE);
         bus.register(WorldEventDirector.INSTANCE);
     }
 
