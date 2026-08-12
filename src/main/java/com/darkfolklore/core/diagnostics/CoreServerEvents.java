@@ -21,6 +21,7 @@ public final class CoreServerEvents {
         FolkloreCommands.register(event.getDispatcher());
         InvestigationCommands.register(event.getDispatcher());
         PredationCommands.register(event.getDispatcher());
+        LifecycleCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
