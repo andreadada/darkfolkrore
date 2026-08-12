@@ -1,6 +1,8 @@
 # Dark Folklore Core
 
-Dark Folklore Core is the server-authoritative integration layer for the Dark Folklore Minecraft modpack. It gives overlapping supernatural content a shared semantic vocabulary and connects provider-owned facts to lore, witnesses, rumors, villages, organizations, investigations, weaknesses, contracts, and encounter pacing. Provider mods remain authoritative for transformations, families, factions, spellcasting, rendering, and their own progression.
+Dark Folklore Core is the server-authoritative integration/orchestration layer for the Dark Folklore Minecraft modpack. It gives overlapping supernatural content a shared semantic vocabulary and connects provider-owned facts to lore, witnesses, rumors, villages, organizations, investigations, weaknesses, contracts, vampire predation, and encounter pacing.
+
+Provider mods remain authoritative for transformations, infection/cure, families, factions, rendering, spellcasting and their own progression. Core observes and orchestrates; it does not silently replace those systems.
 
 ## Target
 
@@ -8,19 +10,17 @@ Dark Folklore Core is the server-authoritative integration layer for the Dark Fo
 - NeoForge **21.1.248** (21.1 line)
 - Java **21**
 - Mod ID `darkfolklore`
-- Version **0.3.1**
+- Version **0.4.0**
 - Society persistence schema **2**
 - Investigation sidecar schema **1**
 
-Minecraft and NeoForge are required. Third-party gameplay integrations are optional. Exact Java adapters activate only for audited versions; missing or different versions fail closed rather than guessing supernatural or political facts.
+Minecraft and NeoForge are required. Third-party gameplay integrations are optional. Exact Java/reflection adapters activate only for audited versions; missing or different versions fail closed rather than guessing supernatural state.
 
-## What 0.3.1 implements
-
-0.3.1 hardens the unified occult-investigation loop introduced in 0.3.0:
+## Unified gameplay loop
 
 ```text
-incident
- -> physical evidence / credible testimony
+incident / suspicious feeding
+ -> physical evidence + witnesses
  -> evidence-only hypotheses
  -> optional occult analysis
  -> identification
@@ -28,53 +28,127 @@ incident
  -> research
  -> learned countermeasure
  -> bounded tracking
- -> hunt
- -> social / village / organization consequences
+ -> hunt / social resolution
+ -> village, family, rumor and organization consequences
 ```
 
-Key 0.3.1 changes:
+## 0.4.0 — native MCA vampire lifecycle integration
 
-- **Case continuity.** New investigation-sidecar data explicitly links a contract to the story that created it, the known incident culprit UUID, and the observed concrete provider implementation.
-- **Actual culprit hunting.** When a factual culprit is known, tracking and contract completion prefer that entity. A same-concept fallback is enabled only after confirmed culprit death; merely unloading the entity never authorizes a fallback.
-- **Issuer recovery.** A confirmed issuer death can enable a bounded local hand-in fallback. If a local Hunter Society exists, only an authorized member can receive it; otherwise a valid local villager/MCA representative can do so.
-- **Creature sightings.** Cryptids, spirits, demons, constructs, and Fae use persistent concept-level observations instead of being forced into MCA-style `SecretType` identities. This lets a witness genuinely testify about `darkfolklore:wendigo`, `darkfolklore:wraith`, and other curated concepts.
-- **Expired evidence safety.** Physical clue collection rejects logically expired evidence directly rather than relying only on later pruning.
-- **Knowledge-gated preparation.** Weakness ground truth no longer leaks to an ordinary player just because a matching item is in the inventory. Countermeasure details become player-facing at `STUDIED`; the prepared-hunt bonus requires that learned knowledge.
-- **KEEP_DISTINCT Field Guide support.** Investigation retains the concrete implementation, allowing the exact observed page to unlock for concepts such as provider-distinct Wraiths instead of arbitrarily collapsing them.
-- **Fae investigation.** Feywild's existing `feywild:sprite` is curated as `darkfolklore:sprite`; its case requires Fae analysis to expose `GLAMOUR_TRACE`. No new mob or duplicate magic system is added.
-- **Hypothesis terminology.** Player/operator output reports evidence `support`, not a misleading probability-like confidence percentage.
-- **CI hardening.** Linux wrapper execution is fixed, Java 21 clean builds run in GitHub Actions, the 0.3.1 JAR is audited/uploaded, and NeoForge GameTests are part of the branch release gate.
+0.4.0 stacks on the 0.3.1 investigation and Vampire Society hardening. Its main purpose is to understand the **real** lifecycle owned by MCA Reborn x Vampirism Compat 2.0.12 without creating a second conversion system.
 
-The implementation deliberately avoids new Mixins for these systems and does not mutate optional mods' private state.
+### Exact provider lifecycle
+
+For the exact audited stack, Core can observe:
+
+```text
+HUMAN
+ -> INFECTED
+ -> VAMPIRE
+ -> CURING
+ -> HUMAN
+```
+
+and distinguish important transitions such as:
+
+- infection started;
+- conversion caused by the provider's native bite path;
+- other provider conversion;
+- inherited vampirism;
+- cure start, cancellation and completion;
+- cleared pre-conversion infection;
+- factual vampirism cleared even if the intermediate cure sample was missed.
+
+The provider remains the sole authority for whether infection happens, how long it lasts, whether conversion succeeds, cure progress/completion, inheritance and MCA vampire AI.
+
+### Same MCA person, supernatural state layered on top
+
+Dark Folklore never replaces an MCA vampire with a generic `vampirism:vampire`. The factual state is read from MCA Vamp Compat while MCA identity/family/social data remain owned by MCA.
+
+When the provider supplies a valid conversion-source UUID, Core records vampire provenance/lineage. Provenance is recovered both during a live conversion and after a load, and malformed self-source records are ignored. Inherited vampirism deliberately keeps both parents only as birth context rather than inventing a fake one-parent conversion source.
+
+### Native AI extension point
+
+If an MCA NPC is already factually converted but the provider reports that its native vampire goals were not installed, Core may call the audited idempotent:
+
+```text
+McaVampireAi.registerGoalsIfNeeded(LivingEntity)
+```
+
+Core does **not** install a replacement infection goal.
+
+### Cure behavior
+
+A factual cure is observed from provider state. Cure transitions stop transient Dark Folklore predatory intent, but historical witnesses/rumors are intentionally not erased: factual state and social belief remain separate.
+
+## 0.3.1 foundation retained
+
+### Investigation hardening
+
+- explicit story ↔ contract continuity;
+- factual culprit UUID and concrete provider implementation when known;
+- exact culprit tracking while valid;
+- same-concept fallback only after confirmed death, never ordinary unload;
+- cancellable/rescued `LivingDeathEvent` handling deferred until death finality;
+- bounded issuer-death hand-in recovery;
+- concept-level creature sightings separate from social identity secrets;
+- concept-specific testimony for curated monsters;
+- expired evidence rejected at collection time;
+- weaknesses/preparation hidden until `STUDIED` lore;
+- `KEEP_DISTINCT` Field Guide implementation-specific discovery;
+- curated Feywild Sprite investigation using `GLAMOUR_TRACE`;
+- evidence `support` wording rather than pretending to expose a calibrated probability.
+
+### Vampire Society & Predation
+
+For exact Vampirism 1.10.12 + MCA 7.7.32+1.21.1 + MCA Vamp Compat 2.0.12:
+
+- wild Vampirism vampires can be guided toward **named adult MCA civilians** without globally removing Vampirism's custom-name protection;
+- the actual blood drain uses Vampirism's real creature blood attachment and emits the real provider `BloodDrinkEvent`;
+- the BloodDrink observation runs at `LOWEST`, after MCA Vamp Compat's normal handler, so a blocked/zeroed provider event cannot manufacture Core evidence;
+- MCA Vamp Compat alone decides native MCA infection/conversion;
+- factual MCA vampires use provider-native human infection-bite AI;
+- social risk changes feeding choice: public awareness, village suspicion, Hunter Society influence, personal Vampire suspicion and visible witnesses push MCA vampires toward safer animal feeding;
+- children, close family, hunters, supernatural targets, tamed animals and named non-MCA entities are excluded from autonomous prey selection;
+- animal feeding drains Vampirism's real creature blood store and respects MCA Vamp Compat's bite cooldown, without infecting or replacing the animal;
+- nonlethal attacks can produce `BITE_MARK`, `BLOOD`, victim knowledge, witnesses, rumors, Hunter pressure and a contract-eligible `feeding_assault` story;
+- lethal attacks remain on the existing death-driven incident path so one event is not duplicated;
+- per-predator/per-victim cooldowns and a rolling regional feed budget limit chaos;
+- loaded-area-only staggered scans never force-load chunks.
+
+## Exact provider audit
+
+The MCA Reborn x Vampirism Compat 2.0.12 development audit used a user-supplied JAR with SHA-256:
+
+```text
+BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF
+```
+
+The binary is not committed, redistributed or shaded into Core. See [`docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md`](docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md) for the exact methods/ownership boundary.
 
 ## Existing systems retained
 
-- Reloadable canonical concepts, weakness rules, spawn profiles, magic integrations, investigation profiles, story templates, organization archetypes, social parameters, and political weights.
-- Enchanted-owned canonical wolfsbane with the strict Werewolves bridge for diffuser, finder, crop-contact, recipes, loot, and legacy compatibility.
-- Field Guide 1.14.0 integration with **seven** curated categories and **ten** explicit entity entries after the Fae Sprite addition, with English and Italian resources.
-- Relationship-aware witnesses/rumors, family-secret reactions, controlled false accusations, MCA Capitals political weighting, organizations, society stories, village state, and contract consequences.
-- Evidence-only hypothesis ranking: `HypothesisEngine` never reads the hidden target to manufacture certainty.
-- Loaded-area-only tracking: no chunk force-loading and no whole-world scan.
-- Weakness Engine remains the only Dark Folklore authority for cross-mod damage semantics; investigation does not apply a second damage multiplier.
+- Reloadable/atomically validated canonical concepts, weakness rules, spawn profiles, magic integrations, investigation profiles, story templates, organization archetypes, social parameters and political weights.
+- Enchanted-owned canonical wolfsbane with strict Werewolves compatibility.
+- Field Guide 1.14.0 integration with seven curated categories and ten explicit entries, localized EN/IT.
+- Relationship-aware witnesses/rumors, family-secret reactions, MCA Capitals political weighting, supernatural organizations, dynamic stories and village state.
+- Evidence-only hypothesis ranking: the hidden target is never read to manufacture certainty.
+- Weakness Engine remains the sole Dark Folklore cross-mod damage authority.
 
 ## Install
 
-1. Use Minecraft 1.21.1, NeoForge 21.1.248, and Java 21.
-2. Build or obtain `darkfolklore-core-0.3.1.jar`.
-3. Place only the production JAR, not the sources JAR, in the instance `mods` directory.
-4. Install whichever optional provider mods the pack uses. Exact adapter versions are listed in [Compatibility](docs/COMPATIBILITY.md).
-5. Back up an existing world, start the server, and review `config/darkfolklore-common.toml`.
-6. Run `/folklore diagnostics`; require `invalid=0` and inspect adapter status before using the world for release validation.
-
-The existing `darkfolklore_society` data remains schema 2. New 0.3.1 observation/case-continuity data is stored in a separate `darkfolklore_investigation` SavedData file so hardening does not destructively rewrite the established society schema.
+1. Use Minecraft 1.21.1, NeoForge 21.1.248 and Java 21.
+2. Build or obtain `darkfolklore-core-0.4.0.jar`.
+3. Put only the production JAR in the instance `mods` directory.
+4. Install whichever optional provider mods the pack uses. Exact adapter versions are listed in [`docs/COMPATIBILITY.md`](docs/COMPATIBILITY.md).
+5. Back up an existing world before changing Core/provider versions.
+6. Run `/folklore diagnostics` after startup and require `invalid=0`.
+7. For the vampire stack also inspect `/folklore predation status` and `/folklore lifecycle status`.
 
 ## Build
 
-The build resolves typed compile-only integrations from immutable public artifacts and verifies the audited checksums. It does not require a local `mods/` directory and does not shade provider mods into Core.
+Windows:
 
 ```powershell
-$env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
-$env:Path = "$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat clean build --no-daemon --no-configuration-cache --stacktrace
 ```
 
@@ -84,45 +158,26 @@ Linux/macOS:
 ./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
 ```
 
-Artifacts:
+Production artifact:
 
 ```text
-build/libs/darkfolklore-core-0.3.1.jar
-build/libs/darkfolklore-core-0.3.1-sources.jar
+build/libs/darkfolklore-core-0.4.0.jar
 ```
 
 Useful tasks:
 
-```powershell
-.\gradlew.bat test
-.\gradlew.bat runGameTestServer
-.\gradlew.bat runServer
-.\gradlew.bat runClient
-```
-
-See [0.3.1 testing](docs/TESTING_0.3.1.md) for evidence generated specifically from this branch. Historical 0.2 smoke evidence remains documented separately and must not be presented as if it validated 0.3.1 gameplay.
-
-## Data and reloads
-
-Core atomically reloads:
-
 ```text
-data/<namespace>/darkfolklore/canonical/
-data/<namespace>/darkfolklore/weaknesses/
-data/<namespace>/darkfolklore/spawn_profiles/
-data/<namespace>/darkfolklore/magic_integrations/
-data/<namespace>/darkfolklore/investigation_profiles/
-data/<namespace>/darkfolklore/story_templates/
-data/<namespace>/darkfolklore/organization_archetypes/
-data/<namespace>/darkfolklore/social_parameters/
-data/<namespace>/darkfolklore/political_weights/
+./gradlew test
+./gradlew runGameTestServer
+./gradlew runServer
+./gradlew runClient
 ```
 
-The entire candidate state must validate. If one definition or cross-definition invariant fails, Core retains the previous validated snapshot. Field Guide categories, standard tags, recipes, loot modifiers, and NeoForge biome modifiers remain in their owning formats outside that transaction.
+The build uses immutable checksum-verified compile-only provider artifacts where public artifacts are available. Optional provider code is never shaded into the release JAR.
 
-## Operator commands
+## Operator diagnostics
 
-All `/folklore` ground-truth commands require permission level 2.
+All ground-truth commands require permission level 2.
 
 ```text
 /folklore diagnostics
@@ -137,20 +192,18 @@ All `/folklore` ground-truth commands require permission level 2.
 /folklore fieldguide diagnostics
 /folklore capitals inspect <entity>
 /folklore organization list
-/folklore organization create <type> <leader> <name...>
 /folklore organization inspect <uuid>
 /folklore village [inspect]
 /folklore story list
-/folklore stories
 /folklore contracts
 /folklore investigation status <player>
 /folklore investigation hypotheses <player>
 /folklore investigation profile <concept>
+/folklore predation status
+/folklore predation inspect <entity>
+/folklore lifecycle status
+/folklore lifecycle inspect <entity>
 ```
-
-## Contract quick start
-
-A recognized supernatural actor killing an animal, villager, or MCA person can create a local incident. Empty-handed sneak-right-click a valid local issuer, then collect nearby physical clues, record credible testimony, or analyze the scene with a compatible existing magical implement. Identification advances lore to `OBSERVED`; weakness/preparation details remain hidden until `STUDIED`. If the incident recorded a factual culprit, tracking and hunt completion follow that culprit while it remains valid. Confirmed deaths can enable the documented fallback paths; unloads cannot.
 
 ## Documentation
 
@@ -158,19 +211,18 @@ A recognized supernatural actor killing an animal, villager, or MCA person can c
 - [Society](docs/SOCIETY.md)
 - [Contracts](docs/CONTRACTS.md)
 - [Occult Investigation](docs/OCCULT_INVESTIGATION.md)
+- [MCA Vamp Compat 2.0.12 exact audit](docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md)
 - [0.3.1 testing](docs/TESTING_0.3.1.md)
 - [0.3.1 release gate](docs/RELEASE_0.3.1.md)
-- [Data formats](docs/DATA_FORMATS.md)
+- [Known limitations](docs/KNOWN_LIMITATIONS.md)
 - [Compatibility](docs/COMPATIBILITY.md)
 - [Field Guide](docs/FIELD_GUIDE.md)
 - [Wolfsbane audit](docs/WOLFSBANE_AUDIT.md)
-- [Historical testing](docs/TESTING.md)
-- [Historical 0.2 production record](docs/PRODUCTION_RELEASE.md)
 - [Changelog](CHANGELOG.md)
 
 ## Release classification
 
-0.3.1 remains **`RELEASE_CANDIDATE`** until the final branch CI, in-world client investigation/Field Guide acceptance, and the required real-world migration/compatibility checks are recorded. Compilation or unit tests alone never promote it to `PRODUCTION_READY`.
+0.4.0 remains **`DEVELOPMENT / RELEASE_CANDIDATE`** until the exact optional-provider stack is exercised in-world. A green Core CI proves compilation, policy tests, resources and provider-absent runtime safety; it does not by itself prove real MCA infection, conversion, cure or inheritance.
 
 ## License
 
