@@ -2,11 +2,11 @@
 
 This document records automated evidence for the stacked 0.4.0 native MCA vampire lifecycle integration. It supplements the 0.3.1 hardening evidence and does not replace the exact full-modpack runtime gate.
 
-## Latest code gate
+## Latest verified stacked gate
 
-Latest verified 0.4 code/documentation head before this evidence file: `d12c0a671fd181d9275203a4ec0eb7d84def5739`.
+Verified stacked branch head before this evidence refresh: `1c1bec00cad64bc7e8ef29462fce2b97ac00d445`.
 
-GitHub Actions run `31592481442`: **PASS** on the stacked PR merge ref with Ubuntu 24.04 and Java 21.
+GitHub Actions run `31593042850`: **PASS** with Ubuntu 24.04 and Java 21.
 
 Recorded evidence:
 
