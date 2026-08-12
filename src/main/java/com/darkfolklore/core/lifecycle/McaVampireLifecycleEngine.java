@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -42,8 +43,6 @@ public final class McaVampireLifecycleEngine {
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!FolkloreConfig.MCA_VAMPIRE_LIFECYCLE.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !isMca(event.getEntity())) return;
-        // Provider also handles join. Observe one tick later so its normalization/attachments run first regardless
-        // of event-listener ordering.
         initialObservationTick.put(event.getEntity().getUUID(), level.getServer().getTickCount() + 1);
     }
 
@@ -52,16 +51,15 @@ public final class McaVampireLifecycleEngine {
         UUID id = event.getEntity().getUUID();
         snapshots.remove(id);
         initialObservationTick.remove(id);
-        // Birth context is short-lived and may still be useful if a just-created child changes dimensions.
     }
 
     @SubscribeEvent
     public void onBabySpawn(BabyEntitySpawnEvent event) {
         if (!FolkloreConfig.MCA_VAMPIRE_LIFECYCLE.get()) return;
         AgeableMob child = event.getChild();
-        if (child == null || !isMca(child)) return;
-        long now = child.level().getGameTime();
-        births.put(child.getUUID(), new BirthContext(event.getParentA().getUUID(), event.getParentB().getUUID(), now));
+        if (child == null || !isMca(child) || !(child.level() instanceof ServerLevel)) return;
+        births.put(child.getUUID(), new BirthContext(event.getParentA().getUUID(), event.getParentB().getUUID(),
+                child.level().getGameTime()));
     }
 
     @SubscribeEvent
@@ -123,13 +121,15 @@ public final class McaVampireLifecycleEngine {
                     FolkloreSavedData.get(server).addLineage(new LineageRecord(entity.getUUID(), source,
                             SecretType.VAMPIRE, now)));
             case CURE_STARTED, CURED, VAMPIRISM_CLEARED, INFECTION_CLEARED -> {
-                // Do not erase social beliefs. Historical witnesses may still remember a factual past state.
-                entity.setTarget(null);
-                if (entity instanceof net.minecraft.world.entity.Mob mob) mob.getNavigation().stop();
+                // Historical beliefs deliberately remain. Only transient predatory intent is stopped.
+                if (entity instanceof Mob mob) {
+                    mob.setTarget(null);
+                    mob.getNavigation().stop();
+                }
             }
             case INHERITED_VAMPIRE -> {
-                // Provider inheritance deliberately has no conversion source. Keep parent context in diagnostics
-                // instead of fabricating a one-parent conversion lineage record.
+                // Provider inheritance intentionally has no conversion source. Preserve both parents only in
+                // diagnostic birth context instead of fabricating a one-parent conversion lineage record.
             }
             default -> { }
         }
