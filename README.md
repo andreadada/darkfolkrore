@@ -212,6 +212,8 @@ All ground-truth commands require permission level 2.
 - [Contracts](docs/CONTRACTS.md)
 - [Occult Investigation](docs/OCCULT_INVESTIGATION.md)
 - [MCA Vamp Compat 2.0.12 exact audit](docs/MCA_VAMP_COMPAT_2.0.12_AUDIT.md)
+- [0.4.0 testing](docs/TESTING_0.4.0.md)
+- [0.4.0 release gate](docs/RELEASE_0.4.0.md)
 - [0.3.1 testing](docs/TESTING_0.3.1.md)
 - [0.3.1 release gate](docs/RELEASE_0.3.1.md)
 - [Known limitations](docs/KNOWN_LIMITATIONS.md)
