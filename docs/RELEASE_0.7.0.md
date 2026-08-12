@@ -28,17 +28,28 @@ Status: **DEVELOPMENT / RELEASE_CANDIDATE ONLY** until the full intended-pack be
 - `KILL_FOR_SPORT` never invokes blood/infection mutation;
 - an MCA vampire may receive a narrative/debug profile, but human predation intent remains `PROVIDER_OWNED` and Core never redirects that target.
 
-## Automated evidence
+## Final automated evidence
 
-The final branch evidence is recorded after the current 0.7 GitHub Actions gate completes. Required automated evidence is:
+Final evidenced PR head before this documentation-only evidence commit: `a83fb7981170977879b265a40b23b79428de9ea6`.
 
-- Java 21 clean build PASS;
-- all JUnit PASS with 0 failures/errors;
-- 3/3 NeoForge GameTests PASS;
-- release JAR audit PASS;
-- atomic resource reload with 0 invalid and `feeding_murder` included;
-- production `darkfolklore-core-0.7.0.jar` identity recorded;
-- Atlas tooling/audit artifact PASS.
+GitHub Actions PR run `31634071239`: **PASS**.
+
+- Java 21 clean build: PASS
+- JUnit: **155/155 PASS**, 0 failures, 0 errors, 0 skipped
+- NeoForge GameTests: **3/3 PASS**
+- release JAR audit: PASS
+- Core data reload: **17 canonical concepts, 5 weaknesses, 8 spawn profiles, 2 magic integrations, 9 investigation profiles, 16 story templates, 4 organization archetypes, 6 political overrides, 0 invalid**
+- `feeding_murder` is included in the validated 16-template snapshot
+- Atlas tool syntax/audit: PASS
+- committed Atlas CI baseline: 147 mods, 11,296 cross-mod ingredient uses, 176 namespace bridges
+- artifact: `darkfolklore-core-0.7.0.jar`
+- JAR size: **601,837 bytes**
+- JAR SHA-256: `8A1835847F55C5C7B6F85F6B7244EE7B8701527F82491B777D360BF6786CD6A1`
+- class count: **242**
+- production JAR artifact ID: **9156283800**
+- Atlas audit artifact ID: **9156284363**
+
+This evidence is anchored to the functional/documented PR head above. A later documentation-only commit may change the branch SHA but must not change the binary identity.
 
 A green standard CI still does not prove optional-provider runtime gameplay because the CI GameTest instance intentionally does not ship the complete modpack provider set.
 
