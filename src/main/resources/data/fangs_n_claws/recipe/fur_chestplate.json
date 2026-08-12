@@ -1,0 +1,3 @@
+{
+  "type":"minecraft:crafting_shaped","category":"equipment","pattern":["F F","FFF","FFF"],"key":{"F":{"tag":"darkfolklore:recipe/fur"}},"result":{"count":1,"id":"fangs_n_claws:fur_chestplate"},"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"fangs_n_claws"},{"type":"neoforge:item_exists","item":"fangs_n_claws:fur"},{"type":"neoforge:item_exists","item":"fangs_n_claws:fur_chestplate"},{"type":"neoforge:not","value":{"type":"neoforge:tag_empty","tag":"darkfolklore:recipe/fur"}}]
+}

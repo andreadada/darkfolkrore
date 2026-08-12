@@ -1,0 +1,15 @@
+{
+  "type": "eidolon_repraised:crucible",
+  "steps": [
+    {"items": [{"item": "eidolon_repraised:ender_calx"}]},
+    {"items": [{"tag": "c:dusts/redstone"}, {"tag": "c:dusts/redstone"}, {"tag": "c:dusts/redstone"}, {"tag": "c:dusts/redstone"}, {"tag": "c:dyes/red"}, {"tag": "c:dyes/red"}]},
+    {"stirs": 2, "items": [{"tag": "c:tallow"}, {"tag": "c:tallow"}]}
+  ],
+  "result": {"id": "eidolon_repraised:magicians_wax", "count": 4},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "eidolon_repraised"},
+    {"type": "neoforge:item_exists", "item": "eidolon_repraised:magicians_wax"},
+    {"type": "neoforge:item_exists", "item": "eidolon_repraised:ender_calx"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "c:tallow"}}
+  ]
+}

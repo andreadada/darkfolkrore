@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "hearth_and_timber:quicklime",
+      "required": false
+    },
+    {
+      "id": "enchanted:quicklime",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{
+  "type":"minecraft:crafting_shaped","category":"equipment","pattern":["FFF","F F","F F"],"key":{"F":{"tag":"darkfolklore:recipe/fur"}},"result":{"count":1,"id":"fangs_n_claws:fur_leggings"},"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"fangs_n_claws"},{"type":"neoforge:item_exists","item":"fangs_n_claws:fur"},{"type":"neoforge:item_exists","item":"fangs_n_claws:fur_leggings"},{"type":"neoforge:not","value":{"type":"neoforge:tag_empty","tag":"darkfolklore:recipe/fur"}}]
+}

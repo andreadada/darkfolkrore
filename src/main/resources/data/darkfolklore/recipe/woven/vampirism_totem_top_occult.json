@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["O O", " F ", "OVO"],
+  "key": {"O": {"tag": "darkfolklore:recipe/obsidian"}, "F": {"tag": "darkfolklore:recipe/occult_focus_gem"}, "V": {"item": "vampirism:vampire_book"}},
+  "result": {"count": 1, "id": "vampirism:totem_top_crafted"},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "vampirism"},
+    {"type": "neoforge:item_exists", "item": "vampirism:totem_top_crafted"},
+    {"type": "neoforge:item_exists", "item": "vampirism:vampire_book"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/occult_focus_gem"}},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/obsidian"}}
+  ]
+}

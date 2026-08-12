@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "enchanted:wood_ash",
+      "required": false
+    },
+    {
+      "id": "eidolon_repraised:enchanted_ash",
+      "required": false
+    },
+    {
+      "id": "occultism:otherworld_ashes",
+      "required": false
+    }
+  ]
+}
