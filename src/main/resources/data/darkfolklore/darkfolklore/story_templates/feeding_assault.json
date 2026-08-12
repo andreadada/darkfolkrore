@@ -1,0 +1,11 @@
+{
+  "id": "feeding_assault",
+  "trigger": "FEEDING_ASSAULT",
+  "concept": "darkfolklore:vampire",
+  "weight": 1,
+  "cooldown_ticks": 12000,
+  "lifetime_ticks": 144000,
+  "required_secret": "VAMPIRE",
+  "contract_eligible": true,
+  "enabled": true
+}
