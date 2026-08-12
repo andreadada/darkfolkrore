@@ -93,14 +93,13 @@ public final class InvestigationSavedData extends SavedData {
         return Optional.ofNullable(incidentFacts.get(storyId));
     }
 
-    public void putCaseLink(UUID contractId, InvestigationCaseLink link) {
+    public boolean putCaseLink(UUID contractId, InvestigationCaseLink link) {
         Objects.requireNonNull(contractId, "contractId");
         Objects.requireNonNull(link, "link");
+        if (!caseLinks.containsKey(contractId) && caseLinks.size() >= HARD_MAX_CASE_LINKS) return false;
         caseLinks.put(contractId, link);
-        while (caseLinks.size() > HARD_MAX_CASE_LINKS) {
-            caseLinks.remove(caseLinks.keySet().iterator().next());
-        }
         setDirty();
+        return true;
     }
 
     public Optional<InvestigationCaseLink> caseLink(UUID contractId) {
@@ -177,7 +176,7 @@ public final class InvestigationSavedData extends SavedData {
     }
 
     private void readSightings(ListTag list) {
-        for (int i = 0; i < list.size() && sightings.size() < HARD_MAX_SIGHTINGS; i++) {
+        for (int i = 0; i < list.size() && i < HARD_MAX_SIGHTINGS; i++) {
             try {
                 CompoundTag row = list.getCompound(i);
                 CreatureSightingKey key = new CreatureSightingKey(uuid(row, "observer"), row.getString("concept"));
@@ -209,7 +208,7 @@ public final class InvestigationSavedData extends SavedData {
     }
 
     private void readIncidentFacts(ListTag list) {
-        for (int i = 0; i < list.size() && incidentFacts.size() < HARD_MAX_INCIDENT_FACTS; i++) {
+        for (int i = 0; i < list.size() && i < HARD_MAX_INCIDENT_FACTS; i++) {
             try {
                 CompoundTag row = list.getCompound(i);
                 incidentFacts.put(uuid(row, "story"), new IncidentFact(optionalUuid(row, "culprit"),
@@ -236,7 +235,7 @@ public final class InvestigationSavedData extends SavedData {
     }
 
     private void readCaseLinks(ListTag list) {
-        for (int i = 0; i < list.size() && caseLinks.size() < HARD_MAX_CASE_LINKS; i++) {
+        for (int i = 0; i < list.size() && i < HARD_MAX_CASE_LINKS; i++) {
             try {
                 CompoundTag row = list.getCompound(i);
                 caseLinks.put(uuid(row, "contract"), new InvestigationCaseLink(optionalUuid(row, "story"),

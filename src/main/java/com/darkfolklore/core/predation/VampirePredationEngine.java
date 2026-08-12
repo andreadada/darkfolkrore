@@ -52,13 +52,12 @@ public final class VampirePredationEngine {
         if (!FolkloreConfig.VAMPIRE_PREDATION.get() || !(event.getEntity() instanceof Mob predator)
                 || !(predator.level() instanceof ServerLevel level) || !predator.isAlive()) return;
         if (predator instanceof AgeableMob ageablePredator && ageablePredator.isBaby()) return;
+        int interval = FolkloreConfig.VAMPIRE_PREDATION_SCAN_INTERVAL.get();
+        if (Math.floorMod(predator.tickCount + predator.getId(), interval) != 0) return;
         VampirePredationBridge bridge = CompatibilityManager.INSTANCE.vampirePredation();
         if (!bridge.runtimeAvailable()) return;
         PredatorKind kind = bridge.predatorKind(predator);
         if (kind == PredatorKind.NONE) return;
-
-        int interval = FolkloreConfig.VAMPIRE_PREDATION_SCAN_INTERVAL.get();
-        if (Math.floorMod(predator.tickCount + predator.getId(), interval) != 0) return;
         long now = level.getGameTime();
 
         Session current = sessions.get(predator.getUUID());
@@ -148,10 +147,21 @@ public final class VampirePredationEngine {
             if (!animal && !mca) continue;
             if (animal && target instanceof TamableAnimal tame && tame.isTame()) continue;
             boolean child = target instanceof AgeableMob ageable && ageable.isBaby();
-            boolean closeFamily = kind == PredatorKind.MCA_VAMPIRE && mca && isCloseFamily(predator, target);
-            boolean vampire = CompatibilityManager.INSTANCE.isVampire(target) == FactResult.TRUE;
-            boolean werewolf = CompatibilityManager.INSTANCE.isWerewolf(target) == FactResult.TRUE;
-            boolean hunter = CompatibilityManager.INSTANCE.isHunter(target) == FactResult.TRUE;
+            boolean closeFamily = false;
+            if (kind == PredatorKind.MCA_VAMPIRE && mca) {
+                McaRelationshipCategory relationship = CompatibilityManager.INSTANCE.mcaSocial()
+                        .relationship(target, predator).relationship();
+                if (relationship == McaRelationshipCategory.UNKNOWN
+                        || relationship == McaRelationshipCategory.NOT_APPLICABLE) continue;
+                closeFamily = CLOSE_FAMILY.contains(relationship);
+            }
+            FactResult vampireFact = CompatibilityManager.INSTANCE.isVampire(target);
+            FactResult werewolfFact = CompatibilityManager.INSTANCE.isWerewolf(target);
+            FactResult hunterFact = CompatibilityManager.INSTANCE.isHunter(target);
+            if (!PredationPolicy.factsKnown(vampireFact, werewolfFact, hunterFact)) continue;
+            boolean vampire = vampireFact == FactResult.TRUE;
+            boolean werewolf = werewolfFact == FactResult.TRUE;
+            boolean hunter = hunterFact == FactResult.TRUE;
             boolean providerEligible = kind == PredatorKind.WILD_VAMPIRISM
                     ? bridge.canWildFeed(predator, target)
                     : animal ? bridge.canMcaAnimalFeed(predator, target) : bridge.canMcaVampireTarget(predator, target);
@@ -271,11 +281,6 @@ public final class VampirePredationEngine {
             risk = Math.max(risk, candidate);
         }
         return Math.min(100.0D, risk);
-    }
-
-    private static boolean isCloseFamily(Entity predator, Entity target) {
-        McaRelationshipCategory relationship = CompatibilityManager.INSTANCE.mcaSocial().relationship(target, predator).relationship();
-        return CLOSE_FAMILY.contains(relationship);
     }
 
     private static int visibleWitnesses(ServerLevel level, LivingEntity predator, LivingEntity target) {

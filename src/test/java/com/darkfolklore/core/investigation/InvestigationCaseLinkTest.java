@@ -43,4 +43,16 @@ class InvestigationCaseLinkTest {
         assertFalse(link.culpritFallbackAllowed());
         assertFalse(link.issuerFallbackAllowed());
     }
+
+    @Test
+    void testimonyRemainsBoundToExactCulpritUntilConfirmedFallback() {
+        UUID culprit = UUID.randomUUID();
+        UUID otherVampire = UUID.randomUUID();
+        InvestigationCaseLink link = InvestigationCaseLink.fromStory(UUID.randomUUID(),
+                new IncidentFact(Optional.of(culprit), "mca:villager", 10L));
+
+        assertTrue(InvestigationTargeting.matchesTestimonySubject(culprit, link));
+        assertFalse(InvestigationTargeting.matchesTestimonySubject(otherVampire, link));
+        assertTrue(InvestigationTargeting.matchesTestimonySubject(otherVampire, link.allowCulpritFallback()));
+    }
 }

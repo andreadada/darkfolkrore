@@ -6,6 +6,7 @@ import com.darkfolklore.core.canonical.FolkloreLootModifiers;
 import com.darkfolklore.core.canonical.FolkloreBiomeModifiers;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractEngine;
+import com.darkfolklore.core.contracts.ConfirmedDeathDispatcher;
 import com.darkfolklore.core.diagnostics.CoreServerEvents;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
@@ -43,6 +44,7 @@ public final class DarkFolkloreCore {
 
         var bus = NeoForge.EVENT_BUS;
         bus.register(CoreServerEvents.INSTANCE);
+        bus.register(ConfirmedDeathDispatcher.INSTANCE);
         bus.register(WeaknessEngine.INSTANCE);
         bus.register(LoreEngine.INSTANCE);
         bus.register(WitnessEngine.INSTANCE);

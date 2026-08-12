@@ -20,4 +20,21 @@ class DeathFinalityTest {
     void onlyUncancelledNonAliveEntityIsConfirmedDead() {
         assertTrue(DeathFinality.confirmed(false, false));
     }
+
+    @Test
+    void confirmationIsNeverDispatchedDuringTheOriginalDeathTick() {
+        assertFalse(ConfirmedDeathDispatcher.shouldDispatch(100, 101, false, false));
+    }
+
+    @Test
+    void nextTickDispatchStillRejectsCancellationAndRescue() {
+        assertFalse(ConfirmedDeathDispatcher.shouldDispatch(101, 101, true, false));
+        assertFalse(ConfirmedDeathDispatcher.shouldDispatch(101, 101, false, true));
+        assertTrue(ConfirmedDeathDispatcher.shouldDispatch(101, 101, false, false));
+    }
+
+    @Test
+    void liveReplacementWithTheSameIdentityIsTreatedAsARescue() {
+        assertFalse(ConfirmedDeathDispatcher.shouldDispatch(101, 101, false, true));
+    }
 }

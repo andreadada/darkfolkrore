@@ -72,4 +72,17 @@ class InvestigationSavedDataTest {
         assertTrue(data.sighting(observer, "darkfolklore:wendigo").isEmpty());
         assertTrue(data.sighting(observer, "darkfolklore:sprite").isPresent());
     }
+
+    @Test
+    void continuityCapRejectsNewAdmissionInsteadOfEvictingAnExistingExactCase() {
+        InvestigationSavedData data = new InvestigationSavedData();
+        UUID first = new UUID(1L, 0L);
+        InvestigationCaseLink link = InvestigationCaseLink.fromStory(UUID.randomUUID(), null);
+        for (int i = 0; i < 20_000; i++) {
+            assertTrue(data.putCaseLink(new UUID(1L, i), link));
+        }
+
+        assertFalse(data.putCaseLink(new UUID(2L, 0L), link));
+        assertTrue(data.caseLink(first).isPresent(), "active exact continuity must never be silently evicted");
+    }
 }

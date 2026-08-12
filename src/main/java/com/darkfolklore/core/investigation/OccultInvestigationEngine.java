@@ -1,5 +1,6 @@
 package com.darkfolklore.core.investigation;
 
+import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractAssignment;
@@ -23,9 +24,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -167,16 +166,16 @@ public final class OccultInvestigationEngine {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public void onPreparedHunt(LivingDeathEvent event) {
+    @SubscribeEvent
+    public void onPreparedHunt(ConfirmedLivingDeathEvent event) {
         if (!FolkloreConfig.OCCULT_INVESTIGATION.get() || !FolkloreConfig.PREPARED_HUNT_BONUS.get()
-                || !(event.getSource().getEntity() instanceof ServerPlayer player)) return;
+                || !(event.source().getEntity() instanceof ServerPlayer player)) return;
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
         ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
         if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED) return;
         InvestigationCaseLink link = InvestigationSavedData.get(player.getServer())
                 .caseLink(assignment.contract().id()).orElse(null);
-        if (!InvestigationTargeting.matches(assignment, event.getEntity(), link)) return;
+        if (!InvestigationTargeting.matches(assignment, event.entity(), link)) return;
         InvestigationProfile profile = FolkloreDataManager.INSTANCE
                 .investigationProfile(assignment.contract().targetConcept()).orElse(null);
         if (profile == null) return;

@@ -29,7 +29,7 @@ class CreatureSightingRecordTest {
         assertEquals(KnowledgeSource.DIRECT_WITNESS, merged.source());
         assertEquals(Optional.of(entity), merged.entityId());
         assertTrue(merged.location().isPresent());
-        assertEquals(200L, merged.gameTime(), "freshness advances without discarding stronger factual detail");
+        assertEquals(100L, merged.gameTime(), "a later unrelated rumor must not refresh older entity provenance");
     }
 
     @Test

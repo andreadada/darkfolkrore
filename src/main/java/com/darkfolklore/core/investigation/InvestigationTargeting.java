@@ -6,6 +6,8 @@ import com.darkfolklore.core.society.SecretFacts;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.UUID;
+
 /** Shared factual target matching for tracking, prepared hunts and contract completion. */
 public final class InvestigationTargeting {
     private InvestigationTargeting() {}
@@ -21,5 +23,11 @@ public final class InvestigationTargeting {
         if (!canonicalConcept(entity).equals(assignment.contract().targetConcept())) return false;
         if (link == null || link.culpritId().isEmpty()) return true;
         return entity.getUUID().equals(link.culpritId().get()) || link.culpritFallbackAllowed();
+    }
+
+    /** Identity testimony follows the exact culprit until confirmed-death fallback is authorized. */
+    public static boolean matchesTestimonySubject(UUID subject, InvestigationCaseLink link) {
+        if (link == null || link.culpritId().isEmpty() || link.culpritFallbackAllowed()) return true;
+        return link.culpritId().get().equals(subject);
     }
 }

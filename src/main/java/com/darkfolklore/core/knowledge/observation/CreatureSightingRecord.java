@@ -38,7 +38,7 @@ public record CreatureSightingRecord(
                 || (incoming.state == state && incoming.confidence == confidence && incoming.gameTime > gameTime);
         CreatureSightingRecord preferred = incomingPreferred ? incoming : this;
         return new CreatureSightingRecord(state.max(incoming.state), Math.max(confidence, incoming.confidence),
-                preferred.source, Math.max(gameTime, incoming.gameTime), preferred.entityId,
+                preferred.source, preferred.gameTime, preferred.entityId,
                 preferred.location, preferred.evidence);
     }
 

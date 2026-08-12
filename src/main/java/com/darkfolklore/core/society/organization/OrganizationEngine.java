@@ -2,6 +2,7 @@ package com.darkfolklore.core.society.organization;
 
 import com.darkfolklore.core.DarkFolkloreCore;
 import com.darkfolklore.core.api.event.ContractCompletedEvent;
+import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
 import com.darkfolklore.core.api.event.WitnessEvent;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.compat.mca.McaPersonalityInfluence;
@@ -30,7 +31,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
@@ -111,11 +111,11 @@ public final class OrganizationEngine {
     }
 
     @SubscribeEvent
-    public void onConfirmedDeath(LivingDeathEvent event) {
-        if (!FolkloreConfig.ORGANIZATIONS.get() || event.getEntity() instanceof Player
-                || !(event.getEntity().level() instanceof ServerLevel level)) return;
+    public void onConfirmedDeath(ConfirmedLivingDeathEvent event) {
+        if (!FolkloreConfig.ORGANIZATIONS.get() || event.entity() instanceof Player
+                || !(event.entity().level() instanceof ServerLevel level)) return;
         FolkloreSavedData.DeathCleanupResult result = FolkloreSavedData.get(level.getServer())
-                .handleConfirmedDeath(event.getEntity().getUUID(), level.getGameTime());
+                .handleConfirmedDeath(event.entity().getUUID(), level.getGameTime());
         if (FolkloreConfig.DEBUG_LOGGING.get() && (result.membershipsRemoved() > 0
                 || result.organizationsDissolved() > 0)) {
             DarkFolkloreCore.LOGGER.debug("[society] Confirmed death cleanup: memberships={}, dissolved={}, successions={}",

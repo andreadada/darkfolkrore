@@ -1,5 +1,7 @@
 package com.darkfolklore.core.predation;
 
+import com.darkfolklore.core.compat.FactResult;
+
 /** Pure scoring policy kept independent from Minecraft/provider classes for deterministic tests. */
 public final class PredationPolicy {
     private PredationPolicy() {}
@@ -47,6 +49,13 @@ public final class PredationPolicy {
         if (candidate.isolated()) score += candidate.mcaCivilian() ? 14.0D : 6.0D;
         return score < 10.0D ? Decision.rejected("social risk makes this prey unsuitable")
                 : new Decision(true, score, candidate.animal() ? "animal" : "mca_civilian");
+    }
+
+    public static boolean factsKnown(FactResult... facts) {
+        for (FactResult fact : facts) {
+            if (fact != FactResult.TRUE && fact != FactResult.FALSE) return false;
+        }
+        return true;
     }
 
     private static double clamp(double value, double min, double max) {

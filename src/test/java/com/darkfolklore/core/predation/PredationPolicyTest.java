@@ -1,5 +1,6 @@
 package com.darkfolklore.core.predation;
 
+import com.darkfolklore.core.compat.FactResult;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,6 +57,13 @@ class PredationPolicyTest {
     void daytimePredationFailsClosed() {
         var context = new PredationPolicy.Context(PredatorKind.WILD_VAMPIRISM, false, 0, 0);
         assertFalse(PredationPolicy.score(context, candidate(false, true, 0, true)).eligible());
+    }
+
+    @Test
+    void unknownProviderFactsNeverBecomeMundanePreyFacts() {
+        assertTrue(PredationPolicy.factsKnown(FactResult.FALSE, FactResult.FALSE, FactResult.TRUE));
+        assertFalse(PredationPolicy.factsKnown(FactResult.UNKNOWN, FactResult.FALSE, FactResult.FALSE));
+        assertFalse(PredationPolicy.factsKnown(FactResult.NOT_APPLICABLE, FactResult.FALSE, FactResult.FALSE));
     }
 
     private static PredationPolicy.Candidate candidate(boolean animal, boolean mca, int witnesses, boolean isolated) {
