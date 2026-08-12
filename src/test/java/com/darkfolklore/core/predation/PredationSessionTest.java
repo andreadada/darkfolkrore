@@ -27,6 +27,42 @@ class PredationSessionTest {
     }
 
     @Test
+    void ripperCanProgressFromFeedToOverfeedAndThenLethalCombat() {
+        PredationSession session = new PredationSession(UUID.randomUUID(), false,
+                PredatorKind.WILD_VAMPIRISM, true, 10, 250,
+                VampireBehaviorProfile.RIPPER, VampirePredationIntent.OVERFEED);
+        session.transition(PredationPhase.ATTACKING, "range");
+        session.transition(PredationPhase.FEEDING, "first provider feed");
+        assertEquals(1, session.recordConfirmedFeed(40));
+        assertEquals(40, session.lastFeedAt());
+        session.transition(PredationPhase.OVERFEEDING, "keeps drinking");
+        session.transition(PredationPhase.KILLING, "continues as combat");
+        assertEquals(PredationPhase.KILLING, session.phase());
+        assertEquals(VampireBehaviorProfile.RIPPER, session.behaviorProfile());
+        assertEquals(VampirePredationIntent.OVERFEED, session.intent());
+    }
+
+    @Test
+    void recruiterSessionRetainsExplicitNonlethalIntent() {
+        PredationSession session = new PredationSession(UUID.randomUUID(), false,
+                PredatorKind.WILD_VAMPIRISM, true, 10, 250,
+                VampireBehaviorProfile.RECRUITER, VampirePredationIntent.RECRUIT);
+        session.transition(PredationPhase.FEEDING, "provider feed");
+        assertEquals(VampirePredationIntent.RECRUIT, session.intent());
+        assertFalse(session.intent().lethal());
+    }
+
+    @Test
+    void sessionExpiryCanBeExtendedOnlyForward() {
+        PredationSession session = new PredationSession(UUID.randomUUID(), false,
+                PredatorKind.WILD_VAMPIRISM, true, 10, 250,
+                VampireBehaviorProfile.PREDATOR, VampirePredationIntent.KILL_AFTER_FEED);
+        session.extendUntil(500);
+        session.extendUntil(100);
+        assertEquals(500, session.expiresAt());
+    }
+
+    @Test
     void invalidBackwardsTransitionFailsLoudly() {
         PredationSession session = new PredationSession(UUID.randomUUID(), false,
                 PredatorKind.WILD_VAMPIRISM, true, 10, 250);

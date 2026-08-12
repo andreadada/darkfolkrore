@@ -27,6 +27,7 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue OCCULT_INVESTIGATION = toggle("occultInvestigation", true);
     public static final ModConfigSpec.BooleanValue PREPARED_HUNT_BONUS = toggle("preparedHuntBonus", true);
     public static final ModConfigSpec.BooleanValue VAMPIRE_PREDATION = toggle("vampirePredation", true);
+    public static final ModConfigSpec.BooleanValue VAMPIRE_BEHAVIOR_PROFILES = toggle("vampireBehaviorProfiles", true);
     public static final ModConfigSpec.BooleanValue MCA_VAMPIRE_LIFECYCLE = toggle("mcaVampireLifecycle", true);
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING = toggle("debugLogging", false);
 
@@ -90,8 +91,23 @@ public final class FolkloreConfig {
             "Rolling local anti-chaos window for completed feeding events")
             .defineInRange("vampirePredationLocalWindowTicks", 2400, 200, 24000);
     public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_MAX_LOCAL_FEEDS = BUILDER.comment(
-            "Maximum completed feedings in one village-region during the anti-chaos window")
+            "Maximum completed feedings/lethal predation incidents in one village-region during the anti-chaos window")
             .defineInRange("vampirePredationMaxLocalFeeds", 4, 1, 32);
+    public static final ModConfigSpec.DoubleValue VAMPIRE_PREDATOR_KILL_CHANCE = BUILDER.comment(
+            "Stable per predator/victim/day chance that a hungry PREDATOR keeps attacking after feeding")
+            .defineInRange("vampirePredatorKillChance", 0.18D, 0.0D, 1.0D);
+    public static final ModConfigSpec.DoubleValue VAMPIRE_RIPPER_OVERFEED_CHANCE = BUILDER.comment(
+            "Stable per predator/victim/day chance that a hungry RIPPER deliberately continues feeding")
+            .defineInRange("vampireRipperOverfeedChance", 0.78D, 0.0D, 1.0D);
+    public static final ModConfigSpec.DoubleValue VAMPIRE_RIPPER_SPORT_KILL_CHANCE = BUILDER.comment(
+            "Stable per predator/victim/day chance that a RIPPER hunts an MCA human without current feeding pressure")
+            .defineInRange("vampireRipperSportKillChance", 0.10D, 0.0D, 1.0D);
+    public static final ModConfigSpec.DoubleValue VAMPIRE_VENGEFUL_KILL_CHANCE = BUILDER.comment(
+            "Stable chance that a VENGEFUL wild vampire targets an MCA witness who already knows its vampire identity")
+            .defineInRange("vampireVengefulKillChance", 0.90D, 0.0D, 1.0D);
+    public static final ModConfigSpec.IntValue VAMPIRE_RIPPER_MAX_EXTRA_FEEDS = BUILDER.comment(
+            "Maximum additional provider-confirmed feeds attempted by one RIPPER session before switching to combat")
+            .defineInRange("vampireRipperMaxExtraFeeds", 2, 0, 8);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 

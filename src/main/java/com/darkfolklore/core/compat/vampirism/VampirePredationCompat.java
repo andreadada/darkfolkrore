@@ -149,6 +149,20 @@ public final class VampirePredationCompat implements VampirePredationBridge {
     }
 
     @Override
+    public boolean requestWildCombatTarget(Mob predator, LivingEntity target) {
+        if (isMcaNamespace(predator) || !circuit(Circuit.WILD_FEED)
+                || !(predator instanceof IVampireMob) || !target.isAlive()) return false;
+        LivingEntity current = predator.getTarget();
+        boolean currentAlive = current != null && current.isAlive();
+        boolean currentIsChosen = current != null && current.getUUID().equals(target.getUUID());
+        // This hook is called only after Core has already authorized a lethal wild-vampire session.
+        if (currentAlive && !currentIsChosen) return false;
+        predator.setTarget(target);
+        LivingEntity applied = predator.getTarget();
+        return applied != null && applied.getUUID().equals(target.getUUID());
+    }
+
+    @Override
     public void clearWildHuntTarget(Mob predator, UUID expectedTarget) {
         if (isMcaNamespace(predator) || !(predator instanceof IVampireMob)) return;
         LivingEntity current = predator.getTarget();

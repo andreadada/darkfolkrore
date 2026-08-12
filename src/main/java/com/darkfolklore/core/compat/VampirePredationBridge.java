@@ -35,6 +35,14 @@ public interface VampirePredationBridge {
      */
     default boolean requestWildHuntTarget(Mob predator, LivingEntity target) { return false; }
 
+    /**
+     * Reasserts a Dark-Folklore-owned combat target for a wild Vampirism mob during an already-authorized lethal
+     * session. Unlike {@link #requestWildHuntTarget}, this does not require the victim to remain biteable after a
+     * successful feed. It still must never steal a different live combat target and is never available to MCA
+     * vampires.
+     */
+    default boolean requestWildCombatTarget(Mob predator, LivingEntity target) { return false; }
+
     /** Clears only a target previously selected by Dark Folklore for the expected victim. */
     default void clearWildHuntTarget(Mob predator, UUID expectedTarget) {}
 

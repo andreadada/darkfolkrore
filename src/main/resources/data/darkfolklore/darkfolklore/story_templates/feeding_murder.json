@@ -1,0 +1,11 @@
+{
+  "id": "feeding_murder",
+  "trigger": "FEEDING_MURDER",
+  "concept": "darkfolklore:vampire",
+  "weight": 2,
+  "cooldown_ticks": 12000,
+  "lifetime_ticks": 168000,
+  "required_secret": "VAMPIRE",
+  "contract_eligible": true,
+  "enabled": true
+}

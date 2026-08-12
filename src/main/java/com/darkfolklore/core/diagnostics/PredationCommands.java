@@ -22,6 +22,7 @@ public final class PredationCommands {
             var bridge = CompatibilityManager.INSTANCE.vampirePredation();
             send(context.getSource(), "Vampire predation bridge=" + bridge.runtimeAvailable()
                     + " activeSessions=" + VampirePredationEngine.INSTANCE.activeSessions()
+                    + " pendingLethal=" + VampirePredationEngine.INSTANCE.pendingLethalIntents()
                     + " trackedRegions=" + VampirePredationEngine.INSTANCE.trackedRegions()
                     + " traces=" + PredationTraceEngine.INSTANCE.tracked());
             if (!bridge.circuitStatus().isEmpty()) send(context.getSource(), "circuits=" + bridge.circuitStatus());
@@ -44,12 +45,15 @@ public final class PredationCommands {
                             + " curing=" + provider.curing() + " recentBite=" + provider.recentBite()
                             + " nativeAi=" + provider.aiGoalsAdded() + " detail=" + provider.detail());
                     if (!bridge.circuitStatus().isEmpty()) send(context.getSource(), "circuits=" + bridge.circuitStatus());
-                    VampirePredationEngine.INSTANCE.diagnostic(entity.getUUID()).ifPresentOrElse(value ->
-                                    send(context.getSource(), "director localRisk=" + Math.round(value.localRisk())
-                                            + " personalRisk=" + Math.round(value.personalRisk())
-                                            + " target=" + value.target().orElse(null)
-                                            + " phase=" + VampirePredationEngine.INSTANCE.sessionPhase(entity.getUUID()).orElse(null)
-                                            + " reason=" + value.reason() + " t=" + value.gameTime()),
+                    VampirePredationEngine.INSTANCE.diagnostic(entity.getUUID()).ifPresentOrElse(value -> {
+                                send(context.getSource(), "behavior profile=" + value.behaviorProfile()
+                                        + " intent=" + value.intent() + " source=" + value.profileDetail());
+                                send(context.getSource(), "director localRisk=" + Math.round(value.localRisk())
+                                        + " personalRisk=" + Math.round(value.personalRisk())
+                                        + " target=" + value.target().orElse(null)
+                                        + " phase=" + VampirePredationEngine.INSTANCE.sessionPhase(entity.getUUID()).orElse(null)
+                                        + " reason=" + value.reason() + " t=" + value.gameTime());
+                            },
                             () -> send(context.getSource(), "director: no recent decision for this entity"));
                     return 1;
                 })));
@@ -63,8 +67,10 @@ public final class PredationCommands {
                         return 0;
                     }
                     send(context.getSource(), "Predation trace " + entity.getName().getString()
-                            + " kind=" + trace.kind() + " phase=" + trace.phase()
+                            + " kind=" + trace.kind() + " profile=" + trace.behaviorProfile()
+                            + " intent=" + trace.intent() + " phase=" + trace.phase()
                             + " wantsBlood=" + trace.wantsBlood());
+                    send(context.getSource(), "profileSource=" + trace.profileDetail());
                     send(context.getSource(), "environment day=" + trace.day() + " skyVisible=" + trace.skyVisible()
                             + " allowed=" + trace.environmentAllowed() + " localRisk=" + Math.round(trace.localRisk())
                             + " personalRisk=" + Math.round(trace.personalRisk()));
@@ -73,8 +79,13 @@ public final class PredationCommands {
                     for (var candidate : trace.candidates()) {
                         send(context.getSource(), "candidate " + candidate.name() + " " + candidate.entity()
                                 + " animal=" + candidate.animal() + " mca=" + candidate.mcaCivilian()
-                                + " provider=" + candidate.providerEligible() + " witnesses=" + candidate.witnesses()
-                                + " distance=" + Math.round(candidate.distance()) + " eligible=" + candidate.eligible()
+                                + " provider=" + candidate.providerEligible()
+                                + " knowsIdentity=" + candidate.victimKnowsIdentity()
+                                + " witnesses=" + candidate.witnesses()
+                                + " distance=" + Math.round(candidate.distance())
+                                + " behaviorAdj=" + Math.round(candidate.behaviorAdjustment())
+                                + " intent=" + candidate.predictedIntent()
+                                + " eligible=" + candidate.eligible()
                                 + " score=" + (Double.isFinite(candidate.score()) ? Math.round(candidate.score()) : "-")
                                 + " reason=" + candidate.reason());
                     }
