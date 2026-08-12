@@ -2,11 +2,11 @@
 
 This file records evidence generated specifically for the 0.3.1 hardening branch. Historical 0.2 evidence remains in `TESTING.md` and must not be presented as 0.3.1 validation.
 
-## Latest automated gate
+## Latest code gate
 
-Exact predation-hardening head: `f3a8635a15d46855e1eb4e0d78d2f5ab69a5b917`.
+Latest code-changing 0.3.1 head: `0df64c4455e2a08bcf0a364d387098d56676894a`.
 
-GitHub Actions run `31590162424` completed successfully on the PR merge ref for that head with Ubuntu 24.04 and Java 21.
+GitHub Actions run `31592180073` completed successfully for PR #1 with Ubuntu 24.04 and Java 21.
 
 Recorded evidence:
 
@@ -24,14 +24,14 @@ Production JAR from that run:
 | Property | Value |
 | --- | --- |
 | File | `darkfolklore-core-0.3.1.jar` |
-| Size | `457,738` bytes |
-| SHA-256 | `A62623ED93B3912FDFB009DE62382B5C1CA7F014F7EAE9ACD5F2B0AF390BD10F` |
+| Size | `457,973` bytes |
+| SHA-256 | `0AADE878DD00EE168E36F546D0E4A2321F05E0C85185C6F28CB79D7012C3E4C3` |
 | Class files | `182` |
 | Java class version | 65 / Java 21, enforced by JAR audit |
 
 ## 0.3.1-specific automated coverage
 
-The branch now covers the investigation hardening plus the Vampire Society & Predation policy. Automated checks include:
+The branch covers investigation hardening plus Vampire Society & Predation. Automated checks include:
 
 - story/contract/culprit continuity and confirmed-death fallback semantics;
 - cancelled/rescued death finality;
@@ -42,6 +42,11 @@ The branch now covers the investigation hardening plus the Vampire Society & Pre
 - deterministic predation policy: low-risk MCA vampires may prefer isolated adult civilians, rising local/personal suspicion pushes them toward animals, visible witnesses penalize civilian attacks, children/close family/hunters/supernatural targets/named non-MCA targets are rejected, wild Vampirism mobs react less strongly to social risk, and autonomous feeding is night-only;
 - existing society, rumor, organization, canonicalization, wolfsbane and weakness regressions.
 
+The final code gate additionally verifies compilation after two provider-safety fixes:
+
+- entity `BloodDrinkEvent` observation now runs at `LOWEST`, after MCA Vamp Compat's normal handler, so a provider-blocked/zeroed drain cannot manufacture Core evidence or cooldown state;
+- malformed conversion lineage whose provider source UUID equals the descendant UUID is ignored rather than passed to `LineageRecord`.
+
 ## Exact-provider audit boundary
 
 The predation bridge activates only when exact audited versions are present: Vampirism `1.10.12`, MCA Reborn `7.7.32+1.21.1`, and MCA Reborn x Vampirism Compat `2.0.12`. Unsupported/missing versions fail closed.
@@ -50,15 +55,16 @@ The exact user-supplied MCA Vamp Compat 2.0.12 JAR audited during development ha
 
 `BD042DF1C5275C2DF3C8596D78761EC7FE2D8CD6338738F078C531AA0EF8B7CF`
 
-Dark Folklore does **not** redistribute or shade that JAR. The normal CI intentionally runs without the full optional provider pack, so a green CI proves compilation, resources, pure policy and Core runtime regressions, not the real three-mod predation/infection interaction.
+Dark Folklore does **not** redistribute or shade that JAR. Normal CI intentionally runs without the full optional provider pack, so green CI proves compilation, resources, pure policy and provider-absent Core runtime regressions, not the real three-mod predation/infection interaction.
 
-The audited provider path is intentionally ownership-preserving:
+The audited provider path is ownership-preserving:
 
 ```text
 wild Vampirism vampire
  -> real Vampirism blood drain / BloodDrinkEvent
- -> MCA Vamp Compat observes the native event
+ -> MCA Vamp Compat handles the event first
  -> MCA Vamp Compat alone decides configured infection/conversion
+ -> Dark Folklore observes the finalized event at LOWEST
 
 MCA vampire
  -> Dark Folklore chooses a socially appropriate target
@@ -81,15 +87,15 @@ The current three live NeoForge GameTests verify validated datapack state, separ
 | Native infection | Let the wild vampire feed on MCA with provider infection enabled. | Real provider `BloodDrinkEvent` reaches MCA Vamp Compat; only provider rules decide infection. |
 | Same-person conversion | Allow infected MCA to convert. | The same MCA character/entity remains the social person; Core does not replace it with `vampirism:vampire`. |
 | MCA vampire social stealth | Compare low-suspicion and high-suspicion MCA vampires with both civilian and animal prey available. | Low risk may choose isolated adult civilian; high risk strongly prefers animal feeding. |
-| Protections | Place child MCA, close family, known hunter, supernatural target and named non-MCA targets nearby. | Autonomous predation rejects them according to policy. |
+| Protections | Place child MCA, close family, known hunter, supernatural target, tamed animal and named non-MCA target nearby. | Autonomous predation rejects them according to policy. |
 | Witnessed nonlethal feed | Let an MCA victim survive a witnessed bite. | `BITE_MARK` + `BLOOD`, direct victim knowledge, witness/rumor propagation and `feeding_assault` story occur without fake death. |
 | Hunter pressure | Repeat witnessed feeds within bounded policy. | Village suspicion/awareness and Hunter Society pressure rise without unbounded spawning/scanning. |
 | Anti-chaos | Keep several vampires in one region. | Per-predator/per-victim cooldowns and rolling regional feed budget prevent constant feeding spam. |
 | Vampire investigation | Accept a resulting Vampire contract and investigate. | Existing evidence/hypothesis/identification/culprit continuity remains correct. |
-| Cure | Cure an MCA vampire through MCA Vamp Compat. | Provider cure owns factual transition; Dark Folklore must stop treating the cured NPC as a predator while historical beliefs may persist. |
-| Inheritance | Produce a child through provider-supported MCA reproduction with vampire parent(s). | MCA Vamp Compat owns inheritance; Core only observes the resulting factual state. |
-| Save/restart | Restart with active stories, lore, sightings and converted/infected NPCs. | Core persistence reopens safely and provider factual state remains authoritative. |
+| Save/restart | Restart with active stories, lore and sightings. | Core persistence reopens safely; transient predation caches reset without changing provider facts. |
 | Field Guide / EN+IT | Exercise Wraith KEEP_DISTINCT, Sprite/FAE and Recent Discoveries in both languages. | Correct provider page/localization, no raw keys. |
+
+Cure/inheritance lifecycle observation is intentionally the stacked 0.4 follow-up rather than being falsely claimed as 0.3.1 functionality.
 
 ## Classification
 
