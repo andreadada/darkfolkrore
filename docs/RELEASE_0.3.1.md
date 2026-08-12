@@ -17,27 +17,31 @@
 
 ## Latest automated code gate
 
-Latest code-changing branch head: `0df64c4455e2a08bcf0a364d387098d56676894a`.
+Latest code-changing branch head: `dd15493d0d18168731ce5dcdc900c75e0cc90182`.
 
-GitHub Actions run `31592180073`: **PASS**.
+GitHub Actions run `31601452108`: **PASS**.
 
 | Property | Recorded value |
 | --- | --- |
 | Artifact | `darkfolklore-core-0.3.1.jar` |
-| JAR size | `457,973` bytes |
-| SHA-256 | `0AADE878DD00EE168E36F546D0E4A2321F05E0C85185C6F28CB79D7012C3E4C3` |
-| Class files | `182` |
-| JUnit | `78/78 PASS`, 0 failures/errors/skipped |
+| JAR size | `464,700` bytes |
+| SHA-256 | `C4BA5810394074E3C90EEECD231352ED629D587B4F23AAE04B0F61CE78CB4001` |
+| Class files | `186` |
+| JUnit | `89/89 PASS`, 0 failures/errors/skipped |
 | GameTests | `3/3 PASS` |
 | Datapack reload | `17 canonical / 5 weaknesses / 8 spawn / 2 magic / 9 investigation / 13 stories / 4 organizations / 6 political, 0 invalid` |
 | Class-file version | `65`, enforced by `auditReleaseJar` |
 
 The release JAR audit rejects test/development classes, nested/shaded provider JARs, provider-owned packages, local user paths, wrong metadata/version, missing investigation/Field Guide resources, and non-Java-21 classes.
 
-The final code gate also includes two provider-safety corrections made after the first predation implementation:
+The final code gate also includes provider- and continuity-safety corrections made after the first predation implementation:
 
 - entity `BloodDrinkEvent` observation runs at `LOWEST`, after MCA Vamp Compat's normal handler, so a provider-blocked/zeroed blood drain cannot create false Dark Folklore evidence, stories or cooldown state;
 - malformed conversion provenance where the provider source UUID equals the converted entity UUID is ignored before constructing lineage data.
+- every irreversible death consequence now consumes one central next-tick confirmed-death event; cancellation, revival and a live replacement with the same UUID all fail closed;
+- exact culprit testimony and incident evidence are correlated to the actual subject, story actor, dimension, location and incident time;
+- full investigation-sidecar admission rejects overflow instead of evicting an active exact case into legacy concept-wide matching;
+- applicable unknown supernatural/relationship facts are not interpreted as safe prey, and reflective provider classification is staggered before invocation.
 
 ## Vampire Society & Predation ownership model
 
@@ -80,6 +84,7 @@ The established `darkfolklore_society` save remains schema 2. Investigation cont
 
 - Fact and belief are separate: a provider-confirmed vampire state does not automatically become public social knowledge.
 - Known contract culprit UUID remains authoritative until confirmed death activates fallback; unload never equals death.
+- Lore, investigation, story, organization and Field Guide death consequences share the same deferred finality gate as contracts, preventing canceled/rescued deaths from creating persistent false facts or unlocks.
 - New contracts retain explicit story identity.
 - Weakness existence is not player knowledge; player-facing countermeasures require `STUDIED` lore.
 - `KEEP_DISTINCT` investigation cases retain their concrete provider implementation.

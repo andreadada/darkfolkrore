@@ -4,9 +4,9 @@ This file records evidence generated specifically for the 0.3.1 hardening branch
 
 ## Latest code gate
 
-Latest code-changing 0.3.1 head: `0df64c4455e2a08bcf0a364d387098d56676894a`.
+Latest code-changing 0.3.1 head: `dd15493d0d18168731ce5dcdc900c75e0cc90182`.
 
-GitHub Actions run `31592180073` completed successfully for PR #1 with Ubuntu 24.04 and Java 21.
+GitHub Actions run `31601452108` completed successfully for PR #1 with Ubuntu 24.04 and Java 21.
 
 Recorded evidence:
 
@@ -14,7 +14,7 @@ Recorded evidence:
 - `./gradlew clean build --no-daemon --no-configuration-cache --stacktrace`: **PASS**;
 - Java compilation and test compilation: **PASS**;
 - `auditReleaseJar`: **PASS**;
-- JUnit: **78/78 PASS**, 0 failures, 0 errors, 0 skipped;
+- JUnit: **89/89 PASS**, 0 failures, 0 errors, 0 skipped;
 - NeoForge `runGameTestServer`: **3/3 PASS**;
 - validated reload: **17 canonical concepts, 5 weaknesses, 8 spawn profiles, 2 magic integrations, 9 investigation profiles, 13 story templates, 4 organization archetypes, 6 political overrides, 0 invalid**;
 - production artifact upload: **PASS**.
@@ -24,17 +24,20 @@ Production JAR from that run:
 | Property | Value |
 | --- | --- |
 | File | `darkfolklore-core-0.3.1.jar` |
-| Size | `457,973` bytes |
-| SHA-256 | `0AADE878DD00EE168E36F546D0E4A2321F05E0C85185C6F28CB79D7012C3E4C3` |
-| Class files | `182` |
+| Size | `464,700` bytes |
+| SHA-256 | `C4BA5810394074E3C90EEECD231352ED629D587B4F23AAE04B0F61CE78CB4001` |
+| Class files | `186` |
 | Java class version | 65 / Java 21, enforced by JAR audit |
 
 ## 0.3.1-specific automated coverage
 
 The branch covers investigation hardening plus Vampire Society & Predation. Automated checks include:
 
-- story/contract/culprit continuity and confirmed-death fallback semantics;
-- cancelled/rescued death finality;
+- story/contract/culprit continuity, exact testimony subjects and incident actor/location/dimension correlation;
+- one central next-tick confirmed-death dispatcher for contracts, lore, investigations, stories, organizations and Field Guide unlocks;
+- cancelled deaths, rescued/revived entities and live same-UUID replacements fail closed before any death-dependent mutation;
+- culprit and issuer fallback policy is exact-identity and final-death-only;
+- investigation sidecar admission and adversarial duplicate-row loads are bounded without silently weakening exact targeting;
 - concept-level creature sightings and investigation-sidecar persistence;
 - knowledge-gated preparation and evidence-only hypotheses;
 - Fae/`GLAMOUR_TRACE` resource coverage;
@@ -42,10 +45,12 @@ The branch covers investigation hardening plus Vampire Society & Predation. Auto
 - deterministic predation policy: low-risk MCA vampires may prefer isolated adult civilians, rising local/personal suspicion pushes them toward animals, visible witnesses penalize civilian attacks, children/close family/hunters/supernatural targets/named non-MCA targets are rejected, wild Vampirism mobs react less strongly to social risk, and autonomous feeding is night-only;
 - existing society, rumor, organization, canonicalization, wolfsbane and weakness regressions.
 
-The final code gate additionally verifies compilation after two provider-safety fixes:
+The final code gate additionally verifies compilation after provider- and continuity-safety fixes:
 
 - entity `BloodDrinkEvent` observation now runs at `LOWEST`, after MCA Vamp Compat's normal handler, so a provider-blocked/zeroed drain cannot manufacture Core evidence or cooldown state;
 - malformed conversion lineage whose provider source UUID equals the descendant UUID is ignored rather than passed to `LineageRecord`.
+- applicable `UNKNOWN` supernatural/relationship facts are rejected during autonomous target selection rather than treated as mundane/acceptable;
+- provider classification occurs only after the 40-tick stagger gate, keeping reflection out of the every-entity/every-tick path.
 
 ## Exact-provider audit boundary
 
@@ -76,7 +81,9 @@ For MCA vampires choosing animals, Dark Folklore uses Vampirism's exact creature
 
 ## GameTest coverage
 
-The current three live NeoForge GameTests verify validated datapack state, separation of factual supernatural state from social belief, and deterministic organization-leader death/succession cleanup. They do not install the optional provider pack and therefore do not prove exact MCA/Vampirism runtime behavior.
+The current three CI NeoForge GameTests verify validated datapack state, separation of factual supernatural state from social belief, and deterministic organization-leader death/succession cleanup. CI does not install the optional provider pack and therefore does not prove exact MCA/Vampirism runtime behavior.
+
+An additional local dedicated GameTest-server run loaded the exact development modpack, including MCA Reborn `7.7.32+1.21.1`, Vampirism `1.10.12`, MCA Reborn x Vampirism Compat `2.0.12` and Field Guide `1.14.0`, and passed the same **3/3** Core GameTests. This proves exact-pack startup compatibility for that automated server gate only; it is not a substitute for the client-side and in-world scenarios below.
 
 ## Required full-pack manual acceptance
 
