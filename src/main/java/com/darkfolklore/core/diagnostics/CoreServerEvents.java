@@ -20,6 +20,7 @@ public final class CoreServerEvents {
     public void onRegisterCommands(RegisterCommandsEvent event) {
         FolkloreCommands.register(event.getDispatcher());
         InvestigationCommands.register(event.getDispatcher());
+        PredationCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
