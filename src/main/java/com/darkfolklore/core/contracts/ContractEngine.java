@@ -16,6 +16,7 @@ import com.darkfolklore.core.society.village.VillageSocietyState;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -36,6 +37,7 @@ import java.util.*;
 public final class ContractEngine {
     public static final ContractEngine INSTANCE = new ContractEngine();
     private final Map<UUID, Long> feedbackCooldowns = new HashMap<>();
+    private final Map<UUID, PendingDeathCheck> pendingDeathChecks = new HashMap<>();
     private ContractEngine() {}
 
     @SubscribeEvent
@@ -151,43 +153,25 @@ public final class ContractEngine {
     @SubscribeEvent
     public void onLivingDeath(LivingDeathEvent event) {
         if (!FolkloreConfig.CONTRACTS.get() || !(event.getEntity().level() instanceof ServerLevel level)) return;
-        FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
-        InvestigationSavedData investigation = InvestigationSavedData.get(level.getServer());
-        UUID dead = event.getEntity().getUUID();
+        UUID killerId = event.getSource().getEntity() instanceof ServerPlayer killer ? killer.getUUID() : null;
 
-        // Only a confirmed death, never an unload, enables semantic fallbacks.
-        for (ContractAssignment value : data.contracts()) {
-            if (value.contract().status().terminal()) continue;
-            InvestigationCaseLink link = investigation.caseLink(value.contract().id()).orElse(null);
-            if (value.contract().issuer().equals(dead)) investigation.allowIssuerFallback(value.contract().id());
-            if (link != null && link.culpritId().filter(dead::equals).isPresent()) {
-                boolean ownerKill = event.getSource().getEntity() instanceof ServerPlayer killer
-                        && killer.getUUID().equals(value.player())
-                        && value.contract().status() == ContractStatus.IDENTIFIED;
-                if (!ownerKill) investigation.allowCulpritFallback(value.contract().id());
-            }
-        }
-
-        if (!(event.getSource().getEntity() instanceof ServerPlayer player)) return;
-        ContractAssignment assignment = data.activeContract(player.getUUID()).orElse(null);
-        if (assignment == null || assignment.contract().status() != ContractStatus.IDENTIFIED) return;
-        InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
-        if (!InvestigationTargeting.matches(assignment, event.getEntity(), link)
-                || !assignment.contract().markHunted()) return;
-        data.putContract(assignment);
-        PersistentStory story = linkedStory(data, investigation, assignment);
-        if (story != null && story.story().status() == StoryStatus.INVESTIGATING) {
-            story.story().advance(StoryStatus.CONFRONTATION);
-            data.putStory(story);
-        }
-        player.displayClientMessage(Component.literal(link != null && link.issuerFallbackAllowed()
-                ? "Target defeated. The original issuer is unavailable; return to an authorized local representative."
-                : "Target defeated. Return to the contract issuer."), false);
+        // LivingDeathEvent is cancellable. Keep the event object for one server tick so its final
+        // cancellation state is observed after every listener has run; no persistent contract state
+        // is weakened inside the still-cancellable event callback.
+        pendingDeathChecks.put(event.getEntity().getUUID(), new PendingDeathCheck(
+                event, Optional.ofNullable(killerId), level.getServer().getTickCount() + 1));
     }
 
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
-        if (!FolkloreConfig.CONTRACTS.get() || event.getServer().getTickCount() % 200 != 0) return;
+        if (!FolkloreConfig.CONTRACTS.get()) {
+            pendingDeathChecks.clear();
+            return;
+        }
+
+        processPendingDeaths(event);
+        if (event.getServer().getTickCount() % 200 != 0) return;
+
         FolkloreSavedData data = FolkloreSavedData.get(event.getServer());
         InvestigationSavedData investigation = InvestigationSavedData.get(event.getServer());
         long now = event.getServer().overworld().getGameTime();
@@ -202,6 +186,72 @@ public final class ContractEngine {
         for (PersistentStory story : data.stories()) storyIds.add(story.story().id());
         investigation.pruneOrphans(data.contracts(), storyIds);
         feedbackCooldowns.entrySet().removeIf(entry -> now - entry.getValue() > 1200L);
+    }
+
+    private void processPendingDeaths(ServerTickEvent.Post tickEvent) {
+        int currentTick = tickEvent.getServer().getTickCount();
+        List<PendingDeathCheck> ready = new ArrayList<>();
+        Iterator<Map.Entry<UUID, PendingDeathCheck>> iterator = pendingDeathChecks.entrySet().iterator();
+        while (iterator.hasNext()) {
+            PendingDeathCheck pending = iterator.next().getValue();
+            if (currentTick < pending.verifyAfterTick()) continue;
+            iterator.remove();
+            ready.add(pending);
+        }
+
+        for (PendingDeathCheck pending : ready) {
+            LivingEntity entity = pending.event().getEntity();
+            if (!DeathFinality.confirmed(pending.event().isCanceled(), entity.isAlive())) continue;
+            finalizeConfirmedDeath(tickEvent.getServer(), pending);
+        }
+    }
+
+    private static void finalizeConfirmedDeath(MinecraftServer server, PendingDeathCheck pending) {
+        LivingEntity deadEntity = pending.event().getEntity();
+        UUID dead = deadEntity.getUUID();
+        FolkloreSavedData data = FolkloreSavedData.get(server);
+        InvestigationSavedData investigation = InvestigationSavedData.get(server);
+        UUID huntedContractId = null;
+
+        if (pending.killerId().isPresent()) {
+            UUID killerId = pending.killerId().get();
+            ContractAssignment assignment = data.activeContract(killerId).orElse(null);
+            if (assignment != null && assignment.contract().status() == ContractStatus.IDENTIFIED) {
+                InvestigationCaseLink link = investigation.caseLink(assignment.contract().id()).orElse(null);
+                if (InvestigationTargeting.matches(assignment, deadEntity, link)
+                        && assignment.contract().markHunted()) {
+                    data.putContract(assignment);
+                    huntedContractId = assignment.contract().id();
+                    PersistentStory story = linkedStory(data, investigation, assignment);
+                    if (story != null && story.story().status() == StoryStatus.INVESTIGATING) {
+                        story.story().advance(StoryStatus.CONFRONTATION);
+                        data.putStory(story);
+                    }
+                    ServerPlayer player = server.getPlayerList().getPlayer(killerId);
+                    if (player != null) {
+                        player.displayClientMessage(Component.literal(link != null && link.issuerFallbackAllowed()
+                                ? "Target defeated. The original issuer is unavailable; return to an authorized local representative."
+                                : "Target defeated. Return to the contract issuer."), false);
+                    }
+                }
+            }
+        }
+
+        // Fallback authorization is also death-dependent, so it happens only here after the
+        // uncancelled/non-alive confirmation. A normal unload never enters this path.
+        for (ContractAssignment value : data.contracts()) {
+            if (value.contract().status().terminal()) continue;
+            InvestigationCaseLink link = investigation.caseLink(value.contract().id()).orElse(null);
+            if (value.contract().issuer().equals(dead)) {
+                investigation.allowIssuerFallback(value.contract().id());
+            }
+            if (value.contract().status() != ContractStatus.HUNTED
+                    && link != null
+                    && link.culpritId().filter(dead::equals).isPresent()
+                    && !value.contract().id().equals(huntedContractId)) {
+                investigation.allowCulpritFallback(value.contract().id());
+            }
+        }
     }
 
     private static void complete(ServerPlayer player, FolkloreSavedData data, InvestigationSavedData investigation,
@@ -360,4 +410,6 @@ public final class ContractEngine {
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
     }
+
+    private record PendingDeathCheck(LivingDeathEvent event, Optional<UUID> killerId, int verifyAfterTick) {}
 }
