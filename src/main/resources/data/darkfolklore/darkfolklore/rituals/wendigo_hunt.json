@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:wendigo_hunt",
+  "encounter": "darkfolklore:cnc_wendigo",
+  "required_knowledge_points": 60,
+  "cooldown_ticks": 72000,
+  "enabled": true
+}
