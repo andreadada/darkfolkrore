@@ -71,7 +71,9 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
     private static EncounterPolicy parseEncounter(ResourceLocation file, JsonObject json) {
         EnumSet<ThreatTrait> traits = EnumSet.noneOf(ThreatTrait.class);
         if (json.has("guaranteed_traits")) {
-            for (JsonElement element : json.getAsJsonArray("guaranteed_traits")) traits.add(ThreatTrait.valueOf(element.getAsString().trim().toUpperCase(Locale.ROOT)));
+            for (JsonElement element : json.getAsJsonArray("guaranteed_traits")) {
+                traits.add(ThreatTrait.valueOf(element.getAsString().trim().toUpperCase(Locale.ROOT)));
+            }
         }
         return new EncounterPolicy(string(json, "id", file.toString()), string(json, "entity", file.toString()),
                 number(json, "natural_spawn_multiplier", 1.0D), number(json, "vitality_multiplier", 1.0D),
@@ -79,8 +81,15 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
     }
 
     private static RitualDefinition parseRitual(ResourceLocation file, JsonObject json) {
+        Map<String, Integer> costs = new LinkedHashMap<>();
+        if (json.has("item_costs")) {
+            json.getAsJsonObject("item_costs").entrySet().forEach(entry -> costs.put(entry.getKey(), entry.getValue().getAsInt()));
+        }
         return new RitualDefinition(string(json, "id", file.toString()), string(json, "encounter", ""),
-                integer(json, "required_knowledge_points", 0), longNumber(json, "cooldown_ticks", 0L), bool(json, "enabled", true));
+                integer(json, "required_knowledge_points", 0), longNumber(json, "cooldown_ticks", 0L),
+                bool(json, "enabled", true), string(json, "focus_block", "minecraft:soul_campfire"),
+                string(json, "activation_item", "minecraft:bone"), bool(json, "requires_night", true),
+                integer(json, "spawn_count", 1), costs);
     }
 
     private static void parseDirectory(ResourceManager manager, String directory, JsonConsumer consumer, List<String> errors) {
