@@ -2,7 +2,9 @@ package com.darkfolklore.core.diagnostics;
 
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.encounter.RitualEngine;
 import com.darkfolklore.core.encounter.ThreatPolicyManager;
+import com.darkfolklore.core.encounter.ThreatPolicyRuntime;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -33,5 +35,7 @@ public final class CoreServerEvents {
         CompatibilityManager.INSTANCE.clearRuntimeCaches();
         McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
         VampirePredationEngine.INSTANCE.clearRuntimeState();
+        ThreatPolicyRuntime.INSTANCE.clearRuntimeState();
+        RitualEngine.clearRuntimeState();
     }
 }
