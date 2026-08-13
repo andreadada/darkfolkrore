@@ -6,6 +6,7 @@ import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.magic.MagicIntegrationDefinition;
+import com.darkfolklore.core.network.FolkloreNetwork;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.traits.*;
@@ -13,7 +14,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -78,8 +78,7 @@ public final class LoreEngine {
         if (after.points() != before.points()) {
             NeoForge.EVENT_BUS.post(new KnowledgeChangedEvent(player, concept, before, after));
             if (after.stage() != before.stage()) {
-                player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                        "Folklore knowledge: " + concept + " -> " + after.stage()), true);
+                FolkloreNetwork.sendLoreToast(player, concept, after.stage().name());
             }
         }
         return after;
