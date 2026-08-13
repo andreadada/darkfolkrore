@@ -15,6 +15,8 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue VILLAGE_SOCIETY = toggle("villageSociety", true);
     public static final ModConfigSpec.BooleanValue SPAWN_DIRECTOR = toggle("spawnDirector", true);
     public static final ModConfigSpec.BooleanValue ENCOUNTER_DIRECTOR = toggle("encounterDirector", true);
+    public static final ModConfigSpec.BooleanValue RITUALS = toggle("rituals", true);
+    public static final ModConfigSpec.BooleanValue L2_HOSTILITY_INTEGRATION = toggle("l2HostilityIntegration", true);
     public static final ModConfigSpec.BooleanValue CONTRACTS = toggle("contracts", true);
     public static final ModConfigSpec.BooleanValue DYNAMIC_STORIES = toggle("dynamicStories", true);
     public static final ModConfigSpec.BooleanValue WORLD_EVENTS = toggle("worldEvents", true);
@@ -48,6 +50,18 @@ public final class FolkloreConfig {
             .defineInRange("encounterCooldownTicks", 12000, 200, Integer.MAX_VALUE);
     public static final ModConfigSpec.DoubleValue SPAWN_MULTIPLIER = BUILDER.comment("Global multiplier applied to curated natural spawn chances")
             .defineInRange("naturalSpawnMultiplier", 1.0D, 0.0D, 4.0D);
+    public static final ModConfigSpec.DoubleValue HOSTILE_NATURAL_SPAWN_MULTIPLIER = BUILDER.comment(
+            "Fallback natural-spawn multiplier for hostile Monster entities without an explicit encounter policy")
+            .defineInRange("hostileNaturalSpawnMultiplier", 0.60D, 0.0D, 1.0D);
+    public static final ModConfigSpec.DoubleValue HOSTILE_HEALTH_MULTIPLIER = BUILDER.comment(
+            "Fallback max-health multiplier for hostile Monster entities without an explicit encounter policy")
+            .defineInRange("hostileHealthMultiplier", 1.35D, 1.0D, 4.0D);
+    public static final ModConfigSpec.DoubleValue HOSTILE_DAMAGE_MULTIPLIER = BUILDER.comment(
+            "Fallback attack-damage multiplier for hostile Monster entities without an explicit encounter policy")
+            .defineInRange("hostileDamageMultiplier", 1.15D, 1.0D, 3.0D);
+    public static final ModConfigSpec.IntValue L2_GENERIC_MIN_LEVEL = BUILDER.comment(
+            "Minimum L2 Hostility level requested for generic hostile encounters when audited L2 Hostility is installed")
+            .defineInRange("l2GenericMinimumLevel", 12, 0, 500);
     public static final ModConfigSpec.IntValue EVIDENCE_LIFETIME = BUILDER.comment("Logical evidence lifetime in ticks")
             .defineInRange("evidenceLifetimeTicks", 24000, 1200, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue CONTRACT_LIFETIME = BUILDER.comment("Monster contract lifetime in ticks")
