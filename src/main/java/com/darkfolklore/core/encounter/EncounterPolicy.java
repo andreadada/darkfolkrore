@@ -7,6 +7,7 @@ public record EncounterPolicy(
         String entityId,
         double naturalSpawnMultiplier,
         double vitalityMultiplier,
+        double powerMultiplier,
         int minimumEncounterPressure,
         int l2MinimumLevel,
         Set<ThreatTrait> guaranteedTraits
@@ -16,6 +17,7 @@ public record EncounterPolicy(
         if (entityId == null || entityId.isBlank() || !entityId.contains(":")) throw new IllegalArgumentException("Encounter entity must be namespaced");
         if (naturalSpawnMultiplier < 0.0D || naturalSpawnMultiplier > 1.0D) throw new IllegalArgumentException("natural_spawn_multiplier must be 0..1");
         if (vitalityMultiplier < 1.0D) throw new IllegalArgumentException("vitality_multiplier must be >= 1");
+        if (powerMultiplier < 1.0D) throw new IllegalArgumentException("power_multiplier must be >= 1");
         if (minimumEncounterPressure < 0 || minimumEncounterPressure > 100) throw new IllegalArgumentException("minimum_encounter_pressure must be 0..100");
         if (l2MinimumLevel < 0) throw new IllegalArgumentException("l2_minimum_level must be >= 0");
         guaranteedTraits = guaranteedTraits == null ? Set.of() : Set.copyOf(guaranteedTraits);
