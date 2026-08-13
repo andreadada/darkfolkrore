@@ -1,0 +1,16 @@
+{
+  "id": "darkfolklore:blood_invitation",
+  "encounter": "darkfolklore:vampire_predator",
+  "required_knowledge_points": 25,
+  "cooldown_ticks": 24000,
+  "enabled": true,
+  "focus_block": "minecraft:soul_campfire",
+  "activation_item": "vampirism:vampire_blood_bottle",
+  "requires_night": true,
+  "spawn_count": 1,
+  "item_costs": {
+    "vampirism:vampire_blood_bottle": 1,
+    "minecraft:redstone": 8,
+    "minecraft:rotten_flesh": 8
+  }
+}
