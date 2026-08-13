@@ -2,6 +2,7 @@ package com.darkfolklore.core.diagnostics;
 
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.encounter.ThreatPolicyManager;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,6 +17,7 @@ public final class CoreServerEvents {
     @SubscribeEvent
     public void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(FolkloreDataManager.INSTANCE);
+        event.addListener(ThreatPolicyManager.INSTANCE);
     }
 
     @SubscribeEvent
