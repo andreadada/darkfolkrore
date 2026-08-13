@@ -1,0 +1,13 @@
+{
+  "structures":[{"structure":"the_day_of_the_beast:demon_invocation_structure","weight":1}],
+  "placement":{
+    "type":"minecraft:random_spread",
+    "frequency":0.0,
+    "frequency_reduction_method":"default",
+    "salt":18493127,
+    "separation":8,
+    "spacing":32,
+    "spread_type":"linear"
+  },
+  "neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"the_day_of_the_beast"}]
+}

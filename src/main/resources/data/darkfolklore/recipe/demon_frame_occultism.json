@@ -1,0 +1,16 @@
+{
+  "type":"occultism:ritual",
+  "activation_item":{"item":"occultism:book_of_binding_bound_afrit"},
+  "duration":600,
+  "ingredients":[
+    {"item":"the_day_of_the_beast:demon_bricks"},{"item":"the_day_of_the_beast:demon_bricks"},{"item":"the_day_of_the_beast:demon_bricks"},{"item":"the_day_of_the_beast:demon_bricks"},
+    {"item":"occultism:afrit_essence"},{"item":"occultism:spirit_attuned_crystal"},{"item":"malum:refined_soulstone"},{"item":"eidolon_repraised:shadow_gem"},{"item":"enchanted:nether_chalk"},{"item":"occultism:otherstone_tablet"}
+  ],
+  "pentacle_id":"occultism:craft_afrit",
+  "result":{"count":1,"id":"the_day_of_the_beast:demon_frame"},
+  "ritual_dummy":{"count":1,"id":"the_day_of_the_beast:demon_frame"},
+  "ritual_type":"occultism:craft",
+  "neoforge:conditions":[
+    {"type":"neoforge:mod_loaded","modid":"the_day_of_the_beast"},{"type":"neoforge:mod_loaded","modid":"occultism"},{"type":"neoforge:mod_loaded","modid":"malum"},{"type":"neoforge:mod_loaded","modid":"eidolon_repraised"},{"type":"neoforge:mod_loaded","modid":"enchanted"}
+  ]
+}

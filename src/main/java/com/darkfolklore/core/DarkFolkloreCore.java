@@ -9,6 +9,8 @@ import com.darkfolklore.core.contracts.ContractEngine;
 import com.darkfolklore.core.contracts.ConfirmedDeathDispatcher;
 import com.darkfolklore.core.diagnostics.CoreServerEvents;
 import com.darkfolklore.core.encounter.LegendaryEncounterEngine;
+import com.darkfolklore.core.endgame.EndgameConfig;
+import com.darkfolklore.core.endgame.ForbiddenEndgameEngine;
 import com.darkfolklore.core.fae.FaeBargainEngine;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
@@ -45,6 +47,7 @@ public final class DarkFolkloreCore {
     public DarkFolkloreCore(IEventBus modBus, ModContainer container) {
         LOGGER.info("[core] Dark Folklore Core loading");
         container.registerConfig(ModConfig.Type.COMMON, FolkloreConfig.SPEC);
+        container.registerConfig(ModConfig.Type.COMMON, EndgameConfig.SPEC, "darkfolklore-endgame.toml");
         FolkloreBiomeModifiers.register(modBus);
         FolkloreLootModifiers.register(modBus);
         modBus.addListener(this::commonSetup);
@@ -74,6 +77,7 @@ public final class DarkFolkloreCore {
         bus.register(WardPredationGuard.INSTANCE);
         bus.register(FaeBargainEngine.INSTANCE);
         bus.register(TrophyEngine.INSTANCE);
+        bus.register(ForbiddenEndgameEngine.INSTANCE);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
