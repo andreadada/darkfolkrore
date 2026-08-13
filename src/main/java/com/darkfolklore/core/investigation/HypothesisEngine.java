@@ -50,7 +50,7 @@ public final class HypothesisEngine {
         return switch (type) {
             case HERBAL_REACTION, GARLIC_REACTION, WOLFSBANE_REACTION, SPIRIT_ECHO, SOUL_ECHO, OCCULT_SIGNATURE,
                     GLAMOUR_TRACE, CURSE_TRACE, BINDING_TRACE -> 3;
-            case BITE_MARK, FOOTPRINT, BONE, MAGICAL_RESIDUE, SCORCH, SCENT, HAIR, TRACK -> 2;
+            case BITE_MARK, FOOTPRINT, BONE, MAGICAL_RESIDUE, BLOOD_RESONANCE, SCORCH, SCENT, HAIR, TRACK -> 2;
             case DIRECT_WITNESS, BODY, BLOOD, TESTIMONY -> 1;
         };
     }

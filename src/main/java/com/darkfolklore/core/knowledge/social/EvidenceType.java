@@ -4,6 +4,7 @@ public enum EvidenceType {
     DIRECT_WITNESS,
     BODY,
     BLOOD,
+    BLOOD_RESONANCE,
     BITE_MARK,
     TRACK,
     HAIR,

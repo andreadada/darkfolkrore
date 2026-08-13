@@ -13,34 +13,19 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
 public final class CoreServerEvents {
-    public static final CoreServerEvents INSTANCE = new CoreServerEvents();
+    public static final CoreServerEvents INSTANCE=new CoreServerEvents();
     private CoreServerEvents() {}
-
-    @SubscribeEvent
-    public void onAddReloadListeners(AddReloadListenerEvent event) {
-        event.addListener(FolkloreDataManager.INSTANCE);
+    @SubscribeEvent public void onAddReloadListeners(AddReloadListenerEvent event){event.addListener(FolkloreDataManager.INSTANCE);}
+    @SubscribeEvent public void onRegisterCommands(RegisterCommandsEvent event){
+        FolkloreCommands.register(event.getDispatcher()); InvestigationCommands.register(event.getDispatcher());
+        PredationCommands.register(event.getDispatcher()); LifecycleCommands.register(event.getDispatcher());
+        KnowledgeCommands.register(event.getDispatcher()); SocietyCommands.register(event.getDispatcher());
+        MagicCommands.register(event.getDispatcher()); WorldLoopCommands.register(event.getDispatcher());
+        EncounterCommands.register(event.getDispatcher()); CasebookCommands.register(event.getDispatcher());
     }
-
-    @SubscribeEvent
-    public void onRegisterCommands(RegisterCommandsEvent event) {
-        FolkloreCommands.register(event.getDispatcher());
-        InvestigationCommands.register(event.getDispatcher());
-        PredationCommands.register(event.getDispatcher());
-        LifecycleCommands.register(event.getDispatcher());
-        KnowledgeCommands.register(event.getDispatcher());
-        SocietyCommands.register(event.getDispatcher());
-        MagicCommands.register(event.getDispatcher());
-        WorldLoopCommands.register(event.getDispatcher());
-        EncounterCommands.register(event.getDispatcher());
-    }
-
-    @SubscribeEvent
-    public void onServerStopped(ServerStoppedEvent event) {
-        CompatibilityManager.INSTANCE.clearRuntimeCaches();
-        McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
-        VampirePredationEngine.INSTANCE.clearRuntimeState();
-        PredationTraceEngine.INSTANCE.clearRuntimeState();
-        VillageResponseEngine.INSTANCE.clearRuntimeState();
-        L2HostilityBridge.INSTANCE.reset();
+    @SubscribeEvent public void onServerStopped(ServerStoppedEvent event){
+        CompatibilityManager.INSTANCE.clearRuntimeCaches(); McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
+        VampirePredationEngine.INSTANCE.clearRuntimeState(); PredationTraceEngine.INSTANCE.clearRuntimeState();
+        VillageResponseEngine.INSTANCE.clearRuntimeState(); L2HostilityBridge.INSTANCE.reset();
     }
 }
