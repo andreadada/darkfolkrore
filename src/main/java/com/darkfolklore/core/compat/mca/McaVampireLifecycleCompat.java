@@ -1,6 +1,7 @@
 package com.darkfolklore.core.compat.mca;
 
 import com.darkfolklore.core.DarkFolkloreCore;
+import com.darkfolklore.core.compat.CompatCapabilityCircuit;
 import com.darkfolklore.core.compat.McaVampireLifecycleBridge;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,12 +9,13 @@ import net.minecraft.world.entity.LivingEntity;
 import java.lang.reflect.Method;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-/** Exact read-mostly adapter for MCA Reborn x Vampirism Compat 2.0.12. */
+/**
+ * Read-mostly lifecycle bridge. State reads and the single idempotent provider mutation have separate circuits.
+ */
 public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridge {
-    private final AtomicBoolean failureLogged = new AtomicBoolean();
-    private final AtomicBoolean available = new AtomicBoolean(true);
+    private final CompatCapabilityCircuit reads = new CompatCapabilityCircuit("lifecycle-reads");
+    private final CompatCapabilityCircuit mutation = new CompatCapabilityCircuit("native-ai-mutation");
     private final Method isMcaVillager;
     private final Method capabilityGet;
     private final Method isInfected;
@@ -30,8 +32,6 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
         Class<?> stateService = Class.forName("com.guilh.mca_vampirism_compat.service.McaVampireStateService", false, loader);
         Class<?> capabilities = Class.forName("com.guilh.mca_vampirism_compat.capability.ModCapabilities", false, loader);
         Class<?> state = Class.forName("com.guilh.mca_vampirism_compat.VampiricVillagerState", false, loader);
-        Class<?> ai = Class.forName("com.guilh.mca_vampirism_compat.ai.McaVampireAi", false, loader);
-
         isMcaVillager = stateService.getMethod("isMcaVillager", Entity.class);
         capabilityGet = capabilities.getMethod("get", Entity.class);
         isInfected = state.getMethod("isInfected");
@@ -41,15 +41,31 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
         isBiteWasConversionCause = state.getMethod("isBiteWasConversionCause");
         areAiGoalsAdded = state.getMethod("areAiGoalsAdded");
         getSource = state.getMethod("getSource");
-        registerGoalsIfNeeded = ai.getMethod("registerGoalsIfNeeded", LivingEntity.class);
+        reads.markReady("provider lifecycle state members resolved");
+
+        Method mutationMethod = null;
+        try {
+            Class<?> ai = Class.forName("com.guilh.mca_vampirism_compat.ai.McaVampireAi", false, loader);
+            mutationMethod = ai.getMethod("registerGoalsIfNeeded", LivingEntity.class);
+            mutation.markReady("idempotent native AI member resolved");
+        } catch (ReflectiveOperationException | LinkageError exception) {
+            mutation.fail(exception);
+            DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] Native AI mutation unavailable; reads remain active: {}",
+                    exception.getClass().getSimpleName());
+        }
+        registerGoalsIfNeeded = mutationMethod;
     }
 
     @Override
-    public boolean runtimeAvailable() { return available.get(); }
+    public boolean runtimeAvailable() { return reads.available(); }
+
+    public boolean mutationAvailable() { return mutation.available() && registerGoalsIfNeeded != null; }
+
+    public String diagnosticDetail() { return reads.detail() + ", " + mutation.detail(); }
 
     @Override
     public Snapshot snapshot(Entity entity) {
-        if (!runtimeAvailable()) return Snapshot.unavailable("lifecycle provider circuit open");
+        if (!reads.available()) return Snapshot.unavailable("lifecycle read circuit open");
         try {
             boolean mca = (boolean) isMcaVillager.invoke(null, entity);
             if (!mca) {
@@ -73,29 +89,24 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
                     (boolean) isBiteWasConversionCause.invoke(state),
                     (boolean) areAiGoalsAdded.invoke(state),
                     source,
-                    "exact MCA Vamp Compat 2.0.12 state");
+                    "audited MCA Vamp Compat lifecycle state");
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
-            fail("snapshot", exception);
+            reads.fail(exception);
+            DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] Lifecycle read failed; reads fail closed", exception);
             return Snapshot.unavailable("MCA Vamp Compat lifecycle query failed");
         }
     }
 
     @Override
     public boolean ensureNativeAi(LivingEntity entity) {
-        if (!runtimeAvailable()) return false;
+        if (!mutationAvailable()) return false;
         try {
             return (boolean) registerGoalsIfNeeded.invoke(null, entity);
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
-            fail("native AI registration", exception);
+            mutation.fail(exception);
+            DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] Native AI mutation disabled; state reads remain active",
+                    exception);
             return false;
-        }
-    }
-
-    private void fail(String operation, Throwable exception) {
-        available.set(false);
-        if (failureLogged.compareAndSet(false, true)) {
-            DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] {} failed; lifecycle observation fails closed",
-                    operation, exception);
         }
     }
 }
