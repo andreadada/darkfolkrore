@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:wild_hunt",
+  "kind": "ENTITY",
+  "canonical": "occultism:wild_hunt_wither_skeleton",
+  "implementations": ["occultism:wild_hunt_skeleton"],
+  "policy": "KEEP_DISTINCT",
+  "reason": "Wild Hunt captain and followers share one folklore event concept but keep their distinct provider roles and mechanics."
+}

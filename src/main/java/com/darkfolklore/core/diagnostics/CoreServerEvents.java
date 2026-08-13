@@ -1,6 +1,7 @@
 package com.darkfolklore.core.diagnostics;
 
 import com.darkfolklore.core.compat.CompatibilityManager;
+import com.darkfolklore.core.compat.l2hostility.L2HostilityBridge;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
 import com.darkfolklore.core.predation.PredationTraceEngine;
@@ -30,6 +31,7 @@ public final class CoreServerEvents {
         SocietyCommands.register(event.getDispatcher());
         MagicCommands.register(event.getDispatcher());
         WorldLoopCommands.register(event.getDispatcher());
+        EncounterCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
@@ -39,5 +41,6 @@ public final class CoreServerEvents {
         VampirePredationEngine.INSTANCE.clearRuntimeState();
         PredationTraceEngine.INSTANCE.clearRuntimeState();
         VillageResponseEngine.INSTANCE.clearRuntimeState();
+        L2HostilityBridge.INSTANCE.reset();
     }
 }

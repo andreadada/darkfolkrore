@@ -29,6 +29,12 @@ public final class FolkloreConfig {
     public static final ModConfigSpec.BooleanValue VAMPIRE_PREDATION = toggle("vampirePredation", true);
     public static final ModConfigSpec.BooleanValue VAMPIRE_BEHAVIOR_PROFILES = toggle("vampireBehaviorProfiles", true);
     public static final ModConfigSpec.BooleanValue MCA_VAMPIRE_LIFECYCLE = toggle("mcaVampireLifecycle", true);
+
+    public static final ModConfigSpec.BooleanValue LEGENDARY_ENCOUNTERS = toggle("legendaryEncounters", true);
+    public static final ModConfigSpec.BooleanValue WARDS = toggle("wards", true);
+    public static final ModConfigSpec.BooleanValue FAE_BARGAINS = toggle("faeBargains", true);
+    public static final ModConfigSpec.BooleanValue TROPHY_RESEARCH = toggle("trophyResearch", true);
+    public static final ModConfigSpec.BooleanValue L2_HOSTILITY_SCALING = toggle("l2HostilityScaling", false);
     public static final ModConfigSpec.BooleanValue DEBUG_LOGGING = toggle("debugLogging", false);
 
     public static final ModConfigSpec.IntValue WITNESS_RADIUS = BUILDER.comment("Maximum event-driven witness radius in blocks")
@@ -77,6 +83,28 @@ public final class FolkloreConfig {
             .defineInRange("monsterTrackingRadius", 96, 16, 192);
     public static final ModConfigSpec.IntValue TRACKING_COOLDOWN = BUILDER.comment("Ticks between explicit monster-tracking pulses")
             .defineInRange("monsterTrackingCooldownTicks", 80, 20, 1200);
+
+    public static final ModConfigSpec.IntValue LEGENDARY_MAX_ACTIVE = BUILDER.comment(
+            "Maximum simultaneous non-terminal Legendary Encounter records across the server")
+            .defineInRange("legendaryMaxActive", 4, 1, 16);
+    public static final ModConfigSpec.IntValue LIVESTOCK_PANIC_THRESHOLD = BUILDER.comment(
+            "Confirmed nighttime livestock deaths in one region before a Chupacabra story becomes eligible")
+            .defineInRange("livestockPanicThreshold", 3, 2, 12);
+    public static final ModConfigSpec.DoubleValue WENDIGO_DAILY_CHANCE = BUILDER.comment(
+            "Stable per region/day chance for a missing-traveller Wendigo origin while players are present at night")
+            .defineInRange("wendigoDailyChance", 0.015D, 0.0D, 0.25D);
+    public static final ModConfigSpec.DoubleValue WILD_HUNT_FULL_MOON_CHANCE = BUILDER.comment(
+            "Stable per region/full-moon-night chance for a Wild Hunt omen")
+            .defineInRange("wildHuntFullMoonChance", 0.12D, 0.0D, 1.0D);
+    public static final ModConfigSpec.DoubleValue REVENANT_DEATH_CHANCE = BUILDER.comment(
+            "Stable chance that a confirmed violent villager/MCA death seeds a returned-dead story")
+            .defineInRange("revenantDeathChance", 0.08D, 0.0D, 1.0D);
+    public static final ModConfigSpec.IntValue WARD_LIFETIME = BUILDER.comment(
+            "Lifetime in ticks of an explicit Dark Folklore threshold ward")
+            .defineInRange("wardLifetimeTicks", 168000, 1200, Integer.MAX_VALUE);
+    public static final ModConfigSpec.IntValue FAE_BARGAIN_COOLDOWN = BUILDER.comment(
+            "Regional cooldown in ticks between accepted fae offerings")
+            .defineInRange("faeBargainCooldownTicks", 24000, 1200, Integer.MAX_VALUE);
 
     public static final ModConfigSpec.IntValue VAMPIRE_PREDATION_SCAN_INTERVAL = BUILDER.comment(
             "Ticks between staggered prey evaluations for an eligible vampire; each entity is phase-offset")

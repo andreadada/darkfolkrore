@@ -1,0 +1,6 @@
+package com.darkfolklore.core.encounter;
+
+public enum EncounterOrigin {
+    NATURAL, HUMAN_CORRUPTION, VIOLENT_DEATH, STARVATION, CURSE, RITUAL, FAERIE_BARGAIN,
+    SPIRIT_UNREST, BLOOD_EVENT, WORLD_OMEN, LOST_PERSON, UNKNOWN
+}

@@ -8,6 +8,8 @@ import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractEngine;
 import com.darkfolklore.core.contracts.ConfirmedDeathDispatcher;
 import com.darkfolklore.core.diagnostics.CoreServerEvents;
+import com.darkfolklore.core.encounter.LegendaryEncounterEngine;
+import com.darkfolklore.core.fae.FaeBargainEngine;
 import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.knowledge.lore.LoreEngine;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
@@ -21,6 +23,9 @@ import com.darkfolklore.core.society.story.SocietyStoryEngine;
 import com.darkfolklore.core.society.village.VillageResponseEngine;
 import com.darkfolklore.core.society.witness.WitnessEngine;
 import com.darkfolklore.core.spawn.SpawnDirector;
+import com.darkfolklore.core.trophy.TrophyEngine;
+import com.darkfolklore.core.ward.WardEngine;
+import com.darkfolklore.core.ward.WardPredationGuard;
 import com.darkfolklore.core.weakness.WeaknessEngine;
 import com.darkfolklore.core.world.WorldEventDirector;
 import com.mojang.logging.LogUtils;
@@ -64,6 +69,11 @@ public final class DarkFolkloreCore {
         bus.register(McaVampireLifecycleEngine.INSTANCE);
         bus.register(VillageResponseEngine.INSTANCE);
         bus.register(WorldEventDirector.INSTANCE);
+        bus.register(LegendaryEncounterEngine.INSTANCE);
+        bus.register(WardEngine.INSTANCE);
+        bus.register(WardPredationGuard.INSTANCE);
+        bus.register(FaeBargainEngine.INSTANCE);
+        bus.register(TrophyEngine.INSTANCE);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
