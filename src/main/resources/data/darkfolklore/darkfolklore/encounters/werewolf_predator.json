@@ -1,0 +1,9 @@
+{
+  "id": "darkfolklore:werewolf_predator",
+  "entity": "werewolves:human_werewolf",
+  "natural_spawn_multiplier": 0.40,
+  "vitality_multiplier": 1.55,
+  "minimum_encounter_pressure": 20,
+  "l2_minimum_level": 32,
+  "guaranteed_traits": ["TANK", "BRUTAL", "SWIFT"]
+}
