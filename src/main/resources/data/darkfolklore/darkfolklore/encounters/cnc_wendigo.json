@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:cnc_wendigo",
+  "entity": "cnc:wendigo",
+  "natural_spawn_multiplier": 0.002,
+  "minimum_encounter_pressure": 35,
+  "l2_minimum_level": 55
+}

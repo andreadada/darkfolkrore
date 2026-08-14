@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:minecraft_zombie",
+  "entity": "minecraft:zombie",
+  "natural_spawn_multiplier": 0.025,
+  "minimum_encounter_pressure": 8,
+  "l2_minimum_level": 24
+}

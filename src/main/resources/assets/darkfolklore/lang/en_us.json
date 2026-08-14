@@ -6,37 +6,31 @@
   "category.darkfolklore.fieldguide.cryptids": "Cryptids",
   "category.darkfolklore.fieldguide.mythical_beasts": "Mythical Beasts",
   "category.darkfolklore.fieldguide.constructs": "Constructs",
-
   "fieldguide.name.entity.vampirism.vampire": "Vampire",
   "fieldguide.entity.vampirism.vampire.description": "An undead predator sustained by blood. Garlic can keep lesser vampires at bay, while silver and sunlight remain dependable preparations for a hunt.",
-
   "fieldguide.name.entity.werewolves.human_werewolf": "Werewolf",
   "fieldguide.entity.werewolves.human_werewolf.description": "A lycanthrope caught between human will and the beast. Silver weapons punish the transformed body, and wolfsbane can disrupt a werewolf's strength and senses.",
-
   "fieldguide.name.entity.cnc.wendigo": "Wendigo",
   "fieldguide.entity.cnc.wendigo.description": "A very rare nocturnal cryptid. Tracks, missing prey, and recovered remains are safer evidence than confronting one before the hunt is understood.",
-
   "fieldguide.name.entity.cnc.chupacabra": "Chupacabra",
   "fieldguide.entity.cnc.chupacabra.description": "A nocturnal livestock predator associated with drained animals, poison, and blood trails. Follow the evidence before it chooses another herd.",
-
   "fieldguide.name.entity.mythsandlegends.imp": "Imp",
   "fieldguide.entity.mythsandlegends.imp.description": "A fire-resistant Nether demon. Its apparent death may divide the threat instead of ending it, so hunters should watch for surviving fragments.",
-
   "fieldguide.name.entity.vampirism.ghost": "Ghost",
   "fieldguide.entity.vampirism.ghost.description": "A restless incorporeal spirit found in the supernatural ecology of Vampirism. Spiritual preparations are more reliable than ordinary force.",
-
   "fieldguide.name.entity.eidolon_repraised.wraith": "Ritual Wraith",
   "fieldguide.entity.eidolon_repraised.wraith.description": "A ritual-linked undead spirit whose chilling touch rewards careful occult and spiritual preparation.",
-
   "fieldguide.name.entity.graveyard.wraith": "Grave Wraith",
   "fieldguide.entity.graveyard.wraith.description": "A grave spirit that extinguishes nearby light. It is a distinct creature from the wraiths bound to Eidolon rites.",
-
   "fieldguide.name.entity.occultism.iesnium_golem": "Iesnium Golem",
   "fieldguide.entity.occultism.iesnium_golem.description": "An occult construct shaped from iesnium. Treat its forged body as a deliberate magical creation, not a naturally occurring beast.",
-
   "fieldguide.name.entity.feywild.sprite": "Sprite",
   "fieldguide.entity.feywild.sprite.description": "A small Fae being whose presence can leave magical traces that mundane observation cannot fully explain. Fae-attuned analysis can reveal a glamour signature.",
-
+  "toast.darkfolklore.lore.title": "Field Guide Updated",
+  "toast.darkfolklore.lore.discovered": "%s documented",
+  "toast.darkfolklore.lore.observed": "%s behaviour observed",
+  "toast.darkfolklore.lore.studied": "%s studied in depth",
+  "toast.darkfolklore.lore.mastered": "%s knowledge mastered",
   "message.darkfolklore.wolfsbane_finder.found": "Wolfsbane crop found at %s, %s, %s (%s blocks away)",
   "message.darkfolklore.wolfsbane_finder.not_found": "No planted wolfsbane crop was found in loaded chunks within %s blocks"
 }

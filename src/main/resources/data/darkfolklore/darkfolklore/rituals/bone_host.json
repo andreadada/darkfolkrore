@@ -1,0 +1,16 @@
+{
+  "id": "darkfolklore:bone_host",
+  "encounter": "darkfolklore:minecraft_skeleton",
+  "required_knowledge_points": 0,
+  "cooldown_ticks": 12000,
+  "enabled": true,
+  "focus_block": "minecraft:soul_campfire",
+  "activation_item": "minecraft:bone",
+  "requires_night": true,
+  "spawn_count": 3,
+  "item_costs": {
+    "minecraft:bone": 12,
+    "minecraft:arrow": 8,
+    "minecraft:coal": 1
+  }
+}

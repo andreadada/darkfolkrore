@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:minecraft_skeleton",
+  "entity": "minecraft:skeleton",
+  "natural_spawn_multiplier": 0.03,
+  "minimum_encounter_pressure": 8,
+  "l2_minimum_level": 26
+}

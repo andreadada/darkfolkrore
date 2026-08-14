@@ -5,7 +5,6 @@ import com.darkfolklore.core.knowledge.social.SecretType;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.society.story.SocietyStoryEngine;
 import com.darkfolklore.core.society.story.StoryTrigger;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -17,9 +16,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Makes persisted society pressure visible without spawning fake provider factions or mutating MCA/Vampirism AI.
- * Announcements are edge-triggered and bounded per online player. Major observed village-state transitions are
- * delegated to the existing persistent SocietyStoryEngine rather than creating a second narrative store.
+ * Maintains persisted village-response observations and story transitions without duplicating player-facing notices.
+ * VillageReactionNotifier is the single bounded/hysteretic notification path for nearby players.
  */
 public final class VillageResponseEngine {
     public static final VillageResponseEngine INSTANCE = new VillageResponseEngine();
@@ -45,15 +43,9 @@ public final class VillageResponseEngine {
             persistMajorTransition(player, previousVillageTier, snapshot.tier());
         }
 
-        Observation previous = observations.remove(player.getUUID());
+        observations.remove(player.getUUID());
         observations.put(player.getUUID(), new Observation(village, snapshot));
         trim(observations, MAX_PLAYER_OBSERVATIONS);
-        boolean changedVillage = previous == null || !previous.village().equals(village);
-        boolean changedTier = previous == null || previous.snapshot().tier() != snapshot.tier();
-        if ((changedVillage || changedTier) && snapshot.tier() != VillageResponseTier.CALM) {
-            player.displayClientMessage(Component.literal("Village response: " + snapshot.tier()
-                    + " — " + snapshot.message()), false);
-        }
     }
 
     private static void persistMajorTransition(ServerPlayer observer, VillageResponseTier from,

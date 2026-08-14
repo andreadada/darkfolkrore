@@ -1,37 +1,29 @@
 package com.darkfolklore.core.compat.l2hostility;
 
+import com.darkfolklore.core.encounter.L2HostilityAdapter;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.fml.ModList;
 
 /**
- * Dormant L2 Hostility integration boundary.
- *
- * <p>0.8 deliberately performs no L2 runtime mutation, even when an existing config file still contains
- * {@code l2HostilityScaling=true}. The bridge stays in place only so diagnostics and a future exact-JAR audit
- * have a stable integration point.</p>
+ * Compatibility facade retained for the 0.8 diagnostics/API surface.
+ * Active combat scaling is now owned by ThreatPolicyRuntime, which requests L2 Hostility level floors through
+ * the audited L2HostilityAdapter. This facade deliberately does not translate legacy profile names into levels.
  */
 public final class L2HostilityBridge {
     public static final L2HostilityBridge INSTANCE = new L2HostilityBridge();
-    private static final String MOD_ID = "l2hostility";
-    private static final boolean POLICY_ENABLED = false;
 
     private L2HostilityBridge() {}
 
     public ApplyResult apply(LivingEntity entity, String profile) {
         return new ApplyResult(Status.DISABLED, 0,
-                POLICY_ENABLED ? "integration has no active implementation" : "disabled by Dark Folklore 0.8 policy");
+                "legacy profile mutation disabled; encounter level floors are handled by ThreatPolicyRuntime");
     }
 
     public String diagnostics() {
-        String installed = ModList.get().isLoaded(MOD_ID)
-                ? ModList.get().getModContainerById(MOD_ID)
-                    .map(container -> container.getModInfo().getVersion().toString()).orElse("unknown")
-                : "absent";
-        return "DISABLED_BY_DARKFOLKLORE_POLICY installed=" + installed;
+        return L2HostilityAdapter.INSTANCE.diagnosticDetail();
     }
 
     public void reset() {
-        // No runtime state exists while the integration is policy-disabled.
+        L2HostilityAdapter.INSTANCE.clearRuntimeState();
     }
 
     public record ApplyResult(Status status, int level, String detail) {}

@@ -8,6 +8,7 @@ import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.magic.MagicDisciplineRegistry;
 import com.darkfolklore.core.magic.MagicDisciplineResolver;
 import com.darkfolklore.core.magic.MagicIntegrationDefinition;
+import com.darkfolklore.core.network.FolkloreNetwork;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.society.SecretFacts;
 import com.darkfolklore.core.traits.*;
@@ -87,8 +88,7 @@ public final class LoreEngine {
         if (after.points() != before.points()) {
             NeoForge.EVENT_BUS.post(new KnowledgeChangedEvent(player, concept, before, after));
             if (after.stage() != before.stage()) {
-                player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                        "Folklore knowledge: " + concept + " -> " + after.stage()), true);
+                FolkloreNetwork.sendLoreToast(player, concept, after.stage().name());
             }
         }
         return after;

@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:vampire_predator",
+  "entity": "vampirism:vampire",
+  "natural_spawn_multiplier": 0.01,
+  "minimum_encounter_pressure": 20,
+  "l2_minimum_level": 35
+}

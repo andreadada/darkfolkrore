@@ -1,0 +1,16 @@
+{
+  "id": "darkfolklore:moonbound_call",
+  "encounter": "darkfolklore:werewolf_predator",
+  "required_knowledge_points": 25,
+  "cooldown_ticks": 24000,
+  "enabled": true,
+  "focus_block": "minecraft:campfire",
+  "activation_item": "minecraft:goat_horn",
+  "requires_night": true,
+  "spawn_count": 1,
+  "item_costs": {
+    "minecraft:bone": 8,
+    "minecraft:rabbit_foot": 1,
+    "minecraft:string": 8
+  }
+}

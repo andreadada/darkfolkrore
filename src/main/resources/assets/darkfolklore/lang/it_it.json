@@ -6,37 +6,31 @@
   "category.darkfolklore.fieldguide.cryptids": "Criptidi",
   "category.darkfolklore.fieldguide.mythical_beasts": "Bestie mitiche",
   "category.darkfolklore.fieldguide.constructs": "Costrutti",
-
   "fieldguide.name.entity.vampirism.vampire": "Vampiro",
   "fieldguide.entity.vampirism.vampire.description": "Un predatore non morto che si nutre di sangue. L'aglio può tenere a distanza i vampiri più deboli, mentre argento e luce solare restano preparativi affidabili per la caccia.",
-
   "fieldguide.name.entity.werewolves.human_werewolf": "Licantropo",
   "fieldguide.entity.werewolves.human_werewolf.description": "Un licantropo diviso tra volontà umana e bestia. Le armi d'argento feriscono il corpo trasformato e l'aconito può indebolirne forza e sensi.",
-
   "fieldguide.name.entity.cnc.wendigo": "Wendigo",
   "fieldguide.entity.cnc.wendigo.description": "Un criptide notturno estremamente raro. Tracce, prede scomparse e resti recuperati sono prove più sicure di uno scontro prima di aver compreso la caccia.",
-
   "fieldguide.name.entity.cnc.chupacabra": "Chupacabra",
   "fieldguide.entity.cnc.chupacabra.description": "Un predatore notturno di bestiame associato ad animali dissanguati, veleno e scie di sangue. Segui le prove prima che scelga un'altra mandria.",
-
   "fieldguide.name.entity.mythsandlegends.imp": "Demonietto",
   "fieldguide.entity.mythsandlegends.imp.description": "Un demone del Nether resistente al fuoco. La sua apparente morte può dividere la minaccia invece di eliminarla: controlla che non restino frammenti vivi.",
-
   "fieldguide.name.entity.vampirism.ghost": "Fantasma",
   "fieldguide.entity.vampirism.ghost.description": "Uno spirito incorporeo inquieto dell'ecosistema soprannaturale di Vampirism. Le difese spirituali sono più affidabili della forza ordinaria.",
-
   "fieldguide.name.entity.eidolon_repraised.wraith": "Spettro rituale",
   "fieldguide.entity.eidolon_repraised.wraith.description": "Uno spirito non morto legato ai rituali, il cui tocco gelido premia un'accurata preparazione occulta e spirituale.",
-
   "fieldguide.name.entity.graveyard.wraith": "Spettro cimiteriale",
   "fieldguide.entity.graveyard.wraith.description": "Uno spirito delle tombe che spegne la luce circostante. È una creatura distinta dagli spettri vincolati ai rituali di Eidolon.",
-
   "fieldguide.name.entity.occultism.iesnium_golem": "Golem d'iesnio",
   "fieldguide.entity.occultism.iesnium_golem.description": "Un costrutto occulto plasmato dall'iesnio. Il suo corpo forgiato è una creazione magica intenzionale, non una bestia naturale.",
-
   "fieldguide.name.entity.feywild.sprite": "Sprite",
   "fieldguide.entity.feywild.sprite.description": "Un piccolo essere Fae la cui presenza può lasciare tracce magiche che l'osservazione ordinaria non spiega del tutto. Un'analisi affine al mondo Fae può rivelare una firma di glamour.",
-
+  "toast.darkfolklore.lore.title": "Guida del Folklore aggiornata",
+  "toast.darkfolklore.lore.discovered": "%s documentato",
+  "toast.darkfolklore.lore.observed": "Comportamento di %s osservato",
+  "toast.darkfolklore.lore.studied": "%s studiato in profondità",
+  "toast.darkfolklore.lore.mastered": "Conoscenza di %s padroneggiata",
   "message.darkfolklore.wolfsbane_finder.found": "Coltivazione di aconito trovata a %s, %s, %s (%s blocchi di distanza)",
   "message.darkfolklore.wolfsbane_finder.not_found": "Nessuna coltivazione di aconito trovata nei chunk caricati entro %s blocchi"
 }

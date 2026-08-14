@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:cnc_chupacabra",
+  "entity": "cnc:chupacabra",
+  "natural_spawn_multiplier": 0.005,
+  "minimum_encounter_pressure": 25,
+  "l2_minimum_level": 45
+}
