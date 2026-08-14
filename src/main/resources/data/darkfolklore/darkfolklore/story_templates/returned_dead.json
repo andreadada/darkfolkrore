@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:returned_dead",
+  "trigger": "HUNTER_INVESTIGATION",
+  "concept": "darkfolklore:revenant",
+  "weight": 4,
+  "cooldown_ticks": 144000,
+  "lifetime_ticks": 144000,
+  "contract_eligible": true,
+  "enabled": true
+}

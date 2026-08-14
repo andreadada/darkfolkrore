@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:village_compromised",
+  "trigger": "VILLAGE_COMPROMISED",
+  "concept": "darkfolklore:vampire",
+  "weight": 5,
+  "cooldown_ticks": 48000,
+  "lifetime_ticks": 168000,
+  "contract_eligible": false,
+  "enabled": true
+}

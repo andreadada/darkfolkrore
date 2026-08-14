@@ -1,21 +1,9 @@
 {
   "concept": "darkfolklore:chupacabra",
-  "creature_traits": [
-    "CRYPTID",
-    "SUPERNATURAL"
-  ],
-  "signatures": [
-    "BLOOD",
-    "BITE_MARK",
-    "TRACK",
-    "SCENT"
-  ],
+  "creature_traits": ["CRYPTID", "SUPERNATURAL"],
+  "signatures": ["BLOOD", "BLOOD_RESONANCE", "BITE_MARK", "TRACK", "SCENT"],
   "analysis_results": {},
-  "incident_evidence": [
-    "BLOOD",
-    "TRACK",
-    "SCENT"
-  ],
+  "incident_evidence": ["BLOOD", "TRACK", "SCENT"],
   "required_evidence": 3,
   "tracking_radius": 112
 }

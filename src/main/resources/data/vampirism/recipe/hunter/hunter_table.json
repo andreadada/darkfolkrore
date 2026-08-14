@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["FBG", "PPP", "P P"],
+  "key": {"F": {"item": "vampirism:vampire_fang"}, "B": {"item": "minecraft:book"}, "G": {"tag": "darkfolklore:recipe/garlic"}, "P": {"tag": "minecraft:planks"}},
+  "result": {"count": 1, "id": "vampirism:hunter_table"},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "vampirism"},
+    {"type": "neoforge:item_exists", "item": "vampirism:hunter_table"},
+    {"type": "neoforge:item_exists", "item": "vampirism:vampire_fang"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/garlic"}}
+  ]
+}

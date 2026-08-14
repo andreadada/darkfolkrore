@@ -54,6 +54,15 @@ class PredationPolicyTest {
     }
 
     @Test
+    void wildHuntMayAcquireOrReassertChosenTargetButNeverStealLiveCombatTarget() {
+        assertTrue(PredationPolicy.mayDirectWildHunt(true, true, false, false));
+        assertTrue(PredationPolicy.mayDirectWildHunt(true, true, true, true));
+        assertFalse(PredationPolicy.mayDirectWildHunt(true, true, true, false));
+        assertFalse(PredationPolicy.mayDirectWildHunt(false, true, false, false));
+        assertFalse(PredationPolicy.mayDirectWildHunt(true, false, false, false));
+    }
+
+    @Test
     void daytimePredationFailsClosed() {
         var context = new PredationPolicy.Context(PredatorKind.WILD_VAMPIRISM, false, 0, 0);
         assertFalse(PredationPolicy.score(context, candidate(false, true, 0, true)).eligible());

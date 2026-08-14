@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:amethyst_shard",
+    {
+      "id": "enchanted:ritual_chalk",
+      "required": false
+    },
+    {
+      "id": "bloodlines:zealot_ritual_catalyst",
+      "required": false
+    },
+    {
+      "id": "occultism:otherstone_tablet",
+      "required": false
+    },
+    {
+      "id": "eidolon_repraised:soul_shard",
+      "required": false
+    }
+  ]
+}

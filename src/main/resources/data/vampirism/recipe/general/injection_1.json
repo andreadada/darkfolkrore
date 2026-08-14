@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{"item": "vampirism:injection_empty"}, {"tag": "darkfolklore:recipe/garlic"}],
+  "result": {"count": 1, "id": "vampirism:injection_garlic"},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "vampirism"},
+    {"type": "neoforge:item_exists", "item": "vampirism:injection_empty"},
+    {"type": "neoforge:item_exists", "item": "vampirism:injection_garlic"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/garlic"}}
+  ]
+}

@@ -106,6 +106,26 @@ public final class InvestigationSavedData extends SavedData {
         return Optional.ofNullable(caseLinks.get(contractId));
     }
 
+    /**
+     * Promotes one story from concept-only continuity to an exact manifested culprit. Contracts accepted before
+     * manifestation are updated in-place so another natural mob of the same canonical concept cannot satisfy them.
+     */
+    public int bindCulpritForStory(UUID storyId, UUID culprit, String implementation, long observedAt) {
+        Objects.requireNonNull(storyId, "storyId");
+        Objects.requireNonNull(culprit, "culprit");
+        String observedImplementation = Objects.requireNonNullElse(implementation, "");
+        putIncidentFact(storyId, new IncidentFact(Optional.of(culprit), observedImplementation, Math.max(0L, observedAt)));
+        int updated = 0;
+        for (Map.Entry<UUID, InvestigationCaseLink> entry : caseLinks.entrySet()) {
+            InvestigationCaseLink current = entry.getValue();
+            if (current.storyId().filter(storyId::equals).isEmpty()) continue;
+            entry.setValue(current.bindCulprit(culprit, observedImplementation));
+            updated++;
+        }
+        if (updated > 0) setDirty();
+        return updated;
+    }
+
     public boolean allowCulpritFallback(UUID contractId) {
         InvestigationCaseLink current = caseLinks.get(contractId);
         if (current == null || current.culpritFallbackAllowed()) return false;

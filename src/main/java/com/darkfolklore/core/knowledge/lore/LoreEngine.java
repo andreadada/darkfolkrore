@@ -5,6 +5,8 @@ import com.darkfolklore.core.api.event.KnowledgeChangedEvent;
 import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.magic.MagicDisciplineRegistry;
+import com.darkfolklore.core.magic.MagicDisciplineResolver;
 import com.darkfolklore.core.magic.MagicIntegrationDefinition;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.society.SecretFacts;
@@ -13,7 +15,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -59,6 +60,7 @@ public final class LoreEngine {
             discoverOnce(player, concept, 10);
         }
         if (!traits.isEmpty()) discoverMagicSynergies(player, traits);
+        discoverMagicDisciplines(player, stack);
     }
 
     private void discoverMagicSynergies(ServerPlayer player, Set<ItemTrait> pickedUpTraits) {
@@ -68,6 +70,13 @@ public final class LoreEngine {
             if (inventoryTraits.containsAll(definition.requiredTraits())) {
                 discoverOnce(player, definition.knowledgeReward(), definition.knowledgePoints());
             }
+        }
+    }
+
+    private void discoverMagicDisciplines(ServerPlayer player, ItemStack stack) {
+        for (var discipline : MagicDisciplineResolver.resolveAll(stack)) {
+            var profile = MagicDisciplineRegistry.profile(discipline);
+            if (profile != null) discoverOnce(player, profile.knowledgeConcept(), 5);
         }
     }
 

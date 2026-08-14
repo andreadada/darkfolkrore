@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fangs_n_claws:fur",
+      "required": false
+    },
+    {
+      "id": "naturalist:fur",
+      "required": false
+    }
+  ]
+}

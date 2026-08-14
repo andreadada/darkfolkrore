@@ -1,0 +1,3 @@
+{
+  "type":"minecraft:crafting_shaped","category":"building","pattern":["FFF","FFF","FFF"],"key":{"F":{"tag":"darkfolklore:recipe/fertilizer"}},"result":{"count":1,"id":"farm_and_charm:fertilized_soil"},"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"farm_and_charm"},{"type":"neoforge:item_exists","item":"farm_and_charm:fertilizer"},{"type":"neoforge:item_exists","item":"farm_and_charm:fertilized_soil"},{"type":"neoforge:not","value":{"type":"neoforge:tag_empty","tag":"darkfolklore:recipe/fertilizer"}}]
+}

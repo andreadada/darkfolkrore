@@ -1,0 +1,8 @@
+{
+  "concept": "darkfolklore:revenant",
+  "kind": "ENTITY",
+  "canonical": "graveyard:revenant",
+  "implementations": [],
+  "policy": "CANONICAL",
+  "reason": "Graveyard is the single audited Revenant implementation; Dark Folklore adds story provenance without replacing its mechanics."
+}

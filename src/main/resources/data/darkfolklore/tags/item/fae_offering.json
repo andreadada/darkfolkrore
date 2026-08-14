@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bread",
+    "minecraft:honey_bottle",
+    "minecraft:milk_bucket",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:cookie",
+    "minecraft:cake",
+    {"id": "bakery:baguette", "required": false},
+    {"id": "bakery:braided_bread", "required": false},
+    {"id": "bakery:crusty_bread", "required": false},
+    {"id": "bakery:toast", "required": false}
+  ]
+}

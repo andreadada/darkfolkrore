@@ -1,7 +1,6 @@
 package com.darkfolklore.core.contracts;
 
 import com.darkfolklore.core.knowledge.social.EvidenceType;
-
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,9 +17,7 @@ public final class MonsterContract {
     public MonsterContract(UUID id, UUID issuer, String targetConcept, long expiresAt) {
         this.id = Objects.requireNonNull(id, "id");
         this.issuer = Objects.requireNonNull(issuer, "issuer");
-        if (targetConcept == null || !targetConcept.contains(":")) {
-            throw new IllegalArgumentException("targetConcept must be namespaced");
-        }
+        if (targetConcept == null || !targetConcept.contains(":")) throw new IllegalArgumentException("targetConcept must be namespaced");
         this.targetConcept = targetConcept;
         this.expiresAt = expiresAt;
     }
@@ -31,9 +28,9 @@ public final class MonsterContract {
     public long expiresAt() { return expiresAt; }
     public ContractStatus status() { return status; }
     public Set<EvidenceType> evidence() { return Set.copyOf(evidence); }
-
     public boolean start() { return transition(ContractStatus.OFFERED, ContractStatus.INVESTIGATING); }
 
+    /** Legacy threshold path retained for compatibility and tests when Living Folklore is disabled. */
     public boolean addEvidence(EvidenceType type, int requiredDistinctClues) {
         if (status != ContractStatus.INVESTIGATING) return false;
         boolean changed = recordEvidence(type);
@@ -41,36 +38,28 @@ public final class MonsterContract {
         return changed;
     }
 
-    /**
-     * Records additional research evidence after the target has already been identified.
-     * This is used by the 0.3 occult-analysis loop without changing the historical
-     * INVESTIGATING -> IDENTIFIED threshold behavior.
-     */
     public boolean recordEvidence(EvidenceType type) {
         if (status != ContractStatus.INVESTIGATING && status != ContractStatus.IDENTIFIED) return false;
         return evidence.add(Objects.requireNonNull(type));
     }
 
+    /** 0.10 path: evidence is recorded first, then the independent hypothesis assessment may identify the case. */
+    public boolean identify() { return transition(ContractStatus.INVESTIGATING, ContractStatus.IDENTIFIED); }
     public boolean markHunted() { return transition(ContractStatus.IDENTIFIED, ContractStatus.HUNTED); }
     public boolean complete() { return transition(ContractStatus.HUNTED, ContractStatus.COMPLETE); }
 
     public boolean expire(long now) {
-        if (!status.terminal() && now >= expiresAt) {
-            status = ContractStatus.EXPIRED;
-            return true;
-        }
+        if (!status.terminal() && now >= expiresAt) { status = ContractStatus.EXPIRED; return true; }
         return false;
     }
 
     public void restore(ContractStatus status, Set<EvidenceType> evidence) {
         this.status = Objects.requireNonNull(status);
-        this.evidence.clear();
-        this.evidence.addAll(evidence);
+        this.evidence.clear(); this.evidence.addAll(evidence);
     }
 
     private boolean transition(ContractStatus expected, ContractStatus next) {
         if (status != expected) return false;
-        status = next;
-        return true;
+        status = next; return true;
     }
 }

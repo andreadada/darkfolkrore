@@ -38,6 +38,20 @@ class InvestigationCaseLinkTest {
     }
 
     @Test
+    void lateCulpritBindingClosesConceptFallbackAndPreservesIssuerFallback() {
+        UUID story = UUID.randomUUID();
+        UUID culprit = UUID.randomUUID();
+        InvestigationCaseLink link = InvestigationCaseLink.fromStory(story, null)
+                .allowCulpritFallback().allowIssuerFallback();
+
+        InvestigationCaseLink bound = link.bindCulprit(culprit, "cnc:wendigo");
+        assertEquals(culprit, bound.culpritId().orElseThrow());
+        assertEquals("cnc:wendigo", bound.observedImplementation());
+        assertFalse(bound.culpritFallbackAllowed());
+        assertTrue(bound.issuerFallbackAllowed());
+    }
+
+    @Test
     void missingLegacyFactProducesSafeEmptyContinuityMetadata() {
         UUID story = UUID.randomUUID();
         InvestigationCaseLink link = InvestigationCaseLink.fromStory(story, null);
@@ -79,6 +93,53 @@ class InvestigationCaseLinkTest {
         assertFalse(InvestigationTargeting.matchesEvidence("darkfolklore:vampire", exact, link, null));
         assertFalse(InvestigationTargeting.mayUseLegacyStoryFallback(link));
         assertTrue(InvestigationTargeting.mayUseLegacyStoryFallback(null));
+    }
+
+    @Test
+    void subjectlessLegendaryOmenMatchesOnlyItsExactBoundStoryEnvelope() {
+        UUID storyId = UUID.randomUUID();
+        StoryInstance story = new StoryInstance(storyId, "darkfolklore:missing_traveller",
+                "darkfolklore:wendigo", 100L, 1000L);
+        PersistentStory persistent = new PersistentStory(story,
+                new WorldPosition("minecraft:overworld", 0, 64, 0), "village");
+        InvestigationCaseLink link = InvestigationCaseLink.fromStory(storyId, null);
+        EvidenceRecord omen = new EvidenceRecord(UUID.randomUUID(), EvidenceType.FOOTPRINT,
+                "darkfolklore:wendigo", Optional.empty(),
+                new WorldPosition("minecraft:overworld", 10, 64, 2), 300L, 1200L, Optional.empty());
+
+        assertTrue(InvestigationTargeting.matchesEvidence("darkfolklore:wendigo", omen, link, persistent));
+
+        StoryInstance wrong = new StoryInstance(UUID.randomUUID(), "darkfolklore:missing_traveller",
+                "darkfolklore:wendigo", 100L, 1000L);
+        PersistentStory wrongPersistent = new PersistentStory(wrong,
+                new WorldPosition("minecraft:overworld", 0, 64, 0), "village");
+        assertFalse(InvestigationTargeting.matchesEvidence("darkfolklore:wendigo", omen, link, wrongPersistent));
+
+        EvidenceRecord tooFar = new EvidenceRecord(UUID.randomUUID(), EvidenceType.FOOTPRINT,
+                "darkfolklore:wendigo", Optional.empty(),
+                new WorldPosition("minecraft:overworld", 20, 64, 0), 300L, 1200L, Optional.empty());
+        assertFalse(InvestigationTargeting.matchesEvidence("darkfolklore:wendigo", tooFar, link, persistent));
+    }
+
+    @Test
+    void postManifestationEncounterEvidenceRequiresExactBoundCulpritEvenLongAfterOrigin() {
+        UUID storyId = UUID.randomUUID();
+        UUID culprit = UUID.randomUUID();
+        StoryInstance story = new StoryInstance(storyId, "darkfolklore:missing_traveller",
+                "darkfolklore:wendigo", 100L, 4000L);
+        PersistentStory persistent = new PersistentStory(story,
+                new WorldPosition("minecraft:overworld", 0, 64, 0), "village");
+        InvestigationCaseLink link = InvestigationCaseLink.fromStory(storyId, null)
+                .bindCulprit(culprit, "cnc:wendigo");
+        EvidenceRecord exact = new EvidenceRecord(UUID.randomUUID(), EvidenceType.BLOOD,
+                "darkfolklore:wendigo", Optional.of(culprit),
+                new WorldPosition("minecraft:overworld", 90, 64, 90), 2500L, 4200L, Optional.empty());
+        EvidenceRecord wrong = new EvidenceRecord(UUID.randomUUID(), EvidenceType.BLOOD,
+                "darkfolklore:wendigo", Optional.of(UUID.randomUUID()),
+                new WorldPosition("minecraft:overworld", 1, 64, 1), 2500L, 4200L, Optional.empty());
+
+        assertTrue(InvestigationTargeting.matchesEvidence("darkfolklore:wendigo", exact, link, persistent));
+        assertFalse(InvestigationTargeting.matchesEvidence("darkfolklore:wendigo", wrong, link, persistent));
     }
 
     private static EvidenceRecord evidence(UUID subject) {

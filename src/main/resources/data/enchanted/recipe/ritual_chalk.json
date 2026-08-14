@@ -1,0 +1,3 @@
+{
+  "type":"minecraft:crafting_shaped","category":"misc","pattern":["ATA","AGA","AGA"],"key":{"A":{"tag":"darkfolklore:recipe/ritual_ash"},"T":{"item":"enchanted:tear_of_the_goddess"},"G":{"item":"enchanted:gypsum"}},"result":{"count":1,"id":"enchanted:ritual_chalk"},"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"enchanted"},{"type":"neoforge:item_exists","item":"enchanted:ritual_chalk"},{"type":"neoforge:item_exists","item":"enchanted:wood_ash"},{"type":"neoforge:item_exists","item":"enchanted:tear_of_the_goddess"},{"type":"neoforge:item_exists","item":"enchanted:gypsum"},{"type":"neoforge:not","value":{"type":"neoforge:tag_empty","tag":"darkfolklore:recipe/ritual_ash"}}]
+}

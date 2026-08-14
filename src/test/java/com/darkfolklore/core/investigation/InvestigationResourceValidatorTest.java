@@ -32,6 +32,8 @@ class InvestigationResourceValidatorTest {
 
         int count = 0;
         boolean faeAnalysisShipped = false;
+        boolean revenantShipped = false;
+        boolean wildHuntShipped = false;
         try (var paths = Files.list(profileDir)) {
             for (Path path : paths.filter(value -> value.getFileName().toString().endsWith(".json")).toList()) {
                 count++;
@@ -62,9 +64,13 @@ class InvestigationResourceValidatorTest {
                                 json.getAsJsonObject("analysis_results").get("FAE").getAsString());
                     }
                 }
+                revenantShipped |= "darkfolklore:revenant".equals(concept);
+                wildHuntShipped |= "darkfolklore:wild_hunt".equals(concept);
             }
         }
-        assertEquals(9, count, "0.3.1 ships nine curated investigation profiles");
+        assertEquals(11, count, "0.8 ships eleven curated investigation profiles");
+        assertTrue(revenantShipped, "0.8 must ship a Revenant forensic profile");
+        assertTrue(wildHuntShipped, "0.8 must ship a Wild Hunt forensic profile");
         assertTrue(faeAnalysisShipped, "FAE must be a real shipped analysis path, not only an unused tool tag");
 
         for (String tradition : Set.of("witchcraft", "spirit", "soul", "forbidden_theurgy", "fae")) {

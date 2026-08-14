@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {"id":"bloodlines:zealot_ritual_catalyst","required":false},
+    {"id":"bloodlines:corrupted_blood_sample","required":false},
+    {"id":"bloodlines:frozen_blood_sample","required":false},
+    {"id":"graveyard:vial_of_blood","required":false},
+    {"id":"vampirism:blood_bucket","required":false}
+  ]
+}

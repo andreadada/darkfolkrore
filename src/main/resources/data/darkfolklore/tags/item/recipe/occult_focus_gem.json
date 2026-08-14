@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "occultism:spirit_attuned_gem",
+      "required": false
+    },
+    {
+      "id": "feywild:fey_gem",
+      "required": false
+    },
+    {
+      "id": "eidolon_repraised:shadow_gem",
+      "required": false
+    },
+    {
+      "id": "malum:refined_soulstone",
+      "required": false
+    }
+  ]
+}

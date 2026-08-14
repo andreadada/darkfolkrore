@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:wild_hunt_omen",
+  "trigger": "FULL_MOON_INCIDENT",
+  "concept": "darkfolklore:wild_hunt",
+  "weight": 3,
+  "cooldown_ticks": 240000,
+  "lifetime_ticks": 72000,
+  "contract_eligible": false,
+  "enabled": true
+}

@@ -58,6 +58,26 @@ class InvestigationSavedDataTest {
     }
 
     @Test
+    void lateManifestationBindsEveryExistingCaseForExactStory() {
+        InvestigationSavedData data = new InvestigationSavedData();
+        UUID story = UUID.randomUUID();
+        UUID contractA = UUID.randomUUID();
+        UUID contractB = UUID.randomUUID();
+        UUID otherStoryContract = UUID.randomUUID();
+        UUID culprit = UUID.randomUUID();
+        data.putCaseLink(contractA, InvestigationCaseLink.fromStory(story, null));
+        data.putCaseLink(contractB, InvestigationCaseLink.fromStory(story, null).allowCulpritFallback());
+        data.putCaseLink(otherStoryContract, InvestigationCaseLink.fromStory(UUID.randomUUID(), null));
+
+        assertEquals(2, data.bindCulpritForStory(story, culprit, "cnc:wendigo", 500L));
+        assertEquals(culprit, data.incidentFact(story).orElseThrow().culpritId().orElseThrow());
+        assertEquals(culprit, data.caseLink(contractA).orElseThrow().culpritId().orElseThrow());
+        assertEquals(culprit, data.caseLink(contractB).orElseThrow().culpritId().orElseThrow());
+        assertFalse(data.caseLink(contractB).orElseThrow().culpritFallbackAllowed());
+        assertTrue(data.caseLink(otherStoryContract).orElseThrow().culpritId().isEmpty());
+    }
+
+    @Test
     void weakOldSightingsCanBePrunedWithoutTouchingConfirmedRecentOnes() {
         InvestigationSavedData data = new InvestigationSavedData();
         UUID observer = UUID.randomUUID();
