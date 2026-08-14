@@ -1,7 +1,11 @@
 package com.darkfolklore.core.encounter;
 
 import com.darkfolklore.core.config.FolkloreConfig;
+import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
+import com.darkfolklore.core.spawn.SpawnDirector;
+import com.darkfolklore.core.spawn.SpawnProfile;
+import com.darkfolklore.core.world.WorldEventDirector;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,13 +32,37 @@ public final class ThreatPolicyRuntime {
 
     public void onPositionCheck(MobSpawnEvent.PositionCheck event) {
         if (!FolkloreConfig.SPAWN_DIRECTOR.get() || event.getSpawnType() != MobSpawnType.NATURAL) return;
+        ServerLevel level = event.getLevel().getLevel();
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
-        double multiplier;
-        if (policy != null) multiplier = policy.naturalSpawnMultiplier();
-        else if (event.getEntity() instanceof Monster) multiplier = FolkloreConfig.HOSTILE_NATURAL_SPAWN_MULTIPLIER.get();
-        else return;
-        if (multiplier < 1.0D && event.getLevel().getRandom().nextDouble() > multiplier) {
+        SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
+
+        // Repeat the profile's hard semantic gate here so correctness never depends on event-listener ordering.
+        if (profile != null && !SpawnDirector.hardGateAllows(profile, level.isNight())) {
+            event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
+            return;
+        }
+
+        double profileContext = 1.0D;
+        if (profile != null) {
+            if (!WorldEventDirector.INSTANCE.active(level).isEmpty()) profileContext *= profile.eventMultiplier();
+            if (FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
+                var nearestPlayer = level.getNearestPlayer(event.getX(), event.getY(), event.getZ(), 128, false);
+                if (nearestPlayer != null) {
+                    int pressure = FolkloreSavedData.get(level.getServer()).encounterPressure(nearestPlayer.getUUID());
+                    profileContext *= Math.max(0.2D, 1.0D - pressure / 125.0D);
+                }
+            }
+        }
+
+        NaturalSpawnRarityPolicy.Decision decision = NaturalSpawnRarityPolicy.resolve(
+                policy == null ? null : policy.naturalSpawnMultiplier(),
+                profile == null ? null : (double) profile.rarity().naturalChance(),
+                event.getEntity() instanceof Monster,
+                FolkloreConfig.HOSTILE_NATURAL_SPAWN_MULTIPLIER.get(),
+                FolkloreConfig.SPAWN_MULTIPLIER.get(),
+                profileContext);
+        if (NaturalSpawnRarityPolicy.reject(decision, event.getLevel().getRandom().nextDouble())) {
             event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
         }
     }
