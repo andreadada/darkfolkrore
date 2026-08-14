@@ -72,9 +72,12 @@ public final class CompatibilityManager {
             CompatibilityStatus status = supported ? CompatibilityStatus.ACTIVE : CompatibilityStatus.UNTESTED_VERSION;
             String detail;
             if (status != CompatibilityStatus.ACTIVE) {
-                detail = "Adapter internals disabled until this version is audited";
+                detail = "Adapter internals disabled until this version line is admitted for runtime probing";
             } else if (spec.modId().equals(McaVampCompatAdapter.MOD_ID)) {
-                detail = "Audited provider version; individual capabilities are probed independently at runtime";
+                String normalized = McaVampCompatAdapter.normalizeVersion(actual);
+                detail = McaVampCompatAdapter.supportsVersion(actual)
+                        ? "Known provider version " + normalized + "; capabilities are probed independently at runtime"
+                        : "Compatible 2.0.x provider candidate " + normalized + "; no capability is enabled until its runtime probe succeeds";
             } else {
                 detail = "Exact audited version";
             }
@@ -86,9 +89,9 @@ public final class CompatibilityManager {
         boolean werewolvesExact = isExact(nextReports, "werewolves");
         boolean mcaExact = isExact(nextReports, McaSocialAdapter.MOD_ID);
         boolean mcaCapitalsExact = isExact(nextReports, McaCapitalsCompat.MOD_ID);
-        boolean providerSupported = isExact(nextReports, McaVampCompatAdapter.MOD_ID);
+        boolean providerProbeEligible = isExact(nextReports, McaVampCompatAdapter.MOD_ID);
         boolean fieldGuideExact = isExact(nextReports, "fieldguide");
-        boolean factualMcaStack = mcaExact && providerSupported;
+        boolean factualMcaStack = mcaExact && providerProbeEligible;
         boolean fullMcaVampStack = vampirismExact && factualMcaStack;
 
         if (mcaExact && !mcaSocial.initialize(actualVersion(nextReports, McaSocialAdapter.MOD_ID))) {
@@ -133,22 +136,35 @@ public final class CompatibilityManager {
             }
         }
 
-        if (fullMcaVampStack) {
-            predation = CompatibilityStatus.ERROR;
+        /*
+         * Critical isolation rule: ordinary Vampirism predation depends only on Vampirism. MCA version/probe
+         * failures must never prevent IVampireMob recognition, blood hunger, targeting or feeding.
+         */
+        if (vampirismExact) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
-                        CompatibilityManager.class.getClassLoader()).getConstructor().newInstance();
+                                CompatibilityManager.class.getClassLoader())
+                        .getConstructor(boolean.class).newInstance(fullMcaVampStack);
                 if (!(adapter instanceof VampirePredationBridge bridge)) {
                     throw new LinkageError("VampirePredationCompat does not implement VampirePredationBridge");
                 }
                 vampirePredationBridge = bridge;
                 NeoForge.EVENT_BUS.register(adapter);
-                predation = bridge.runtimeAvailable() ? CompatibilityStatus.ACTIVE : CompatibilityStatus.ERROR;
+                if (fullMcaVampStack) {
+                    predation = bridge.mcaRuntimeAvailable() ? CompatibilityStatus.ACTIVE : CompatibilityStatus.ERROR;
+                }
+                if (!bridge.wildRuntimeAvailable()) {
+                    DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Wild Vampirism circuit failed to initialize: {}",
+                            bridge.runtimeDetail());
+                }
             } catch (ReflectiveOperationException | LinkageError | RuntimeException exception) {
                 vampirePredationBridge = VampirePredationBridge.DISABLED;
-                DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Provider bridge failed to load", exception);
+                if (fullMcaVampStack) predation = CompatibilityStatus.ERROR;
+                DarkFolkloreCore.LOGGER.error("[compat/vampire_predation] Wild predation bridge failed to load", exception);
             }
+        }
 
+        if (fullMcaVampStack) {
             lifecycle = CompatibilityStatus.ERROR;
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.mca.McaVampireLifecycleCompat", true,
@@ -166,10 +182,10 @@ public final class CompatibilityManager {
 
         mcaFactStatus = facts;
         mcaVampComponents = new ProviderComponents(facts, predation, lifecycle);
-        if (status(nextReports, McaVampCompatAdapter.MOD_ID) != CompatibilityStatus.DISABLED && providerSupported) {
+        if (status(nextReports, McaVampCompatAdapter.MOD_ID) != CompatibilityStatus.DISABLED && providerProbeEligible) {
             replaceStatus(nextReports, McaVampCompatAdapter.MOD_ID, mcaVampComponents.combinedStatus(),
                     "Capabilities: facts=" + facts + ", predation=" + predation + ", lifecycle=" + lifecycle
-                            + "; " + factsDetail);
+                            + "; " + factsDetail + "; predationBridge=" + vampirePredationBridge.runtimeDetail());
         }
 
         if (fieldGuideExact) {
@@ -250,7 +266,9 @@ public final class CompatibilityManager {
     }
 
     private static boolean versionSupported(Spec spec, String actual) {
-        if (spec.modId().equals(McaVampCompatAdapter.MOD_ID)) return McaVampCompatAdapter.supportsVersion(actual);
+        if (spec.modId().equals(McaVampCompatAdapter.MOD_ID)) {
+            return McaVampCompatAdapter.runtimeProbeEligible(actual);
+        }
         return actual.equals(spec.testedVersion());
     }
 
