@@ -69,15 +69,13 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
     }
 
     private static EncounterPolicy parseEncounter(ResourceLocation file, JsonObject json) {
-        EnumSet<ThreatTrait> traits = EnumSet.noneOf(ThreatTrait.class);
-        if (json.has("guaranteed_traits")) {
-            for (JsonElement element : json.getAsJsonArray("guaranteed_traits")) {
-                traits.add(ThreatTrait.valueOf(element.getAsString().trim().toUpperCase(Locale.ROOT)));
-            }
+        if (json.has("vitality_multiplier") || json.has("guaranteed_traits")) {
+            DarkFolkloreCore.LOGGER.warn("[encounter-data] {} contains legacy direct-stat fields; they are ignored. "
+                    + "Use l2_minimum_level for combat scaling.", file);
         }
         return new EncounterPolicy(string(json, "id", file.toString()), string(json, "entity", file.toString()),
-                number(json, "natural_spawn_multiplier", 1.0D), number(json, "vitality_multiplier", 1.0D),
-                integer(json, "minimum_encounter_pressure", 0), integer(json, "l2_minimum_level", 0), Set.copyOf(traits));
+                number(json, "natural_spawn_multiplier", 1.0D), integer(json, "minimum_encounter_pressure", 0),
+                integer(json, "l2_minimum_level", 0));
     }
 
     private static RitualDefinition parseRitual(ResourceLocation file, JsonObject json) {
