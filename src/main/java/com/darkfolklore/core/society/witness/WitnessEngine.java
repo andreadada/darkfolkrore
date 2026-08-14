@@ -169,6 +169,11 @@ public final class WitnessEngine {
         data.tryPutOrganization(organization, FolkloreConfig.MAX_ORGANIZATIONS.get());
     }
 
+    /** Clears non-persistent incident throttles when a server lifecycle ends. */
+    public void clearRuntimeState() {
+        incidentCooldown.clear();
+    }
+
     private static Optional<SecretType> primarySecret(Entity actor) {
         Set<SecretType> secrets = SecretFacts.actualSecrets(actor);
         for (SecretType type : List.of(SecretType.VAMPIRE, SecretType.WEREWOLF,
