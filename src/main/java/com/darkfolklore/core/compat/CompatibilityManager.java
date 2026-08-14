@@ -92,7 +92,7 @@ public final class CompatibilityManager {
         boolean providerProbeEligible = isExact(nextReports, McaVampCompatAdapter.MOD_ID);
         boolean fieldGuideExact = isExact(nextReports, "fieldguide");
         boolean factualMcaStack = mcaExact && providerProbeEligible;
-        boolean fullMcaVampStack = vampirismExact && factualMcaStack;
+        boolean fullMcaVampStack = PredationBridgePolicy.enableMcaProbe(vampirismExact, mcaExact, providerProbeEligible);
 
         if (mcaExact && !mcaSocial.initialize(actualVersion(nextReports, McaSocialAdapter.MOD_ID))) {
             replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.ERROR, mcaSocial.statusDetail());
@@ -140,7 +140,7 @@ public final class CompatibilityManager {
          * Critical isolation rule: ordinary Vampirism predation depends only on Vampirism. MCA version/probe
          * failures must never prevent IVampireMob recognition, blood hunger, targeting or feeding.
          */
-        if (vampirismExact) {
+        if (PredationBridgePolicy.loadWildBridge(vampirismExact)) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
                                 CompatibilityManager.class.getClassLoader())
