@@ -124,6 +124,13 @@ public final class RumorEngine {
     public int queued() { return queue.size(); }
     public List<RumorDiagnostic> diagnostics() { return List.copyOf(diagnostics); }
 
+    /** Clears non-persistent queue/cooldown/diagnostic state when a server lifecycle ends. */
+    public void clearRuntimeState() {
+        queue.clear();
+        cooldowns.clear();
+        diagnostics.clear();
+    }
+
     private record RumorTask(UUID sender, UUID subject, SecretType secret,
                              SocialKnowledgeRecord knowledge, String dimension, int hops) {}
     private record RumorCooldownKey(UUID sender, UUID subject, SecretType secret) {}
