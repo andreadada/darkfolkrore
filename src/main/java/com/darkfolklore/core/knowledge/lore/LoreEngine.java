@@ -5,6 +5,8 @@ import com.darkfolklore.core.api.event.KnowledgeChangedEvent;
 import com.darkfolklore.core.canonical.CanonicalDefinition;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
+import com.darkfolklore.core.magic.MagicDisciplineRegistry;
+import com.darkfolklore.core.magic.MagicDisciplineResolver;
 import com.darkfolklore.core.magic.MagicIntegrationDefinition;
 import com.darkfolklore.core.network.FolkloreNetwork;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
@@ -59,6 +61,7 @@ public final class LoreEngine {
             discoverOnce(player, concept, 10);
         }
         if (!traits.isEmpty()) discoverMagicSynergies(player, traits);
+        discoverMagicDisciplines(player, stack);
     }
 
     private void discoverMagicSynergies(ServerPlayer player, Set<ItemTrait> pickedUpTraits) {
@@ -71,6 +74,13 @@ public final class LoreEngine {
         }
     }
 
+    private void discoverMagicDisciplines(ServerPlayer player, ItemStack stack) {
+        for (var discipline : MagicDisciplineResolver.resolveAll(stack)) {
+            var profile = MagicDisciplineRegistry.profile(discipline);
+            if (profile != null) discoverOnce(player, profile.knowledgeConcept(), 5);
+        }
+    }
+
     public LoreProgress grant(ServerPlayer player, String concept, int points) {
         FolkloreSavedData data = FolkloreSavedData.get(player.getServer());
         LoreProgress before = data.lore(player.getUUID(), concept);
@@ -78,7 +88,7 @@ public final class LoreEngine {
         if (after.points() != before.points()) {
             NeoForge.EVENT_BUS.post(new KnowledgeChangedEvent(player, concept, before, after));
             if (after.stage() != before.stage()) {
-                FolkloreNetwork.sendLoreToast(player, concept, after.stage().name());
+                FolkloreNetwork.sendLoreToast(player, concept, after);
             }
         }
         return after;

@@ -33,6 +33,11 @@ public final class VillageSocietyState {
     public void adjustSuspicion(int delta) { suspicion = clamp(suspicion + delta); }
     public void adjustPoliticalImportance(int delta) { politicalImportance = clamp(politicalImportance + delta); }
 
+    /** Semantic aliases used by event engines when recording world pressure. */
+    public void addAwareness(int delta) { adjustPublicAwareness(delta); }
+    public void addFear(int delta) { adjustFear(delta); }
+    public void addSuspicion(int delta) { adjustSuspicion(delta); }
+
     public void adjustInfluence(OrganizationType organizationType, int delta) {
         switch (organizationType) {
             case VAMPIRE_COVEN -> vampireInfluence = clamp(vampireInfluence + delta);

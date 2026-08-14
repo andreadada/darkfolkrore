@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:village_mobilization",
+  "trigger": "VILLAGE_MOBILIZATION",
+  "concept": "darkfolklore:hunter",
+  "weight": 5,
+  "cooldown_ticks": 48000,
+  "lifetime_ticks": 168000,
+  "contract_eligible": false,
+  "enabled": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["IGI", "III", "S S"],
+  "key": {"I": {"item": "minecraft:iron_ingot"}, "G": {"tag": "darkfolklore:recipe/garlic"}, "S": {"item": "minecraft:stone_bricks"}},
+  "result": {"count": 1, "id": "vampirism:alchemical_cauldron"},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "vampirism"},
+    {"type": "neoforge:item_exists", "item": "vampirism:alchemical_cauldron"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/garlic"}}
+  ]
+}

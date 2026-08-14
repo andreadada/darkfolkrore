@@ -5,6 +5,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * Exact-provider bridge used by the bounded predation director.
  *
@@ -16,11 +19,32 @@ public interface VampirePredationBridge {
 
     default boolean runtimeAvailable() { return false; }
 
+    /** Read-only per-capability health for diagnostics; an empty map means the bridge does not expose subcircuits. */
+    default Map<String, Boolean> circuitStatus() { return Map.of(); }
+
     default PredatorKind predatorKind(Mob entity) { return PredatorKind.NONE; }
 
     default boolean wantsBlood(Mob entity) { return false; }
 
     default boolean canWildFeed(Mob predator, LivingEntity target) { return false; }
+
+    /**
+     * Gives a wild Vampirism mob a bounded combat-target hint for a provider-valid prey target. Implementations
+     * must never steal a different live combat target. This hook is intentionally unavailable to MCA vampires,
+     * whose target selection/navigation remain owned by MCA Vamp Compat.
+     */
+    default boolean requestWildHuntTarget(Mob predator, LivingEntity target) { return false; }
+
+    /**
+     * Reasserts a Dark-Folklore-owned combat target for a wild Vampirism mob during an already-authorized lethal
+     * session. Unlike {@link #requestWildHuntTarget}, this does not require the victim to remain biteable after a
+     * successful feed. It still must never steal a different live combat target and is never available to MCA
+     * vampires.
+     */
+    default boolean requestWildCombatTarget(Mob predator, LivingEntity target) { return false; }
+
+    /** Clears only a target previously selected by Dark Folklore for the expected victim. */
+    default void clearWildHuntTarget(Mob predator, UUID expectedTarget) {}
 
     /** Performs a real Vampirism blood drain and emits the provider BloodDrinkEvent. */
     default boolean performWildFeed(Mob predator, LivingEntity target) { return false; }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["BBB", "BGB", "PRP"],
+  "key": {"B": {"item": "vampirism:blood_infused_iron_ingot"}, "G": {"tag": "darkfolklore:recipe/garlic"}, "P": {"tag": "minecraft:planks"}, "R": {"item": "minecraft:redstone"}},
+  "result": {"count": 1, "id": "vampirism:garlic_finder"},
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "vampirism"},
+    {"type": "neoforge:item_exists", "item": "vampirism:garlic_finder"},
+    {"type": "neoforge:item_exists", "item": "vampirism:blood_infused_iron_ingot"},
+    {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/garlic"}}
+  ]
+}

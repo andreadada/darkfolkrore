@@ -31,6 +31,15 @@ public record InvestigationCaseLink(
                 fact == null ? "" : fact.observedImplementation(), false, false);
     }
 
+    /**
+     * Replaces a previously unknown/legacy culprit with a newly observed exact manifestation.
+     * A newly bound factual culprit always closes concept-level culprit fallback again.
+     */
+    public InvestigationCaseLink bindCulprit(UUID culprit, String implementation) {
+        return new InvestigationCaseLink(storyId, Optional.of(Objects.requireNonNull(culprit)),
+                Objects.requireNonNullElse(implementation, ""), false, issuerFallbackAllowed);
+    }
+
     public InvestigationCaseLink allowCulpritFallback() {
         return culpritFallbackAllowed ? this : new InvestigationCaseLink(storyId, culpritId,
                 observedImplementation, true, issuerFallbackAllowed);

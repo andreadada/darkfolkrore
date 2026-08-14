@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:livestock_panic",
+  "trigger": "HUNTER_INVESTIGATION",
+  "concept": "darkfolklore:chupacabra",
+  "weight": 5,
+  "cooldown_ticks": 96000,
+  "lifetime_ticks": 96000,
+  "contract_eligible": true,
+  "enabled": true
+}

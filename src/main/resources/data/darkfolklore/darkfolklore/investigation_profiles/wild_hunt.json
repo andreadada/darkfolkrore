@@ -1,0 +1,26 @@
+{
+  "concept": "darkfolklore:wild_hunt",
+  "creature_traits": [
+    "UNDEAD",
+    "SPIRIT",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "OCCULT_SIGNATURE",
+    "SPIRIT_ECHO",
+    "FOOTPRINT",
+    "SOUL_ECHO"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "SOUL": "SOUL_ECHO",
+    "FORBIDDEN_THEURGY": "OCCULT_SIGNATURE"
+  },
+  "incident_evidence": [
+    "OCCULT_SIGNATURE",
+    "SPIRIT_ECHO",
+    "FOOTPRINT"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 144
+}

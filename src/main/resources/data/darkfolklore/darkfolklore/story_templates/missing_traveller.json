@@ -1,0 +1,10 @@
+{
+  "id": "darkfolklore:missing_traveller",
+  "trigger": "HUNTER_INVESTIGATION",
+  "concept": "darkfolklore:wendigo",
+  "weight": 5,
+  "cooldown_ticks": 168000,
+  "lifetime_ticks": 168000,
+  "contract_eligible": true,
+  "enabled": true
+}

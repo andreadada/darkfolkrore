@@ -1,0 +1,27 @@
+{
+  "concept": "darkfolklore:revenant",
+  "creature_traits": [
+    "REVENANT",
+    "UNDEAD",
+    "SPIRIT",
+    "SUPERNATURAL"
+  ],
+  "signatures": [
+    "SPIRIT_ECHO",
+    "SOUL_ECHO",
+    "BONE",
+    "OCCULT_SIGNATURE"
+  ],
+  "analysis_results": {
+    "SPIRIT": "SPIRIT_ECHO",
+    "SOUL": "SOUL_ECHO",
+    "FORBIDDEN_THEURGY": "OCCULT_SIGNATURE"
+  },
+  "incident_evidence": [
+    "SPIRIT_ECHO",
+    "SOUL_ECHO",
+    "BONE"
+  ],
+  "required_evidence": 3,
+  "tracking_radius": 96
+}

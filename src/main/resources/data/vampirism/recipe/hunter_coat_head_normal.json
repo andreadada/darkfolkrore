@@ -1,0 +1,9 @@
+{
+  "type": "vampirism:shaped_crafting_weapontable",
+  "category": "equipment",
+  "key": {"G": {"tag": "darkfolklore:recipe/garlic"}, "I": {"tag": "c:ingots/iron"}},
+  "lava": 2,
+  "pattern": ["IIII", "IGGI"],
+  "result": {"count": 1, "id": "vampirism:hunter_coat_head_normal"},
+  "neoforge:conditions": [{"type": "neoforge:mod_loaded", "modid": "vampirism"}, {"type": "neoforge:item_exists", "item": "vampirism:hunter_coat_head_normal"}, {"type": "neoforge:not", "value": {"type": "neoforge:tag_empty", "tag": "darkfolklore:recipe/garlic"}}]
+}

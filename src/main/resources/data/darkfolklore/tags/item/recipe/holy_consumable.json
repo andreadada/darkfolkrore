@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "vampirism:holy_water_bottle_normal",
+      "required": false
+    },
+    {
+      "id": "vampirism:holy_water_bottle_enhanced",
+      "required": false
+    },
+    {
+      "id": "vampirism:holy_water_bottle_ultimate",
+      "required": false
+    }
+  ]
+}
