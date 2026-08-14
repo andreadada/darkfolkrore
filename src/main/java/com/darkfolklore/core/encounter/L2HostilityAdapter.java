@@ -11,7 +11,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Optional exact-version bridge for L2 Hostility. The integration never links against L2 at compile time and
+ * Optional exact-version bridge for L2 Hostility. Dark Folklore only requests a difficulty floor: L2 itself owns
+ * health scaling, equipment and trait generation. The integration never links against L2 at compile time and
  * unknown versions fail closed. Entity attachment initialization is asynchronous, so callers may safely retry.
  */
 public final class L2HostilityAdapter {
@@ -26,6 +27,7 @@ public final class L2HostilityAdapter {
     private Method getExisting;
     private Method isInitialized;
     private Method getLevel;
+    private Method reinit;
     private Method setLevel;
     private Method syncToClient;
 
@@ -48,11 +50,18 @@ public final class L2HostilityAdapter {
             }
             int current = ((Number) getLevel.invoke(cap)).intValue();
             if (current < minimumLevel) {
-                setLevel.invoke(cap, entity, minimumLevel);
-                syncToClient.invoke(cap, entity);
+                // Re-run L2's own initialization around the requested floor so L2, not Dark Folklore, selects
+                // level-derived health/equipment/traits. A final setLevel only enforces the floor if variation
+                // or an entity-specific cap produced a lower result.
+                reinit.invoke(cap, entity, minimumLevel, false);
                 current = ((Number) getLevel.invoke(cap)).intValue();
+                if (current < minimumLevel) {
+                    setLevel.invoke(cap, entity, minimumLevel);
+                    current = ((Number) getLevel.invoke(cap)).intValue();
+                }
+                syncToClient.invoke(cap, entity);
             }
-            return new ApplyResult(Status.APPLIED, current, "minimum difficulty satisfied");
+            return new ApplyResult(Status.APPLIED, current, "L2 difficulty floor satisfied; L2 owns combat scaling");
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
             available = false;
             detail = "runtime bridge failed: " + exception.getClass().getSimpleName();
@@ -69,6 +78,7 @@ public final class L2HostilityAdapter {
         getExisting = null;
         isInitialized = null;
         getLevel = null;
+        reinit = null;
         setLevel = null;
         syncToClient = null;
     }
@@ -107,10 +117,11 @@ public final class L2HostilityAdapter {
             Class<?> cap = Class.forName("dev.xkmc.l2hostility.content.capability.mob.MobTraitCap", false, loader);
             isInitialized = cap.getMethod("isInitialized");
             getLevel = cap.getMethod("getLevel");
+            reinit = cap.getMethod("reinit", LivingEntity.class, int.class, boolean.class);
             setLevel = cap.getMethod("setLevel", LivingEntity.class, int.class);
             syncToClient = cap.getMethod("syncToClient", LivingEntity.class);
             available = true;
-            detail = "audited L2 Hostility " + actual + " attachment bridge active";
+            detail = "audited L2 Hostility " + actual + " level bridge active; L2 owns combat scaling";
             DarkFolkloreCore.LOGGER.info("[compat/l2hostility] {}", detail);
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
             detail = "initialization failed: " + exception.getClass().getSimpleName();
