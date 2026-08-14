@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public final class L2HostilityAdapter {
             return new ApplyResult(Status.APPLIED, current, "L2 difficulty floor satisfied; L2 owns combat scaling");
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
             available = false;
-            detail = "runtime bridge failed: " + exception.getClass().getSimpleName();
+            detail = "runtime bridge failed: " + failureName(exception);
             DarkFolkloreCore.LOGGER.warn("[compat/l2hostility] Runtime integration disabled fail-closed", exception);
             return new ApplyResult(Status.FAILED, 0, detail);
         }
@@ -106,13 +107,20 @@ public final class L2HostilityAdapter {
             Class<?> misc = Class.forName("dev.xkmc.l2hostility.init.registrate.LHMiscs", false, loader);
             Field mobField = misc.getField("MOB");
             Object mobAttachment = mobField.get(null);
-            Method type = Arrays.stream(mobAttachment.getClass().getMethods())
-                    .filter(method -> method.getName().equals("type") && method.getParameterCount() == 0)
-                    .findFirst().orElseThrow(() -> new NoSuchMethodException("LHMiscs.MOB.type"));
+
+            // L2Core's AttVal is public, but its concrete Val implementation can be package-private. Resolving
+            // type() from mobAttachment.getClass() therefore yields a Method whose declaring class is inaccessible
+            // to Dark Folklore and Java 21 correctly throws IllegalAccessException. Resolve the same public method
+            // from the public AttVal interface instead.
+            Class<?> attVal = Class.forName("dev.xkmc.l2core.init.reg.simple.AttVal", false, loader);
+            Method type = attVal.getMethod("type");
             attachmentType = type.invoke(mobAttachment);
-            getExisting = Arrays.stream(attachmentType.getClass().getMethods())
+
+            // Likewise resolve getExisting from L2Core's public holder class, never from an implementation class.
+            Class<?> holder = Class.forName("dev.xkmc.l2core.capability.attachment.GeneralCapabilityHolder", false, loader);
+            getExisting = Arrays.stream(holder.getMethods())
                     .filter(method -> method.getName().equals("getExisting") && method.getParameterCount() == 1)
-                    .findFirst().orElseThrow(() -> new NoSuchMethodException("MOB.type().getExisting"));
+                    .findFirst().orElseThrow(() -> new NoSuchMethodException("GeneralCapabilityHolder.getExisting"));
 
             Class<?> cap = Class.forName("dev.xkmc.l2hostility.content.capability.mob.MobTraitCap", false, loader);
             isInitialized = cap.getMethod("isInitialized");
@@ -124,9 +132,17 @@ public final class L2HostilityAdapter {
             detail = "audited L2 Hostility " + actual + " level bridge active; L2 owns combat scaling";
             DarkFolkloreCore.LOGGER.info("[compat/l2hostility] {}", detail);
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
-            detail = "initialization failed: " + exception.getClass().getSimpleName();
+            detail = "initialization failed: " + failureName(exception);
             DarkFolkloreCore.LOGGER.warn("[compat/l2hostility] Optional integration disabled fail-closed", exception);
         }
+    }
+
+    private static String failureName(Throwable throwable) {
+        Throwable cause = throwable;
+        if (throwable instanceof InvocationTargetException invocation && invocation.getCause() != null) {
+            cause = invocation.getCause();
+        }
+        return cause.getClass().getSimpleName();
     }
 
     public enum Status { APPLIED, RETRY, DISABLED, FAILED }
