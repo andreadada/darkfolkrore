@@ -13,11 +13,16 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-/** Fail-closed audited adapter with independent factual and provenance capabilities. */
+/** Fail-closed adapter with independent factual and provenance capabilities. */
 public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
     public static final String MOD_ID = "mca_vamp_compat";
-    public static final String TESTED_VERSION = "3.0.29";
-    public static final Set<String> SUPPORTED_VERSIONS = Set.of("2.0.12", TESTED_VERSION);
+    /** Current reference version used by the intended 1.21.1 pack. */
+    public static final String TESTED_VERSION = "2.0.29";
+    /**
+     * Versions whose integration surface is accepted. Every useful member is still resolved at runtime and each
+     * capability fails closed independently, so accepting a version never bypasses the reflection probes.
+     */
+    public static final Set<String> SUPPORTED_VERSIONS = Set.of("2.0.12", "2.0.29", "3.0.29");
 
     private final CompatCapabilityCircuit facts = new CompatCapabilityCircuit("facts");
     private final CompatCapabilityCircuit provenance = new CompatCapabilityCircuit("provenance");
