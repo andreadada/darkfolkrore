@@ -9,15 +9,25 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Exact-provider bridge used by the bounded predation director.
+ * Provider bridge used by the bounded predation director.
  *
  * <p>Core decides whether a feeding attempt is socially reasonable; provider code remains authoritative for
- * infection, conversion and cure state. Blood operations use Vampirism's exact audited creature attachment.</p>
+ * infection, conversion and cure state. Wild Vampirism support and MCA-provider support are deliberately
+ * independent so an MCA compatibility failure can never disable ordinary Vampirism mobs.</p>
  */
 public interface VampirePredationBridge {
     VampirePredationBridge DISABLED = new VampirePredationBridge() {};
 
     default boolean runtimeAvailable() { return false; }
+
+    /** True when ordinary Vampirism mob feeding/predation is usable. */
+    default boolean wildRuntimeAvailable() { return false; }
+
+    /** True when the MCA-specific autonomous predation surface is usable. */
+    default boolean mcaRuntimeAvailable() { return false; }
+
+    /** Short runtime-probe summary for diagnostics. */
+    default String runtimeDetail() { return "predation bridge disabled"; }
 
     /** Read-only per-capability health for diagnostics; an empty map means the bridge does not expose subcircuits. */
     default Map<String, Boolean> circuitStatus() { return Map.of(); }
@@ -53,8 +63,9 @@ public interface VampirePredationBridge {
     default boolean canMcaVampireTarget(Mob predator, LivingEntity target) { return false; }
 
     /**
-     * MCA Vamp Compat 2.0.12 has no native animal-feeding goal. This exact adapter may drain an animal through
-     * Vampirism's audited ExtendedCreature blood attachment, without infecting/replacing the animal.
+     * Some MCA Vamp Compat builds have no native animal-feeding goal. This adapter may drain an animal through
+     * Vampirism's ExtendedCreature blood attachment, without infecting/replacing the animal, only when the
+     * corresponding runtime-probed MCA capability is healthy.
      */
     default boolean canMcaAnimalFeed(Mob predator, LivingEntity target) { return false; }
 
