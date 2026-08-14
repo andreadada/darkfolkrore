@@ -12,17 +12,17 @@ import java.lang.reflect.Method;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Fail-closed adapter with independent factual and provenance capabilities. */
 public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
     public static final String MOD_ID = "mca_vamp_compat";
     /** Current reference version used by the intended 1.21.1 pack. */
     public static final String TESTED_VERSION = "2.0.29";
-    /**
-     * Versions whose integration surface is accepted. Every useful member is still resolved at runtime and each
-     * capability fails closed independently, so accepting a version never bypasses the reflection probes.
-     */
+    /** Versions whose exact surface has already been reviewed. */
     public static final Set<String> SUPPORTED_VERSIONS = Set.of("2.0.12", "2.0.29", "3.0.29");
+    private static final Pattern VERSION_TRIPLE = Pattern.compile("(?:^|[^0-9])(\\d+)\\.(\\d+)\\.(\\d+)(?:$|[^0-9])");
 
     private final CompatCapabilityCircuit facts = new CompatCapabilityCircuit("facts");
     private final CompatCapabilityCircuit provenance = new CompatCapabilityCircuit("provenance");
@@ -33,8 +33,40 @@ public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
     private Method vampireSource;
     private Method werewolfSource;
 
+    /**
+     * Normalizes loader/build decorations such as {@code 2.0.29+build.4}, {@code v2.0.29} or surrounding text to
+     * the semantic version triple Dark Folklore actually gates on.
+     */
+    public static String normalizeVersion(String version) {
+        if (version == null) return "";
+        String trimmed = version.trim();
+        Matcher matcher = VERSION_TRIPLE.matcher(trimmed);
+        if (!matcher.find()) return trimmed;
+        return matcher.group(1) + "." + matcher.group(2) + "." + matcher.group(3);
+    }
+
     public static boolean supportsVersion(String version) {
-        return version != null && SUPPORTED_VERSIONS.contains(version);
+        return SUPPORTED_VERSIONS.contains(normalizeVersion(version));
+    }
+
+    /**
+     * The 2.0.x provider line is allowed to enter the runtime-probe path from 2.0.12 onward. This does not grant
+     * capability access by version alone: every reflected member still has to resolve successfully and each
+     * capability fails closed independently. Other version lines remain exact-review only.
+     */
+    public static boolean runtimeProbeEligible(String version) {
+        String normalized = normalizeVersion(version);
+        if (SUPPORTED_VERSIONS.contains(normalized)) return true;
+        Matcher matcher = VERSION_TRIPLE.matcher(normalized);
+        if (!matcher.find()) return false;
+        try {
+            int major = Integer.parseInt(matcher.group(1));
+            int minor = Integer.parseInt(matcher.group(2));
+            int patch = Integer.parseInt(matcher.group(3));
+            return major == 2 && minor == 0 && patch >= 12;
+        } catch (NumberFormatException ignored) {
+            return false;
+        }
     }
 
     public void initialize() throws ReflectiveOperationException {
