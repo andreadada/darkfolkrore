@@ -88,7 +88,7 @@ public final class LoreEngine {
         if (after.points() != before.points()) {
             NeoForge.EVENT_BUS.post(new KnowledgeChangedEvent(player, concept, before, after));
             if (after.stage() != before.stage()) {
-                FolkloreNetwork.sendLoreToast(player, concept, after);
+                FolkloreNetwork.sendLoreToast(player, concept, after.stage().name());
             }
         }
         return after;
