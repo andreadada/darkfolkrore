@@ -77,7 +77,8 @@ public final class McaVampCompatAdapter implements SupernaturalStateAdapter {
         }
     }
 
-    public void initialize() {
+    /** Retains the historical checked contract while every sub-probe now handles its own failure internally. */
+    public void initialize() throws ReflectiveOperationException {
         ClassLoader loader = McaVampCompatAdapter.class.getClassLoader();
         probeFact(loader, vampireFacts, "vampire",
                 "com.guilh.mca_vampirism_compat.service.McaVampireStateService", "isVampire");
