@@ -37,7 +37,6 @@ public final class ThreatPolicyRuntime {
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
         SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
 
-        // Repeat the profile's hard semantic gate here so correctness never depends on event-listener ordering.
         if (profile != null && !SpawnDirector.hardGateAllows(profile, level.isNight())) {
             event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
             return;
@@ -67,15 +66,25 @@ public final class ThreatPolicyRuntime {
         }
     }
 
+    /**
+     * The generic hostile floor belongs to naturally spawned ambient threats only. Explicit Dark Folklore
+     * encounter policies are handled on entity join so rituals/story manifestations still receive their floor.
+     * This prevents the Core from silently re-leveling another mod's summoned minion, scripted boss or NPC battle.
+     */
+    public void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
+        if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || event.getSpawnType() != MobSpawnType.NATURAL
+                || !(event.getEntity() instanceof Monster monster)) return;
+        String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(monster.getType()).toString();
+        if (ThreatPolicyManager.INSTANCE.forEntity(entityId).isPresent()) return;
+        requestL2Floor(event.getLevel().getLevel(), monster, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+    }
+
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !(event.getEntity() instanceof LivingEntity living)) return;
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
-        if (policy == null) {
-            if (living instanceof Monster) requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
-            return;
-        }
+        if (policy == null) return;
 
         var nearest = level.players().stream()
                 .filter(player -> player.distanceToSqr(living) < 16384.0D)
@@ -108,10 +117,6 @@ public final class ThreatPolicyRuntime {
         L2HostilityAdapter.INSTANCE.clearRuntimeState();
     }
 
-    /**
-     * Requests a minimum through L2 and retains the strongest pending request while L2's attachment initializes.
-     * Lower-priority systems can therefore never overwrite a stronger legendary/story request made in the same tick.
-     */
     public L2HostilityAdapter.ApplyResult requestL2Floor(ServerLevel level, LivingEntity living, int minimumLevel) {
         if (minimumLevel <= 0) {
             return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0, "no level requested");
