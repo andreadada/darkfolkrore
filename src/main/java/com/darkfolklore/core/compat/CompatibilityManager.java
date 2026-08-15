@@ -148,10 +148,6 @@ public final class CompatibilityManager {
             }
         }
 
-        /*
-         * Critical isolation rule: ordinary Vampirism predation depends only on Vampirism. MCA version/probe
-         * failures must never prevent IVampireMob recognition, blood hunger, targeting or feeding.
-         */
         if (PredationBridgePolicy.loadWildBridge(vampirismExact)) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
@@ -243,6 +239,10 @@ public final class CompatibilityManager {
 
     public void clearRuntimeCaches() {
         mcaCapitals.clearCache();
+        if (mcaFactAdapter != null) mcaFactAdapter.clearRuntimeState();
+        FieldGuideBridge guide = fieldGuideBridge;
+        if (guide != null) guide.clearRuntimeState();
+        mcaVampireLifecycleBridge.clearRuntimeState();
         vampirePredationBridge.clearRuntimeState();
     }
 
