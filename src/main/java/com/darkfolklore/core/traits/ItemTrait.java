@@ -3,6 +3,8 @@ package com.darkfolklore.core.traits;
 public enum ItemTrait {
     SILVER,
     SILVER_WEAPON,
+    /** Semantic damage-source trait for projectiles whose ammunition item is no longer recoverable from DamageSource. */
+    SILVER_PROJECTILE,
     COLD_IRON,
     WOOD,
     WOODEN_STAKE,
