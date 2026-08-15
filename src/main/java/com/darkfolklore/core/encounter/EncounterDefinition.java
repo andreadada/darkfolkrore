@@ -10,7 +10,7 @@ import java.util.Set;
 public record EncounterDefinition(String id, String concept, String implementation, EncounterRank rank,
         EncounterSpawnMode spawnMode, Set<EncounterOrigin> origins, int minimumOmens, boolean nightOnly,
         int minimumPlayerDistance, int maximumPlayerDistance, long omenIntervalTicks, long regionalCooldownTicks,
-        long lifetimeTicks, List<EvidenceType> omenEvidence, String combatProfile) {
+        long lifetimeTicks, List<EvidenceType> omenEvidence, int l2MinimumLevel) {
     public EncounterDefinition {
         id = requireResourceLocation(id, "id");
         concept = requireResourceLocation(concept, "concept");
@@ -26,7 +26,7 @@ public record EncounterDefinition(String id, String concept, String implementati
         regionalCooldownTicks = Math.max(1200L, regionalCooldownTicks);
         lifetimeTicks = Math.max(2400L, lifetimeTicks);
         omenEvidence = List.copyOf(omenEvidence == null ? List.of() : omenEvidence);
-        combatProfile = combatProfile == null ? "" : combatProfile;
+        l2MinimumLevel = Math.max(0, Math.min(1000, l2MinimumLevel));
     }
 
     private static String requireResourceLocation(String value, String field) {
