@@ -16,6 +16,11 @@ public final class EncounterEventRegistrar {
     }
 
     @SubscribeEvent
+    public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
+        ThreatPolicyRuntime.INSTANCE.onFinalizeSpawn(event);
+    }
+
+    @SubscribeEvent
     public static void onEntityJoin(EntityJoinLevelEvent event) {
         ThreatPolicyRuntime.INSTANCE.onEntityJoin(event);
     }
