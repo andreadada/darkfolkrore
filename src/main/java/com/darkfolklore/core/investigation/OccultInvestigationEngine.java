@@ -4,6 +4,7 @@ import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.contracts.ContractAssignment;
+import com.darkfolklore.core.contracts.ContractEvidenceProgression;
 import com.darkfolklore.core.contracts.ContractStatus;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.knowledge.lore.KnowledgeStage;
@@ -88,16 +89,13 @@ public final class OccultInvestigationEngine {
             return;
         }
 
-        boolean changed = assignment.contract().status() == ContractStatus.INVESTIGATING
-                ? assignment.contract().addEvidence(derived, assignment.requiredDistinctClues())
-                : assignment.contract().recordEvidence(derived);
-        if (!changed) {
+        ContractEvidenceProgression.Result progression = ContractEvidenceProgression.record(player, data, assignment, derived);
+        if (!progression.changed()) {
             player.displayClientMessage(Component.literal(
                     "You have already extracted this " + tradition.name().toLowerCase(Locale.ROOT) + " signature."), true);
             return;
         }
 
-        data.putContract(assignment);
         LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 8);
         LoreEngine.INSTANCE.grant(player, MagicPracticeResolver.knowledgeConcept(tradition), 3);
         sendAnalysisParticles(level, clue, tradition);
@@ -231,6 +229,12 @@ public final class OccultInvestigationEngine {
 
     public Optional<InvestigationProfile> profile(String concept) {
         return FolkloreDataManager.INSTANCE.investigationProfile(concept);
+    }
+
+    /** Clears per-player transient UI/tracking state between integrated or dedicated server lifecycles. */
+    public void clearRuntimeState() {
+        trackingCooldown.clear();
+        announcedIdentification.clear();
     }
 
     private void ensureObservedIfIdentified(ServerPlayer player, FolkloreSavedData data, ContractAssignment assignment) {
