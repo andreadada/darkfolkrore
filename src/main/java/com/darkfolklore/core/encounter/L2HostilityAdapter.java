@@ -52,8 +52,8 @@ public final class L2HostilityAdapter {
             int current = ((Number) getLevel.invoke(cap)).intValue();
             if (current < minimumLevel) {
                 // Re-run L2's own initialization around the requested floor so L2, not Dark Folklore, selects
-                // level-derived health/equipment/traits. A final setLevel only enforces the floor if variation
-                // or an entity-specific cap produced a lower result.
+                // level-derived health/equipment/traits. L2's setLevel itself clamps against global/entity caps and
+                // rescales through TraitManager.scale, so the resulting level must be read back and respected.
                 reinit.invoke(cap, entity, minimumLevel, false);
                 current = ((Number) getLevel.invoke(cap)).intValue();
                 if (current < minimumLevel) {
@@ -61,6 +61,11 @@ public final class L2HostilityAdapter {
                     current = ((Number) getLevel.invoke(cap)).intValue();
                 }
                 syncToClient.invoke(cap, entity);
+            }
+            if (current < minimumLevel) {
+                return new ApplyResult(Status.CAPPED, current,
+                        "L2 capped the requested floor " + minimumLevel + " at level " + current
+                                + "; Dark Folklore will not bypass L2 configuration");
             }
             return new ApplyResult(Status.APPLIED, current, "L2 difficulty floor satisfied; L2 owns combat scaling");
         } catch (ReflectiveOperationException | RuntimeException | LinkageError exception) {
@@ -145,7 +150,7 @@ public final class L2HostilityAdapter {
         return cause.getClass().getSimpleName();
     }
 
-    public enum Status { APPLIED, RETRY, DISABLED, FAILED }
+    public enum Status { APPLIED, CAPPED, RETRY, DISABLED, FAILED }
 
     public record ApplyResult(Status status, int resultingLevel, String detail) {
         public boolean retry() { return status == Status.RETRY; }
