@@ -26,55 +26,68 @@ import java.util.UUID;
 public final class ThreatPolicyRuntime {
     public static final ThreatPolicyRuntime INSTANCE = new ThreatPolicyRuntime();
     private static final int MAX_PENDING_L2 = 4096;
+    private static final int MAX_NATURAL_CANDIDATES = 4096;
     private final LinkedHashMap<UUID, PendingL2> pendingL2 = new LinkedHashMap<>();
+    private final LinkedHashMap<UUID, Long> naturalSpawnCandidates = new LinkedHashMap<>();
 
     private ThreatPolicyRuntime() {}
 
     public void onPositionCheck(MobSpawnEvent.PositionCheck event) {
-        if (!FolkloreConfig.SPAWN_DIRECTOR.get() || event.getSpawnType() != MobSpawnType.NATURAL) return;
+        if (event.getSpawnType() != MobSpawnType.NATURAL) return;
         ServerLevel level = event.getLevel().getLevel();
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
         SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
 
-        if (profile != null && !SpawnDirector.hardGateAllows(profile, level.isNight())) {
-            event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
-            return;
-        }
+        if (FolkloreConfig.SPAWN_DIRECTOR.get()) {
+            if (profile != null && !SpawnDirector.hardGateAllows(profile, level.isNight())) {
+                event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
+                return;
+            }
 
-        double profileContext = 1.0D;
-        if (profile != null) {
-            if (!WorldEventDirector.INSTANCE.active(level).isEmpty()) profileContext *= profile.eventMultiplier();
-            if (FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
-                var nearestPlayer = level.getNearestPlayer(event.getX(), event.getY(), event.getZ(), 128, false);
-                if (nearestPlayer != null) {
-                    int pressure = FolkloreSavedData.get(level.getServer()).encounterPressure(nearestPlayer.getUUID());
-                    profileContext *= Math.max(0.2D, 1.0D - pressure / 125.0D);
+            double profileContext = 1.0D;
+            if (profile != null) {
+                if (!WorldEventDirector.INSTANCE.active(level).isEmpty()) profileContext *= profile.eventMultiplier();
+                if (FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
+                    var nearestPlayer = level.getNearestPlayer(event.getX(), event.getY(), event.getZ(), 128, false);
+                    if (nearestPlayer != null) {
+                        int pressure = FolkloreSavedData.get(level.getServer()).encounterPressure(nearestPlayer.getUUID());
+                        profileContext *= Math.max(0.2D, 1.0D - pressure / 125.0D);
+                    }
                 }
+            }
+
+            NaturalSpawnRarityPolicy.Decision decision = NaturalSpawnRarityPolicy.resolve(
+                    policy == null ? null : policy.naturalSpawnMultiplier(),
+                    profile == null ? null : (double) profile.rarity().naturalChance(),
+                    event.getEntity() instanceof Monster,
+                    FolkloreConfig.HOSTILE_NATURAL_SPAWN_MULTIPLIER.get(),
+                    FolkloreConfig.SPAWN_MULTIPLIER.get(),
+                    profileContext);
+            if (NaturalSpawnRarityPolicy.reject(decision, event.getLevel().getRandom().nextDouble())) {
+                event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
+                return;
             }
         }
 
-        NaturalSpawnRarityPolicy.Decision decision = NaturalSpawnRarityPolicy.resolve(
-                policy == null ? null : policy.naturalSpawnMultiplier(),
-                profile == null ? null : (double) profile.rarity().naturalChance(),
-                event.getEntity() instanceof Monster,
-                FolkloreConfig.HOSTILE_NATURAL_SPAWN_MULTIPLIER.get(),
-                FolkloreConfig.SPAWN_MULTIPLIER.get(),
-                profileContext);
-        if (NaturalSpawnRarityPolicy.reject(decision, event.getLevel().getRandom().nextDouble())) {
-            event.setResult(MobSpawnEvent.PositionCheck.Result.FAIL);
+        // NeoForge 21.1.x exposes the natural spawn reason here, while EntityJoinLevelEvent does not. Retain a
+        // short-lived, bounded marker so generic L2 scaling can distinguish ambient natural monsters from another
+        // mod's summoned minions, scripted bosses and command-created entities without depending on provider APIs.
+        if (FolkloreConfig.ENCOUNTER_DIRECTOR.get() && event.getEntity() instanceof Monster) {
+            rememberNaturalCandidate(event.getEntity().getUUID(), level.getGameTime());
         }
     }
 
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !(event.getEntity() instanceof LivingEntity living)) return;
+        boolean observedNaturalSpawn = naturalSpawnCandidates.remove(living.getUUID()) != null;
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
         if (policy == null) {
-            // This fallback intentionally remains broad until an exact 1.21.1 spawn-reason hook is audited.
-            // Explicit Dark Folklore policies still override it for curated ritual/story entities.
-            if (living instanceof Monster) requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+            if (observedNaturalSpawn && living instanceof Monster) {
+                requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+            }
             return;
         }
 
@@ -87,6 +100,8 @@ public final class ThreatPolicyRuntime {
                 data.setEncounterPressure(nearest.getUUID(), policy.minimumEncounterPressure());
             }
         }
+        // Explicit policies are intentional Dark Folklore encounter semantics, so ritual/story/non-natural spawns
+        // still receive their curated L2 floor while ordinary unlisted provider summons do not.
         requestL2Floor(level, living, policy.l2MinimumLevel());
     }
 
@@ -106,13 +121,10 @@ public final class ThreatPolicyRuntime {
 
     public void clearRuntimeState() {
         pendingL2.clear();
+        naturalSpawnCandidates.clear();
         L2HostilityAdapter.INSTANCE.clearRuntimeState();
     }
 
-    /**
-     * Requests a minimum through L2 and retains the strongest pending request while L2's attachment initializes.
-     * Lower-priority systems can therefore never overwrite a stronger legendary/story request made in the same tick.
-     */
     public L2HostilityAdapter.ApplyResult requestL2Floor(ServerLevel level, LivingEntity living, int minimumLevel) {
         if (minimumLevel <= 0) {
             return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0, "no level requested");
@@ -128,6 +140,14 @@ public final class ThreatPolicyRuntime {
         }
         pendingL2.put(living.getUUID(), new PendingL2(strongest, expiresAt));
         return result;
+    }
+
+    private void rememberNaturalCandidate(UUID entityId, long now) {
+        naturalSpawnCandidates.entrySet().removeIf(entry -> entry.getValue() < now);
+        if (!naturalSpawnCandidates.containsKey(entityId) && naturalSpawnCandidates.size() >= MAX_NATURAL_CANDIDATES) {
+            naturalSpawnCandidates.remove(naturalSpawnCandidates.keySet().iterator().next());
+        }
+        naturalSpawnCandidates.put(entityId, now + 200L);
     }
 
     private record PendingL2(int minimumLevel, long expiresAt) {}
