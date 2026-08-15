@@ -24,6 +24,8 @@ public interface McaVampireLifecycleBridge {
 
     default boolean ensureNativeAi(LivingEntity entity) { return false; }
 
+    default void clearRuntimeState() {}
+
     record Snapshot(boolean available,
                     boolean mcaVillager,
                     boolean infected,
