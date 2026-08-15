@@ -2,10 +2,12 @@ package com.darkfolklore.core.diagnostics;
 
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.compat.l2hostility.L2HostilityBridge;
+import com.darkfolklore.core.contracts.ContractEngine;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.encounter.RitualEngine;
 import com.darkfolklore.core.encounter.ThreatPolicyManager;
 import com.darkfolklore.core.encounter.ThreatPolicyRuntime;
+import com.darkfolklore.core.investigation.OccultInvestigationEngine;
 import com.darkfolklore.core.lifecycle.McaVampireLifecycleEngine;
 import com.darkfolklore.core.predation.PredationTraceEngine;
 import com.darkfolklore.core.predation.VampirePredationEngine;
@@ -43,6 +45,8 @@ public final class CoreServerEvents {
         McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
         VampirePredationEngine.INSTANCE.clearRuntimeState();
         PredationTraceEngine.INSTANCE.clearRuntimeState();
+        ContractEngine.INSTANCE.clearRuntimeState();
+        OccultInvestigationEngine.INSTANCE.clearRuntimeState();
         RumorEngine.INSTANCE.clearRuntimeState();
         WitnessEngine.INSTANCE.clearRuntimeState();
         WorldEventDirector.INSTANCE.clearRuntimeState();
