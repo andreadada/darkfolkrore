@@ -42,6 +42,7 @@ public final class CoreServerEvents {
     @SubscribeEvent
     public void onServerStopped(ServerStoppedEvent event) {
         CompatibilityManager.INSTANCE.clearRuntimeCaches();
+        CompatibilityManager.INSTANCE.mcaSocial().clearRuntimeState();
         McaVampireLifecycleEngine.INSTANCE.clearRuntimeState();
         VampirePredationEngine.INSTANCE.clearRuntimeState();
         PredationTraceEngine.INSTANCE.clearRuntimeState();
