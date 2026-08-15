@@ -34,7 +34,7 @@ public final class MonsterContract {
     public boolean addEvidence(EvidenceType type, int requiredDistinctClues) {
         if (status != ContractStatus.INVESTIGATING) return false;
         boolean changed = recordEvidence(type);
-        if (evidence.size() >= Math.max(1, requiredDistinctClues)) status = ContractStatus.IDENTIFIED;
+        if (changed && evidence.size() >= Math.max(1, requiredDistinctClues)) status = ContractStatus.IDENTIFIED;
         return changed;
     }
 
