@@ -11,10 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Read-mostly lifecycle bridge with independent core-state, metadata, AI-state and mutation capabilities.
- * Infection/conversion/cure observation remains usable when an optional lineage/cause member changes.
- */
+/** Read-mostly lifecycle bridge with independent core-state, metadata, AI-state and mutation capabilities. */
 public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridge {
     private final CompatCapabilityCircuit coreReads = new CompatCapabilityCircuit("lifecycle-core");
     private final CompatCapabilityCircuit metadataReads = new CompatCapabilityCircuit("lifecycle-metadata");
@@ -26,11 +23,9 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
     private Method isInfected;
     private Method isConverted;
     private Method isCuringVampire;
-
     private Method isFactionInheritanceProcessed;
     private Method isBiteWasConversionCause;
     private Method getSource;
-
     private Method areAiGoalsAdded;
     private Method registerGoalsIfNeeded;
 
@@ -87,21 +82,14 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
         }
     }
 
-    @Override
-    public boolean runtimeAvailable() { return coreReads.available(); }
-
+    @Override public boolean runtimeAvailable() { return coreReads.available(); }
     public boolean metadataAvailable() { return metadataReads.available(); }
-
     public boolean aiStateAvailable() { return aiStateReads.available() && areAiGoalsAdded != null; }
-
     public boolean mutationAvailable() { return mutation.available() && registerGoalsIfNeeded != null; }
 
     public Map<String, Boolean> circuitStatus() {
-        return Map.of(
-                "core", coreReads.available(),
-                "metadata", metadataReads.available(),
-                "ai_state", aiStateAvailable(),
-                "ai_mutation", mutationAvailable());
+        return Map.of("core", coreReads.available(), "metadata", metadataReads.available(),
+                "ai_state", aiStateAvailable(), "ai_mutation", mutationAvailable());
     }
 
     public String diagnosticDetail() {
@@ -122,7 +110,6 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
                 return Snapshot.unavailable("MCA vampire capability absent; " + diagnosticDetail());
             }
             Object state = optional.get();
-
             boolean infected = (boolean) isInfected.invoke(state);
             boolean converted = (boolean) isConverted.invoke(state);
             boolean curing = (boolean) isCuringVampire.invoke(state);
@@ -173,6 +160,27 @@ public final class McaVampireLifecycleCompat implements McaVampireLifecycleBridg
             DarkFolkloreCore.LOGGER.warn("[compat/mca_vamp_lifecycle] Native AI mutation disabled; state reads remain active",
                     exception);
             return false;
+        }
+    }
+
+    /** Re-arm only signatures that were actually resolved; unavailable provider members stay unavailable. */
+    @Override
+    public void clearRuntimeState() {
+        if (isMcaVillager != null && capabilityGet != null && isInfected != null && isConverted != null && isCuringVampire != null) {
+            coreReads.reset();
+            coreReads.markReady("infection/conversion/cure members resolved");
+        }
+        if (isFactionInheritanceProcessed != null && isBiteWasConversionCause != null && getSource != null) {
+            metadataReads.reset();
+            metadataReads.markReady("inheritance/cause/provenance members resolved");
+        }
+        if (areAiGoalsAdded != null) {
+            aiStateReads.reset();
+            aiStateReads.markReady("native AI state member resolved");
+        }
+        if (registerGoalsIfNeeded != null) {
+            mutation.reset();
+            mutation.markReady("idempotent native AI member resolved");
         }
     }
 
