@@ -73,7 +73,7 @@ public final class ThreatPolicyRuntime {
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
         if (policy == null) {
-            if (living instanceof Monster) requestL2(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+            if (living instanceof Monster) requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
             return;
         }
 
@@ -86,7 +86,7 @@ public final class ThreatPolicyRuntime {
                 data.setEncounterPressure(nearest.getUUID(), policy.minimumEncounterPressure());
             }
         }
-        requestL2(level, living, policy.l2MinimumLevel());
+        requestL2Floor(level, living, policy.l2MinimumLevel());
     }
 
     public void onEntityTick(EntityTickEvent.Post event) {
@@ -108,12 +108,25 @@ public final class ThreatPolicyRuntime {
         L2HostilityAdapter.INSTANCE.clearRuntimeState();
     }
 
-    private void requestL2(ServerLevel level, LivingEntity living, int minimumLevel) {
-        if (minimumLevel <= 0) return;
+    /**
+     * Requests a minimum through L2 and retains the strongest pending request while L2's attachment initializes.
+     * Lower-priority systems can therefore never overwrite a stronger legendary/story request made in the same tick.
+     */
+    public L2HostilityAdapter.ApplyResult requestL2Floor(ServerLevel level, LivingEntity living, int minimumLevel) {
+        if (minimumLevel <= 0) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0, "no level requested");
+        }
         L2HostilityAdapter.ApplyResult result = L2HostilityAdapter.INSTANCE.applyMinimum(living, minimumLevel);
-        if (!result.retry()) return;
-        if (pendingL2.size() >= MAX_PENDING_L2) pendingL2.remove(pendingL2.keySet().iterator().next());
-        pendingL2.put(living.getUUID(), new PendingL2(minimumLevel, level.getGameTime() + 200L));
+        if (!result.retry()) return result;
+
+        PendingL2 existing = pendingL2.get(living.getUUID());
+        int strongest = existing == null ? minimumLevel : Math.max(minimumLevel, existing.minimumLevel());
+        long expiresAt = Math.max(level.getGameTime() + 200L, existing == null ? 0L : existing.expiresAt());
+        if (existing == null && pendingL2.size() >= MAX_PENDING_L2) {
+            pendingL2.remove(pendingL2.keySet().iterator().next());
+        }
+        pendingL2.put(living.getUUID(), new PendingL2(strongest, expiresAt));
+        return result;
     }
 
     private record PendingL2(int minimumLevel, long expiresAt) {}
