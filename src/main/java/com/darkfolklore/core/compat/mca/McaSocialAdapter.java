@@ -19,10 +19,7 @@ import java.util.UUID;
 
 /**
  * Fail-closed, exact-version bridge to MCA's read-only social APIs.
- *
- * <p>Family relationships, player affinity, personality and traits are deliberately probed as independent
- * capabilities. A signature change in one optional social surface therefore degrades only that evidence instead
- * of disabling every MCA social read.</p>
+ * Family, affinity, personality and traits are independent capabilities.
  */
 public final class McaSocialAdapter {
     public static final String MOD_ID = "mca";
@@ -35,7 +32,6 @@ public final class McaSocialAdapter {
     private final CompatCapabilityCircuit traits = new CompatCapabilityCircuit("traits");
 
     private Class<?> villagerClass;
-
     private Method familyTreeGet;
     private Method familyTreeGetOrEmpty;
     private Method nodePartner;
@@ -43,21 +39,17 @@ public final class McaSocialAdapter {
     private Method relationshipStateIsMarried;
     private Method nodeIsParent;
     private Method nodeSiblings;
-
     private Method affinityVillagerGetBrain;
     private Method brainGetMemories;
     private Method memoriesGetHearts;
     private Method configGetInstance;
     private Field friendThreshold;
     private Field bountyThreshold;
-
     private Method personalityVillagerGetBrain;
     private Method brainGetPersonality;
-
     private Method villagerGetTraits;
     private Method traitsGetTraits;
     private Method traitId;
-
     private volatile boolean ready;
     private volatile String statusDetail = "not initialized";
 
@@ -83,7 +75,6 @@ public final class McaSocialAdapter {
         probeAffinity(loader);
         probePersonality(loader);
         probeTraits(loader);
-
         ready = actors.available() && (family.available() || affinity.available()
                 || personality.available() || traits.available());
         statusDetail = (fullyReady() ? "active: " : ready ? "partial: " : "disabled: ") + diagnosticDetail();
@@ -164,12 +155,8 @@ public final class McaSocialAdapter {
     }
 
     public Map<String, Boolean> circuitStatus() {
-        return Map.of(
-                "actors", actors.available(),
-                "family", family.available(),
-                "affinity", affinity.available(),
-                "personality", personality.available(),
-                "traits", traits.available());
+        return Map.of("actors", actors.available(), "family", family.available(), "affinity", affinity.available(),
+                "personality", personality.available(), "traits", traits.available());
     }
 
     public McaSocialContext relationship(Entity observer, Entity source) {
@@ -274,7 +261,6 @@ public final class McaSocialAdapter {
         }
     }
 
-    /** Intended for diagnostics and story selection, not per-tick polling. */
     public Set<String> traitIds(Entity entity) {
         if (!ready || !actors.available() || !traits.available() || !villagerClass.isInstance(entity)) return Set.of();
         try {
@@ -316,6 +302,33 @@ public final class McaSocialAdapter {
 
     private boolean isSocialActor(Entity entity) {
         return entity instanceof Player || (villagerClass != null && villagerClass.isInstance(entity));
+    }
+
+    /** Re-arm only capabilities whose signatures were resolved; genuine signature mismatches stay disabled. */
+    public synchronized void clearRuntimeState() {
+        if (villagerClass != null) rearm(actors, "VillagerEntityMCA resolved");
+        if (familyTreeGet != null && familyTreeGetOrEmpty != null && nodePartner != null && nodeRelationshipState != null
+                && relationshipStateIsMarried != null && nodeIsParent != null && nodeSiblings != null) {
+            rearm(family, "family tree members resolved");
+        }
+        if (affinityVillagerGetBrain != null && brainGetMemories != null && memoriesGetHearts != null
+                && configGetInstance != null && friendThreshold != null && bountyThreshold != null) {
+            rearm(affinity, "player affinity members resolved");
+        }
+        if (personalityVillagerGetBrain != null && brainGetPersonality != null) {
+            rearm(personality, "personality members resolved");
+        }
+        if (villagerGetTraits != null && traitsGetTraits != null && traitId != null) {
+            rearm(traits, "trait members resolved");
+        }
+        ready = actors.available() && (family.available() || affinity.available()
+                || personality.available() || traits.available());
+        refreshStatus();
+    }
+
+    private static void rearm(CompatCapabilityCircuit circuit, String detail) {
+        circuit.reset();
+        circuit.markReady(detail);
     }
 
     private static McaSocialContext context(McaRelationshipCategory relationship, OptionalInt hearts,
