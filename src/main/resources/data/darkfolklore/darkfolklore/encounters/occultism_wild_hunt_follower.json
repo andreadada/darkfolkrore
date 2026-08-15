@@ -1,0 +1,7 @@
+{
+  "id": "darkfolklore:occultism_wild_hunt_follower",
+  "entity": "occultism:wild_hunt_skeleton",
+  "natural_spawn_multiplier": 0.0,
+  "minimum_encounter_pressure": 30,
+  "l2_minimum_level": 40
+}
