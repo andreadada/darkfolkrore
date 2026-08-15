@@ -6,4 +6,5 @@ import net.minecraft.server.level.ServerPlayer;
 public interface FieldGuideBridge {
     boolean unlockObservedImplementation(ServerPlayer player, String registryId);
     boolean runtimeAvailable();
+    default void clearRuntimeState() {}
 }
