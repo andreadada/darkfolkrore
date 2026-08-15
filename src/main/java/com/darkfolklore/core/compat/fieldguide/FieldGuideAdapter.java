@@ -85,10 +85,6 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
         }
     }
 
-    /**
-     * Unlocks the implementation actually observed by an investigation. For KEEP_DISTINCT concepts that exact
-     * provider entry is authoritative. Canonical concepts may fall back to the canonical entity page.
-     */
     @Override
     public boolean unlockObservedImplementation(ServerPlayer player, String registryId) {
         if (!runtimeAvailable || registryId == null || registryId.isBlank()) return false;
@@ -96,9 +92,7 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
             FieldGuideProgressManager manager = FieldGuideProgressManager.getInstance();
             PlayerFieldGuideProgress progress = manager.getProgress(player);
             if (progress == null) return false;
-
             if (unlockEntry(manager, progress, player, registryId)) return true;
-
             String canonicalId = FolkloreDataManager.INSTANCE.canonical().resolve(registryId)
                     .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
                     .map(CanonicalDefinition::canonicalId)
@@ -111,8 +105,13 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
         }
     }
 
+    @Override public boolean runtimeAvailable() { return runtimeAvailable; }
+
+    /** A server-local provider state failure must not poison every later integrated-server world in this JVM. */
     @Override
-    public boolean runtimeAvailable() { return runtimeAvailable; }
+    public void clearRuntimeState() {
+        runtimeAvailable = true;
+    }
 
     private static boolean unlockEntry(FieldGuideProgressManager manager, PlayerFieldGuideProgress progress,
                                        ServerPlayer player, String registryId) {
@@ -138,7 +137,6 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
                 failure.getClass().getSimpleName(), failure.getMessage());
     }
 
-    /** Invalid data is a local content error, not a reason to trip the binary Field Guide circuit. */
     private static ResourceLocation entryId(String registryId) {
         ResourceLocation id = ResourceLocation.tryParse(registryId);
         if (id == null) return null;
