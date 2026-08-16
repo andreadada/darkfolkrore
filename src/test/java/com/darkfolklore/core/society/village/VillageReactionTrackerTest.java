@@ -23,4 +23,21 @@ class VillageReactionTrackerTest {
         assertTrue(tracker.record("village", "incident-c", 1300L, state).isEmpty());
         tracker.clear();
     }
+
+    @Test
+    void runtimeCachesRemainHardBoundedUnderIncidentFlood() {
+        VillageReactionTracker tracker = VillageReactionTracker.INSTANCE;
+        tracker.clear();
+        VillageSocietyState state = new VillageSocietyState();
+        state.setValues(0, 0, 0, 0, 0, 25, 0);
+
+        long now = 10_000L;
+        for (int i = 0; i < VillageReactionTracker.MAX_TRACKED + 512; i++) {
+            tracker.record("village-" + i, "incident-" + i, now, state);
+        }
+
+        assertTrue(tracker.trackedVillageCount() <= VillageReactionTracker.MAX_TRACKED);
+        assertTrue(tracker.recentIncidentCount() <= VillageReactionTracker.MAX_TRACKED);
+        tracker.clear();
+    }
 }
