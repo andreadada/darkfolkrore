@@ -162,12 +162,15 @@ public final class ThreatPolicyRuntime {
         L2HostilityAdapter.ApplyResult result = L2HostilityAdapter.INSTANCE.applyMinimum(living, minimumLevel);
         if (!result.retry()) return result;
 
-        PendingL2 existing = pendingL2.get(living.getUUID());
+        long now = level.getGameTime();
+        prunePendingL2(now);
+        PendingL2 existing = pendingL2.remove(living.getUUID());
         int strongest = existing == null ? minimumLevel : Math.max(minimumLevel, existing.minimumLevel());
-        long expiresAt = Math.max(level.getGameTime() + 200L, existing == null ? 0L : existing.expiresAt());
-        if (existing == null && pendingL2.size() >= MAX_PENDING_L2) {
+        long expiresAt = Math.max(now + 200L, existing == null ? 0L : existing.expiresAt());
+        while (pendingL2.size() >= MAX_PENDING_L2) {
             pendingL2.remove(pendingL2.keySet().iterator().next());
         }
+        // Reinsert even for an existing request so map order remains compatible with expiry/oldest-first pruning.
         pendingL2.put(living.getUUID(), new PendingL2(strongest, expiresAt));
         return result;
     }
@@ -227,6 +230,15 @@ public final class ThreatPolicyRuntime {
         while (iterator.hasNext()) {
             Map.Entry<UUID, Long> entry = iterator.next();
             if (entry.getValue() >= now) break;
+            iterator.remove();
+        }
+    }
+
+    private void prunePendingL2(long now) {
+        Iterator<Map.Entry<UUID, PendingL2>> iterator = pendingL2.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, PendingL2> entry = iterator.next();
+            if (entry.getValue().expiresAt() >= now) break;
             iterator.remove();
         }
     }
