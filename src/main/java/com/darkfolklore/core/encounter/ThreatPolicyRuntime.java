@@ -13,7 +13,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Monster;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
@@ -75,37 +74,19 @@ public final class ThreatPolicyRuntime {
             }
         }
 
-        // NeoForge 21.1.x exposes the natural spawn reason here, while EntityJoinLevelEvent does not. Mark every
-        // accepted natural mob, not only Monster subclasses: several provider creatures use neutral/custom base
-        // classes while still owning an explicit Dark Folklore encounter policy.
+        // PositionCheck is the reliable 1.21.1 source for NATURAL provenance. Do not mutate SavedData or L2 from
+        // EntityJoinLevelEvent: NeoForge may fire that event before the chunk reaches FULL and it can still be
+        // cancelled by another listener. A mob that was actually admitted will tick shortly afterwards; that first
+        // tick consumes this bounded marker and is the commit point for pressure/L2 side effects.
         if (FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
             rememberNaturalCandidate(event.getEntity().getUUID(), level.getGameTime());
         }
     }
 
-    public void onEntityJoin(EntityJoinLevelEvent event) {
-        if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || !(event.getLevel() instanceof ServerLevel level)
-                || !(event.getEntity() instanceof LivingEntity living)) return;
-        if (naturalSpawnCandidates.remove(living.getUUID()) == null) return;
-
-        String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
-        SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
-        if (profile != null && profile.rarity().ordinal() >= SpawnRarity.RARE.ordinal()) {
-            addEncounterPressure(level, living, 15);
-        }
-
-        EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
-        if (policy != null) {
-            applyCuratedEncounter(level, living, policy);
-        } else if (living instanceof Monster) {
-            requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
-        }
-    }
-
     /**
      * Applies the non-rarity part of an explicit Dark Folklore encounter exactly when the Core itself manifests it.
-     * Callers use this after a successful addFreshEntity. EntityJoinLevelEvent intentionally does not apply explicit
-     * policies to arbitrary non-natural joins because that event also fires for chunk reloads and provider summons.
+     * Core-owned ritual/legendary callers invoke this after addFreshEntity succeeds. Provider summons and entities
+     * merely reloaded from disk therefore never inherit a Dark Folklore encounter policy by registry id alone.
      */
     public L2HostilityAdapter.ApplyResult applyCuratedEncounter(ServerLevel level, LivingEntity living,
                                                                 EncounterPolicy policy) {
@@ -146,9 +127,15 @@ public final class ThreatPolicyRuntime {
 
     public void onEntityTick(EntityTickEvent.Post event) {
         if (!(event.getEntity() instanceof LivingEntity living) || !(living.level() instanceof ServerLevel level)) return;
+        long now = level.getGameTime();
+
+        Long naturalExpiry = naturalSpawnCandidates.remove(living.getUUID());
+        if (naturalExpiry != null && now <= naturalExpiry && FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
+            applyNaturalSpawn(level, living);
+        }
+
         PendingL2 pending = pendingL2.get(living.getUUID());
         if (pending == null) return;
-        long now = level.getGameTime();
         if (now > pending.expiresAt() || living.isRemoved()) {
             pendingL2.remove(living.getUUID());
             return;
@@ -183,6 +170,21 @@ public final class ThreatPolicyRuntime {
         }
         pendingL2.put(living.getUUID(), new PendingL2(strongest, expiresAt));
         return result;
+    }
+
+    private void applyNaturalSpawn(ServerLevel level, LivingEntity living) {
+        String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
+        SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
+        if (profile != null && profile.rarity().ordinal() >= SpawnRarity.RARE.ordinal()) {
+            addEncounterPressure(level, living, 15);
+        }
+
+        EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
+        if (policy != null) {
+            applyCuratedEncounter(level, living, policy);
+        } else if (living instanceof Monster) {
+            requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+        }
     }
 
     private static ServerPlayer nearestPlayer(ServerLevel level, LivingEntity living) {
