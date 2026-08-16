@@ -146,6 +146,9 @@ public final class RitualEngine {
             living.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
                     level.random.nextFloat() * 360.0F, 0.0F);
             if (!level.noCollision(living)) return List.of();
+            if (result.stream().anyMatch(other -> other.getBoundingBox().intersects(living.getBoundingBox()))) {
+                return List.of();
+            }
             result.add(living);
         }
         return List.copyOf(result);
