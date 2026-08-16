@@ -79,4 +79,14 @@ class MonsterContractTest {
         assertFalse(contract.addEvidence(EvidenceType.BLOOD, 1));
         assertEquals(ContractStatus.INVESTIGATING, contract.status());
     }
+
+    @Test
+    void targetConceptMustBeAnExplicitNonEmptyResourceId() {
+        assertThrows(IllegalArgumentException.class, () -> new MonsterContract(
+                UUID.randomUUID(), UUID.randomUUID(), "vampire", 10_000));
+        assertThrows(IllegalArgumentException.class, () -> new MonsterContract(
+                UUID.randomUUID(), UUID.randomUUID(), "darkfolklore:", 10_000));
+        assertDoesNotThrow(() -> new MonsterContract(
+                UUID.randomUUID(), UUID.randomUUID(), "darkfolklore:vampire", 10_000));
+    }
 }
