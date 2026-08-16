@@ -69,17 +69,16 @@ public final class InvestigationCaseRecord {
         return true;
     }
 
+    public boolean canIdentify(String concept) {
+        if (!validConcept(concept) || stage.terminal() || stage.ordinal() > CaseStage.IDENTIFIED.ordinal()) return false;
+        return stage != CaseStage.IDENTIFIED || identifiedConcept.isBlank();
+    }
+
     /** Identification is a confirmed one-way case transition; it cannot rewrite an already identified/closed case. */
     public boolean identify(String concept, long now) {
-        if (!validConcept(concept) || stage.terminal() || stage.ordinal() > CaseStage.IDENTIFIED.ordinal()) return false;
-        if (stage == CaseStage.IDENTIFIED) {
-            if (!identifiedConcept.isBlank()) return false;
-            identifiedConcept = concept;
-            updatedAt = Math.max(updatedAt, now);
-            return true;
-        }
+        if (!canIdentify(concept)) return false;
         identifiedConcept = concept;
-        stage = CaseStage.IDENTIFIED;
+        if (stage != CaseStage.IDENTIFIED) stage = CaseStage.IDENTIFIED;
         updatedAt = Math.max(updatedAt, now);
         return true;
     }
