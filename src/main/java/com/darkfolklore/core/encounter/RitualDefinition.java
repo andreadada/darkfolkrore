@@ -23,7 +23,11 @@ public record RitualDefinition(String id, String encounterId, int requiredKnowle
     }
 
     private static String requireResourceId(String value, String label) {
-        if (value == null || ResourceLocation.tryParse(value) == null) {
+        if (value == null || !value.contains(":")) {
+            throw new IllegalArgumentException(label + " must be an explicit namespaced resource location");
+        }
+        ResourceLocation parsed = ResourceLocation.tryParse(value);
+        if (parsed == null || parsed.getNamespace().isBlank() || parsed.getPath().isBlank()) {
             throw new IllegalArgumentException(label + " must be a valid namespaced resource location");
         }
         return value;
