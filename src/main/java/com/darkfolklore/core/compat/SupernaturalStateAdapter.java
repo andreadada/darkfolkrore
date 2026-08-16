@@ -15,4 +15,7 @@ public interface SupernaturalStateAdapter {
     default Optional<UUID> conversionSource(Entity entity, SecretType type) {
         return Optional.empty();
     }
+
+    /** Clears server-lifecycle-local failures/caches without resolving or registering the adapter a second time. */
+    default void clearRuntimeState() {}
 }

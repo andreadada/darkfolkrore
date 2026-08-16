@@ -25,8 +25,9 @@ public final class RumorEngine {
     private static final int MAX_QUEUE = 1024;
     private static final int MAX_DIAGNOSTICS = 128;
     private static final int MAX_LOCAL_CANDIDATES = 24;
+    private static final int MAX_COOLDOWNS = 4096;
     private final ArrayDeque<RumorTask> queue = new ArrayDeque<>();
-    private final Map<RumorCooldownKey, Long> cooldowns = new HashMap<>();
+    private final LinkedHashMap<RumorCooldownKey, Long> cooldowns = new LinkedHashMap<>();
     private final ArrayDeque<RumorDiagnostic> diagnostics = new ArrayDeque<>();
 
     private RumorEngine() {}
@@ -58,6 +59,7 @@ public final class RumorEngine {
             data.pruneNarrativeHistory(now, FolkloreConfig.HISTORY_RETENTION.get());
             data.pruneRumorSilence(now);
             cooldowns.entrySet().removeIf(entry -> now - entry.getValue() > FolkloreConfig.RUMOR_HALF_LIFE.get());
+            trimOldest(cooldowns, MAX_COOLDOWNS);
         }
     }
 
@@ -103,7 +105,9 @@ public final class RumorEngine {
                 return;
             }
             SocialKnowledgeRecord merged = data.mergeSocial(key, retold);
+            cooldowns.remove(cooldownKey);
             cooldowns.put(cooldownKey, now);
+            trimOldest(cooldowns, MAX_COOLDOWNS);
             recordDiagnostic(new RumorDiagnostic(now, sender.getUUID(), recipient.getUUID(), task.subject(),
                     task.secret(), trust.trust(), task.knowledge().confidence(), merged.confidence(), true,
                     "delivered", trust.contributions()));
@@ -123,6 +127,22 @@ public final class RumorEngine {
 
     public int queued() { return queue.size(); }
     public List<RumorDiagnostic> diagnostics() { return List.copyOf(diagnostics); }
+
+    /** Clears non-persistent queue/cooldown/diagnostic state when a server lifecycle ends. */
+    public void clearRuntimeState() {
+        queue.clear();
+        cooldowns.clear();
+        diagnostics.clear();
+    }
+
+    private static <K, V> void trimOldest(LinkedHashMap<K, V> map, int maximum) {
+        while (map.size() > maximum) {
+            Iterator<Map.Entry<K, V>> iterator = map.entrySet().iterator();
+            if (!iterator.hasNext()) return;
+            iterator.next();
+            iterator.remove();
+        }
+    }
 
     private record RumorTask(UUID sender, UUID subject, SecretType secret,
                              SocialKnowledgeRecord knowledge, String dimension, int hops) {}

@@ -94,11 +94,23 @@ public final class CompatibilityManager {
         boolean factualMcaStack = mcaExact && providerProbeEligible;
         boolean fullMcaVampStack = PredationBridgePolicy.enableMcaProbe(vampirismExact, mcaExact, providerProbeEligible);
 
-        if (mcaExact && !mcaSocial.initialize(actualVersion(nextReports, McaSocialAdapter.MOD_ID))) {
-            replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.ERROR, mcaSocial.statusDetail());
+        if (mcaExact) {
+            if (!mcaSocial.initialize(actualVersion(nextReports, McaSocialAdapter.MOD_ID))) {
+                replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.ERROR, mcaSocial.statusDetail());
+            } else if (!mcaSocial.fullyReady()) {
+                replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.PARTIAL, mcaSocial.statusDetail());
+            } else {
+                replaceStatus(nextReports, McaSocialAdapter.MOD_ID, CompatibilityStatus.ACTIVE, mcaSocial.statusDetail());
+            }
         }
-        if (mcaCapitalsExact && !mcaCapitals.initialize(actualVersion(nextReports, McaCapitalsCompat.MOD_ID))) {
-            replaceStatus(nextReports, McaCapitalsCompat.MOD_ID, CompatibilityStatus.ERROR, mcaCapitals.statusDetail());
+        if (mcaCapitalsExact) {
+            if (!mcaCapitals.initialize(actualVersion(nextReports, McaCapitalsCompat.MOD_ID))) {
+                replaceStatus(nextReports, McaCapitalsCompat.MOD_ID, CompatibilityStatus.ERROR, mcaCapitals.statusDetail());
+            } else if (!mcaCapitals.villageLookupAvailable()) {
+                replaceStatus(nextReports, McaCapitalsCompat.MOD_ID, CompatibilityStatus.PARTIAL, mcaCapitals.statusDetail());
+            } else {
+                replaceStatus(nextReports, McaCapitalsCompat.MOD_ID, CompatibilityStatus.ACTIVE, mcaCapitals.statusDetail());
+            }
         }
 
         if (vampirismExact) {
@@ -136,10 +148,6 @@ public final class CompatibilityManager {
             }
         }
 
-        /*
-         * Critical isolation rule: ordinary Vampirism predation depends only on Vampirism. MCA version/probe
-         * failures must never prevent IVampireMob recognition, blood hunger, targeting or feeding.
-         */
         if (PredationBridgePolicy.loadWildBridge(vampirismExact)) {
             try {
                 Object adapter = Class.forName("com.darkfolklore.core.compat.vampirism.VampirePredationCompat", true,
@@ -231,6 +239,10 @@ public final class CompatibilityManager {
 
     public void clearRuntimeCaches() {
         mcaCapitals.clearCache();
+        if (mcaFactAdapter != null) mcaFactAdapter.clearRuntimeState();
+        FieldGuideBridge guide = fieldGuideBridge;
+        if (guide != null) guide.clearRuntimeState();
+        mcaVampireLifecycleBridge.clearRuntimeState();
         vampirePredationBridge.clearRuntimeState();
     }
 

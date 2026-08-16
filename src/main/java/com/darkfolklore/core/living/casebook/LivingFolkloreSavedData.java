@@ -104,8 +104,18 @@ public final class LivingFolkloreSavedData extends SavedData {
         for (int i=0;i<Math.min(rows.size(),HARD_MAX_CASES);i++) {
             try {
                 InvestigationCaseRecord value = CasebookNbtCodec.read(rows.getCompound(i));
-                if (data.byContract.containsKey(value.contractId())) continue;
-                data.cases.put(value.id(), value); data.index(value);
+                if (data.byContract.containsKey(value.contractId())) {
+                    DarkFolkloreCore.LOGGER.warn("[living/persistence] ignoring duplicate case contract {} at row {}",
+                            value.contractId(), i);
+                    continue;
+                }
+                if (data.cases.containsKey(value.id())) {
+                    DarkFolkloreCore.LOGGER.warn("[living/persistence] ignoring conflicting duplicate case id {} at row {}",
+                            value.id(), i);
+                    continue;
+                }
+                data.cases.put(value.id(), value);
+                data.index(value);
             } catch (RuntimeException ex) {
                 DarkFolkloreCore.LOGGER.error("[living/persistence] malformed case row {}", i, ex);
             }

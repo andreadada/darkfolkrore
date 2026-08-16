@@ -1,6 +1,7 @@
 package com.darkfolklore.core.contracts;
 
 import com.darkfolklore.core.knowledge.social.EvidenceType;
+import net.minecraft.resources.ResourceLocation;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +18,7 @@ public final class MonsterContract {
     public MonsterContract(UUID id, UUID issuer, String targetConcept, long expiresAt) {
         this.id = Objects.requireNonNull(id, "id");
         this.issuer = Objects.requireNonNull(issuer, "issuer");
-        if (targetConcept == null || !targetConcept.contains(":")) throw new IllegalArgumentException("targetConcept must be namespaced");
+        if (!validConcept(targetConcept)) throw new IllegalArgumentException("targetConcept must be a valid namespaced resource location");
         this.targetConcept = targetConcept;
         this.expiresAt = expiresAt;
     }
@@ -34,7 +35,7 @@ public final class MonsterContract {
     public boolean addEvidence(EvidenceType type, int requiredDistinctClues) {
         if (status != ContractStatus.INVESTIGATING) return false;
         boolean changed = recordEvidence(type);
-        if (evidence.size() >= Math.max(1, requiredDistinctClues)) status = ContractStatus.IDENTIFIED;
+        if (changed && evidence.size() >= Math.max(1, requiredDistinctClues)) status = ContractStatus.IDENTIFIED;
         return changed;
     }
 
@@ -61,5 +62,11 @@ public final class MonsterContract {
     private boolean transition(ContractStatus expected, ContractStatus next) {
         if (status != expected) return false;
         status = next; return true;
+    }
+
+    private static boolean validConcept(String concept) {
+        if (concept == null || !concept.contains(":")) return false;
+        ResourceLocation id = ResourceLocation.tryParse(concept);
+        return id != null && !id.getNamespace().isBlank() && !id.getPath().isBlank();
     }
 }

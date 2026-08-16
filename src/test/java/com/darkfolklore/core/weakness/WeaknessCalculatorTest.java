@@ -13,6 +13,9 @@ class WeaknessCalculatorTest {
     private static final WeaknessRule SILVER = new WeaknessRule(
             "darkfolklore:silver_vs_werewolf", Set.of(CreatureTrait.WEREWOLF),
             Set.of(ItemTrait.SILVER_WEAPON), 1.75F, Set.of("werewolves"), 100);
+    private static final WeaknessRule SILVER_PROJECTILE = new WeaknessRule(
+            "darkfolklore:silver_projectile_vs_werewolf", Set.of(CreatureTrait.WEREWOLF),
+            Set.of(ItemTrait.SILVER_PROJECTILE), 1.5F, Set.of(), 110);
 
     @Test
     void appliesSemanticWeaknessToForeignWerewolf() {
@@ -30,5 +33,14 @@ class WeaknessCalculatorTest {
                 "werewolves", List.of(SILVER));
         assertEquals(8.0F, result.finalDamage());
         assertFalse(result.modified());
+    }
+
+    @Test
+    void curatedSilverProjectileCanAffectCanonicalWerewolfWithoutChangingNativeMeleeRule() {
+        WeaknessCalculator.Result result = WeaknessCalculator.calculate(8.0F,
+                Set.of(CreatureTrait.WEREWOLF), Set.of(ItemTrait.SILVER_PROJECTILE),
+                "werewolves", List.of(SILVER, SILVER_PROJECTILE));
+        assertEquals(12.0F, result.finalDamage());
+        assertEquals("darkfolklore:silver_projectile_vs_werewolf", result.appliedRule());
     }
 }

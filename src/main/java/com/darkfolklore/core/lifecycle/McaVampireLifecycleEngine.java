@@ -30,10 +30,12 @@ public final class McaVampireLifecycleEngine {
     public static final McaVampireLifecycleEngine INSTANCE = new McaVampireLifecycleEngine();
     private static final int SAMPLE_INTERVAL = 40;
     private static final long BIRTH_CONTEXT_TTL = 200L;
+    private static final int MAX_TRACKED_ENTITIES = 4096;
+    private static final int MAX_BIRTH_CONTEXTS = 2048;
 
-    private final Map<UUID, McaVampireLifecycleBridge.Snapshot> snapshots = new HashMap<>();
-    private final Map<UUID, Integer> initialObservationTick = new HashMap<>();
-    private final Map<UUID, BirthContext> births = new HashMap<>();
+    private final LinkedHashMap<UUID, McaVampireLifecycleBridge.Snapshot> snapshots = new LinkedHashMap<>();
+    private final LinkedHashMap<UUID, Integer> initialObservationTick = new LinkedHashMap<>();
+    private final LinkedHashMap<UUID, BirthContext> births = new LinkedHashMap<>();
     private final LinkedHashMap<UUID, Observation> latest = new LinkedHashMap<>();
 
     private McaVampireLifecycleEngine() {}
@@ -42,7 +44,8 @@ public final class McaVampireLifecycleEngine {
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!FolkloreConfig.MCA_VAMPIRE_LIFECYCLE.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !isMca(event.getEntity())) return;
-        initialObservationTick.put(event.getEntity().getUUID(), level.getServer().getTickCount() + 1);
+        putBounded(initialObservationTick, event.getEntity().getUUID(), level.getServer().getTickCount() + 1,
+                MAX_TRACKED_ENTITIES);
     }
 
     @SubscribeEvent
@@ -50,6 +53,7 @@ public final class McaVampireLifecycleEngine {
         UUID id = event.getEntity().getUUID();
         snapshots.remove(id);
         initialObservationTick.remove(id);
+        births.remove(id);
     }
 
     @SubscribeEvent
@@ -57,8 +61,8 @@ public final class McaVampireLifecycleEngine {
         if (!FolkloreConfig.MCA_VAMPIRE_LIFECYCLE.get()) return;
         AgeableMob child = event.getChild();
         if (child == null || !isMca(child) || !(child.level() instanceof ServerLevel)) return;
-        births.put(child.getUUID(), new BirthContext(event.getParentA().getUUID(), event.getParentB().getUUID(),
-                child.level().getGameTime()));
+        putBounded(births, child.getUUID(), new BirthContext(event.getParentA().getUUID(), event.getParentB().getUUID(),
+                child.level().getGameTime()), MAX_BIRTH_CONTEXTS);
     }
 
     @SubscribeEvent
@@ -89,12 +93,14 @@ public final class McaVampireLifecycleEngine {
         long now = level.getGameTime();
         BirthContext birth = births.get(entity.getUUID());
         boolean recentBirth = birth != null && now - birth.gameTime() <= BIRTH_CONTEXT_TTL;
-        McaVampireLifecycleBridge.Snapshot previous = snapshots.put(entity.getUUID(), current);
+        McaVampireLifecycleBridge.Snapshot previous = snapshots.remove(entity.getUUID());
+        putBounded(snapshots, entity.getUUID(), current, MAX_TRACKED_ENTITIES);
 
         if (current.converted() && !current.curing() && !current.aiGoalsAdded()) {
             bridge.ensureNativeAi(entity);
             current = bridge.snapshot(entity);
-            snapshots.put(entity.getUUID(), current);
+            snapshots.remove(entity.getUUID());
+            putBounded(snapshots, entity.getUUID(), current, MAX_TRACKED_ENTITIES);
         }
 
         // Provider provenance is a durable factual datum, not merely a transition edge. Recover it after world
@@ -129,10 +135,8 @@ public final class McaVampireLifecycleEngine {
                                   McaVampireLifecycleBridge.Snapshot current,
                                   McaVampireLifecycleTransition transition,
                                   BirthContext birth, long now) {
-        latest.remove(entity.getUUID());
-        latest.put(entity.getUUID(), new Observation(entity.getUUID(), McaVampireLifecycleClassifier.state(current),
-                transition, current.source(), Optional.ofNullable(birth), now));
-        while (latest.size() > 512) latest.remove(latest.keySet().iterator().next());
+        putBounded(latest, entity.getUUID(), new Observation(entity.getUUID(), McaVampireLifecycleClassifier.state(current),
+                transition, current.source(), Optional.ofNullable(birth), now), 512);
 
         switch (transition) {
             case CURE_STARTED, CURED, VAMPIRISM_CLEARED, INFECTION_CLEARED -> {
@@ -159,7 +163,10 @@ public final class McaVampireLifecycleEngine {
         long now = event.getServer().overworld().getGameTime();
         births.entrySet().removeIf(entry -> now - entry.getValue().gameTime() > BIRTH_CONTEXT_TTL);
         initialObservationTick.entrySet().removeIf(entry -> event.getServer().getTickCount() - entry.getValue() > 1200);
-        while (latest.size() > 512) latest.remove(latest.keySet().iterator().next());
+        trimOldest(births, MAX_BIRTH_CONTEXTS);
+        trimOldest(initialObservationTick, MAX_TRACKED_ENTITIES);
+        trimOldest(snapshots, MAX_TRACKED_ENTITIES);
+        trimOldest(latest, 512);
     }
 
     public Optional<Observation> latest(UUID entity) { return Optional.ofNullable(latest.get(entity)); }
@@ -176,6 +183,21 @@ public final class McaVampireLifecycleEngine {
     private static boolean isMca(Entity entity) {
         var id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         return id != null && id.getNamespace().equals("mca");
+    }
+
+    private static <K, V> void putBounded(LinkedHashMap<K, V> map, K key, V value, int maximum) {
+        map.remove(key);
+        map.put(key, value);
+        trimOldest(map, maximum);
+    }
+
+    private static <K, V> void trimOldest(LinkedHashMap<K, V> map, int maximum) {
+        while (map.size() > maximum) {
+            Iterator<Map.Entry<K, V>> iterator = map.entrySet().iterator();
+            if (!iterator.hasNext()) return;
+            iterator.next();
+            iterator.remove();
+        }
     }
 
     public record BirthContext(UUID parentA, UUID parentB, long gameTime) {}

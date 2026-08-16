@@ -9,6 +9,7 @@ public final class Organization {
     public static final int MAX_INTELLIGENCE = 256;
     public static final int MAX_MEMBERS_HARD = 256;
     public static final int MAX_RELATIONS = 1024;
+    static final long MEMBER_SEEN_WRITE_INTERVAL = 200L;
 
     private final UUID id;
     private final OrganizationType type;
@@ -73,7 +74,9 @@ public final class Organization {
     public boolean markMemberSeen(UUID member, long gameTime) {
         if (!members.contains(member)) return false;
         long normalized = Math.max(0L, gameTime);
-        Long previous = memberLastSeen.put(member, normalized);
+        Long previous = memberLastSeen.get(member);
+        if (previous != null && normalized >= previous && normalized - previous < MEMBER_SEEN_WRITE_INTERVAL) return false;
+        memberLastSeen.put(member, normalized);
         return previous == null || previous != normalized;
     }
 

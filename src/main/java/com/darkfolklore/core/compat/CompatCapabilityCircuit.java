@@ -24,6 +24,12 @@ public final class CompatCapabilityCircuit {
         return name + ": " + detail.get();
     }
 
+    /** Restores the probe to its pre-initialization state for a fresh server/runtime initialization pass. */
+    public void reset() {
+        available.set(true);
+        detail.set("ready");
+    }
+
     public void markReady(String message) {
         if (!available.get()) return;
         detail.set(message == null || message.isBlank() ? "ready" : message);

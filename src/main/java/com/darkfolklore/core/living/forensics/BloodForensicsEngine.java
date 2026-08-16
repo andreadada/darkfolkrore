@@ -1,6 +1,7 @@
 package com.darkfolklore.core.living.forensics;
 
 import com.darkfolklore.core.contracts.ContractAssignment;
+import com.darkfolklore.core.contracts.ContractEvidenceProgression;
 import com.darkfolklore.core.contracts.ContractStatus;
 import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.investigation.EvidenceRecord;
@@ -71,15 +72,13 @@ public final class BloodForensicsEngine {
             return;
         }
 
-        boolean changed = assignment.contract().status() == ContractStatus.INVESTIGATING
-                ? assignment.contract().addEvidence(EvidenceType.BLOOD_RESONANCE, assignment.requiredDistinctClues())
-                : assignment.contract().recordEvidence(EvidenceType.BLOOD_RESONANCE);
-        if (!changed) {
+        ContractEvidenceProgression.Result progression = ContractEvidenceProgression.record(
+                player, data, assignment, EvidenceType.BLOOD_RESONANCE);
+        if (!progression.changed()) {
             player.displayClientMessage(net.minecraft.network.chat.Component.literal(
                     "This blood resonance has already been recorded."), true);
             return;
         }
-        data.putContract(assignment);
         LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 5);
         LoreEngine.INSTANCE.grant(player, "darkfolklore:blood_magic", 3);
         level.sendParticles(ParticleTypes.DAMAGE_INDICATOR, blood.position().x() + 0.5D,
@@ -89,6 +88,8 @@ public final class BloodForensicsEngine {
                 CaseNoteKind.ANALYSIS, "Blood Magic analysis found a supernatural blood resonance.",
                 Optional.empty(), 0.8F, Optional.empty());
         player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                "Blood forensics: supernatural resonance recorded. It narrows the case, but does not identify the creature by itself."), false);
+                progression.identifiedNow()
+                        ? "Blood forensics: the accumulated evidence now supports a conclusive identification."
+                        : "Blood forensics: supernatural resonance recorded. It narrows the case, but does not identify the creature by itself."), false);
     }
 }

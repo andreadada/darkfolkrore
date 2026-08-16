@@ -8,6 +8,7 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /** Atomic datapack registry for DarkFolklore-owned encounter and ritual policies. */
@@ -73,7 +74,7 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
             DarkFolkloreCore.LOGGER.warn("[encounter-data] {} contains legacy direct-stat fields; they are ignored. "
                     + "Use l2_minimum_level for combat scaling.", file);
         }
-        return new EncounterPolicy(string(json, "id", file.toString()), string(json, "entity", file.toString()),
+        return new EncounterPolicy(string(json, "id", file.toString()), requiredString(json, "entity"),
                 number(json, "natural_spawn_multiplier", 1.0D), integer(json, "minimum_encounter_pressure", 0),
                 integer(json, "l2_minimum_level", 0));
     }
@@ -81,9 +82,12 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
     private static RitualDefinition parseRitual(ResourceLocation file, JsonObject json) {
         Map<String, Integer> costs = new LinkedHashMap<>();
         if (json.has("item_costs")) {
-            json.getAsJsonObject("item_costs").entrySet().forEach(entry -> costs.put(entry.getKey(), entry.getValue().getAsInt()));
+            JsonElement costsElement = json.get("item_costs");
+            if (!costsElement.isJsonObject()) throw new IllegalArgumentException("item_costs must be an object");
+            costsElement.getAsJsonObject().entrySet().forEach(entry ->
+                    costs.put(entry.getKey(), exactInteger(entry.getValue(), "item_costs." + entry.getKey())));
         }
-        return new RitualDefinition(string(json, "id", file.toString()), string(json, "encounter", ""),
+        return new RitualDefinition(string(json, "id", file.toString()), requiredString(json, "encounter"),
                 integer(json, "required_knowledge_points", 0), longNumber(json, "cooldown_ticks", 0L),
                 bool(json, "enabled", true), string(json, "focus_block", "minecraft:soul_campfire"),
                 string(json, "activation_item", "minecraft:bone"), bool(json, "requires_night", true),
@@ -99,11 +103,40 @@ public final class ThreatPolicyManager extends SimplePreparableReloadListener<Th
         });
     }
 
+    private static String requiredString(JsonObject json, String key) {
+        if (!json.has(key) || json.get(key).isJsonNull()) throw new IllegalArgumentException("Missing required field " + key);
+        String value = json.get(key).getAsString();
+        if (value.isBlank()) throw new IllegalArgumentException("Required field " + key + " must not be blank");
+        return value;
+    }
+
     private static String string(JsonObject json, String key, String fallback) { return json.has(key) ? json.get(key).getAsString() : fallback; }
     private static double number(JsonObject json, String key, double fallback) { return json.has(key) ? json.get(key).getAsDouble() : fallback; }
-    private static int integer(JsonObject json, String key, int fallback) { return json.has(key) ? json.get(key).getAsInt() : fallback; }
-    private static long longNumber(JsonObject json, String key, long fallback) { return json.has(key) ? json.get(key).getAsLong() : fallback; }
+    private static int integer(JsonObject json, String key, int fallback) {
+        return json.has(key) ? exactInteger(json.get(key), key) : fallback;
+    }
+    private static long longNumber(JsonObject json, String key, long fallback) {
+        return json.has(key) ? exactLong(json.get(key), key) : fallback;
+    }
     private static boolean bool(JsonObject json, String key, boolean fallback) { return json.has(key) ? json.get(key).getAsBoolean() : fallback; }
+
+    private static int exactInteger(JsonElement element, String key) {
+        try {
+            BigDecimal value = element.getAsBigDecimal();
+            return value.intValueExact();
+        } catch (RuntimeException exception) {
+            throw new IllegalArgumentException(key + " must be an exact 32-bit integer", exception);
+        }
+    }
+
+    private static long exactLong(JsonElement element, String key) {
+        try {
+            BigDecimal value = element.getAsBigDecimal();
+            return value.longValueExact();
+        } catch (RuntimeException exception) {
+            throw new IllegalArgumentException(key + " must be an exact 64-bit integer", exception);
+        }
+    }
 
     @FunctionalInterface
     private interface JsonConsumer { void accept(ResourceLocation id, JsonObject json); }

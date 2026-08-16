@@ -138,12 +138,11 @@ public final class ContractEngine {
             return;
         }
         if (!data.collectEvidence(clue.id(), player.getUUID())) return;
-        ContractStatus before = assignment.contract().status();
-        if (!assignment.contract().addEvidence(clue.type(), assignment.requiredDistinctClues())) return;
-        data.putContract(assignment);
+        ContractEvidenceProgression.Result progression = ContractEvidenceProgression.record(
+                player, data, assignment, clue.type());
+        if (!progression.changed()) return;
         LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 2);
-        if (before != ContractStatus.IDENTIFIED
-                && assignment.contract().status() == ContractStatus.IDENTIFIED) {
+        if (progression.identifiedNow()) {
             LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 8);
         }
         level.sendParticles(ParticleTypes.HAPPY_VILLAGER, clue.position().x() + 0.5D,
@@ -167,10 +166,7 @@ public final class ContractEngine {
 
     @SubscribeEvent
     public void onServerTick(ServerTickEvent.Post event) {
-        if (!FolkloreConfig.CONTRACTS.get()) {
-            return;
-        }
-
+        if (!FolkloreConfig.CONTRACTS.get()) return;
         if (event.getServer().getTickCount() % 200 != 0) return;
 
         FolkloreSavedData data = FolkloreSavedData.get(event.getServer());
@@ -187,6 +183,11 @@ public final class ContractEngine {
         for (PersistentStory story : data.stories()) storyIds.add(story.story().id());
         investigation.pruneOrphans(data.contracts(), storyIds);
         feedbackCooldowns.entrySet().removeIf(entry -> now - entry.getValue() > 1200L);
+    }
+
+    /** Clears non-persistent UI throttles when an integrated or dedicated server stops. */
+    public void clearRuntimeState() {
+        feedbackCooldowns.clear();
     }
 
     private static void finalizeConfirmedDeath(MinecraftServer server, LivingEntity deadEntity,
@@ -300,12 +301,11 @@ public final class ContractEngine {
 
     private static boolean recordTestimony(ServerPlayer player, FolkloreSavedData data, ContractAssignment assignment,
                                            float confidence, String source) {
-        ContractStatus before = assignment.contract().status();
-        if (!assignment.contract().addEvidence(EvidenceType.TESTIMONY, assignment.requiredDistinctClues())) return false;
-        data.putContract(assignment);
+        ContractEvidenceProgression.Result progression = ContractEvidenceProgression.record(
+                player, data, assignment, EvidenceType.TESTIMONY);
+        if (!progression.changed()) return false;
         LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 3);
-        if (before != ContractStatus.IDENTIFIED
-                && assignment.contract().status() == ContractStatus.IDENTIFIED) {
+        if (progression.identifiedNow()) {
             LoreEngine.INSTANCE.grant(player, assignment.contract().targetConcept(), 8);
         }
         player.displayClientMessage(Component.literal("Credible " + source + " recorded (confidence "
@@ -388,5 +388,4 @@ public final class ContractEngine {
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
     }
-
 }

@@ -2,6 +2,7 @@ package com.darkfolklore.core.living.casebook;
 
 import com.darkfolklore.core.knowledge.social.EvidenceType;
 import com.darkfolklore.core.persistence.WorldPosition;
+import net.minecraft.resources.ResourceLocation;
 import java.util.*;
 
 public final class InvestigationCaseRecord {
@@ -68,11 +69,16 @@ public final class InvestigationCaseRecord {
         return true;
     }
 
+    public boolean canIdentify(String concept) {
+        if (!validConcept(concept) || stage.terminal() || stage.ordinal() > CaseStage.IDENTIFIED.ordinal()) return false;
+        return stage != CaseStage.IDENTIFIED || identifiedConcept.isBlank();
+    }
+
+    /** Identification is a confirmed one-way case transition; it cannot rewrite an already identified/closed case. */
     public boolean identify(String concept, long now) {
-        if (concept == null || !concept.contains(":")) return false;
-        if (stage.ordinal() > CaseStage.IDENTIFIED.ordinal() && !stage.terminal()) return false;
+        if (!canIdentify(concept)) return false;
         identifiedConcept = concept;
-        if (stage.ordinal() < CaseStage.IDENTIFIED.ordinal()) stage = CaseStage.IDENTIFIED;
+        if (stage != CaseStage.IDENTIFIED) stage = CaseStage.IDENTIFIED;
         updatedAt = Math.max(updatedAt, now);
         return true;
     }
@@ -86,7 +92,13 @@ public final class InvestigationCaseRecord {
         if (restoredEvidence != null) evidence.addAll(restoredEvidence);
         notes.clear();
         if (restoredNotes != null) restoredNotes.stream().skip(Math.max(0, restoredNotes.size() - HARD_MAX_NOTES)).forEach(notes::addLast);
-        identifiedConcept = Objects.requireNonNullElse(restoredConcept, "");
+        identifiedConcept = validConcept(restoredConcept) ? restoredConcept : "";
         updatedAt = Math.max(createdAt, restoredUpdatedAt);
+    }
+
+    private static boolean validConcept(String concept) {
+        if (concept == null || !concept.contains(":")) return false;
+        ResourceLocation id = ResourceLocation.tryParse(concept);
+        return id != null && !id.getNamespace().isBlank() && !id.getPath().isBlank();
     }
 }

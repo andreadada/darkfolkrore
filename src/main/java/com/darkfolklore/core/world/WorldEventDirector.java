@@ -36,6 +36,11 @@ public final class WorldEventDirector {
         return Set.copyOf(active.getOrDefault(level.dimension(), EnumSet.noneOf(WorldEventType.class)));
     }
 
+    /** Prevents dimension-key state from one integrated/dedicated server leaking into the next server lifecycle. */
+    public void clearRuntimeState() {
+        active.clear();
+    }
+
     private void set(ServerLevel level, WorldEventType type, boolean enabled) {
         EnumSet<WorldEventType> values = active.computeIfAbsent(level.dimension(), ignored -> EnumSet.noneOf(WorldEventType.class));
         boolean changed = enabled ? values.add(type) : values.remove(type);

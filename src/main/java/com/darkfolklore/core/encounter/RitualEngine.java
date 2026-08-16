@@ -92,23 +92,40 @@ public final class RitualEngine {
             return;
         }
 
-        if (!player.getAbilities().instabuild) consumeCosts(player, ritual.itemCosts());
         EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(entityId);
-        int spawned = 0;
-        for (BlockPos pos : positions) {
-            Entity entity = type.create(level);
-            if (!(entity instanceof LivingEntity living)) continue;
-            living.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
-                    level.random.nextFloat() * 360.0F, 0.0F);
-            if (!level.noCollision(living) || !level.addFreshEntity(living)) continue;
-            spawned++;
-        }
-        if (spawned == 0) {
-            player.sendSystemMessage(Component.literal("The offering is consumed, but the manifestation fails."));
+        List<LivingEntity> prepared = prepareManifestations(level, type, positions);
+        if (prepared.size() != ritual.spawnCount()) {
+            player.sendSystemMessage(Component.literal("The manifestation cannot form safely here; the offering is untouched."));
             return;
         }
 
+        List<LivingEntity> added = new ArrayList<>(prepared.size());
+        for (LivingEntity living : prepared) {
+            if (!level.addFreshEntity(living)) {
+                added.forEach(Entity::discard);
+                player.sendSystemMessage(Component.literal("The pattern destabilizes before the offering is consumed."));
+                return;
+            }
+            added.add(living);
+        }
+
+        // The spawn event chain can run arbitrary provider listeners. Re-check payment before committing the offering;
+        // if anything changed, roll back the just-created manifestations instead of granting a free ritual.
+        if (!player.getAbilities().instabuild && !hasCosts(player, ritual.itemCosts())) {
+            added.forEach(Entity::discard);
+            player.sendSystemMessage(Component.literal("The offering changed before the rite could settle; the manifestation collapses."));
+            return;
+        }
+        if (!player.getAbilities().instabuild) consumeCosts(player, ritual.itemCosts());
+
+        // Only committed Dark Folklore manifestations receive the curated non-natural encounter policy. Doing this
+        // explicitly avoids relying on EntityJoinLevelEvent, which also fires when old entities are reloaded from disk.
+        for (LivingEntity living : added) {
+            ThreatPolicyRuntime.INSTANCE.applyCuratedEncounter(level, living, encounter);
+        }
+
         rememberCooldown(key, now + ritual.cooldownTicks(), now);
+        int spawned = added.size();
         player.sendSystemMessage(Component.literal(spawned == 1
                 ? "The rite takes hold. Something answers."
                 : "The rite takes hold. Several presences answer."));
@@ -118,6 +135,23 @@ public final class RitualEngine {
 
     public static void clearRuntimeState() {
         COOLDOWNS.clear();
+    }
+
+    private static List<LivingEntity> prepareManifestations(ServerLevel level, EntityType<?> type,
+                                                             List<BlockPos> positions) {
+        List<LivingEntity> result = new ArrayList<>(positions.size());
+        for (BlockPos pos : positions) {
+            Entity entity = type.create(level);
+            if (!(entity instanceof LivingEntity living)) return List.of();
+            living.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
+                    level.random.nextFloat() * 360.0F, 0.0F);
+            if (!level.noCollision(living)) return List.of();
+            if (result.stream().anyMatch(other -> other.getBoundingBox().intersects(living.getBoundingBox()))) {
+                return List.of();
+            }
+            result.add(living);
+        }
+        return List.copyOf(result);
     }
 
     private static List<BlockPos> findSpawnPositions(ServerLevel level, BlockPos focus, int count) {

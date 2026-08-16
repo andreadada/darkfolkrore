@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "immersiveengineering:revolver_silver", "required": false},
+    {"id": "immersiveengineering:revolver_silver_turret", "required": false}
+  ]
+}

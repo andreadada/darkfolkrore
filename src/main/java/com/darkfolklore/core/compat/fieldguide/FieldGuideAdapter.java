@@ -36,10 +36,15 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
                 .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
                 .map(definition -> definition.canonicalId().isBlank() ? registryId : definition.canonicalId())
                 .orElse(registryId);
+        ResourceLocation guideEntry = entryId(guideRegistryId);
+        if (guideEntry == null) {
+            DarkFolkloreCore.LOGGER.warn("[compat/fieldguide] Ignoring malformed entity registry id '{}'", guideRegistryId);
+            return;
+        }
         try {
             PlayerFieldGuideProgress progress = FieldGuideProgressManager.getInstance().getProgress(player);
             if (progress != null) {
-                progress.tryUnlock(player, entryId(guideRegistryId), "", EntryUnlockData.UnlockTrigger.KILL);
+                progress.tryUnlock(player, guideEntry, "", EntryUnlockData.UnlockTrigger.KILL);
             }
         } catch (RuntimeException | LinkageError exception) {
             disableAfterFailure(exception);
@@ -59,7 +64,8 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
                 LoreProgress lore = data.lore(player.getUUID(), definition.concept());
                 boolean guideUnlocked = false;
                 for (String implementation : entityImplementations(definition)) {
-                    if (progress.isUnlocked(entryId(implementation))) {
+                    ResourceLocation implementationEntry = entryId(implementation);
+                    if (implementationEntry != null && progress.isUnlocked(implementationEntry)) {
                         guideUnlocked = true;
                         break;
                     }
@@ -69,7 +75,7 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
                     if (lore.points() == 0) LoreEngine.INSTANCE.discoverOnce(player, definition.concept(), 10);
                 } else if (lore.points() >= GUIDE_UNLOCK_THRESHOLD && !definition.canonicalId().isBlank()) {
                     ResourceLocation entry = entryId(definition.canonicalId());
-                    if (manager.isValidEntry(entry) && progress.canUnlock(entry)) {
+                    if (entry != null && manager.isValidEntry(entry) && progress.canUnlock(entry)) {
                         progress.unlock(player, entry, "", false);
                     }
                 }
@@ -79,13 +85,6 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
         }
     }
 
-    /**
-     * Unlocks the implementation actually observed by an investigation. For
-     * KEEP_DISTINCT concepts that exact provider entry is authoritative. For
-     * canonical concepts whose runtime implementation has no dedicated guide
-     * page (for example an internal provider variant), the bridge falls back to
-     * the concept's canonical entity page instead of silently losing the unlock.
-     */
     @Override
     public boolean unlockObservedImplementation(ServerPlayer player, String registryId) {
         if (!runtimeAvailable || registryId == null || registryId.isBlank()) return false;
@@ -93,9 +92,7 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
             FieldGuideProgressManager manager = FieldGuideProgressManager.getInstance();
             PlayerFieldGuideProgress progress = manager.getProgress(player);
             if (progress == null) return false;
-
             if (unlockEntry(manager, progress, player, registryId)) return true;
-
             String canonicalId = FolkloreDataManager.INSTANCE.canonical().resolve(registryId)
                     .filter(definition -> definition.kind() == CanonicalKind.ENTITY)
                     .map(CanonicalDefinition::canonicalId)
@@ -108,15 +105,18 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
         }
     }
 
+    @Override public boolean runtimeAvailable() { return runtimeAvailable; }
+
+    /** A server-local provider state failure must not poison every later integrated-server world in this JVM. */
     @Override
-    public boolean runtimeAvailable() {
-        return runtimeAvailable;
+    public void clearRuntimeState() {
+        runtimeAvailable = true;
     }
 
     private static boolean unlockEntry(FieldGuideProgressManager manager, PlayerFieldGuideProgress progress,
                                        ServerPlayer player, String registryId) {
         ResourceLocation entry = entryId(registryId);
-        if (!manager.isValidEntry(entry)) return false;
+        if (entry == null || !manager.isValidEntry(entry)) return false;
         if (progress.isUnlocked(entry)) return true;
         if (!progress.canUnlock(entry)) return false;
         progress.unlock(player, entry, "", false);
@@ -138,7 +138,8 @@ public final class FieldGuideAdapter implements FieldGuideBridge {
     }
 
     private static ResourceLocation entryId(String registryId) {
-        ResourceLocation id = ResourceLocation.parse(registryId);
+        ResourceLocation id = ResourceLocation.tryParse(registryId);
+        if (id == null) return null;
         return ResourceLocation.fromNamespaceAndPath("entity", id.getNamespace() + "/" + id.getPath());
     }
 }

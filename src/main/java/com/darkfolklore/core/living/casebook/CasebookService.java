@@ -18,6 +18,9 @@ public final class CasebookService {
 
     public InvestigationCaseRecord open(ServerPlayer player, ContractAssignment assignment, Optional<UUID> storyId) {
         LivingFolkloreSavedData data = LivingFolkloreSavedData.get(player.getServer());
+        InvestigationCaseRecord existing = data.caseForContract(assignment.contract().id()).orElse(null);
+        if (existing != null) return existing;
+
         InvestigationCaseRecord value = data.create(player.getUUID(), assignment.contract().id(), storyId,
                 assignment.investigationCenter(), player.level().getGameTime(), assignment.contract().expiresAt(),
                 LivingFolkloreConfig.CASES_PER_PLAYER.get());
@@ -56,9 +59,15 @@ public final class CasebookService {
                 (conclusive ? "Conclusive" : "Contested") + " evidence currently favors " + first.concept() + ".",
                 Optional.empty(),Optional.empty(),Optional.empty(),first.confidence()), LivingFolkloreConfig.CASE_NOTES.get());
         caseData.changed(value);
-        if (!conclusive || !first.concept().equals(assignment.contract().targetConcept()) || !assignment.contract().identify()) return false;
+
+        if (!conclusive || !first.concept().equals(assignment.contract().targetConcept()) || !value.canIdentify(first.concept())) return false;
+        // Both state machines are checked before either is committed. Runtime runs on the server thread, so after
+        // these pure preconditions the two one-way transitions cannot observe an intermediate external mutation.
+        if (!assignment.contract().identify()) return false;
+        if (!value.identify(first.concept(),player.level().getGameTime())) {
+            throw new IllegalStateException("Case identification precondition changed during server-thread commit");
+        }
         society.putContract(assignment);
-        value.identify(first.concept(),player.level().getGameTime());
         caseData.changed(value);
         return true;
     }
@@ -69,9 +78,12 @@ public final class CasebookService {
 
     private void advance(MinecraftServer server, ContractAssignment assignment, CaseStage stage, CaseNoteKind kind, String detail) {
         LivingFolkloreSavedData data=LivingFolkloreSavedData.get(server);
-        data.caseForContract(assignment.contract().id()).ifPresent(value->{ long now=server.overworld().getGameTime();
-            if(value.advance(stage,now)) value.addNote(new CaseNote(now,kind,detail,Optional.empty(),Optional.empty(),Optional.empty(),1.0F),LivingFolkloreConfig.CASE_NOTES.get());
-            data.changed(value); });
+        data.caseForContract(assignment.contract().id()).ifPresent(value->{
+            long now=server.overworld().getGameTime();
+            if (!value.advance(stage,now)) return;
+            value.addNote(new CaseNote(now,kind,detail,Optional.empty(),Optional.empty(),Optional.empty(),1.0F),LivingFolkloreConfig.CASE_NOTES.get());
+            data.changed(value);
+        });
     }
 
     public String summary(ContractAssignment assignment) {
