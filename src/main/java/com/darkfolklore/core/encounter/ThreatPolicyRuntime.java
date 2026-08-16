@@ -5,9 +5,11 @@ import com.darkfolklore.core.data.FolkloreDataManager;
 import com.darkfolklore.core.persistence.FolkloreSavedData;
 import com.darkfolklore.core.spawn.SpawnDirector;
 import com.darkfolklore.core.spawn.SpawnProfile;
+import com.darkfolklore.core.spawn.SpawnRarity;
 import com.darkfolklore.core.world.WorldEventDirector;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.Monster;
@@ -16,7 +18,9 @@ import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -27,6 +31,7 @@ public final class ThreatPolicyRuntime {
     public static final ThreatPolicyRuntime INSTANCE = new ThreatPolicyRuntime();
     private static final int MAX_PENDING_L2 = 4096;
     private static final int MAX_NATURAL_CANDIDATES = 4096;
+    private static final long NATURAL_CANDIDATE_TTL = 20L;
     private final LinkedHashMap<UUID, PendingL2> pendingL2 = new LinkedHashMap<>();
     private final LinkedHashMap<UUID, Long> naturalSpawnCandidates = new LinkedHashMap<>();
 
@@ -70,10 +75,10 @@ public final class ThreatPolicyRuntime {
             }
         }
 
-        // NeoForge 21.1.x exposes the natural spawn reason here, while EntityJoinLevelEvent does not. Retain a
-        // short-lived, bounded marker so generic L2 scaling can distinguish ambient natural monsters from another
-        // mod's summoned minions, scripted bosses, command-created entities and entities merely reloaded from disk.
-        if (FolkloreConfig.ENCOUNTER_DIRECTOR.get() && event.getEntity() instanceof Monster) {
+        // NeoForge 21.1.x exposes the natural spawn reason here, while EntityJoinLevelEvent does not. Mark every
+        // accepted natural mob, not only Monster subclasses: several provider creatures use neutral/custom base
+        // classes while still owning an explicit Dark Folklore encounter policy.
+        if (FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
             rememberNaturalCandidate(event.getEntity().getUUID(), level.getGameTime());
         }
     }
@@ -81,16 +86,20 @@ public final class ThreatPolicyRuntime {
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !(event.getEntity() instanceof LivingEntity living)) return;
-        boolean observedNaturalSpawn = naturalSpawnCandidates.remove(living.getUUID()) != null;
-        if (!observedNaturalSpawn) return;
+        if (naturalSpawnCandidates.remove(living.getUUID()) == null) return;
 
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
-        EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
-        if (policy == null) {
-            if (living instanceof Monster) requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
-            return;
+        SpawnProfile profile = FolkloreDataManager.INSTANCE.spawns().get(entityId).orElse(null);
+        if (profile != null && profile.rarity().ordinal() >= SpawnRarity.RARE.ordinal()) {
+            addEncounterPressure(level, living, 15);
         }
-        applyCuratedEncounter(level, living, policy);
+
+        EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
+        if (policy != null) {
+            applyCuratedEncounter(level, living, policy);
+        } else if (living instanceof Monster) {
+            requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
+        }
     }
 
     /**
@@ -114,14 +123,8 @@ public final class ThreatPolicyRuntime {
                     "encounter policy/entity mismatch");
         }
 
-        var nearest = level.players().stream()
-                .filter(player -> player.distanceToSqr(living) < 16384.0D)
-                .min(Comparator.comparingDouble(player -> player.distanceToSqr(living))).orElse(null);
-        if (nearest != null && policy.minimumEncounterPressure() > 0) {
-            FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
-            if (data.encounterPressure(nearest.getUUID()) < policy.minimumEncounterPressure()) {
-                data.setEncounterPressure(nearest.getUUID(), policy.minimumEncounterPressure());
-            }
+        if (policy.minimumEncounterPressure() > 0) {
+            ensureEncounterPressure(level, living, policy.minimumEncounterPressure());
         }
         return requestL2Floor(level, living, policy.l2MinimumLevel());
     }
@@ -182,12 +185,48 @@ public final class ThreatPolicyRuntime {
         return result;
     }
 
+    private static ServerPlayer nearestPlayer(ServerLevel level, LivingEntity living) {
+        return level.players().stream()
+                .filter(player -> player.distanceToSqr(living) < 16384.0D)
+                .min(Comparator.comparingDouble(player -> player.distanceToSqr(living))).orElse(null);
+    }
+
+    private static void addEncounterPressure(ServerLevel level, LivingEntity living, int amount) {
+        if (amount <= 0) return;
+        ServerPlayer nearest = nearestPlayer(level, living);
+        if (nearest == null) return;
+        FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
+        data.setEncounterPressure(nearest.getUUID(), data.encounterPressure(nearest.getUUID()) + amount);
+    }
+
+    private static void ensureEncounterPressure(ServerLevel level, LivingEntity living, int minimum) {
+        if (minimum <= 0) return;
+        ServerPlayer nearest = nearestPlayer(level, living);
+        if (nearest == null) return;
+        FolkloreSavedData data = FolkloreSavedData.get(level.getServer());
+        if (data.encounterPressure(nearest.getUUID()) < minimum) {
+            data.setEncounterPressure(nearest.getUUID(), minimum);
+        }
+    }
+
     private void rememberNaturalCandidate(UUID entityId, long now) {
-        naturalSpawnCandidates.entrySet().removeIf(entry -> entry.getValue() < now);
-        if (!naturalSpawnCandidates.containsKey(entityId) && naturalSpawnCandidates.size() >= MAX_NATURAL_CANDIDATES) {
+        pruneNaturalCandidates(now);
+        // Remove before re-adding so insertion order remains expiry order even if a provider fires PositionCheck more
+        // than once for the same entity instance.
+        naturalSpawnCandidates.remove(entityId);
+        while (naturalSpawnCandidates.size() >= MAX_NATURAL_CANDIDATES) {
             naturalSpawnCandidates.remove(naturalSpawnCandidates.keySet().iterator().next());
         }
-        naturalSpawnCandidates.put(entityId, now + 200L);
+        naturalSpawnCandidates.put(entityId, now + NATURAL_CANDIDATE_TTL);
+    }
+
+    private void pruneNaturalCandidates(long now) {
+        Iterator<Map.Entry<UUID, Long>> iterator = naturalSpawnCandidates.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, Long> entry = iterator.next();
+            if (entry.getValue() >= now) break;
+            iterator.remove();
+        }
     }
 
     private record PendingL2(int minimumLevel, long expiresAt) {}
