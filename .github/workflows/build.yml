@@ -36,8 +36,11 @@ jobs:
         shell: bash
         run: |
           python3 -m py_compile tools/*.py
+          SCAN=$(find darkfolklore-atlas -mindepth 1 -maxdepth 1 -type d -name 'scan-*' | LC_ALL=C sort | tail -n 1)
+          test -n "$SCAN" -a -d "$SCAN"
+          echo "ATLAS_SCAN=$SCAN"
           rm -rf atlas-audit
-          python3 tools/atlas_recipe_audit.py darkfolklore-atlas/scan-20260810-143508 --out atlas-audit
+          python3 tools/atlas_recipe_audit.py "$SCAN" --out atlas-audit
 
       - name: Build, test, validate resources, and audit release JAR
         run: ./gradlew clean build --no-daemon --no-configuration-cache --stacktrace
