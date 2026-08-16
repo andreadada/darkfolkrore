@@ -67,7 +67,9 @@ jobs:
           PY
 
       - name: Prepare GameTest server properties
-        run: printf 'online-mode=false\n' > server.properties
+        run: |
+          mkdir -p run
+          printf 'online-mode=false\n' > run/server.properties
 
       - name: Run NeoForge GameTests
         run: ./gradlew runGameTestServer --no-daemon --no-configuration-cache --stacktrace
