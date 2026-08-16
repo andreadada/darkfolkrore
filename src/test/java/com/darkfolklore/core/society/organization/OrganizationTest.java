@@ -46,4 +46,22 @@ class OrganizationTest {
         assertFalse(OrganizationRules.mayAutoFound(OrganizationType.HUNTER_SOCIETY));
         assertTrue(OrganizationRules.mayAutoFound(OrganizationType.WEREWOLF_PACK));
     }
+
+    @Test
+    void memberSeenWritesAreThrottledButTimeRollbackCanRepairTheTimestamp() {
+        UUID leader = UUID.randomUUID();
+        Organization organization = new Organization(UUID.randomUUID(),
+                OrganizationType.HUNTER_SOCIETY, "Quiet Ledger", leader);
+
+        assertTrue(organization.markMemberSeen(leader, 1_000L));
+        assertFalse(organization.markMemberSeen(leader, 1_000L + Organization.MEMBER_SEEN_WRITE_INTERVAL - 1L));
+        assertEquals(1_000L, organization.memberLastSeen().get(leader));
+
+        assertTrue(organization.markMemberSeen(leader, 1_000L + Organization.MEMBER_SEEN_WRITE_INTERVAL));
+        assertEquals(1_000L + Organization.MEMBER_SEEN_WRITE_INTERVAL,
+                organization.memberLastSeen().get(leader));
+
+        assertTrue(organization.markMemberSeen(leader, 500L));
+        assertEquals(500L, organization.memberLastSeen().get(leader));
+    }
 }
