@@ -9,6 +9,8 @@ import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
+import java.util.Set;
+
 public final class LineageEngine {
     public static final LineageEngine INSTANCE = new LineageEngine();
     private LineageEngine() {}
@@ -17,8 +19,9 @@ public final class LineageEngine {
     public void onEntityJoin(EntityJoinLevelEvent event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
         Entity entity = event.getEntity();
+        Set<SecretType> facts = SecretFacts.actualSecrets(entity);
         for (SecretType type : new SecretType[]{SecretType.VAMPIRE, SecretType.WEREWOLF}) {
-            if (!SecretFacts.actualSecrets(entity).contains(type)) continue;
+            if (!facts.contains(type)) continue;
             CompatibilityManager.INSTANCE.conversionSource(entity, type)
                     .filter(source -> !source.equals(entity.getUUID()))
                     .ifPresent(source -> FolkloreSavedData.get(level.getServer()).addLineage(
