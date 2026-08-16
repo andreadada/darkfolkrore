@@ -118,6 +118,12 @@ public final class RitualEngine {
         }
         if (!player.getAbilities().instabuild) consumeCosts(player, ritual.itemCosts());
 
+        // Only committed Dark Folklore manifestations receive the curated non-natural encounter policy. Doing this
+        // explicitly avoids relying on EntityJoinLevelEvent, which also fires when old entities are reloaded from disk.
+        for (LivingEntity living : added) {
+            ThreatPolicyRuntime.INSTANCE.applyCuratedEncounter(level, living, encounter);
+        }
+
         rememberCooldown(key, now + ritual.cooldownTicks(), now);
         int spawned = added.size();
         player.sendSystemMessage(Component.literal(spawned == 1
