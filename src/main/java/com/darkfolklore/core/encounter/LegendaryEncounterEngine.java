@@ -2,7 +2,6 @@ package com.darkfolklore.core.encounter;
 
 import com.darkfolklore.core.DarkFolkloreCore;
 import com.darkfolklore.core.api.event.ConfirmedLivingDeathEvent;
-import com.darkfolklore.core.compat.l2hostility.L2HostilityBridge;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.investigation.EvidenceRecord;
 import com.darkfolklore.core.knowledge.social.EvidenceType;
@@ -272,7 +271,7 @@ public final class LegendaryEncounterEngine {
             return;
         }
         living.moveTo(pos.getX() + .5, pos.getY(), pos.getZ() + .5, level.random.nextFloat() * 360F, 0F);
-        if (!level.addFreshEntity(living)) return;
+        if (!level.noCollision(living) || !level.addFreshEntity(living)) return;
 
         encounter.bindManifestation(living.getUUID());
         encounter.transition(EncounterStage.MANIFESTED, now + 20L);
@@ -285,8 +284,7 @@ public final class LegendaryEncounterEngine {
                 .bindCulpritForStory(storyId, living.getUUID(), id.toString(), now));
         applyManifestationBehavior(level, living, encounter);
 
-        L2HostilityBridge.ApplyResult l2 = new L2HostilityBridge.ApplyResult(
-                L2HostilityBridge.Status.DISABLED, 0, "disabled by Dark Folklore 0.8 policy");
+        L2HostilityAdapter.ApplyResult l2 = ThreatPolicyRuntime.INSTANCE.applyCuratedEncounter(level, living);
         notifyNearby(level, pos, 128, manifestationMessage(encounter));
         DarkFolkloreCore.LOGGER.info("[encounter] manifested {} as {} uuid={} region={} l2={}",
                 definition.id(), id, living.getUUID(), encounter.region(), l2);
@@ -316,8 +314,9 @@ public final class LegendaryEncounterEngine {
             Entity entity = followerType.create(level);
             if (!(entity instanceof Mob follower)) continue;
             follower.moveTo(pos.getX() + .5, pos.getY(), pos.getZ() + .5, level.random.nextFloat() * 360F, 0F);
-            if (!level.addFreshEntity(follower)) continue;
+            if (!level.noCollision(follower) || !level.addFreshEntity(follower)) continue;
             encounter.addParticipant(follower.getUUID());
+            ThreatPolicyRuntime.INSTANCE.applyCuratedEncounter(level, follower);
         }
     }
 
