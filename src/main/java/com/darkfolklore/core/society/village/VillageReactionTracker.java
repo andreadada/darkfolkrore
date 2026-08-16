@@ -1,6 +1,7 @@
 package com.darkfolklore.core.society.village;
 
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,11 +16,11 @@ public final class VillageReactionTracker {
 
     static final long INCIDENT_DEDUP_TICKS = 100L;
     static final long NOTIFICATION_COOLDOWN_TICKS = 200L;
-    private static final int MAX_TRACKED = 4096;
+    static final int MAX_TRACKED = 4096;
 
-    private final Map<String, VillageAlertLevel> levels = new HashMap<>();
-    private final Map<String, Long> lastNotification = new HashMap<>();
-    private final Map<String, Long> recentIncidents = new HashMap<>();
+    private final LinkedHashMap<String, VillageAlertLevel> levels = new LinkedHashMap<>();
+    private final LinkedHashMap<String, Long> lastNotification = new LinkedHashMap<>();
+    private final LinkedHashMap<String, Long> recentIncidents = new LinkedHashMap<>();
 
     private VillageReactionTracker() {}
 
@@ -30,12 +31,14 @@ public final class VillageReactionTracker {
             String dedupKey = villageKey + "|" + incidentFingerprint;
             long previous = recentIncidents.getOrDefault(dedupKey, Long.MIN_VALUE / 2);
             if (gameTime - previous < INCIDENT_DEDUP_TICKS) return Optional.empty();
+            recentIncidents.remove(dedupKey);
             recentIncidents.put(dedupKey, gameTime);
         }
 
         VillageAlertLevel before = levels.getOrDefault(villageKey, VillageAlertLevel.CALM);
         int score = VillageAlertLevel.score(state);
         VillageAlertLevel after = VillageAlertLevel.transition(before, score);
+        levels.remove(villageKey);
         levels.put(villageKey, after);
         prune(gameTime);
 
@@ -43,7 +46,9 @@ public final class VillageReactionTracker {
         long notified = lastNotification.getOrDefault(villageKey, Long.MIN_VALUE / 2);
         if (gameTime - notified < NOTIFICATION_COOLDOWN_TICKS) return Optional.empty();
 
+        lastNotification.remove(villageKey);
         lastNotification.put(villageKey, gameTime);
+        trimOldest(lastNotification, MAX_TRACKED);
         return Optional.of(new Transition(before, after, score));
     }
 
@@ -57,13 +62,33 @@ public final class VillageReactionTracker {
         recentIncidents.clear();
     }
 
+    int trackedVillageCount() { return levels.size(); }
+    int recentIncidentCount() { return recentIncidents.size(); }
+
     private void prune(long gameTime) {
         if (recentIncidents.size() > MAX_TRACKED) {
             recentIncidents.entrySet().removeIf(entry -> gameTime - entry.getValue() > INCIDENT_DEDUP_TICKS * 4);
+            trimOldest(recentIncidents, MAX_TRACKED);
         }
         if (levels.size() > MAX_TRACKED) {
             lastNotification.entrySet().removeIf(entry -> gameTime - entry.getValue() > 24000L);
-            levels.keySet().retainAll(lastNotification.keySet());
+            while (levels.size() > MAX_TRACKED) {
+                Iterator<Map.Entry<String, VillageAlertLevel>> iterator = levels.entrySet().iterator();
+                if (!iterator.hasNext()) break;
+                String removed = iterator.next().getKey();
+                iterator.remove();
+                lastNotification.remove(removed);
+            }
+        }
+        trimOldest(lastNotification, MAX_TRACKED);
+    }
+
+    private static <K, V> void trimOldest(LinkedHashMap<K, V> map, int maximum) {
+        while (map.size() > maximum) {
+            Iterator<Map.Entry<K, V>> iterator = map.entrySet().iterator();
+            if (!iterator.hasNext()) return;
+            iterator.next();
+            iterator.remove();
         }
     }
 
