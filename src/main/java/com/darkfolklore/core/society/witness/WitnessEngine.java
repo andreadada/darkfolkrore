@@ -18,6 +18,7 @@ import com.darkfolklore.core.society.SocialEntityClassifier;
 import com.darkfolklore.core.society.organization.*;
 import com.darkfolklore.core.society.rumor.RumorEngine;
 import com.darkfolklore.core.society.village.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -31,7 +32,8 @@ import java.util.*;
 
 public final class WitnessEngine {
     public static final WitnessEngine INSTANCE = new WitnessEngine();
-    private final Map<IncidentKey, Long> incidentCooldown = new HashMap<>();
+    private static final int MAX_INCIDENT_COOLDOWNS = 2048;
+    private final LinkedHashMap<IncidentKey, Long> incidentCooldown = new LinkedHashMap<>();
 
     private WitnessEngine() {}
 
@@ -46,9 +48,11 @@ public final class WitnessEngine {
         long now = level.getGameTime();
         IncidentKey key = new IncidentKey(actor.getUUID(), event.getEntity().getUUID(), secret.get());
         if (now - incidentCooldown.getOrDefault(key, Long.MIN_VALUE / 2) < 100) return;
+        incidentCooldown.remove(key);
         incidentCooldown.put(key, now);
-        if (incidentCooldown.size() > 2048) {
+        if (incidentCooldown.size() > MAX_INCIDENT_COOLDOWNS) {
             incidentCooldown.entrySet().removeIf(entry -> now - entry.getValue() > 1200);
+            trimOldest(incidentCooldown, MAX_INCIDENT_COOLDOWNS);
         }
         recordIncident(level, actor, event.getEntity(), secret.get(), EvidenceType.DIRECT_WITNESS,
                 Math.max(1, Math.min(10, Math.round(event.getNewDamage() / 2.0F))));
@@ -102,7 +106,7 @@ public final class WitnessEngine {
     public List<LivingEntity> recordCreatureSighting(ServerLevel level, LivingEntity actor, Entity victim,
                                                       String concept, EvidenceType evidence, int severity) {
         if (!FolkloreConfig.SOCIAL_KNOWLEDGE.get() || !FolkloreConfig.WITNESSES.get()
-                || concept == null || !concept.contains(":")) return List.of();
+                || !validConcept(concept)) return List.of();
         List<LivingEntity> nearby = candidateWitnesses(level, actor, victim);
         InvestigationSavedData observations = InvestigationSavedData.get(level.getServer());
         List<LivingEntity> accepted = new ArrayList<>();
@@ -181,6 +185,21 @@ public final class WitnessEngine {
             if (secrets.contains(type)) return Optional.of(type);
         }
         return Optional.empty();
+    }
+
+    private static boolean validConcept(String concept) {
+        if (concept == null || !concept.contains(":")) return false;
+        ResourceLocation id = ResourceLocation.tryParse(concept);
+        return id != null && !id.getNamespace().isBlank() && !id.getPath().isBlank();
+    }
+
+    private static <K, V> void trimOldest(LinkedHashMap<K, V> map, int maximum) {
+        while (map.size() > maximum) {
+            Iterator<Map.Entry<K, V>> iterator = map.entrySet().iterator();
+            if (!iterator.hasNext()) return;
+            iterator.next();
+            iterator.remove();
+        }
     }
 
     private record IncidentKey(UUID actor, UUID victim, SecretType secret) {}
