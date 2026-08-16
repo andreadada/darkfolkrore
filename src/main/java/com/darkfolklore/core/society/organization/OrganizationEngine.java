@@ -7,7 +7,6 @@ import com.darkfolklore.core.api.event.WitnessEvent;
 import com.darkfolklore.core.compat.CompatibilityManager;
 import com.darkfolklore.core.compat.mca.McaPersonalityInfluence;
 import com.darkfolklore.core.compat.mcacapitals.PoliticalContext;
-import com.darkfolklore.core.compat.mcacapitals.PoliticalWeightModel;
 import com.darkfolklore.core.compat.mcacapitals.PoliticalWeights;
 import com.darkfolklore.core.config.FolkloreConfig;
 import com.darkfolklore.core.data.FolkloreDataManager;
@@ -63,6 +62,12 @@ public final class OrganizationEngine {
             }
             return;
         }
+
+        // EntityJoinLevelEvent is also fired when persistent entities are loaded from disk. Recruitment/founding is
+        // a lifecycle decision, not a chunk-loading side effect: otherwise repeatedly unloading a villager rerolls
+        // recruitment probability and old worlds manufacture organizations merely by being explored again.
+        if (event.loadedFromDisk()) return;
+
         OrganizationType affiliation = OrganizationRules.naturalAffiliation(SecretFacts.actualSecrets(entity)).orElse(null);
         if (affiliation == null) return;
         VillageKey village = VillageKey.at(level, entity.blockPosition());
@@ -258,8 +263,10 @@ public final class OrganizationEngine {
         int budget = Math.min(FolkloreConfig.ORGANIZATION_MAINTENANCE_BUDGET.get(), organizations.size());
         for (int i = 0; i < budget; i++) {
             Organization organization = organizations.get((maintenanceCursor + i) % organizations.size());
-            if (!organization.members().contains(organization.leader())) organization.setLeader(organization.leader());
-            data.putOrganization(organization);
+            if (!organization.members().contains(organization.leader())) {
+                organization.setLeader(organization.leader());
+                data.putOrganization(organization);
+            }
         }
         maintenanceCursor = (maintenanceCursor + budget) % organizations.size();
     }
