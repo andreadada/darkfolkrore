@@ -72,7 +72,7 @@ public final class ThreatPolicyRuntime {
 
         // NeoForge 21.1.x exposes the natural spawn reason here, while EntityJoinLevelEvent does not. Retain a
         // short-lived, bounded marker so generic L2 scaling can distinguish ambient natural monsters from another
-        // mod's summoned minions, scripted bosses and command-created entities without depending on provider APIs.
+        // mod's summoned minions, scripted bosses, command-created entities and entities merely reloaded from disk.
         if (FolkloreConfig.ENCOUNTER_DIRECTOR.get() && event.getEntity() instanceof Monster) {
             rememberNaturalCandidate(event.getEntity().getUUID(), level.getGameTime());
         }
@@ -82,13 +82,36 @@ public final class ThreatPolicyRuntime {
         if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get() || !(event.getLevel() instanceof ServerLevel level)
                 || !(event.getEntity() instanceof LivingEntity living)) return;
         boolean observedNaturalSpawn = naturalSpawnCandidates.remove(living.getUUID()) != null;
+        if (!observedNaturalSpawn) return;
+
         String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
         EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
         if (policy == null) {
-            if (observedNaturalSpawn && living instanceof Monster) {
-                requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
-            }
+            if (living instanceof Monster) requestL2Floor(level, living, FolkloreConfig.L2_GENERIC_MIN_LEVEL.get());
             return;
+        }
+        applyCuratedEncounter(level, living, policy);
+    }
+
+    /**
+     * Applies the non-rarity part of an explicit Dark Folklore encounter exactly when the Core itself manifests it.
+     * Callers use this after a successful addFreshEntity. EntityJoinLevelEvent intentionally does not apply explicit
+     * policies to arbitrary non-natural joins because that event also fires for chunk reloads and provider summons.
+     */
+    public L2HostilityAdapter.ApplyResult applyCuratedEncounter(ServerLevel level, LivingEntity living,
+                                                                EncounterPolicy policy) {
+        if (!FolkloreConfig.ENCOUNTER_DIRECTOR.get()) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0,
+                    "encounter director disabled");
+        }
+        if (level == null || living == null || policy == null) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0,
+                    "missing curated encounter context");
+        }
+        String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
+        if (!policy.entityId().equals(entityId)) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0,
+                    "encounter policy/entity mismatch");
         }
 
         var nearest = level.players().stream()
@@ -100,9 +123,22 @@ public final class ThreatPolicyRuntime {
                 data.setEncounterPressure(nearest.getUUID(), policy.minimumEncounterPressure());
             }
         }
-        // Explicit policies are intentional Dark Folklore encounter semantics, so ritual/story/non-natural spawns
-        // still receive their curated L2 floor while ordinary unlisted provider summons do not.
-        requestL2Floor(level, living, policy.l2MinimumLevel());
+        return requestL2Floor(level, living, policy.l2MinimumLevel());
+    }
+
+    /** Resolve and apply the current datapack policy for a Core-owned manifestation. */
+    public L2HostilityAdapter.ApplyResult applyCuratedEncounter(ServerLevel level, LivingEntity living) {
+        if (living == null) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0,
+                    "missing curated encounter entity");
+        }
+        String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType()).toString();
+        EncounterPolicy policy = ThreatPolicyManager.INSTANCE.forEntity(entityId).orElse(null);
+        if (policy == null) {
+            return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0,
+                    "no curated encounter policy for " + entityId);
+        }
+        return applyCuratedEncounter(level, living, policy);
     }
 
     public void onEntityTick(EntityTickEvent.Post event) {
@@ -110,7 +146,7 @@ public final class ThreatPolicyRuntime {
         PendingL2 pending = pendingL2.get(living.getUUID());
         if (pending == null) return;
         long now = level.getGameTime();
-        if (now > pending.expiresAt()) {
+        if (now > pending.expiresAt() || living.isRemoved()) {
             pendingL2.remove(living.getUUID());
             return;
         }
@@ -125,6 +161,10 @@ public final class ThreatPolicyRuntime {
         L2HostilityAdapter.INSTANCE.clearRuntimeState();
     }
 
+    /**
+     * Requests a minimum through L2 and retains the strongest pending request while L2's attachment initializes.
+     * Lower-priority systems can therefore never overwrite a stronger legendary/story request made in the same tick.
+     */
     public L2HostilityAdapter.ApplyResult requestL2Floor(ServerLevel level, LivingEntity living, int minimumLevel) {
         if (minimumLevel <= 0) {
             return new L2HostilityAdapter.ApplyResult(L2HostilityAdapter.Status.DISABLED, 0, "no level requested");
